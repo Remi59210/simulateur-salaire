@@ -3,252 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convertisseur Brut Net</title>
-    <meta name="description" content="Convertissez facilement votre salaire brut en net selon votre statut">
+    <title>Convertisseur Salaire Brut en Net</title>
+    <meta name="description" content="Calculez votre salaire net après impôts en fonction de votre statut professionnel">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: "#f97316",
-                        secondary: "#ea580c"
+                        primary: '#f97316',
+                        secondary: '#ea580c'
                     }
                 }
             }
         }
     </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .input-field:focus {
+            outline: 2px solid #f97316;
+            outline-offset: 2px;
+        }
+        .ad-container {
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
-<body class="min-h-screen bg-gradient-to-b from-orange-100 to-orange-200 text-gray-800">
-    <div class="container mx-auto px-4 py-8 max-w-6xl">
-        <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-orange-700 mb-2">Convertisseur Brut / Net</h1>
-            <p class="text-lg text-orange-600">Calculez votre salaire net après impôts</p>
-        </header>
-
-        <div class="flex flex-col lg:flex-row gap-6">
-            <main class="bg-white rounded-xl shadow-lg p-6 md:p-8 flex-1">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="space-y-4">
-                        <h2 class="text-xl font-semibold text-orange-700 border-b pb-2">Paramètres</h2>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Statut professionnel</label>
-                            <select id="statut" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
-                                <option value="cadre">Salarié cadre</option>
-                                <option value="non-cadre">Salarié non-cadre</option>
-                                <option value="fonction-publique">Fonction publique</option>
-                                <option value="liberal">Profession libérale</option>
-                                <option value="portage">Portage salarial</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre de mois de salaire</label>
-                            <select id="nb-mois" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
-                                <option value="12">12 mois</option>
-                                <option value="13">13 mois</option>
-                                <option value="14">14 mois</option>
-                                <option value="15">15 mois</option>
-                                <option value="16">16 mois</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Taux de prélèvement à la source (%)</label>
-                            <input type="number" id="taux-prelevement" value="0" min="0" max="100" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <h2 class="text-xl font-semibold text-orange-700 border-b pb-2">Salaire Brut</h2>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Horaire brut (€)</label>
-                            <input type="number" id="brut-horaire" placeholder="0.00" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Mensuel brut (€)</label>
-                            <input type="number" id="brut-mensuel" placeholder="0.00" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Annuel brut (€)</label>
-                            <input type="number" id="brut-annuel" placeholder="0.00" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex justify-center mb-6">
-                    <button id="calculer" class="px-6 py-3 bg-orange-600 text-white font-medium rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors">
-                        Calculer
-                    </button>
-                    <button id="effacer" class="ml-4 px-6 py-3 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors">
-                        Effacer
-                    </button>
-                </div>
-                
-                <div class="bg-orange-50 rounded-lg p-6 mb-6">
-                    <h2 class="text-xl font-semibold text-orange-700 border-b pb-2 mb-4">Résultats</h2>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <h3 class="text-sm font-medium text-gray-500">Horaire net</h3>
-                            <p id="net-horaire" class="text-2xl font-bold text-orange-600">0.00 €</p>
-                        </div>
-                        
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <h3 class="text-sm font-medium text-gray-500">Mensuel net</h3>
-                            <p id="net-mensuel" class="text-2xl font-bold text-orange-600">0.00 €</p>
-                        </div>
-                        
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <h3 class="text-sm font-medium text-gray-500">Annuel net</h3>
-                            <p id="net-annuel" class="text-2xl font-bold text-orange-600">0.00 €</p>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6 pt-4 border-t border-orange-200">
-                        <h3 class="text-sm font-medium text-gray-500">Après impôt sur le revenu</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                            <div class="bg-white p-4 rounded-lg shadow-sm">
-                                <h4 class="text-sm font-medium text-gray-500">Mensuel net après IR</h4>
-                                <p id="net-mensuel-apres-ir" class="text-xl font-bold text-orange-600">0.00 €</p>
-                            </div>
-                            <div class="bg-white p-4 rounded-lg shadow-sm">
-                                <h4 class="text-sm font-medium text-gray-500">Annuel net après IR</h4>
-                                <p id="net-annuel-apres-ir" class="text-xl font-bold text-orange-600">0.00 €</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bannière horizontale pub -->
-                <div class="bg-gray-100 border border-gray-200 rounded-lg p-8 text-center mb-6">
-                    <p class="text-gray-500 font-medium">Espace publicitaire</p>
-                    <p class="text-sm text-gray-400 mt-1">Bannière horizontale 728x90</p>
-                </div>
-            </main>
-
-            <!-- Colonne latérale droite (desktop) -->
-            <aside class="lg:w-72 flex-shrink-0">
-                <!-- Bannière verticale pub -->
-                <div class="bg-gray-100 border border-gray-200 rounded-lg p-8 text-center sticky top-4">
-                    <p class="text-gray-500 font-medium">Espace publicitaire</p>
-                    <p class="text-sm text-gray-400 mt-1">Bannière verticale 300x600</p>
-                </div>
-            </aside>
+<body class="min-h-screen bg-gradient-to-br from-orange-100 to-orange-200 flex flex-col">
+    <header class="bg-orange-500 text-white shadow-md">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-2xl md:text-3xl font-bold text-center">
+                <i class="fas fa-calculator mr-2"></i>Convertisseur Brut-Net
+            </h1>
+            <p class="text-center mt-2 opacity-90">Calculez votre salaire net après impôts</p>
         </div>
-        
-        <footer class="mt-8 text-center text-sm text-orange-600">
-            <p>Cet outil fournit une estimation indicative. Les résultats peuvent varier selon votre situation.</p>
-        </footer>
-    </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl">
+        <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Main Content -->
+            <div class="flex-grow">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+                        <!-- Input Section -->
+                        <div class="space-y-6">
+                            <h2 class="text-xl font-semibold text-gray-800 border-b pb-2">Paramètres</h2>
+                            
+                            <div>
+                                <label class="block text-gray-700 mb-2">Statut professionnel</label>
+                                <select id="status" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-field">
+                                    <option value="non-cadre">Salarié non-cadre</option>
+                                    <option value="cadre">Salarié cadre</option>
+                                    <option value="fonction-publique">Fonction publique</option>
+                                    <option value="profession-liberale">Profession libérale</option>
+                                    <option value="portage-salarial">Portage salarial</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 mb-2">Nombre de mois de salaire</label>
+                                <select id="months" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-field">
+                                    <option value="12">12 mois</option>
+                                    <option value="13">13 mois</option>
+                                    <option value="14">14 mois</option>
+                                    <option value="15">15 mois</option>
+                                    <option value="16">16 mois</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 mb-2">Taux de prélèvement à la source (%)</label>
+                                <input type="number" id="tax-rate" min="0" max="100" value="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-field">
+                            </div>
+                            
+                            <div class="pt-4">
+                                <h2 class="text-xl font-semibold text-gray-800 border-b pb-2">Salaire Brut</h2>
+                                <div class="space-y-4 mt-4">
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Horaire (€/h)</label>
+                                        <input type="number" id="hourly-brut" min="0" step="0.01" placeholder="0,00" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-field">
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Mensuel (€)</label>
+                                        <input type="number" id="monthly-brut" min="0" step="0.01" placeholder="0,00" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-field">
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Annuel (€)</label>
+                                        <input type="number" id="annual-brut" min="0" step="0.01" placeholder="0,00" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-field">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Results Section -->
+                        <div class="bg-orange-50 rounded-lg p-6">
+                            <h2 class="text-xl font-semibold text-gray-800 border-b pb-2">Résultats</h2>
+                            
+                            <div class="mt-6 space-y-6">
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <h3 class="text-lg font-medium text-gray-700 mb-3">Salaire Net</h3>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <p class="text-gray-600">Horaire</p>
+                                            <p id="hourly-net" class="text-xl font-bold text-orange-600">0,00 €</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-600">Mensuel</p>
+                                            <p id="monthly-net" class="text-xl font-bold text-orange-600">0,00 €</p>
+                                        </div>
+                                        <div class="col-span-2">
+                                            <p class="text-gray-600">Annuel</p>
+                                            <p id="annual-net" class="text-xl font-bold text-orange-600">0,00 €</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <h3 class="text-lg font-medium text-gray-700 mb-3">Après impôt</h3>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <p class="text-gray-600">Mensuel</p>
+                                            <p id="monthly-after-tax" class="text-xl font-bold text-orange-600">0,00 €</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-600">Annuel</p>
+                                            <p id="annual-after-tax" class="text-xl font-bold text-orange-600">0,00 €</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <h3 class="text-lg font-medium text-gray-700 mb-3">Détails</h3>
+                                    <div>
+                                        <p class="text-gray-600">Taux de conversion brut-net</p>
+                                        <p id="conversion-rate" class="text-lg font-semibold">78%</p>
+                                    </div>
+                                    <div class="mt-3">
+                                        <p class="text-gray-600">Prélèvement à la source</p>
+                                        <p id="tax-amount" class="text-lg font-semibold">0,00 €</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Horizontal Banner -->
+                    <div class="px-6 pb-6">
+                        <div class="ad-container w-full max-w-[728px] h-[90px] mx-auto bg-gray-100 border border-gray-300 rounded-lg flex items-center justify-center">
+                            <span class="text-gray-500 text-sm md:text-base">Espace publicitaire – format 728x90</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Clear Button -->
+                    <div class="px-6 pb-6">
+                        <button id="clear-btn" class="w-full md:w-auto px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors">
+                            <i class="fas fa-eraser mr-2"></i>Effacer les champs
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vertical Banner (Desktop only) -->
+            <div class="hidden lg:block w-[300px] flex-shrink-0">
+                <div class="ad-container h-full bg-white rounded-xl shadow-lg overflow-hidden flex items-center justify-center">
+                    <div class="w-full h-[600px] bg-gray-100 border border-gray-300 rounded-lg flex items-center justify-center p-4">
+                        <span class="text-gray-500 text-center">Espace publicitaire – format 300x600</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-orange-500 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2023 Convertisseur Brut-Net | Outil de calcul gratuit</p>
+            <p class="mt-2 text-sm opacity-80">Les résultats sont indicatifs et peuvent varier selon votre situation</p>
+        </div>
+    </footer>
 
     <script>
-        // Coefficients de conversion selon le statut (simplifiés)
-        const coefficients = {
-            "cadre": 0.75,
+        // Conversion rates by status
+        const conversionRates = {
             "non-cadre": 0.78,
+            "cadre": 0.75,
             "fonction-publique": 0.85,
-            "liberal": 0.65,
-            "portage": 0.70
+            "profession-liberale": 0.70,
+            "portage-salarial": 0.65
         };
 
-        // Éléments du DOM
-        const brutHoraireInput = document.getElementById("brut-horaire");
-        const brutMensuelInput = document.getElementById("brut-mensuel");
-        const brutAnnuelInput = document.getElementById("brut-annuel");
-        const statutSelect = document.getElementById("statut");
-        const nbMoisSelect = document.getElementById("nb-mois");
-        const tauxPrelevementInput = document.getElementById("taux-prelevement");
-        const calculerBtn = document.getElementById("calculer");
-        const effacerBtn = document.getElementById("effacer");
-        
-        // Résultats
-        const netHoraire = document.getElementById("net-horaire");
-        const netMensuel = document.getElementById("net-mensuel");
-        const netAnnuel = document.getElementById("net-annuel");
-        const netMensuelApresIr = document.getElementById("net-mensuel-apres-ir");
-        const netAnnuelApresIr = document.getElementById("net-annuel-apres-ir");
+        // DOM Elements
+        const hourlyBrutInput = document.getElementById('hourly-brut');
+        const monthlyBrutInput = document.getElementById('monthly-brut');
+        const annualBrutInput = document.getElementById('annual-brut');
+        const statusSelect = document.getElementById('status');
+        const monthsSelect = document.getElementById('months');
+        const taxRateInput = document.getElementById('tax-rate');
+        const clearBtn = document.getElementById('clear-btn');
 
-        // Calcul automatique lors de la saisie
-        [brutHoraireInput, brutMensuelInput, brutAnnuelInput, statutSelect, nbMoisSelect, tauxPrelevementInput].forEach(el => {
-            el.addEventListener("input", calculerSalaireNet);
-        });
+        // Result elements
+        const hourlyNetEl = document.getElementById('hourly-net');
+        const monthlyNetEl = document.getElementById('monthly-net');
+        const annualNetEl = document.getElementById('annual-net');
+        const monthlyAfterTaxEl = document.getElementById('monthly-after-tax');
+        const annualAfterTaxEl = document.getElementById('annual-after-tax');
+        const conversionRateEl = document.getElementById('conversion-rate');
+        const taxAmountEl = document.getElementById('tax-amount');
 
-        // Bouton calculer
-        calculerBtn.addEventListener("click", calculerSalaireNet);
+        // Variables to track which input is active
+        let activeInput = null;
+        let isProgrammaticUpdate = false;
 
-        // Bouton effacer
-        effacerBtn.addEventListener("click", () => {
-            brutHoraireInput.value = "";
-            brutMensuelInput.value = "";
-            brutAnnuelInput.value = "";
-            tauxPrelevementInput.value = "0";
-            netHoraire.textContent = "0.00 €";
-            netMensuel.textContent = "0.00 €";
-            netAnnuel.textContent = "0.00 €";
-            netMensuelApresIr.textContent = "0.00 €";
-            netAnnuelApresIr.textContent = "0.00 €";
-        });
+        // Initialize conversion rate
+        let conversionRate = conversionRates[statusSelect.value];
+        let months = parseInt(monthsSelect.value);
+        let taxRate = parseFloat(taxRateInput.value) / 100;
 
-        function calculerSalaireNet() {
-            const statut = statutSelect.value;
-            const nbMois = parseInt(nbMoisSelect.value);
-            const tauxPrelevement = parseFloat(tauxPrelevementInput.value) / 100;
-            const coefficient = coefficients[statut];
+        // Set up event listeners
+        function setupEventListeners() {
+            // Track active input
+            [hourlyBrutInput, monthlyBrutInput, annualBrutInput].forEach(input => {
+                input.addEventListener('focus', () => {
+                    activeInput = input.id;
+                });
+            });
+
+            // Input changes
+            hourlyBrutInput.addEventListener('input', handleSalaryInput);
+            monthlyBrutInput.addEventListener('input', handleSalaryInput);
+            annualBrutInput.addEventListener('input', handleSalaryInput);
             
-            let brutHoraire, brutMensuel, brutAnnuel;
+            // Other parameter changes
+            statusSelect.addEventListener('change', () => {
+                conversionRate = conversionRates[statusSelect.value];
+                conversionRateEl.textContent = `${Math.round(conversionRate * 100)}%`;
+                calculate();
+            });
             
-            // Déterminer quelle valeur brute a été saisie
-            if (brutHoraireInput.value && !isNaN(brutHoraireInput.value)) {
-                brutHoraire = parseFloat(brutHoraireInput.value);
-                brutMensuel = brutHoraire * 151.67; // Nombre moyen d'heures par mois
-                brutAnnuel = brutMensuel * nbMois;
+            monthsSelect.addEventListener('change', () => {
+                months = parseInt(monthsSelect.value);
+                calculate();
+            });
+            
+            taxRateInput.addEventListener('input', () => {
+                taxRate = parseFloat(taxRateInput.value || 0) / 100;
+                calculate();
+            });
+            
+            // Clear button
+            clearBtn.addEventListener('click', () => {
+                hourlyBrutInput.value = '';
+                monthlyBrutInput.value = '';
+                annualBrutInput.value = '';
+                taxRateInput.value = '0';
+                statusSelect.value = 'non-cadre';
+                monthsSelect.value = '12';
                 
-                brutMensuelInput.value = brutMensuel.toFixed(2);
-                brutAnnuelInput.value = brutAnnuel.toFixed(2);
-            } 
-            else if (brutMensuelInput.value && !isNaN(brutMensuelInput.value)) {
-                brutMensuel = parseFloat(brutMensuelInput.value);
-                brutHoraire = brutMensuel / 151.67;
-                brutAnnuel = brutMensuel * nbMois;
+                // Reset results
+                hourlyNetEl.textContent = '0,00 €';
+                monthlyNetEl.textContent = '0,00 €';
+                annualNetEl.textContent = '0,00 €';
+                monthlyAfterTaxEl.textContent = '0,00 €';
+                annualAfterTaxEl.textContent = '0,00 €';
+                conversionRateEl.textContent = '78%';
+                taxAmountEl.textContent = '0,00 €';
                 
-                brutHoraireInput.value = brutHoraire.toFixed(2);
-                brutAnnuelInput.value = brutAnnuel.toFixed(2);
-            } 
-            else if (brutAnnuelInput.value && !isNaN(brutAnnuelInput.value)) {
-                brutAnnuel = parseFloat(brutAnnuelInput.value);
-                brutMensuel = brutAnnuel / nbMois;
-                brutHoraire = brutMensuel / 151.67;
-                
-                brutHoraireInput.value = brutHoraire.toFixed(2);
-                brutMensuelInput.value = brutMensuel.toFixed(2);
-            } 
-            else {
-                // Aucune valeur saisie
-                return;
+                conversionRate = conversionRates['non-cadre'];
+                months = 12;
+                taxRate = 0;
+            });
+        }
+
+        // Handle salary input changes
+        function handleSalaryInput() {
+            if (isProgrammaticUpdate) return;
+            calculate();
+        }
+
+        // Main calculation function
+        function calculate() {
+            let hourlyBrut = parseFloat(hourlyBrutInput.value) || 0;
+            let monthlyBrut = parseFloat(monthlyBrutInput.value) || 0;
+            let annualBrut = parseFloat(annualBrutInput.value) || 0;
+            
+            // Calculate missing values based on active input
+            if (activeInput === 'hourly-brut' && hourlyBrut > 0) {
+                monthlyBrut = hourlyBrut * 151.67; // Standard hours per month
+                annualBrut = monthlyBrut * months;
+            } else if (activeInput === 'monthly-brut' && monthlyBrut > 0) {
+                hourlyBrut = monthlyBrut / 151.67;
+                annualBrut = monthlyBrut * months;
+            } else if (activeInput === 'annual-brut' && annualBrut > 0) {
+                monthlyBrut = annualBrut / months;
+                hourlyBrut = monthlyBrut / 151.67;
             }
             
-            // Calcul des nets
-            const netHoraireValue = brutHoraire * coefficient;
-            const netMensuelValue = brutMensuel * coefficient;
-            const netAnnuelValue = brutAnnuel * coefficient;
+            // Update input fields without triggering events
+            isProgrammaticUpdate = true;
+            if (activeInput !== 'hourly-brut') hourlyBrutInput.value = hourlyBrut > 0 ? hourlyBrut.toFixed(2) : '';
+            if (activeInput !== 'monthly-brut') monthlyBrutInput.value = monthlyBrut > 0 ? monthlyBrut.toFixed(2) : '';
+            if (activeInput !== 'annual-brut') annualBrutInput.value = annualBrut > 0 ? annualBrut.toFixed(2) : '';
+            isProgrammaticUpdate = false;
             
-            // Après impôt
-            const netMensuelApresIrValue = netMensuelValue * (1 - tauxPrelevement);
-            const netAnnuelApresIrValue = netAnnuelValue * (1 - tauxPrelevement);
+            // Calculate net salaries
+            const hourlyNet = hourlyBrut * conversionRate;
+            const monthlyNet = monthlyBrut * conversionRate;
+            const annualNet = annualBrut * conversionRate;
             
-            // Affichage des résultats
-            netHoraire.textContent = netHoraireValue.toFixed(2) + " €";
-            netMensuel.textContent = netMensuelValue.toFixed(2) + " €";
-            netAnnuel.textContent = netAnnuelValue.toFixed(2) + " €";
-            netMensuelApresIr.textContent = netMensuelApresIrValue.toFixed(2) + " €";
-            netAnnuelApresIr.textContent = netAnnuelApresIrValue.toFixed(2) + " €";
+            // Calculate after-tax salaries
+            const monthlyAfterTax = monthlyNet * (1 - taxRate);
+            const annualAfterTax = annualNet * (1 - taxRate);
+            
+            // Calculate tax amount
+            const taxAmount = annualNet * taxRate;
+            
+            // Update UI
+            hourlyNetEl.textContent = hourlyNet > 0 ? hourlyNet.toFixed(2) + ' €' : '0,00 €';
+            monthlyNetEl.textContent = monthlyNet > 0 ? monthlyNet.toFixed(2) + ' €' : '0,00 €';
+            annualNetEl.textContent = annualNet > 0 ? annualNet.toFixed(2) + ' €' : '0,00 €';
+            monthlyAfterTaxEl.textContent = monthlyAfterTax > 0 ? monthlyAfterTax.toFixed(2) + ' €' : '0,00 €';
+            annualAfterTaxEl.textContent = annualAfterTax > 0 ? annualAfterTax.toFixed(2) + ' €' : '0,00 €';
+            taxAmountEl.textContent = taxAmount > 0 ? taxAmount.toFixed(2) + ' €' : '0,00 €';
         }
+
+        // Initialize
+        setupEventListeners();
+        conversionRateEl.textContent = `${Math.round(conversionRate * 100)}%`;
     </script>
 </body>
 </html>
