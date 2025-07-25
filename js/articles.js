@@ -2,7 +2,7 @@ const articles = [
   {
     id: 1,
     title: "Salaire brut ou net : comment calculer ce que vous touchez réellement",
-    excerpt: "Vous entendez parler de salaire brut et de salaire net, mais quelle est vraiment la différence ? Découvrez comment est calculée votre rémunération et ce qui est déduit avant qu'elle n'arrive sur votre compte.",
+    excerpt: "Brut, net imposable, net à payer… On vous explique comment passer du salaire affiché sur votre contrat à ce que vous touchez réellement sur votre compte.",
     date: "15 mars 2025",
     category: "salaire",
     readTime: "6 min",
@@ -10,8 +10,8 @@ const articles = [
   },
   {
     id: 2,
-    title: "Négocier son salaire : les 5 étapes pour réussir",
-    excerpt: "Que ce soit pour un premier emploi ou une promotion, la négociation salariale est cruciale. Découvrez les méthodes pour aborder le sujet avec assurance et obtenir une rémunération à la hauteur de vos compétences.",
+    title: "Négocier son salaire : les 5 étapes clés pour réussir",
+    excerpt: "Préparation, arguments, timing... Voici comment réussir votre négociation salariale, que ce soit à l'embauche ou en cours de carrière.",
     date: "3 février 2025",
     category: "salaire",
     readTime: "7 min",
@@ -20,7 +20,7 @@ const articles = [
   {
     id: 3,
     title: "Impôt à la source : tout comprendre en 2025",
-    excerpt: "Depuis sa mise en place, le prélèvement à la source a changé notre rapport à l'impôt. Fonctionnement, taux personnalisé ou neutre, régularisation : on vous explique tout simplement.",
+    excerpt: "Le prélèvement à la source simplifie le paiement de l'impôt mais peut poser des questions. Taux neutre, régularisation, modulation… on fait le point.",
     date: "12 janvier 2025",
     category: "fiscalite",
     readTime: "5 min",
@@ -28,8 +28,8 @@ const articles = [
   },
   {
     id: 4,
-    title: "Les meilleurs crédits d’impôt à connaître pour faire des économies",
-    excerpt: "Travaux à domicile, emploi d’un salarié, frais de garde… De nombreux crédits d’impôt sont encore sous-utilisés. Voici ceux qui peuvent réellement alléger votre facture fiscale.",
+    title: "Crédits et réductions d'impôt : les dispositifs à ne pas manquer",
+    excerpt: "Emploi à domicile, dons, frais de garde, travaux énergétiques… Maximisez vos réductions fiscales avec ces dispositifs encore trop méconnus.",
     date: "22 mars 2025",
     category: "fiscalite",
     readTime: "6 min",
@@ -37,8 +37,8 @@ const articles = [
   },
   {
     id: 5,
-    title: "Retraite en France : comprendre le système par répartition",
-    excerpt: "Le système de retraite français repose sur la solidarité entre générations. Découvrez comment il fonctionne, ses avantages et ses limites dans un contexte de vieillissement de la population.",
+    title: "Retraite par répartition : comment fonctionne le système français",
+    excerpt: "Découvrez les principes du système français, comment vos cotisations sont utilisées et comment est calculée votre future pension.",
     date: "18 avril 2025",
     category: "retraite",
     readTime: "6 min",
@@ -46,11 +46,27 @@ const articles = [
   },
   {
     id: 6,
-    title: "Épargner efficacement : les 3 règles d’or d’un budget maîtrisé",
-    excerpt: "Gérer son budget, c’est avant tout adopter les bons réflexes. Des conseils concrets pour équilibrer vos revenus, vos dépenses et enfin mettre de l’argent de côté sans vous priver.",
+    title: "Quel âge pour la retraite en 2025 ? Conditions et exceptions",
+    excerpt: "L’âge légal, l’âge du taux plein, les carrières longues, les régimes spéciaux… Découvrez les conditions actuelles pour partir à la retraite.",
+    date: "7 mai 2025",
+    category: "retraite",
+    readTime: "5 min",
+    image: "https://images.unsplash.com/photo-1615398888876-d7bbfc1c7cb0?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 7,
+    title: "Faire un budget mensuel efficace : méthode et outils",
+    excerpt: "Apprenez à répartir vos revenus, à éviter les découvertes et à mieux gérer votre argent grâce à un budget simple mais puissant.",
     date: "5 mars 2025",
     category: "gestion",
-    readTime: "5 min",
+    readTime: "6 min",
     image: "https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=600&q=80"
-  }
-];
+  },
+  {
+    id: 8,
+    title: "Investir avec peu d'argent : les solutions accessibles en 2025",
+    excerpt: "Assurance-vie, ETF, immobilier fractionné, livret A… Voici où placer votre argent même avec un petit budget, sans prendre de gros risques.",
+    date: "25 juillet 2025",
+    category: "gestion",
+    readTime: "7 min",
+    image: "https://images.unsplash.com/photo-1605902711622-cfb43c4437d1?auto=format&fit=crop&w=600&q
