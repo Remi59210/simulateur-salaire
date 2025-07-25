@@ -26,7 +26,7 @@ const articles = [
     date: "2025-01-12",
     category: "fiscalite",
     readTime: "5 min",
-    image: "https://images.unsplash.com/photo-1615390348067-0e9e0c26f931?auto=format&fit=crop&w=600&q=80",
+    image: "https://plus.unsplash.com/premium_photo-1679496828225-6cfc14f89328?q=80&w=600&auto=format&fit=crop",
     link: "/articles/impot-a-la-source-2025.html"
   },
   {
