@@ -74,8 +74,88 @@
     <p class="text-sm">© 2025 Argent Intelligent | Tous droits réservés</p>
   </footer>
 
-  <!-- Script -->
+  <!-- Script de données -->
   <script src="/js/articles.js"></script>
+
+  <!-- Script dynamique d'affichage -->
+  <script>
+    const articlesPerPage = 6;
+    let currentPage = 1;
+    let filteredArticles = [...articles];
+
+    const container = document.getElementById("articles-container");
+    const categoryFilter = document.getElementById("category-filter");
+    const sortBy = document.getElementById("sort-by");
+    const applyBtn = document.getElementById("apply-filters");
+    const prevBtn = document.getElementById("prev-page");
+    const nextBtn = document.getElementById("next-page");
+    const currentPageSpan = document.getElementById("current-page");
+    const totalPagesSpan = document.getElementById("total-pages");
+
+    function renderArticles() {
+      container.innerHTML = "";
+      const start = (currentPage - 1) * articlesPerPage;
+      const end = start + articlesPerPage;
+      const paginated = filteredArticles.slice(start, end);
+
+      paginated.forEach(article => {
+        const card = document.createElement("div");
+        card.className = "bg-white shadow-lg rounded-lg overflow-hidden";
+        card.innerHTML = `
+          <img src="${article.image}" alt="${article.title}" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <span class="text-sm text-gray-500">${article.category} | ${article.date}</span>
+            <h3 class="font-bold text-lg mt-2">${article.title}</h3>
+            <p class="text-sm text-gray-700 mt-2">${article.excerpt}</p>
+            <p class="text-xs text-gray-400 mt-2">${article.readTime}</p>
+            <a href="#" class="inline-block mt-3 text-orange-600 font-medium hover:underline">Lire la suite</a>
+          </div>`;
+        container.appendChild(card);
+      });
+
+      const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
+      currentPageSpan.textContent = currentPage;
+      totalPagesSpan.textContent = totalPages;
+
+      prevBtn.disabled = currentPage === 1;
+      nextBtn.disabled = currentPage === totalPages;
+    }
+
+    function applyFilters() {
+      const category = categoryFilter.value;
+      const sort = sortBy.value;
+
+      filteredArticles = [...articles];
+      if (category !== "all") {
+        filteredArticles = filteredArticles.filter(a => a.category === category);
+      }
+      if (sort === "recent") {
+        filteredArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+      } else {
+        filteredArticles.sort((a, b) => new Date(a.date) - new Date(b.date));
+      }
+
+      currentPage = 1;
+      renderArticles();
+    }
+
+    applyBtn.addEventListener("click", applyFilters);
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderArticles();
+      }
+    });
+    nextBtn.addEventListener("click", () => {
+      const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderArticles();
+      }
+    });
+
+    applyFilters();
+  </script>
 
 </body>
 </html>
