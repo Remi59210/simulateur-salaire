@@ -36,7 +36,7 @@ const articles = [
     date: "2025-03-22",
     category: "fiscalite",
     readTime: "6 min",
-    image: "https://images.unsplash.com/photo-1588776814546-62c6c71c7ec2?auto=format&fit=crop&w=600&q=80",
+    image: "https://plus.unsplash.com/premium_photo-1679923913530-16c91821a213?q=80&w=600&auto=format&fit=crop",
     link: "/articles/credits-reductions-impots.html"
   },
   {
