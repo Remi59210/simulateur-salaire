@@ -69,6 +69,6 @@ const articles = [
     date: "2025-07-25",
     category: "gestion",
     readTime: "7 min",
-    image: "https://images.unsplash.com/photo-1605902711622-cfb43c4437d1?auto=format&fit=crop&w=600&q=80"
+    image: "image: "https://images.unsplash.com/photo-1584458938509-6acc7be5ccaf?auto=format&fit=crop&w=600&q=80"
   }
 ];
