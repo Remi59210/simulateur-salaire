@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Articles | Argent Intelligent</title>
-  <meta name="description" content="Tous les articles sur le salaire, la fiscalité, la retraite et la gestion financière.">
+  <meta name="description" content="Tous les articles sur le salaire, la fiscalité, la retraite et la gestion financière." />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -19,6 +19,7 @@
 </head>
 <body class="bg-orange-50 min-h-screen flex flex-col">
 
+  <!-- Header -->
   <header class="bg-gradient-to-r from-orange-500 to-orange-600 text-white py-6">
     <div class="container mx-auto px-4 text-center">
       <h1 class="text-3xl font-bold"><i class="fas fa-newspaper mr-2"></i> Nos Articles</h1>
@@ -26,8 +27,9 @@
     </div>
   </header>
 
+  <!-- Contenu -->
   <main class="flex-grow container mx-auto px-4 py-10 max-w-6xl">
-    
+
     <!-- Bouton retour -->
     <div class="mb-8 text-center">
       <a href="index.html" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium px-4 py-2 rounded-lg">
@@ -61,7 +63,7 @@
       </button>
     </div>
 
-    <!-- Conteneur d'articles -->
+    <!-- Articles -->
     <div id="articles-container" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"></div>
 
     <!-- Pagination -->
@@ -77,14 +79,15 @@
 
   </main>
 
+  <!-- Footer -->
   <footer class="bg-gradient-to-r from-orange-700 to-orange-800 text-white py-6 text-center">
     <p class="text-sm">© 2025 Argent Intelligent | Tous droits réservés</p>
   </footer>
 
-  <!-- Script de données -->
+  <!-- Données articles -->
   <script src="js/articles.js"></script>
 
-  <!-- Script dynamique d'affichage -->
+  <!-- Script JS dynamique -->
   <script>
     const articlesPerPage = 6;
     let currentPage = 1;
@@ -111,11 +114,11 @@
         card.innerHTML = `
           <img src="${article.image}" alt="${article.title}" class="w-full h-48 object-cover">
           <div class="p-4">
-            <span class="text-sm text-gray-500">${article.category} | ${article.date}</span>
+            <span class="text-sm text-gray-500 capitalize">${article.category} | ${article.date}</span>
             <h3 class="font-bold text-lg mt-2">${article.title}</h3>
             <p class="text-sm text-gray-700 mt-2">${article.excerpt}</p>
             <p class="text-xs text-gray-400 mt-2">${article.readTime}</p>
-            <a href="#" class="inline-block mt-3 text-orange-600 font-medium hover:underline">Lire la suite</a>
+            <a href="${article.link}" class="inline-block mt-3 text-orange-600 font-medium hover:underline">Lire la suite</a>
           </div>`;
         container.appendChild(card);
       });
