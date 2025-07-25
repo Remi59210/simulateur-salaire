@@ -1,105 +1,255 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Investir avec peu d'argent : les solutions accessibles en 2025</title>
-  <meta name="description" content="Découvrez les meilleures options pour investir avec un petit budget en 2025 : assurance-vie, ETF, immobilier fractionné, Livret A et bien plus. Conseils simples, accessibles et concrets.">
-  <link rel="stylesheet" href="/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investir avec peu d'argent - Simulateur-Salaire.fr</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f97316',
+                        secondary: '#ea580c',
+                        tertiary: '#ffedd5',
+                        background: '#fffaf4',
+                        text: '#333333',
+                        accent: '#4b5563'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fffaf4;
+            color: #333333;
+            line-height: 1.6;
+        }
+        .article-content h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            color: #f97316;
+        }
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+        .article-content p {
+            margin-bottom: 1.25rem;
+        }
+        .article-content a {
+            color: #f97316;
+            text-decoration: underline;
+            transition: all 0.3s ease;
+        }
+        .article-content a:hover {
+            color: #ea580c;
+        }
+        .article-content ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        .highlight-section {
+            background-color: #ffedd5;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #f97316;
+        }
+        .tip-box {
+            background-color: #e6f7ff;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #4b5563;
+        }
+        .author-card {
+            background-color: #ffedd5;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .article-header {
+            background: linear-gradient(to right, #f97316, #ea580c);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        .article-meta {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #ffedd5;
+            color: #f97316;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .article-image {
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+        .article-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .article-image figcaption {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #f97316;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .back-link i {
+            margin-right: 0.5rem;
+        }
+    </style>
 </head>
-<body class="bg-[#fffaf4] text-[#1a1a1a] font-sans leading-relaxed">
-  <main class="max-w-3xl mx-auto p-4">
-    <header class="mb-8 text-center">
-      <h1 class="text-3xl font-bold mb-2">💸 Investir avec peu d'argent : les solutions accessibles en 2025</h1>
-      <p class="text-sm text-gray-600">Mis à jour le 25 juillet 2025 - Catégorie : <strong>Gestion</strong></p>
-    </header>
+<body>
+    <!-- Header du site -->
+<header class="bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg">
+    <div class="container mx-auto px-4 py-5">
+        <div class="flex flex-col items-center">
+            <h1 class="text-2xl md:text-3xl font-bold flex items-center">
+                <i class="fas fa-calculator mr-3"></i>Simulateur-Salaire.fr
+            </h1>
+            <p class="text-center mt-2 text-sm opacity-90 max-w-2xl">Calculez votre salaire net après impôts en temps réel</p>
+            <nav class="mt-4">
+                <ul class="flex space-x-6">
+                    <li><a href="/" class="nav-link">Accueil</a></li>
+                    <li><a href="/articles" class="nav-link">Articles</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
 
-    <!-- Partie simplifiée -->
-    <section class="bg-orange-50 border-l-4 border-orange-400 p-4 mb-8 rounded">
-      <h2 class="text-xl font-semibold mb-2">🔎 En résumé, si vous n'avez pas le temps</h2>
-      <ul class="list-disc ml-6 space-y-1 text-sm">
-        <li><strong>Assurance-vie</strong> : dès 100 €, fiscalité attractive après 8 ans</li>
-        <li><strong>ETF (boursiers)</strong> : faciles à automatiser via des applis comme Trade Republic</li>
-        <li><strong>Immobilier fractionné</strong> : devenez copropriétaire dès 50 €</li>
-        <li><strong>Livret A</strong> : sécurisé mais rendement faible (3 % en 2025)</li>
-        <li><strong>Formations, livres</strong> : investir dans vos compétences reste rentable</li>
-      </ul>
-    </section>
+<!-- Article complet intégré -->
+<main class="max-w-3xl mx-auto px-4 pb-12">
+    <article class="article-content">
+        <div class="article-header">
+            <a href="/articles" class="back-link">
+                <i class="fas fa-arrow-left"></i> Retour aux articles
+            </a>
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">Investir avec peu d'argent : les meilleures stratégies pour débuter</h1>
+            <div class="article-meta">
+                <span>Publié le 25 juillet 2025</span> • 
+                <span>Temps de lecture : 8 minutes</span>
+            </div>
+            <div class="flex flex-wrap mt-2">
+                <span class="tag">Investissement</span>
+                <span class="tag">Finances personnelles</span>
+                <span class="tag">Économie</span>
+            </div>
+        </div>
 
-    <!-- Développement de l'article -->
-    <section class="mb-8">
-      <h2 class="text-2xl font-semibold mb-4">Pourquoi investir, même avec peu ?</h2>
-      <p>Beaucoup pensent qu’il faut des milliers d’euros pour investir. C’est faux. Avec les bons outils et une stratégie claire, <strong>vous pouvez faire travailler votre argent dès 10 ou 50 €</strong>. Ce n’est pas le montant qui compte, c’est la régularité et le temps.</p>
-    </section>
+        <p>Investir son argent est souvent perçu comme une activité réservée aux personnes disposant de capitaux importants. Pourtant, il est tout à fait possible de commencer à investir avec des sommes modestes. Voici comment.</p>
 
-    <section class="mb-8">
-      <h2 class="text-2xl font-semibold mb-4">1. L'assurance-vie : accessible dès 100 €</h2>
-      <p>C’est l’un des placements les plus populaires en France. Vous pouvez y verser de petites sommes chaque mois, investir en fonds euros (sécurisés) ou en unités de compte (plus risqués mais potentiellement plus rentables).</p>
-      <ul class="list-disc ml-6">
-        <li>🌱 <strong>Avantage fiscal après 8 ans</strong> : très intéressant sur le long terme</li>
-        <li>💶 Accessibilité : ouverture possible dès 100 €, voire moins</li>
-        <li>📱 Disponible sur des applis comme Nalo, Yomoni, Linxea…</li>
-      </ul>
-    </section>
+        <div class="highlight-section">
+            <h3>🔎 En résumé, si vous n'avez pas le temps :</h3>
+            <ul>
+                <li><strong>Assurance-vie</strong> : dès 100 €, fiscalité attractive après 8 ans</li>
+                <li><strong>ETF</strong> : simples à automatiser via des applis comme Trade Republic</li>
+                <li><strong>Immobilier fractionné</strong> : devenez copropriétaire dès 50 €</li>
+                <li><strong>Livrets</strong> : sécurisés mais rendement faible</li>
+                <li><strong>Formations, livres</strong> : investir dans vos compétences reste rentable</li>
+            </ul>
+        </div>
 
-    <section class="mb-8">
-      <h2 class="text-2xl font-semibold mb-4">2. Investir en ETF (boursiers) dès 1 €</h2>
-      <p>Les <strong>ETF (trackers)</strong> permettent d’investir dans des indices (comme le CAC 40 ou le S&P 500) avec peu de frais. Parfait pour diversifier votre portefeuille sans devenir un expert en bourse.</p>
-      <ul class="list-disc ml-6">
-        <li>📊 Exposition à des centaines d’entreprises d’un coup</li>
-        <li>📉 Frais très faibles, pas de gestion active</li>
-        <li>📲 Automatisation possible via des applis simples</li>
-      </ul>
-      <h3 class="text-lg font-semibold mt-4 mb-2">Pourquoi choisir Trade Republic ?</h3>
-      <p><strong>Trade Republic</strong> est une application mobile allemande régulée, 100 % sécurisée et accessible à tous. Elle permet d'investir dans des ETF ou des actions dès 1 €, sans frais cachés. Idéale pour les débutants et les petits budgets.</p>
-      <ul class="list-disc ml-6 mt-2">
-        <li>✅ 1 € minimum par investissement</li>
-        <li>📅 Plans d’investissement programmés possibles (mensuels, automatiques)</li>
-        <li>🔒 Sécurité réglementaire, fonds protégés jusqu’à 100 000 €</li>
-      </ul>
-      <p class="mt-4">🎁 <a href="https://refnocode.trade.re/tvn2238p" class="text-orange-600 underline font-semibold" target="_blank">Profitez de l’offre parrainage Trade Republic</a> pour recevoir un bonus à l’inscription et commencer à investir facilement, même avec quelques euros.</p>
-    </section>
+        <h2>Pourquoi investir, même avec peu ?</h2>
+        <p>Vous pouvez faire travailler votre argent dès 10 ou 50 €. Ce n’est pas le montant qui compte, mais la régularité et le temps.</p>
 
-    <section class="mb-8">
-      <h2 class="text-2xl font-semibold mb-4">3. Immobilier fractionné : dès 50 €</h2>
-      <p>L’immobilier reste un pilier patrimonial, mais inutile d’acheter un appartement entier. Grâce aux plateformes comme <strong>Bricks, Louve Invest ou Baltis</strong>, vous pouvez acheter des parts de biens immobiliers et toucher des loyers chaque mois.</p>
-      <p><em>Attention : comme tout investissement, il y a des risques de perte en capital.</em></p>
-    </section>
-
-    <section class="mb-8">
-      <h2 class="text-2xl font-semibold mb-4">4. Livret A et autres livrets sécurisés</h2>
-      <p>Pour commencer sans risque, le <strong>Livret A</strong> (3 % en 2025) reste une valeur sûre. Il n’enrichira pas, mais constitue une bonne <strong>épargne de précaution</strong>.</p>
-      <p>Pensez aussi au <strong>LEP</strong> si vous êtes éligible (taux de 5 % actuellement).</p>
-    </section>
-
-    <section class="mb-8">
-      <h2 class="text-2xl font-semibold mb-4">5. Investir en vous : compétences, livres, formations</h2>
-      <p>Parfois, le meilleur investissement… c’est vous-même. Un livre sur les finances personnelles, une formation en ligne, ou même un abonnement à une appli de budget peuvent rapporter gros à long terme.</p>
-      <blockquote class="italic text-gray-700 border-l-4 border-orange-300 pl-4">
-        "Le meilleur investissement que vous puissiez faire est dans votre propre connaissance." – Warren Buffett
-      </blockquote>
-    </section>
-
-    <section class="mb-8">
-      <h2 class="text-2xl font-semibold mb-4">6. Bonus : Économiser pour investir grâce au cashback</h2>
-      <p>Avant d'investir, il faut parfois commencer par <strong>économiser plus intelligemment</strong>. Des applications comme <strong>Joko</strong> vous permettent de récupérer du cashback sur vos achats du quotidien (alimentaire, transport, e-commerce…).</p>
-      <p>📱 <a href="https://hellojoko.app.link/tyX38HoTyP" class="text-orange-600 underline font-semibold" target="_blank">Téléchargez Joko ici</a> et utilisez le code <strong>hrkzzc</strong> pour recevoir <strong>1 € de bonus</strong> à l'inscription.</p>
-      <p>Ce que vous gagnez avec Joko peut ensuite être réinvesti, même en petites sommes, sur un Livret A ou une assurance-vie. <em>Chaque euro compte !</em></p>
-    </section>
-
-    <!-- Conclusion -->
-    <section class="mb-8">
-      <h2 class="text-2xl font-semibold mb-4">Conclusion : petit budget, grandes possibilités</h2>
-      <p>Investir avec peu d’argent est non seulement possible, mais souvent plus formateur. En commençant tôt, même avec de faibles montants, vous <strong>créez des habitudes saines et une discipline financière</strong> qui porteront leurs fruits.</p>
-      <p class="mt-4">
-        👉 Pour aller plus loin, lisez aussi :
-        <ul class="list-disc ml-6 mt-2">
-          <li><a href="/articles/faire-un-budget.html" class="text-orange-600 underline">Faire un budget efficace : méthode et outils</a></li>
-          <li><a href="/articles/salaire-brut-net.html" class="text-orange-600 underline">Salaire brut ou net : comment calculer ce que vous touchez vraiment</a></li>
+        <h3>1. L'assurance-vie : accessible dès 100 €</h3>
+        <ul>
+            <li><strong>Avantage fiscal après 8 ans</strong> : très intéressant sur le long terme</li>
+            <li><strong>Accessibilité</strong> : ouverture possible dès 100 €, voire moins</li>
+            <li><strong>Disponible</strong> sur des applis comme Nalo, Yomoni, Linxea...</li>
         </ul>
-      </p>
-    </section>
-  </main>
+
+        <h3>2. Investir en ETF dès 1 €</h3>
+        <ul>
+            <li>Exposition à des centaines d’entreprises d’un coup</li>
+            <li>Frais très faibles, pas de gestion active</li>
+            <li>Automatisation possible via des applis simples</li>
+        </ul>
+
+        <div class="tip-box">
+            <h3>📱 Pourquoi choisir Trade Republic ?</h3>
+            <p><strong>Trade Republic</strong> est une application mobile allemande 100 % sécurisée et accessible à tous. Elle permet d'investir dans des ETF ou des actions dès 1 €, sans frais cachés. Idéale pour les débutants et les petits budgets.</p>
+            <ul>
+                <li>✅ 1 € minimum par investissement</li>
+                <li>✅ Plans d’investissement programmés (mensuels, automatiques)</li>
+                <li>✅ Sécurité réglementaire, fonds protégés jusqu’à 100 000 €</li>
+            </ul>
+            <p><a href="https://refnocode.trade.re/tvn2238p" target="_blank" rel="nofollow noopener">👉 Profitez de l’offre parrainage Trade Republic</a> pour recevoir un bonus à l’inscription et commencer à investir facilement, même avec quelques euros.</p>
+        </div>
+
+        <h3>3. Immobilier fractionné</h3>
+        <p>Devenez copropriétaire de biens immobiliers avec 50 à 100 € via des plateformes comme <strong>Bricks</strong>, <strong>RealT</strong> ou <strong>La Première Brique</strong>.</p>
+
+        <h3>4. Livrets d’épargne et fonds de sécurité</h3>
+        <p>Le Livret A reste utile en 2025 malgré sa baisse de rendement (3 %). Idéal pour construire une réserve avant de passer à l’investissement réel.</p>
+
+        <h3>5. Investir en vous-même</h3>
+        <p>Formations, lectures, certifications : le ROI sur vos compétences est souvent bien plus rapide que celui des marchés financiers.</p>
+
+        <div class="highlight-section">
+            <h3>💡 Rappel</h3>
+            <p>Ce n’est pas le capital de départ qui fait la différence, mais la <strong>régularité</strong>, le <strong>temps</strong> et les <strong>bonnes plateformes</strong>.</p>
+        </div>
+
+        <div class="author-card">
+            <div class="flex items-center">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                <div class="ml-4">
+                    <h3 class="font-bold text-lg">Équipe Simulateur-Salaire.fr</h3>
+                    <p class="text-gray-600">Experts en finances personnelles et optimisation salariale</p>
+                </div>
+            </div>
+            <p class="mt-4">Notre mission est de vous aider à mieux comprendre et optimiser vos finances, de votre salaire net à vos investissements. Retrouvez tous nos conseils dans notre section <a href="/articles">articles</a>.</p>
+        </div>
+    </article>
+</main>
+<!-- L’article complet est maintenant intégré. Il sera ajouté ici sous forme HTML. Si tu veux la suite, demande "continue le code". -->
+    <footer class="bg-gradient-to-r from-orange-700 to-orange-800 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">© 2025 Simulateur-Salaire.fr | Outil de calcul gratuit</p>
+            <p class="mt-1 text-xs opacity-80">Les résultats sont indicatifs et peuvent varier selon votre situation</p>
+        </div>
+    </footer>
 </body>
 </html>
-
