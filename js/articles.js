@@ -37,7 +37,7 @@ const articles = [
     category: "fiscalite",
     readTime: "6 min",
     image: "https://images.unsplash.com/photo-1588776814546-62c6c71c7ec2?auto=format&fit=crop&w=600&q=80",
-    link: "/articles/credits-reductions-impot.html"
+    link: "/articles/credits-reductions-impots.html"
   },
   {
     id: 5,
@@ -46,7 +46,7 @@ const articles = [
     date: "2025-04-18",
     category: "retraite",
     readTime: "6 min",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a733b47?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1559234938-b60fff04894d?q=80&w=600&auto=format&fit=crop",
     link: "/articles/retraite-par-repartition.html"
   },
   {
