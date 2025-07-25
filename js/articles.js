@@ -42,7 +42,7 @@ const articles = [
     date: "2025-04-18",
     category: "retraite",
     readTime: "6 min",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a733b47?auto=format&fit=crop&w=600&q=80"
+    image: "https://images.unsplash.com/photo-1617957748995-91d7e84de7de?auto=format&fit=crop&w=600&q=80"
   },
   {
     id: 6,
@@ -51,7 +51,7 @@ const articles = [
     date: "2025-05-07",
     category: "retraite",
     readTime: "5 min",
-    image: "https://images.unsplash.com/photo-1615398888876-d7bbfc1c7cb0?auto=format&fit=crop&w=600&q=80"
+    image: "https://images.unsplash.com/photo-1620050021396-f6f9c1e281f9?auto=format&fit=crop&w=600&q=80"
   },
   {
     id: 7,
