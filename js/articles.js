@@ -6,7 +6,8 @@ const articles = [
     date: "2025-03-15",
     category: "salaire",
     readTime: "6 min",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=600&q=80"
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=600&q=80",
+    link: "/articles/salaire-brut-ou-net.html"
   },
   {
     id: 2,
@@ -15,7 +16,8 @@ const articles = [
     date: "2025-02-03",
     category: "salaire",
     readTime: "7 min",
-    image: "https://images.unsplash.com/photo-1573164574572-cb89e39749b4?auto=format&fit=crop&w=600&q=80"
+    image: "https://images.unsplash.com/photo-1573164574572-cb89e39749b4?auto=format&fit=crop&w=600&q=80",
+    link: "/articles/negocier-son-salaire.html"
   },
   {
     id: 3,
@@ -24,7 +26,8 @@ const articles = [
     date: "2025-01-12",
     category: "fiscalite",
     readTime: "5 min",
-    image: "https://images.unsplash.com/photo-1615390348067-0e9e0c26f931?auto=format&fit=crop&w=600&q=80"
+    image: "https://images.unsplash.com/photo-1615390348067-0e9e0c26f931?auto=format&fit=crop&w=600&q=80",
+    link: "/articles/impot-a-la-source-2025.html"
   },
   {
     id: 4,
@@ -33,7 +36,8 @@ const articles = [
     date: "2025-03-22",
     category: "fiscalite",
     readTime: "6 min",
-    image: "https://images.unsplash.com/photo-1588776814546-62c6c71c7ec2?auto=format&fit=crop&w=600&q=80"
+    image: "https://images.unsplash.com/photo-1588776814546-62c6c71c7ec2?auto=format&fit=crop&w=600&q=80",
+    link: "/articles/credits-reductions-impot.html"
   },
   {
     id: 5,
@@ -42,7 +46,8 @@ const articles = [
     date: "2025-04-18",
     category: "retraite",
     readTime: "6 min",
-    image: "https://images.unsplash.com/photo-1617957748995-91d7e84de7de?auto=format&fit=crop&w=600&q=80"
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a733b47?auto=format&fit=crop&w=600&q=80",
+    link: "/articles/retraite-par-repartition.html"
   },
   {
     id: 6,
@@ -51,7 +56,8 @@ const articles = [
     date: "2025-05-07",
     category: "retraite",
     readTime: "5 min",
-    image: "https://images.unsplash.com/photo-1620050021396-f6f9c1e281f9?auto=format&fit=crop&w=600&q=80"
+    image: "https://plus.unsplash.com/premium_photo-1675368982408-ee5a9e0fab6c?q=80&w=600&auto=format&fit=crop",
+    link: "/articles/age-retraite-2025.html"
   },
   {
     id: 7,
@@ -60,7 +66,8 @@ const articles = [
     date: "2025-03-05",
     category: "gestion",
     readTime: "6 min",
-    image: "https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=600&q=80"
+    image: "https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=600&q=80",
+    link: "/articles/budget-mensuel-efficace.html"
   },
   {
     id: 8,
@@ -69,6 +76,7 @@ const articles = [
     date: "2025-07-25",
     category: "gestion",
     readTime: "7 min",
-    image: "https://images.unsplash.com/photo-1584458938509-6acc7be5ccaf?auto=format&fit=crop&w=600&q=80"
+    image: "https://images.unsplash.com/photo-1584458938509-6acc7be5ccaf?auto=format&fit=crop&w=600&q=80",
+    link: "/articles/investir-avec-peu-argent.html"
   }
 ];
