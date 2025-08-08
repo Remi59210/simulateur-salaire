@@ -1,0 +1,11 @@
+{
+  "name": "Convertisseur Brut-Net",
+  "short_name": "Brut-Net",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff7ed",
+  "theme_color": "#f97316",
+  "icons": [
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
