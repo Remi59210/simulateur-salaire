@@ -5,16 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Articles | Argent Intelligent</title>
   <meta name="description" content="Tous les articles sur le salaire, la fiscalité, la retraite et la gestion financière." />
+
+  <!-- SEO de base -->
+  <link rel="canonical" href="https://simulateur-salaire.fr/articles.html" />
+  <meta property="og:title" content="Articles | Argent Intelligent" />
+  <meta property="og:description" content="Découvrez nos contenus pour mieux gérer votre argent : salaire, impôts, retraite, gestion." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://simulateur-salaire.fr/articles.html" />
+  <meta property="og:image" content="https://simulateur-salaire.fr/images/og-cover.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-    .disabled {
-      opacity: 0.5;
-      pointer-events: none;
-    }
+    body { font-family: 'Inter', sans-serif; }
+    .disabled { opacity: 0.5; pointer-events: none; }
   </style>
 </head>
 <body class="bg-orange-50 min-h-screen flex flex-col">
@@ -32,140 +37,10 @@
 
     <!-- Bouton retour -->
     <div class="mb-8 text-center">
-      <a href="index.html" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium px-4 py-2 rounded-lg">
+      <a href="/" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium px-4 py-2 rounded-lg">
         ← Retour à l'accueil
       </a>
     </div>
 
     <!-- Filtres -->
-    <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
-      <div class="flex items-center gap-4">
-        <label for="category-filter" class="text-sm font-medium text-gray-700">Catégorie :</label>
-        <select id="category-filter" class="border border-gray-300 rounded-lg px-3 py-2">
-          <option value="all">Toutes</option>
-          <option value="salaire">Salaire</option>
-          <option value="fiscalite">Fiscalité</option>
-          <option value="retraite">Retraite</option>
-          <option value="gestion">Gestion financière</option>
-        </select>
-      </div>
-
-      <div class="flex items-center gap-4">
-        <label for="sort-by" class="text-sm font-medium text-gray-700">Trier par :</label>
-        <select id="sort-by" class="border border-gray-300 rounded-lg px-3 py-2">
-          <option value="recent">Plus récents</option>
-          <option value="ancien">Plus anciens</option>
-        </select>
-      </div>
-
-      <button id="apply-filters" class="bg-orange-500 hover:bg-orange-600 text-white font-medium px-4 py-2 rounded-lg">
-        Appliquer les filtres
-      </button>
-    </div>
-
-    <!-- Articles -->
-    <div id="articles-container" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"></div>
-
-    <!-- Pagination -->
-    <div class="flex justify-center items-center gap-4 mt-10">
-      <button id="prev-page" class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">
-        Précédent
-      </button>
-      <span class="text-sm text-gray-700">Page <span id="current-page">1</span> sur <span id="total-pages">1</span></span>
-      <button id="next-page" class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">
-        Suivant
-      </button>
-    </div>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-gradient-to-r from-orange-700 to-orange-800 text-white py-6 text-center">
-    <p class="text-sm">© 2025 Argent Intelligent | Tous droits réservés</p>
-  </footer>
-
-  <!-- Données articles -->
-  <script src="js/articles.js"></script>
-
-  <!-- Script JS dynamique -->
-  <script>
-    const articlesPerPage = 6;
-    let currentPage = 1;
-    let filteredArticles = [...articles];
-
-    const container = document.getElementById("articles-container");
-    const categoryFilter = document.getElementById("category-filter");
-    const sortBy = document.getElementById("sort-by");
-    const applyBtn = document.getElementById("apply-filters");
-    const prevBtn = document.getElementById("prev-page");
-    const nextBtn = document.getElementById("next-page");
-    const currentPageSpan = document.getElementById("current-page");
-    const totalPagesSpan = document.getElementById("total-pages");
-
-    function renderArticles() {
-      container.innerHTML = "";
-      const start = (currentPage - 1) * articlesPerPage;
-      const end = start + articlesPerPage;
-      const paginated = filteredArticles.slice(start, end);
-
-      paginated.forEach(article => {
-        const card = document.createElement("div");
-        card.className = "bg-white shadow-lg rounded-lg overflow-hidden";
-        card.innerHTML = `
-          <img src="${article.image}" alt="${article.title}" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <span class="text-sm text-gray-500 capitalize">${article.category} | ${article.date}</span>
-            <h3 class="font-bold text-lg mt-2">${article.title}</h3>
-            <p class="text-sm text-gray-700 mt-2">${article.excerpt}</p>
-            <p class="text-xs text-gray-400 mt-2">${article.readTime}</p>
-            <a href="${article.link}" class="inline-block mt-3 text-orange-600 font-medium hover:underline">Lire la suite</a>
-          </div>`;
-        container.appendChild(card);
-      });
-
-      const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
-      currentPageSpan.textContent = currentPage;
-      totalPagesSpan.textContent = totalPages;
-
-      prevBtn.disabled = currentPage === 1;
-      nextBtn.disabled = currentPage === totalPages;
-    }
-
-    function applyFilters() {
-      const category = categoryFilter.value;
-      const sort = sortBy.value;
-
-      filteredArticles = [...articles];
-      if (category !== "all") {
-        filteredArticles = filteredArticles.filter(a => a.category === category);
-      }
-      if (sort === "recent") {
-        filteredArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
-      } else {
-        filteredArticles.sort((a, b) => new Date(a.date) - new Date(b.date));
-      }
-
-      currentPage = 1;
-      renderArticles();
-    }
-
-    applyBtn.addEventListener("click", applyFilters);
-    prevBtn.addEventListener("click", () => {
-      if (currentPage > 1) {
-        currentPage--;
-        renderArticles();
-      }
-    });
-    nextBtn.addEventListener("click", () => {
-      const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
-      if (currentPage < totalPages) {
-        currentPage++;
-        renderArticles();
-      }
-    });
-
-    applyFilters();
-  </script>
-
-</body>
-</html>
+    <div class="flex flex-co
