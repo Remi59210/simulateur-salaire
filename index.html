@@ -4,19 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Convertisseur Salaire Brut en Net</title>
-  <meta name="description" content="Calculez votre salaire net après impôts en fonction de votre statut professionnel en temps réel."/>
+  <meta name="description" content="Calculez votre salaire net après impôts en fonction de votre statut professionnel, en temps réel." />
 
-  <!-- SEO de base -->
+  <!-- SEO & icônes -->
   <link rel="canonical" href="https://simulateur-salaire.fr/"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#f97316">
+
+  <!-- Partage social -->
   <meta property="og:title" content="Convertisseur Salaire Brut ↔ Net" />
-  <meta property="og:description" content="Estimez instantanément votre salaire net avant et après impôts selon votre statut. Outil 100% gratuit." />
+  <meta property="og:description" content="Estimez instantanément votre salaire net avant/après impôts selon votre statut. Outil 100% gratuit." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://simulateur-salaire.fr/" />
   <meta property="og:image" content="https://simulateur-salaire.fr/images/og-cover.webp" />
   <meta name="twitter:card" content="summary_large_image" />
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <script>
     tailwind.config = {
@@ -53,6 +60,7 @@
     <div class="relative z-10 container mx-auto px-4 py-8 text-white">
       <div class="max-w-3xl mx-auto text-center">
         <span class="inline-flex items-center gap-2 text-xs uppercase tracking-wide bg-white/15 px-3 py-1 rounded-full">
+          <!-- icône FA -->
           <i class="fa-solid fa-bolt-lightning"></i> Gratuit & instantané
         </span>
         <h1 class="mt-3 text-3xl md:text-4xl font-extrabold flex items-center justify-center gap-3">
@@ -60,7 +68,7 @@
         </h1>
         <p class="mt-2 opacity-95">Calculez votre salaire net avant et après impôts en temps réel selon votre statut.</p>
 
-        <!-- Nav allégée (on garde juste Accueil) -->
+        <!-- Nav minimal -->
         <nav class="mt-4">
           <ul class="flex justify-center gap-6 text-sm">
             <li><a href="/" class="opacity-90 hover:opacity-100 underline-offset-4 hover:underline">Accueil</a></li>
@@ -233,9 +241,11 @@
     </div>
   </footer>
 
+  <!-- Font Awesome (JS) en bas pour de meilleures perfs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
+
   <!-- ===== LOGIQUE CALCULATEUR INCHANGÉE ===== -->
   <script>
-    // Conversion rates by status
     const conversionRates = {
       "non-cadre": 0.78,
       "cadre": 0.75,
@@ -244,7 +254,6 @@
       "portage-salarial": 0.65
     };
 
-    // DOM Elements
     const hourlyBrutInput = document.getElementById('hourly-brut');
     const monthlyBrutInput = document.getElementById('monthly-brut');
     const annualBrutInput = document.getElementById('annual-brut');
@@ -254,7 +263,6 @@
     const taxRateSlider = document.getElementById('tax-rate-slider');
     const clearBtn = document.getElementById('clear-btn');
 
-    // Result elements
     const hourlyNetEl = document.getElementById('hourly-net');
     const monthlyNetEl = document.getElementById('monthly-net');
     const annualNetEl = document.getElementById('annual-net');
@@ -265,25 +273,21 @@
     const socialChargesEl = document.getElementById('social-charges');
     const netAmountBar = document.getElementById('net-amount-bar');
 
-    // Initialize variables
     let conversionRate = conversionRates[statusSelect.value];
     let months = parseInt(monthsSelect.value);
     let taxRate = parseFloat(taxRateInput.value) / 100;
 
-    // Set up event listeners
     function setupEventListeners() {
-      // Input changes trigger calculation
       hourlyBrutInput.addEventListener('input', calculate);
       monthlyBrutInput.addEventListener('input', calculate);
       annualBrutInput.addEventListener('input', calculate);
-      
-      // Tax rate synchronization
+
       taxRateSlider.addEventListener('input', () => {
         taxRateInput.value = taxRateSlider.value;
         taxRate = parseFloat(taxRateSlider.value) / 100;
         calculate();
       });
-      
+
       taxRateInput.addEventListener('input', () => {
         if (taxRateInput.value > 100) taxRateInput.value = 100;
         if (taxRateInput.value < 0) taxRateInput.value = 0;
@@ -291,8 +295,7 @@
         taxRate = parseFloat(taxRateInput.value) / 100;
         calculate();
       });
-      
-      // Status change
+
       statusSelect.addEventListener('change', () => {
         conversionRate = conversionRates[statusSelect.value];
         conversionRateEl.textContent = `${Math.round(conversionRate * 100)}%`;
@@ -300,20 +303,16 @@
         netAmountBar.style.width = `${conversionRate * 100}%`;
         calculate();
       });
-      
-      // Months change
+
       monthsSelect.addEventListener('change', () => {
         months = parseInt(monthsSelect.value);
-        // Recalculate annual salary when months change
         if (monthlyBrutInput.value) {
           annualBrutInput.value = (parseFloat(monthlyBrutInput.value) * months).toFixed(2);
         }
         calculate();
       });
-      
-      // Clear button - COMPLETE RESET
+
       clearBtn.addEventListener('click', () => {
-        // Reset input fields
         hourlyBrutInput.value = '';
         monthlyBrutInput.value = '';
         annualBrutInput.value = '';
@@ -321,8 +320,7 @@
         taxRateSlider.value = '0';
         statusSelect.value = 'non-cadre';
         monthsSelect.value = '12';
-        
-        // Reset results display
+
         hourlyNetEl.textContent = '0,00 €';
         monthlyNetEl.textContent = '0,00 €';
         annualNetEl.textContent = '0,00 €';
@@ -332,60 +330,49 @@
         taxAmountEl.textContent = '0,00 €';
         socialChargesEl.textContent = '22%';
         netAmountBar.style.width = '78%';
-        
-        // Add reset animation
-        const resultCards = document.querySelectorAll('.result-card');
-        resultCards.forEach(card => {
+
+        document.querySelectorAll('.result-card').forEach(card => {
           card.classList.add('reset-animation');
           setTimeout(() => card.classList.remove('reset-animation'), 500);
         });
-        
-        // Reset internal variables
+
         conversionRate = conversionRates['non-cadre'];
         months = 12;
         taxRate = 0;
       });
     }
 
-    // Main calculation function
     function calculate() {
       let hourlyBrut = parseFloat(hourlyBrutInput.value) || 0;
       let monthlyBrut = parseFloat(monthlyBrutInput.value) || 0;
       let annualBrut = parseFloat(annualBrutInput.value) || 0;
-      
-      // Synchronize values based on which field is being edited
+
       if (document.activeElement === hourlyBrutInput && hourlyBrut > 0) {
         monthlyBrut = hourlyBrut * 151.67;
         annualBrut = monthlyBrut * months;
         monthlyBrutInput.value = monthlyBrut.toFixed(2);
         annualBrutInput.value = annualBrut.toFixed(2);
-      } 
-      else if (document.activeElement === monthlyBrutInput && monthlyBrut > 0) {
+      } else if (document.activeElement === monthlyBrutInput && monthlyBrut > 0) {
         hourlyBrut = monthlyBrut / 151.67;
         annualBrut = monthlyBrut * months;
         hourlyBrutInput.value = hourlyBrut.toFixed(2);
         annualBrutInput.value = annualBrut.toFixed(2);
-      } 
-      else if (document.activeElement === annualBrutInput && annualBrut > 0) {
+      } else if (document.activeElement === annualBrutInput && annualBrut > 0) {
         monthlyBrut = annualBrut / months;
         hourlyBrut = monthlyBrut / 151.67;
         hourlyBrutInput.value = hourlyBrut.toFixed(2);
         monthlyBrutInput.value = monthlyBrut.toFixed(2);
       }
-      
-      // Calculate net salaries
+
       const hourlyNet = hourlyBrut * conversionRate;
       const monthlyNet = monthlyBrut * conversionRate;
       const annualNet = annualBrut * conversionRate;
-      
-      // Calculate after-tax salaries
+
       const monthlyAfterTax = monthlyNet * (1 - taxRate);
       const annualAfterTax = annualNet * (1 - taxRate);
-      
-      // Calculate tax amount
+
       const taxAmount = annualNet * taxRate;
-      
-      // Update UI
+
       hourlyNetEl.textContent = hourlyNet > 0 ? hourlyNet.toFixed(2) + ' €' : '0,00 €';
       monthlyNetEl.textContent = monthlyNet > 0 ? monthlyNet.toFixed(2) + ' €' : '0,00 €';
       annualNetEl.textContent = annualNet > 0 ? annualNet.toFixed(2) + ' €' : '0,00 €';
@@ -394,7 +381,6 @@
       taxAmountEl.textContent = taxAmount > 0 ? taxAmount.toFixed(2) + ' €' : '0,00 €';
     }
 
-    // Initialize
     setupEventListeners();
     conversionRateEl.textContent = `${Math.round(conversionRate * 100)}%`;
     socialChargesEl.textContent = `${Math.round((1 - conversionRate) * 100)}%`;
