@@ -1,0 +1,51 @@
+name: Generate & Commit Article
+
+on:
+  workflow_dispatch:
+    inputs:
+      affiliate_url:
+        description: "Lien d'affiliation à insérer"
+        required: false
+        default: ""
+      model:
+        description: "Modèle OpenAI (gpt-5, gpt-5-mini)"
+        required: false
+        default: "gpt-5-mini"
+  schedule:
+    - cron: "0 6 * * 1"  # chaque lundi 06:00 UTC
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai
+
+      - name: Generate article
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          AFFILIATE_URL: ${{ github.event.inputs.affiliate_url }}
+          OPENAI_MODEL: ${{ github.event.inputs.model }}
+        run: |
+          python scripts/generate_article.py
+
+      - name: Commit & push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/
+          git commit -m "feat(content): new article generated" || echo "Nothing to commit"
+          git push
