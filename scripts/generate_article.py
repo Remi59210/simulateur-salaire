@@ -1,11 +1,18 @@
-import os, datetime, pathlib
+import os
+import datetime
+import pathlib
 from openai import OpenAI
 
-# Modèle par défaut (rapide et qualitatif). Tu peux mettre "gpt-5" si tu veux plus costaud.
+# Modèle par défaut : rapide et économique. Tu peux mettre "gpt-5" pour du plus costaud.
 MODEL = os.getenv("OPENAI_MODEL", "gpt-5-mini")
 AFFILIATE = os.getenv("AFFILIATE_URL", "[MON_LIEN_PARRAINAGE]")
 
-client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+# Vérifs minimales pour éviter les erreurs courantes
+API_KEY = os.getenv("OPENAI_API_KEY")
+if not API_KEY:
+    raise RuntimeError("OPENAI_API_KEY n'est pas défini dans les secrets GitHub.")
+
+client = OpenAI(api_key=API_KEY)
 
 PROMPT = f"""
 Tu es un rédacteur SEO francophone. Génère un article PRÊT À COLLER dans WordPress
@@ -26,13 +33,14 @@ def main():
     slug = f"trade-republic-mirror-{datetime.date.today().isoformat()}.md"
     out_path = out_dir / slug
 
-    # Appel API
+    # Appel API (⚠️ pas de temperature ici)
     resp = client.responses.create(
         model=MODEL,
         input=PROMPT,
-        temperature=0.7,
     )
-    article = resp.output_text
+
+    # Récupération du texte agrégé
+    article = resp.output_text if hasattr(resp, "output_text") else str(resp)
 
     # Sauvegarde
     out_path.write_text(article, encoding="utf-8")
