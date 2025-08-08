@@ -8,11 +8,8 @@
 
   <!-- SEO & icônes -->
   <link rel="canonical" href="https://simulateur-salaire.fr/"/>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="alternate icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
-  <meta name="theme-color" content="#f97316">
+  <meta name="theme-color" content="#f97316" />
 
   <!-- Partage social -->
   <meta property="og:title" content="Convertisseur Salaire Brut ↔ Net" />
@@ -60,7 +57,6 @@
     <div class="relative z-10 container mx-auto px-4 py-8 text-white">
       <div class="max-w-3xl mx-auto text-center">
         <span class="inline-flex items-center gap-2 text-xs uppercase tracking-wide bg-white/15 px-3 py-1 rounded-full">
-          <!-- icône FA -->
           <i class="fa-solid fa-bolt-lightning"></i> Gratuit & instantané
         </span>
         <h1 class="mt-3 text-3xl md:text-4xl font-extrabold flex items-center justify-center gap-3">
@@ -68,10 +64,11 @@
         </h1>
         <p class="mt-2 opacity-95">Calculez votre salaire net avant et après impôts en temps réel selon votre statut.</p>
 
-        <!-- Nav minimal -->
+        <!-- Nav avec Articles -->
         <nav class="mt-4">
           <ul class="flex justify-center gap-6 text-sm">
             <li><a href="/" class="opacity-90 hover:opacity-100 underline-offset-4 hover:underline">Accueil</a></li>
+            <li><a href="/articles.html" class="opacity-90 hover:opacity-100 underline-offset-4 hover:underline">Articles</a></li>
           </ul>
         </nav>
       </div>
@@ -232,6 +229,30 @@
       </aside>
 
     </div>
+
+    <!-- ======= RESSOURCES UTILES ======= -->
+    <section class="mt-10">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Ressources utiles</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/articles/calculer-salaire-net-2025.html" class="block bg-white p-5 rounded-xl shadow hover:shadow-lg transition border border-orange-100">
+          <p class="text-xs text-gray-500">Salaire • Guide</p>
+          <h3 class="font-semibold mt-1">Calculer son salaire net en 2025</h3>
+          <p class="text-sm text-gray-600 mt-1">Exemples, erreurs à éviter, connexion au simulateur.</p>
+        </a>
+        <a href="/articles/optimiser-prelevement-source.html" class="block bg-white p-5 rounded-xl shadow hover:shadow-lg transition border border-orange-100">
+          <p class="text-xs text-gray-500">Fiscalité • Guide</p>
+          <h3 class="font-semibold mt-1">Optimiser son prélèvement à la source</h3>
+          <p class="text-sm text-gray-600 mt-1">7 leviers pratiques pour mieux lisser votre impôt.</p>
+        </a>
+      </div>
+      <div class="mt-4">
+        <a href="/articles.html" class="inline-block bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg">
+          Voir tous les articles
+        </a>
+      </div>
+    </section>
+    <!-- ================================ -->
+
   </main>
 
   <footer class="bg-gradient-to-r from-orange-700 to-orange-800 text-white py-6 mt-8">
@@ -348,42 +369,14 @@
       let annualBrut = parseFloat(annualBrutInput.value) || 0;
 
       if (document.activeElement === hourlyBrutInput && hourlyBrut > 0) {
-        monthlyBrut = hourlyBrut * 151.67;
-        annualBrut = monthlyBrut * months;
-        monthlyBrutInput.value = monthlyBrut.toFixed(2);
-        annualBrutInput.value = annualBrut.toFixed(2);
+        let monthlyBrutCalc = hourlyBrut * 151.67;
+        let annualBrutCalc = monthlyBrutCalc * months;
+        monthlyBrutInput.value = monthlyBrutCalc.toFixed(2);
+        annualBrutInput.value = annualBrutCalc.toFixed(2);
+        monthlyBrut = monthlyBrutCalc; annualBrut = annualBrutCalc;
       } else if (document.activeElement === monthlyBrutInput && monthlyBrut > 0) {
-        hourlyBrut = monthlyBrut / 151.67;
-        annualBrut = monthlyBrut * months;
-        hourlyBrutInput.value = hourlyBrut.toFixed(2);
-        annualBrutInput.value = annualBrut.toFixed(2);
-      } else if (document.activeElement === annualBrutInput && annualBrut > 0) {
-        monthlyBrut = annualBrut / months;
-        hourlyBrut = monthlyBrut / 151.67;
-        hourlyBrutInput.value = hourlyBrut.toFixed(2);
-        monthlyBrutInput.value = monthlyBrut.toFixed(2);
-      }
-
-      const hourlyNet = hourlyBrut * conversionRate;
-      const monthlyNet = monthlyBrut * conversionRate;
-      const annualNet = annualBrut * conversionRate;
-
-      const monthlyAfterTax = monthlyNet * (1 - taxRate);
-      const annualAfterTax = annualNet * (1 - taxRate);
-
-      const taxAmount = annualNet * taxRate;
-
-      hourlyNetEl.textContent = hourlyNet > 0 ? hourlyNet.toFixed(2) + ' €' : '0,00 €';
-      monthlyNetEl.textContent = monthlyNet > 0 ? monthlyNet.toFixed(2) + ' €' : '0,00 €';
-      annualNetEl.textContent = annualNet > 0 ? annualNet.toFixed(2) + ' €' : '0,00 €';
-      monthlyAfterTaxEl.textContent = monthlyAfterTax > 0 ? monthlyAfterTax.toFixed(2) + ' €' : '0,00 €';
-      annualAfterTaxEl.textContent = annualAfterTax > 0 ? annualAfterTax.toFixed(2) + ' €' : '0,00 €';
-      taxAmountEl.textContent = taxAmount > 0 ? taxAmount.toFixed(2) + ' €' : '0,00 €';
-    }
-
-    setupEventListeners();
-    conversionRateEl.textContent = `${Math.round(conversionRate * 100)}%`;
-    socialChargesEl.textContent = `${Math.round((1 - conversionRate) * 100)}%`;
-  </script>
-</body>
-</html>
+        let hourlyBrutCalc = monthlyBrut / 151.67;
+        let annualBrutCalc = monthlyBrut * months;
+        hourlyBrutInput.value = hourlyBrutCalc.toFixed(2);
+        annualBrutInput.value = annualBrutCalc.toFixed(2);
+        hourlyBrut = hourlyBrutCalc;
