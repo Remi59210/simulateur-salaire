@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Articles | Convertisseur Brut-Net</title>
+  <meta name="description" content="Guides pratiques sur le salaire brut/net, le prélèvement à la source et l’optimisation de votre rémunération." />
+  <link rel="canonical" href="https://simulateur-salaire.fr/articles.html" />
+  <meta property="og:title" content="Articles | Convertisseur Brut-Net" />
+  <meta property="og:description" content="Guides pratiques sur salaire, impôts, retraite et gestion du revenu." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://simulateur-salaire.fr/articles.html" />
+  <meta property="og:image" content="https://simulateur-salaire.fr/images/og-cover.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    .disabled{opacity:.5;pointer-events:none}
+  </style>
+</head>
+<body class="bg-orange-50 min-h-screen flex flex-col">
+
+  <header class="bg-gradient-to-r from-orange-500 to-orange-600 text-white py-6">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-3xl font-bold">Nos Articles</h1>
+      <p class="mt-2 text-sm opacity-90">Comprendre, calculer, optimiser.</p>
+      <div class="mt-4">
+        <a href="/" class="inline-block bg-white/15 hover:bg-white/25 text-white px-4 py-2 rounded-lg">← Retour au simulateur</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow container mx-auto px-4 py-10 max-w-6xl">
+    <!-- Filtres -->
+    <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
+      <div class="flex items-center gap-3">
+        <label for="category-filter" class="text-sm text-gray-700 font-medium">Catégorie :</label>
+        <select id="category-filter" class="border border-gray-300 rounded-lg px-3 py-2">
+          <option value="all">Toutes</option>
+          <option value="salaire">Salaire</option>
+          <option value="fiscalite">Fiscalité</option>
+        </select>
+      </div>
+      <div class="flex items-center gap-3">
+        <label for="sort-by" class="text-sm text-gray-700 font-medium">Trier par :</label>
+        <select id="sort-by" class="border border-gray-300 rounded-lg px-3 py-2">
+          <option value="recent">Plus récents</option>
+          <option value="ancien">Plus anciens</option>
+        </select>
+      </div>
+      <button id="apply-filters" class="bg-orange-500 hover:bg-orange-600 text-white font-medium px-4 py-2 rounded-lg">
+        Appliquer les filtres
+      </button>
+    </div>
+
+    <!-- Grille d’articles -->
+    <div id="articles-container" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+    <!-- Pagination -->
+    <div class="flex justify-center items-center gap-4 mt-10">
+      <button id="prev-page" class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">Précédent</button>
+      <span class="text-sm text-gray-700">Page <span id="current-page">1</span> sur <span id="total-pages">1</span></span>
+      <button id="next-page" class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">Suivant</button>
+    </div>
+  </main>
+
+  <footer class="bg-gradient-to-r from-orange-700 to-orange-800 text-white py-6 text-center">
+    <p class="text-sm">© 2025 Convertisseur Brut-Net</p>
+  </footer>
+
+  <!-- Données -->
+  <script src="/js/articles.js"></script>
+
+  <!-- Script page -->
+  <script>
+    const articlesPerPage = 6;
+    let currentPage = 1;
+    let filteredArticles = Array.isArray(articles) ? [...articles] : [];
+
+    const container = document.getElementById("articles-container");
+    const categoryFilter = document.getElementById("category-filter");
+    const sortBy = document.getElementById("sort-by");
+    const applyBtn = document.getElementById("apply-filters");
+    const prevBtn = document.getElementById("prev-page");
+    const nextBtn = document.getElementById("next-page");
+    const currentPageSpan = document.getElementById("current-page");
+    const totalPagesSpan = document.getElementById("total-pages");
+
+    function dFR(iso){const d=new Date(iso);return isNaN(d)?iso:d.toLocaleDateString('fr-FR');}
+
+    function renderArticles(){
+      container.innerHTML="";
+      if(filteredArticles.length===0){
+        container.innerHTML = '<div class="col-span-full text-center bg-white p-8 rounded-lg shadow">Aucun article pour le moment.</div>';
+        currentPageSpan.textContent = 1; totalPagesSpan.textContent = 1;
+        prevBtn.classList.add('disabled'); nextBtn.classList.add('disabled'); return;
+      }
+      const start=(currentPage-1)*articlesPerPage, end=start+articlesPerPage;
+      filteredArticles.slice(start,end).forEach(a=>{
+        const card=document.createElement("div");
+        card.className="bg-white shadow rounded-lg overflow-hidden border border-orange-100";
+        const date=dFR(a.date);
+        card.innerHTML = `
+          <div class="p-4">
+            <span class="text-xs text-gray-500 capitalize">${a.category} | ${date}</span>
+            <h3 class="font-bold text-lg mt-2">${a.title}</h3>
+            <p class="text-sm text-gray-700 mt-2">${a.excerpt}</p>
+            <p class="text-xs text-gray-400 mt-2">${a.readingTime || ""}</p>
+            <a href="${a.link}" class="inline-block mt-3 text-orange-600 font-medium hover:underline">Lire la suite</a>
+          </div>`;
+        container.appendChild(card);
+      });
+      const totalPages=Math.ceil(filteredArticles.length/articlesPerPage)||1;
+      currentPageSpan.textContent=currentPage; totalPagesSpan.textContent=totalPages;
+      if(currentPage===1) prevBtn.classList.add('disabled'); else prevBtn.classList.remove('disabled');
+      if(currentPage===totalPages) nextBtn.classList.add('disabled'); else nextBtn.classList.remove('disabled');
+    }
+
+    function applyFilters(){
+      const cat=categoryFilter.value, sort=sortBy.value;
+      filteredArticles = Array.isArray(articles)?[...articles]:[];
+      if(cat!=="all") filteredArticles = filteredArticles.filter(a=>a.category===cat);
+      filteredArticles.sort((a,b)=> sort==="recent" ? (new Date(b.date)-new Date(a.date)) : (new Date(a.date)-new Date(b.date)));
+      currentPage=1; renderArticles();
+    }
+
+    applyBtn.addEventListener("click", applyFilters);
+    prevBtn.addEventListener("click", ()=>{ if(currentPage>1){ currentPage--; renderArticles(); }});
+    nextBtn.addEventListener("click", ()=>{ const t=Math.ceil(filteredArticles.length/articlesPerPage)||1; if(currentPage<t){ currentPage++; renderArticles(); }});
+    applyFilters();
+  </script>
+</body>
+</html>
