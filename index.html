@@ -2,381 +2,664 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Convertisseur Salaire Brut en Net</title>
-  <meta name="description" content="Calculez votre salaire net après impôts en fonction de votre statut professionnel, en temps réel." />
-
-  <!-- SEO & icônes -->
-  <link rel="canonical" href="https://simulateur-salaire.fr/"/>
-  <link rel="manifest" href="/manifest.webmanifest">
-  <meta name="theme-color" content="#f97316" />
-
-  <!-- Partage social -->
-  <meta property="og:title" content="Convertisseur Salaire Brut ↔ Net" />
-  <meta property="og:description" content="Estimez instantanément votre salaire net avant/après impôts selon votre statut. Outil 100% gratuit." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://simulateur-salaire.fr/" />
-  <meta property="og:image" content="https://simulateur-salaire.fr/images/og-cover.webp" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#f97316',
-            secondary: '#ea580c',
-            tertiary: '#fff7ed'
-          },
-          boxShadow: {
-            soft: '0 8px 30px rgba(249,115,22,0.10)'
-          }
-        }
-      }
-    }
-  </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulateur Salaire Brut Net 2025 – Cadre, Fonctionnaire, Libéral, Portage</title>
+  <meta name="description" content="Simulateur salaire brut en net instantané : salarié cadre, non-cadre, fonction publique, profession libérale, portage salarial. Prélèvement à la source inclus." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    body { font-family: 'Inter', sans-serif; }
-    .input-field:focus { outline: 2px solid #f97316; outline-offset: 2px; }
-    .result-card { transition: transform .2s ease, box-shadow .2s ease; }
-    .result-card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.06); }
-    .reset-animation { animation: resetPulse .5s ease; }
-    @keyframes resetPulse { 0% {opacity:.6; transform:scale(.98);} 100% {opacity:1; transform:scale(1);} }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:      #FF6B00;
+      --orange-dark: #e05e00;
+      --orange-light:#FFF0E5;
+      --orange-mid:  #FFD9B8;
+      --bg:          #FAF7F4;
+      --white:       #FFFFFF;
+      --text:        #1A1A1A;
+      --text-soft:   #6B6B6B;
+      --border:      #EDE8E2;
+      --radius:      16px;
+      --shadow:      0 2px 16px rgba(255,107,0,.08);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ─── HEADER ─────────────────────────────────────────── */
+    header {
+      background: var(--orange);
+      padding: 20px 24px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      right: -60px; top: -60px;
+      width: 260px; height: 260px;
+      background: rgba(255,255,255,.07);
+      border-radius: 50%;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      left: -40px; bottom: -80px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,.05);
+      border-radius: 50%;
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    header h1 {
+      color: #fff;
+      font-size: clamp(1.4rem, 5vw, 2.1rem);
+      font-weight: 800;
+      line-height: 1.2;
+      position: relative;
+    }
+    header p {
+      color: rgba(255,255,255,.85);
+      font-size: .92rem;
+      margin-top: 6px;
+      position: relative;
+    }
+
+    /* ─── MAIN LAYOUT ────────────────────────────────────── */
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 28px 16px 60px;
+    }
+
+    /* ─── CARD ───────────────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+    .card-title {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    /* ─── FORM ELEMENTS ──────────────────────────────────── */
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 540px) { .field-row { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 360px) { .field-row { grid-template-columns: 1fr; } }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .field label {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text-soft);
+    }
+    .input-wrap { position: relative; }
+    .input-wrap input[type="number"] {
+      width: 100%;
+      padding: 11px 44px 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      font-weight: 600;
+      color: var(--text);
+      background: #FAFAFA;
+      transition: border-color .18s, box-shadow .18s;
+      -moz-appearance: textfield;
+    }
+    .input-wrap input[type="number"]::-webkit-inner-spin-button,
+    .input-wrap input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .input-wrap input[type="number"]:focus {
+      outline: none;
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,107,0,.13);
+      background: #fff;
+    }
+    .input-unit {
+      position: absolute;
+      right: 12px; top: 50%;
+      transform: translateY(-50%);
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--text-soft);
+      pointer-events: none;
+    }
+
+    /* ─── SELECT (statut + mois) ─────────────────────────── */
+    .select-wrap select {
+      width: 100%;
+      padding: 11px 36px 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: .92rem;
+      font-family: inherit;
+      font-weight: 600;
+      color: var(--text);
+      background: #FAFAFA;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B6B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      transition: border-color .18s;
+    }
+    .select-wrap select:focus {
+      outline: none;
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,107,0,.13);
+    }
+
+    /* ─── NOTE LIBÉRALE ──────────────────────────────────── */
+    .statut-note {
+      display: none;
+      margin-top: 10px;
+      background: var(--orange-light);
+      border-left: 3px solid var(--orange);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: .82rem;
+      color: var(--orange-dark);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .statut-note.visible { display: block; }
+
+    /* ─── TWO-COL PARAMS ─────────────────────────────────── */
+    .params-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 480px) { .params-row { grid-template-columns: 1fr; } }
+
+    /* ─── SLIDER ─────────────────────────────────────────── */
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .slider-label { font-size: .82rem; font-weight: 600; color: var(--text-soft); }
+    .slider-value {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--orange);
+      background: var(--orange-light);
+      padding: 2px 10px;
+      border-radius: 8px;
+    }
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(to right, var(--orange) 0%, var(--orange) var(--range-pct, 0%), var(--border) var(--range-pct, 0%), var(--border) 100%);
+      outline: none;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--orange);
+      border: 3px solid #fff;
+      box-shadow: 0 1px 6px rgba(255,107,0,.35);
+      cursor: pointer;
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--orange);
+      border: 3px solid #fff;
+      box-shadow: 0 1px 6px rgba(255,107,0,.35);
+      cursor: pointer;
+    }
+
+    /* ─── RESULTS GRID ───────────────────────────────────── */
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 540px) { .results-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 340px) { .results-grid { grid-template-columns: 1fr; } }
+
+    .result-cell {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .result-cell .rc-label {
+      font-size: .74rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+    .result-cell .rc-value {
+      font-size: 1.18rem;
+      font-weight: 800;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .result-cell.highlight {
+      background: var(--orange-light);
+      border-color: var(--orange-mid);
+    }
+    .result-cell.highlight .rc-value { color: var(--orange); }
+
+    /* Section divider */
+    .section-sep {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin: 20px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-sep::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── SEO CONTENT ────────────────────────────────────── */
+    .seo-section h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .seo-section h3 {
+      font-size: .97rem;
+      font-weight: 700;
+      margin: 22px 0 6px;
+      color: var(--orange-dark);
+    }
+    .seo-section p {
+      font-size: .9rem;
+      color: var(--text-soft);
+      line-height: 1.75;
+      margin-bottom: 8px;
+    }
+    .seo-section ul {
+      margin: 6px 0 10px 20px;
+      font-size: .9rem;
+      color: var(--text-soft);
+      line-height: 1.8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: .78rem;
+      color: var(--text-soft);
+      border-top: 1px solid var(--border);
+    }
   </style>
 </head>
+<body>
 
-<body class="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 flex flex-col">
-  <!-- HERO -->
-  <header class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-600"></div>
-    <div class="relative z-10 container mx-auto px-4 py-8 text-white">
-      <div class="max-w-3xl mx-auto text-center">
-        <span class="inline-flex items-center gap-2 text-xs uppercase tracking-wide bg-white/15 px-3 py-1 rounded-full">
-          <i class="fa-solid fa-bolt-lightning"></i> Gratuit & instantané
-        </span>
-        <h1 class="mt-3 text-3xl md:text-4xl font-extrabold flex items-center justify-center gap-3">
-          <i class="fas fa-calculator"></i> Convertisseur Brut → Net
-        </h1>
-        <p class="mt-2 opacity-95">Calculez votre salaire net avant et après impôts en temps réel selon votre statut.</p>
+<header>
+  <div class="header-badge">Outil gratuit &amp; instantané</div>
+  <h1>Simulateur Salaire Brut → Net</h1>
+  <p>Cadre · Non-cadre · Fonctionnaire · Libéral · Portage salarial · Prélèvement à la source</p>
+</header>
 
-        <!-- Nav avec Articles -->
-        <nav class="mt-4">
-          <ul class="flex justify-center gap-6 text-sm">
-            <li><a href="/" class="opacity-90 hover:opacity-100 underline-offset-4 hover:underline">Accueil</a></li>
-            <li><a href="/articles.html" class="opacity-90 hover:opacity-100 underline-offset-4 hover:underline">Articles</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-    <div class="h-2 bg-gradient-to-r from-orange-600 to-orange-500"></div>
-  </header>
+<main>
 
-  <!-- MAIN -->
-  <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <!-- ── PARAMÈTRES ── -->
+  <div class="card">
+    <div class="card-title">Paramètres</div>
+    <div class="params-row">
 
-      <!-- LEFT: Inputs -->
-      <section aria-labelledby="params-title">
-        <div class="bg-white rounded-2xl shadow-soft overflow-hidden">
-          <div class="p-6 border-b border-orange-100 bg-tertiary">
-            <h2 id="params-title" class="text-xl font-bold text-gray-800 flex items-center gap-2">
-              <i class="fa-solid fa-sliders"></i> Paramètres du calcul
-            </h2>
-            <p class="mt-1 text-sm text-gray-600">Renseignez votre statut, vos montants bruts et votre taux de prélèvement.</p>
-          </div>
-
-          <div class="p-6 space-y-6">
-            <!-- Statut + Mois -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2" for="status">Statut professionnel</label>
-                <select id="status" class="w-full px-4 py-2.5 text-base border border-gray-300 rounded-lg input-field focus:ring-2 focus:ring-orange-500">
-                  <option value="non-cadre">Salarié non-cadre</option>
-                  <option value="cadre">Salarié cadre</option>
-                  <option value="fonction-publique">Fonction publique</option>
-                  <option value="profession-liberale">Profession libérale</option>
-                  <option value="portage-salarial">Portage salarial</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2" for="months">Nombre de mois</label>
-                <select id="months" class="w-full px-4 py-2.5 text-base border border-gray-300 rounded-lg input-field focus:ring-2 focus:ring-orange-500">
-                  <option value="12">12 mois</option>
-                  <option value="13">13 mois</option>
-                  <option value="14">14 mois</option>
-                  <option value="15">15 mois</option>
-                  <option value="16">16 mois</option>
-                </select>
-                <p class="mt-1 text-xs text-gray-500">Inclut les primes et 13ème mois si applicable.</p>
-              </div>
-            </div>
-
-            <!-- Taux PAS -->
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2" for="tax-rate">Taux de prélèvement à la source (%)</label>
-              <div class="flex items-center">
-                <input type="range" id="tax-rate-slider" min="0" max="100" value="0" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-orange-500">
-                <input type="number" id="tax-rate" min="0" max="100" value="0" class="ml-4 w-24 px-3 py-2 text-base border border-gray-300 rounded-lg input-field" aria-label="Taux en pourcentage">
-              </div>
-            </div>
-
-            <!-- Brut -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2" for="hourly-brut">Horaire (€/h)</label>
-                <input type="number" id="hourly-brut" min="0" step="0.01" placeholder="0,00" class="w-full px-4 py-2.5 text-base border border-gray-300 rounded-lg input-field focus:ring-2 focus:ring-orange-500">
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2" for="monthly-brut">Mensuel (€)</label>
-                <input type="number" id="monthly-brut" min="0" step="0.01" placeholder="0,00" class="w-full px-4 py-2.5 text-base border border-gray-300 rounded-lg input-field focus:ring-2 focus:ring-orange-500">
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2" for="annual-brut">Annuel (€)</label>
-                <input type="number" id="annual-brut" min="0" step="0.01" placeholder="0,00" class="w-full px-4 py-2.5 text-base border border-gray-300 rounded-lg input-field focus:ring-2 focus:ring-orange-500">
-              </div>
-            </div>
-
-            <!-- Reset -->
-            <button id="clear-btn" class="w-full px-4 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg transition-colors flex items-center justify-center">
-              <i class="fas fa-eraser mr-2"></i> Effacer tous les champs
-            </button>
-          </div>
+      <div class="field">
+        <label for="statut-select">Statut professionnel</label>
+        <div class="select-wrap">
+          <select id="statut-select" onchange="onStatutChange()">
+            <option value="non-cadre"  selected>Salarié non-cadre (−22 %)</option>
+            <option value="cadre">Salarié cadre (−25 %)</option>
+            <option value="fp">Fonction publique (−15 %)</option>
+            <option value="liberal">Profession libérale (−35 %)</option>
+            <option value="portage">Portage salarial (−48 %)</option>
+          </select>
         </div>
-      </section>
+        <div class="statut-note" id="statut-note"></div>
+      </div>
 
-      <!-- RIGHT: Results (sticky) -->
-      <aside class="lg:sticky lg:top-6" aria-labelledby="results-title">
-        <div class="space-y-6">
-          <div class="bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-2xl p-5 shadow-soft">
-            <h2 id="results-title" class="text-xl font-bold mb-4 flex items-center gap-2">
-              <i class="fa-solid fa-chart-simple"></i> Résultats du calcul
-            </h2>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="bg-white/20 p-4 rounded-lg backdrop-blur-sm">
-                <p class="text-sm opacity-90">Taux brut-net</p>
-                <p id="conversion-rate" class="text-2xl font-extrabold mt-1">78%</p>
-              </div>
-              <div class="bg-white/20 p-4 rounded-lg backdrop-blur-sm">
-                <p class="text-sm opacity-90">Prélèvement (annuel)</p>
-                <p id="tax-amount" class="text-2xl font-extrabold mt-1">0,00 €</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white border border-orange-100 rounded-xl shadow result-card">
-            <div class="p-5">
-              <h3 class="font-bold text-gray-800 text-lg flex items-center gap-2">
-                <i class="fas fa-wallet text-orange-500"></i> Salaire Net
-              </h3>
-              <div class="mt-4 grid grid-cols-3 gap-4">
-                <div>
-                  <p class="text-xs text-gray-600">Horaire</p>
-                  <p id="hourly-net" class="text-xl font-bold text-orange-600">0,00 €</p>
-                </div>
-                <div>
-                  <p class="text-xs text-gray-600">Mensuel</p>
-                  <p id="monthly-net" class="text-xl font-bold text-orange-600">0,00 €</p>
-                </div>
-                <div>
-                  <p class="text-xs text-gray-600">Annuel</p>
-                  <p id="annual-net" class="text-xl font-bold text-orange-600">0,00 €</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white border border-orange-100 rounded-xl shadow result-card">
-            <div class="p-5">
-              <h3 class="font-bold text-gray-800 text-lg flex items-center gap-2">
-                <i class="fas fa-piggy-bank text-orange-500"></i> Après impôt
-              </h3>
-              <div class="mt-4 grid grid-cols-2 gap-4">
-                <div>
-                  <p class="text-xs text-gray-600">Mensuel</p>
-                  <p id="monthly-after-tax" class="text-xl font-bold text-orange-600">0,00 €</p>
-                </div>
-                <div>
-                  <p class="text-xs text-gray-600">Annuel</p>
-                  <p id="annual-after-tax" class="text-xl font-bold text-orange-600">0,00 €</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white border border-orange-100 rounded-xl shadow result-card">
-            <div class="p-5">
-              <h3 class="font-bold text-gray-800 text-lg flex items-center gap-2">
-                <i class="fas fa-chart-pie text-orange-500"></i> Répartition
-              </h3>
-              <div class="mt-4">
-                <div class="w-full bg-gray-200 rounded-full h-4">
-                  <div id="net-amount-bar" class="bg-orange-500 h-4 rounded-full" style="width: 78%"></div>
-                </div>
-                <div class="flex justify-between mt-2 text-sm">
-                  <span>Charges sociales</span>
-                  <span id="social-charges">22%</span>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="field">
+        <label for="nb-mois">Nombre de mois de salaire</label>
+        <div class="select-wrap">
+          <select id="nb-mois" onchange="recalc()">
+            <option value="12" selected>12 mois (standard)</option>
+            <option value="13">13 mois</option>
+            <option value="14">14 mois</option>
+            <option value="15">15 mois</option>
+          </select>
         </div>
-      </aside>
+      </div>
 
     </div>
+  </div>
 
-    <!-- ======= RESSOURCES UTILES ======= -->
-    <section class="mt-10">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">Ressources utiles</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <a href="/articles/calculer-salaire-net-2025.html" class="block bg-white p-5 rounded-xl shadow hover:shadow-lg transition border border-orange-100">
-          <p class="text-xs text-gray-500">Salaire • Guide</p>
-          <h3 class="font-semibold mt-1">Calculer son salaire net en 2025</h3>
-          <p class="text-sm text-gray-600 mt-1">Exemples, erreurs à éviter, connexion au simulateur.</p>
-        </a>
-        <a href="/articles/optimiser-prelevement-source.html" class="block bg-white p-5 rounded-xl shadow hover:shadow-lg transition border border-orange-100">
-          <p class="text-xs text-gray-500">Fiscalité • Guide</p>
-          <h3 class="font-semibold mt-1">Optimiser son prélèvement à la source</h3>
-          <p class="text-sm text-gray-600 mt-1">7 leviers pratiques pour mieux lisser votre impôt.</p>
-        </a>
+  <!-- ── SAISIE SALAIRE BRUT ── -->
+  <div class="card">
+    <div class="card-title">Salaire Brut — saisir dans n'importe quel champ</div>
+    <div class="field-row">
+      <div class="field">
+        <label for="brut-h">Horaire brut</label>
+        <div class="input-wrap">
+          <input type="number" id="brut-h" min="0" step="0.01" placeholder="ex : 15,00" oninput="onChange('h')" />
+          <span class="input-unit">€/h</span>
+        </div>
       </div>
-      <div class="mt-4">
-        <a href="/articles.html" class="inline-block bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg">
-          Voir tous les articles
-        </a>
+      <div class="field">
+        <label for="brut-m">Mensuel brut</label>
+        <div class="input-wrap">
+          <input type="number" id="brut-m" min="0" step="1" placeholder="ex : 2 500" oninput="onChange('m')" />
+          <span class="input-unit">€/mois</span>
+        </div>
       </div>
-    </section>
-    <!-- ================================ -->
-
-  </main>
-
-  <footer class="bg-gradient-to-r from-orange-700 to-orange-800 text-white py-6 mt-8">
-    <div class="container mx-auto px-4 text-center">
-      <p class="text-sm">© 2025 Convertisseur Brut-Net | Outil de calcul gratuit</p>
-      <p class="mt-1 text-xs opacity-80">Les résultats sont indicatifs et peuvent varier selon votre situation.</p>
+      <div class="field">
+        <label for="brut-a">Annuel brut</label>
+        <div class="input-wrap">
+          <input type="number" id="brut-a" min="0" step="100" placeholder="ex : 30 000" oninput="onChange('a')" />
+          <span class="input-unit">€/an</span>
+        </div>
+      </div>
     </div>
-  </footer>
+  </div>
 
-  <!-- Font Awesome (JS) en bas pour de meilleures perfs -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
+  <!-- ── PRÉLÈVEMENT À LA SOURCE ── -->
+  <div class="card">
+    <div class="card-title">Prélèvement à la source (PAS)</div>
+    <div class="slider-header">
+      <span class="slider-label">Taux d'imposition</span>
+      <span class="slider-value" id="slider-display">0 %</span>
+    </div>
+    <input type="range" id="taux-ir" min="0" max="45" step="0.5" value="0"
+           oninput="onSlider(this)" style="--range-pct:0%" />
+    <p style="font-size:.78rem;color:var(--text-soft);margin-top:8px;">
+      Faites glisser pour voir votre salaire <strong>après impôt</strong>. Taux moyen communiqué par la DGFiP.
+    </p>
+  </div>
 
-  <!-- ===== LOGIQUE CALCULATEUR INCHANGÉE ===== -->
-  <script>
-    const conversionRates = {
-      "non-cadre": 0.78,
-      "cadre": 0.75,
-      "fonction-publique": 0.85,
-      "profession-liberale": 0.70,
-      "portage-salarial": 0.65
-    };
+  <!-- ── RÉSULTATS ── -->
+  <div class="card">
+    <div class="card-title">Résultats</div>
 
-    const hourlyBrutInput = document.getElementById('hourly-brut');
-    const monthlyBrutInput = document.getElementById('monthly-brut');
-    const annualBrutInput = document.getElementById('annual-brut');
-    const statusSelect = document.getElementById('status');
-    const monthsSelect = document.getElementById('months');
-    const taxRateInput = document.getElementById('tax-rate');
-    const taxRateSlider = document.getElementById('tax-rate-slider');
-    const clearBtn = document.getElementById('clear-btn');
+    <div class="section-sep">Salaire Net</div>
+    <div class="results-grid">
+      <div class="result-cell highlight">
+        <div class="rc-label">Net / heure</div>
+        <div class="rc-value" id="res-net-h">— €</div>
+      </div>
+      <div class="result-cell highlight">
+        <div class="rc-label">Net / mois</div>
+        <div class="rc-value" id="res-net-m">— €</div>
+      </div>
+      <div class="result-cell highlight">
+        <div class="rc-label">Net / an</div>
+        <div class="rc-value" id="res-net-a">— €</div>
+      </div>
+    </div>
 
-    const hourlyNetEl = document.getElementById('hourly-net');
-    const monthlyNetEl = document.getElementById('monthly-net');
-    const annualNetEl = document.getElementById('annual-net');
-    const monthlyAfterTaxEl = document.getElementById('monthly-after-tax');
-    const annualAfterTaxEl = document.getElementById('annual-after-tax');
-    const conversionRateEl = document.getElementById('conversion-rate');
-    const taxAmountEl = document.getElementById('tax-amount');
-    const socialChargesEl = document.getElementById('social-charges');
-    const netAmountBar = document.getElementById('net-amount-bar');
+    <div class="section-sep">Après impôt (PAS)</div>
+    <div class="results-grid">
+      <div class="result-cell">
+        <div class="rc-label">Net imposé / h</div>
+        <div class="rc-value" id="res-ir-h">— €</div>
+      </div>
+      <div class="result-cell">
+        <div class="rc-label">Net imposé / mois</div>
+        <div class="rc-value" id="res-ir-m">— €</div>
+      </div>
+      <div class="result-cell">
+        <div class="rc-label">Net imposé / an</div>
+        <div class="rc-value" id="res-ir-a">— €</div>
+      </div>
+    </div>
 
-    let conversionRate = conversionRates[statusSelect.value];
-    let months = parseInt(monthsSelect.value);
-    let taxRate = parseFloat(taxRateInput.value) / 100;
+    <div class="section-sep">Charges estimées</div>
+    <div class="results-grid">
+      <div class="result-cell">
+        <div class="rc-label">Charges / mois</div>
+        <div class="rc-value" id="res-ch-m">— €</div>
+      </div>
+      <div class="result-cell">
+        <div class="rc-label">Charges / an</div>
+        <div class="rc-value" id="res-ch-a">— €</div>
+      </div>
+      <div class="result-cell">
+        <div class="rc-label">Taux appliqué</div>
+        <div class="rc-value" id="res-taux">—</div>
+      </div>
+    </div>
+  </div>
 
-    function setupEventListeners() {
-      hourlyBrutInput.addEventListener('input', calculate);
-      monthlyBrutInput.addEventListener('input', calculate);
-      annualBrutInput.addEventListener('input', calculate);
+  <!-- ── SEO CONTENT ── -->
+  <div class="card seo-section">
+    <h2>Comment fonctionne le calcul salaire brut en net ?</h2>
+    <p>
+      Notre <strong>simulateur salaire</strong> applique les taux de cotisations sociales en vigueur en France pour convertir un salaire brut en salaire net de manière instantanée. La formule est : <em>Salaire Net = Salaire Brut × (1 − taux de charges)</em>. Ce taux varie selon votre statut : le calcul n'est pas le même pour un salarié du privé, un fonctionnaire, un professionnel libéral ou un consultant en portage salarial.
+    </p>
 
-      taxRateSlider.addEventListener('input', () => {
-        taxRateInput.value = taxRateSlider.value;
-        taxRate = parseFloat(taxRateSlider.value) / 100;
-        calculate();
-      });
+    <h3>Salarié non-cadre et cadre : quelle différence ?</h3>
+    <p>
+      Pour un <strong>salarié non-cadre</strong>, les cotisations salariales représentent environ 22 % du salaire brut (assurance maladie, retraite de base, retraite complémentaire AGIRC-ARRCO tranche 1, chômage, CSG/CRDS). Un <strong>salarié cadre</strong> supporte quant à lui environ 25 % de charges, en raison d'une cotisation retraite complémentaire plus élevée et d'une cotisation de prévoyance cadre (CCN du 14 mars 1947).
+    </p>
 
-      taxRateInput.addEventListener('input', () => {
-        if (taxRateInput.value > 100) taxRateInput.value = 100;
-        if (taxRateInput.value < 0) taxRateInput.value = 0;
-        taxRateSlider.value = taxRateInput.value;
-        taxRate = parseFloat(taxRateInput.value) / 100;
-        calculate();
-      });
+    <h3>Comment calculer son salaire dans la fonction publique ?</h3>
+    <p>
+      Le <strong>calcul salaire fonction publique</strong> obéit à des règles différentes du secteur privé. Les fonctionnaires ne cotisent pas à l'assurance chômage et bénéficient d'un régime de retraite spécifique (CNRACL pour les territoriaux et hospitaliers, SRE pour l'État). Le taux de cotisations salariales s'élève à environ <strong>15 %</strong> du traitement brut, ce qui est nettement plus favorable qu'en entreprise. En contrepartie, le traitement de base est indexé sur la valeur du point d'indice de la fonction publique. Notre <strong>simulateur salaire fonctionnaire</strong> vous permet d'estimer rapidement votre net à payer à partir de votre indice ou de votre traitement brut mensuel.
+    </p>
 
-      statusSelect.addEventListener('change', () => {
-        conversionRate = conversionRates[statusSelect.value];
-        conversionRateEl.textContent = `${Math.round(conversionRate * 100)}%`;
-        socialChargesEl.textContent = `${Math.round((1 - conversionRate) * 100)}%`;
-        netAmountBar.style.width = `${conversionRate * 100}%`;
-        calculate();
-      });
+    <h3>Les charges des professions libérales</h3>
+    <p>
+      Le <strong>calcul salaire profession libérale</strong> est plus complexe que pour un salarié : les travailleurs indépendants (médecins, avocats, architectes, consultants…) cotisent auprès de caisses spécifiques (CIPAV, CARMF, CNAVPL…) et paient eux-mêmes leurs cotisations sociales. En moyenne, les <strong>charges des professions libérales</strong> représentent environ 35 % du revenu brut, mais ce taux peut varier de 30 % à 45 % selon le chiffre d'affaires, le régime (réel ou micro-BNC) et la caisse de rattachement. Notre simulateur utilise une estimation simplifiée de 35 % à titre indicatif.
+    </p>
 
-      monthsSelect.addEventListener('change', () => {
-        months = parseInt(monthsSelect.value);
-        if (monthlyBrutInput.value) {
-          annualBrutInput.value = (parseFloat(monthlyBrutInput.value) * months).toFixed(2);
-        }
-        calculate();
-      });
+    <h3>Le net en portage salarial : comment ça marche ?</h3>
+    <p>
+      Le <strong>portage salarial</strong> permet à un consultant indépendant de bénéficier du statut de salarié via une société de portage. En contrepartie, le coût total est élevé : la société de portage prélève une commission (généralement 5 à 12 % du CA), à laquelle s'ajoutent les charges patronales et salariales. Au total, le taux de prélèvement tout compris sur le chiffre d'affaires HT avoisine les <strong>48 %</strong>. Concrètement, pour 10 000 € facturés HT, un consultant en portage percevra environ 5 200 € net. Notre simulateur de <strong>salaire en portage salarial</strong> vous aide à chiffrer précisément votre rémunération nette à partir de votre tarif journalier (TJM).
+    </p>
 
-      clearBtn.addEventListener('click', () => {
-        hourlyBrutInput.value = '';
-        monthlyBrutInput.value = '';
-        annualBrutInput.value = '';
-        taxRateInput.value = '0';
-        taxRateSlider.value = '0';
-        statusSelect.value = 'non-cadre';
-        monthsSelect.value = '12';
+    <h3>Le prélèvement à la source (PAS) expliqué</h3>
+    <p>
+      Depuis janvier 2019, le <strong>prélèvement à la source</strong> collecte l'impôt sur le revenu directement sur le bulletin de paie. Ce taux, communiqué par la DGFiP, s'applique sur le salaire net imposable. Faites glisser le curseur de notre simulateur pour visualiser immédiatement l'impact du prélèvement à la source sur votre pouvoir d'achat réel.
+    </p>
 
-        hourlyNetEl.textContent = '0,00 €';
-        monthlyNetEl.textContent = '0,00 €';
-        annualNetEl.textContent = '0,00 €';
-        monthlyAfterTaxEl.textContent = '0,00 €';
-        annualAfterTaxEl.textContent = '0,00 €';
-        conversionRateEl.textContent = '78%';
-        taxAmountEl.textContent = '0,00 €';
-        socialChargesEl.textContent = '22%';
-        netAmountBar.style.width = '78%';
+    <h3>13e mois et nombre de mois de salaire</h3>
+    <p>
+      Certaines conventions collectives prévoient un 13e, 14e ou 15e mois. Notre outil gère cette option : si vous saisissez un mensuel brut avec un 13e mois, le <strong>calcul salaire annuel</strong> sera automatiquement multiplié par 13 au lieu de 12. Inversement, si vous entrez un annuel, le mensuel sera recalculé en conséquence.
+    </p>
 
-        document.querySelectorAll('.result-card').forEach(card => {
-          card.classList.add('reset-animation');
-          setTimeout(() => card.classList.remove('reset-animation'), 500);
-        });
+    <h3>Qui utilise un simulateur salaire ?</h3>
+    <ul>
+      <li><strong>Candidats en négociation</strong> : convertir une offre brute en net avant d'accepter un poste.</li>
+      <li><strong>Fonctionnaires</strong> : estimer leur net à partir de leur indice de traitement.</li>
+      <li><strong>Consultants en portage</strong> : calculer leur rémunération nette à partir de leur TJM.</li>
+      <li><strong>Professions libérales</strong> : comparer une rémunération en BNC avec un salariat.</li>
+      <li><strong>RH et employeurs</strong> : estimer le coût global d'un recrutement.</li>
+    </ul>
 
-        conversionRate = conversionRates['non-cadre'];
-        months = 12;
-        taxRate = 0;
-      });
+    <h3>Avertissement</h3>
+    <p>
+      Ce <strong>calculateur brut net</strong> est fourni à titre indicatif. Les taux réels varient selon la convention collective, les exonérations de charges, le plafond de la Sécurité sociale et les accords d'entreprise. Pour un calcul personnalisé et juridiquement fiable, consultez votre service paie ou un expert-comptable.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  © 2025 simulateur-salaire.fr — Calcul salaire brut en net · Fonctionnaire · Profession libérale · Portage salarial · Prélèvement à la source
+</footer>
+
+<script>
+  /* ─── STATUTS & TAUX ──────────────────────────────────────
+     Chaque entrée : { taux, note }
+     note = null  →  pas d'encart affiché
+  ───────────────────────────────────────────────────────── */
+  const STATUTS = {
+    'non-cadre': { taux: 0.22, note: null },
+    'cadre':     { taux: 0.25, note: null },
+    'fp':        { taux: 0.15, note: null },
+    'liberal':   { taux: 0.35, note: '⚠️ Estimation simplifiée pour travailleur indépendant. Les charges réelles varient selon votre caisse (CIPAV, CARMF…) et votre régime fiscal (micro-BNC ou réel).' },
+    'portage':   { taux: 0.48, note: '📦 Taux global estimé (charges salariales + patronales + commission de portage ~8 %). Pour 10 000 € HT facturés, comptez environ 5 200 € net.' },
+  };
+
+  const H_MONTH = 151.67; // heures légales/mois (35h × 52/12)
+
+  let currentStatut = 'non-cadre';
+  let lastField     = null; // 'h' | 'm' | 'a'
+
+  /* ─── HELPERS ───────────────────────────────────────────── */
+  function val(id)      { return parseFloat(document.getElementById(id).value) || 0; }
+  function setInput(id, num) {
+    document.getElementById(id).value = num > 0 ? parseFloat(num.toFixed(2)) : '';
+  }
+  function display(id, num) {
+    document.getElementById(id).textContent =
+      num > 0
+        ? new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(num)
+        : '— €';
+  }
+
+  /* ─── STATUT CHANGE ─────────────────────────────────────── */
+  function onStatutChange() {
+    currentStatut = document.getElementById('statut-select').value;
+    const noteEl  = document.getElementById('statut-note');
+    const noteMsg = STATUTS[currentStatut].note;
+    if (noteMsg) {
+      noteEl.textContent = noteMsg;
+      noteEl.classList.add('visible');
+    } else {
+      noteEl.textContent = '';
+      noteEl.classList.remove('visible');
+    }
+    recalc();
+  }
+
+  /* ─── SLIDER ────────────────────────────────────────────── */
+  function onSlider(el) {
+    const v   = parseFloat(el.value);
+    const pct = (v / 45) * 100;
+    el.style.setProperty('--range-pct', pct + '%');
+    document.getElementById('slider-display').textContent =
+      v.toFixed(1).replace('.', ',') + ' %';
+    recalc();
+  }
+
+  /* ─── INPUT EVENTS ──────────────────────────────────────── */
+  function onChange(field) {
+    lastField = field;
+    recalc();
+  }
+
+  /* ─── CORE CALCULATION ──────────────────────────────────── */
+  function recalc() {
+    const nbMois = parseInt(document.getElementById('nb-mois').value, 10) || 12;
+    const taux   = STATUTS[currentStatut].taux;
+    const ir     = parseFloat(document.getElementById('taux-ir').value) / 100;
+
+    let brutH = 0, brutM = 0, brutA = 0;
+
+    if (lastField === 'h') {
+      brutH = val('brut-h');
+      brutM = brutH * H_MONTH;
+      brutA = brutM * nbMois;
+      setInput('brut-m', brutM);
+      setInput('brut-a', brutA);
+    } else if (lastField === 'm') {
+      brutM = val('brut-m');
+      brutH = brutM / H_MONTH;
+      brutA = brutM * nbMois;
+      setInput('brut-h', brutH);
+      setInput('brut-a', brutA);
+    } else if (lastField === 'a') {
+      brutA = val('brut-a');
+      brutM = brutA / nbMois;
+      brutH = brutM / H_MONTH;
+      setInput('brut-h', brutH);
+      setInput('brut-m', brutM);
+    } else {
+      // Initialisation : lire le premier champ rempli
+      brutH = val('brut-h');
+      brutM = val('brut-m');
+      brutA = val('brut-a');
+      if      (brutH) { brutM = brutH * H_MONTH; brutA = brutM * nbMois; }
+      else if (brutM) { brutH = brutM / H_MONTH; brutA = brutM * nbMois; }
+      else if (brutA) { brutM = brutA / nbMois;  brutH = brutM / H_MONTH; }
     }
 
-    function calculate() {
-      let hourlyBrut = parseFloat(hourlyBrutInput.value) || 0;
-      let monthlyBrut = parseFloat(monthlyBrutInput.value) || 0;
-      let annualBrut = parseFloat(annualBrutInput.value) || 0;
+    // Net après charges
+    const netH = brutH * (1 - taux);
+    const netM = brutM * (1 - taux);
+    const netA = brutA * (1 - taux);
 
-      if (document.activeElement === hourlyBrutInput && hourlyBrut > 0) {
-        let monthlyBrutCalc = hourlyBrut * 151.67;
-        let annualBrutCalc = monthlyBrutCalc * months;
-        monthlyBrutInput.value = monthlyBrutCalc.toFixed(2);
-        annualBrutInput.value = annualBrutCalc.toFixed(2);
-        monthlyBrut = monthlyBrutCalc; annualBrut = annualBrutCalc;
-      } else if (document.activeElement === monthlyBrutInput && monthlyBrut > 0) {
-        let hourlyBrutCalc = monthlyBrut / 151.67;
-        let annualBrutCalc = monthlyBrut * months;
-        hourlyBrutInput.value = hourlyBrutCalc.toFixed(2);
-        annualBrutInput.value = annualBrutCalc.toFixed(2);
-        hourlyBrut = hourlyBrutCalc;
+    // Net après PAS
+    const irH = netH * (1 - ir);
+    const irM = netM * (1 - ir);
+    const irA = netA * (1 - ir);
+
+    // Montant charges
+    const chM = brutM * taux;
+    const chA = brutA * taux;
+
+    // Affichage
+    display('res-net-h', netH);
+    display('res-net-m', netM);
+    display('res-net-a', netA);
+
+    display('res-ir-h', irH);
+    display('res-ir-m', irM);
+    display('res-ir-a', irA);
+
+    display('res-ch-m', chM);
+    display('res-ch-a', chA);
+    document.getElementById('res-taux').textContent = (taux * 100) + ' %';
+  }
+</script>
+
+</body>
+</html>
