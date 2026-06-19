@@ -340,6 +340,14 @@
       color: var(--text-soft);
       border-top: 1px solid var(--border);
     }
+    .guide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 52px;
+    }
+    @media (max-width: 640px) {
+      .guide-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -546,7 +554,7 @@
       Brut, net, super-brut, prélèvement à la source… Les concepts de la fiche de paie peuvent prêter à confusion. Ce guide vous explique chaque notion en langage clair, avec des exemples concrets basés sur les règles 2026.
     </p>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 52px">
+    <div class="guide-grid">
       <div>
         <h3 style="font-family:'Inter',system-ui,sans-serif;font-size:1.02rem;font-weight:700;color:#1A1A1A;margin:0 0 10px">
           Quelle est la différence exacte entre salaire brut et net ?
