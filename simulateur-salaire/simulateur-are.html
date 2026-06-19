@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulateur ARE Chômage 2026 | Aide Salariés</title>
+  <meta name="description" content="Estimez votre allocation chômage (ARE) : montant journalier, mensuel, durée d'indemnisation maximale selon votre salaire et votre durée d'affiliation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+  <style>
+    .formula-box {
+      background: #F0F4FF; border: 1px solid #C7D7F8;
+      border-radius: 10px; padding: 14px 16px;
+      font-size: .84rem; line-height: 1.65; color: #2D4A8A;
+      margin-top: 14px;
+    }
+    .formula-box code { background: #D8E6FF; border-radius: 4px; padding: 1px 5px; font-size: .83rem; }
+    .gauge-bar { height: 10px; border-radius: 5px; background: var(--border); margin-top: 8px; overflow: hidden; }
+    .gauge-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--orange), var(--orange-dark)); transition: width .4s; }
+  </style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<header class="tool-header">
+  <div class="header-badge">France Travail</div>
+  <h1>Simulateur ARE (Chômage)</h1>
+  <p>Allocation de retour à l'emploi — estimation basée sur les règles 2024-2026</p>
+</header>
+
+<main>
+  <div class="card">
+    <div class="card-title">Vos données</div>
+    <div class="field-row">
+      <div class="field">
+        <label for="salaire-m">Salaire brut mensuel moyen <small style="font-weight:400">(12 derniers mois)</small></label>
+        <div class="input-wrap">
+          <input type="number" id="salaire-m" min="0" step="50" placeholder="ex : 3 000" oninput="recalc()" />
+          <span class="input-unit">€/mois</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="affiliation">Durée d'affiliation (jours travaillés)</label>
+        <div class="input-wrap">
+          <input type="number" id="affiliation" min="0" step="30" placeholder="ex : 730" oninput="recalc()" />
+          <span class="input-unit">jours</span>
+        </div>
+      </div>
+    </div>
+    <div class="field-row" style="margin-top:14px">
+      <div class="field">
+        <label for="age">Âge au moment de la perte d'emploi</label>
+        <div class="select-wrap">
+          <select id="age" onchange="recalc()">
+            <option value="53">Moins de 53 ans</option>
+            <option value="54">53 ou 54 ans</option>
+            <option value="55">55 ans et plus</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="motif">Motif de rupture</label>
+        <div class="select-wrap">
+          <select id="motif" onchange="recalc()">
+            <option value="1">Licenciement</option>
+            <option value="1">Rupture conventionnelle</option>
+            <option value="1">Fin de CDD</option>
+            <option value="0">Démission (cas général — non indemnisé)</option>
+            <option value="0.5">Démission légitime</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="info-box" id="motif-info"></div>
+  </div>
+
+  <div class="card" id="results-card">
+    <div class="card-title">Estimation de l'ARE</div>
+    <div class="results-grid" style="margin-bottom:16px">
+      <div class="result-cell highlight">
+        <div class="rc-label">ARE journalière</div>
+        <div class="rc-value" id="res-jour">— €/j</div>
+      </div>
+      <div class="result-cell highlight">
+        <div class="rc-label">ARE mensuelle estimée</div>
+        <div class="rc-value" id="res-mois">— €/mois</div>
+        <div class="rc-sub">(× 30,42 jours)</div>
+      </div>
+      <div class="result-cell">
+        <div class="rc-label">Durée max d'indemnisation</div>
+        <div class="rc-value" id="res-duree">— mois</div>
+      </div>
+    </div>
+
+    <div class="results-grid-2" style="margin-bottom:16px">
+      <div class="result-cell">
+        <div class="rc-label">SJR (salaire journalier de réf.)</div>
+        <div class="rc-value" id="res-sjr">— €/j</div>
+      </div>
+      <div class="result-cell">
+        <div class="rc-label">Taux de remplacement</div>
+        <div class="rc-value" id="res-taux">— %</div>
+      </div>
+    </div>
+
+    <div style="font-size:.8rem;color:var(--text-soft);margin-bottom:6px">Taux de remplacement / SJR</div>
+    <div class="gauge-bar"><div class="gauge-fill" id="gauge" style="width:0%"></div></div>
+
+    <div class="formula-box">
+      <strong>Formule ARE :</strong><br>
+      <code>ARE = max(40,4 % × SJR + 12,47 €&nbsp;;&nbsp; 57 % × SJR)</code><br>
+      Plafond : <code>75 % du SJR</code> — Minimum légal : <code>32,46 €/jour</code> (2024)<br>
+      Le SJR est calculé sur les 12 derniers mois de salaire brut.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Points importants</div>
+    <div style="display:grid;gap:10px;font-size:.87rem;color:var(--text-soft);line-height:1.65">
+      <p>✅ <strong>Délai de carence</strong> : 7 jours + différé d'indemnisation (congés payés non pris + indemnités supra-légales) avant le versement des premières allocations.</p>
+      <p>✅ <strong>Durée maximale</strong> : 18 mois (< 53 ans), 22,5 mois (53-54 ans), 27 mois (≥ 55 ans). Réduite à 1 jour d'affiliation = 1 jour d'indemnisation.</p>
+      <p>✅ <strong>Dégressivité</strong> : après 6 mois d'indemnisation (si ARE > 1,3 × SMIC net), l'allocation est réduite de 30 % pour les moins de 57 ans avec salaire de réf. > 4 716,36 €/mois.</p>
+      <p>⚠️ <strong>Ce simulateur est une estimation</strong> — le calcul réel effectué par France Travail prend en compte le nombre exact de jours travaillés sur les 24 derniers mois, les primes, les heures supplémentaires, etc.</p>
+    </div>
+  </div>
+</main>
+
+<footer>© 2026 Aide Salariés — Estimation indicative. Pour un calcul officiel, rendez-vous sur francetravail.fr.</footer>
+
+<script src="/js/nav.js"></script>
+<script>
+  var ARE_MIN_JOUR = 32.46;
+  var ARE_FIXE     = 12.47;
+  var JOURS_MOIS   = 30.42;
+
+  var motifInfos = {
+    '1':   '✅ Ce motif ouvre droit à l\'ARE dès la fin du contrat (sous réserve de remplir les conditions d\'affiliation).',
+    '0':   '❌ La démission sans motif légitime n\'ouvre généralement pas droit à l\'ARE. Des exceptions existent (reconversion professionnelle, suivi de conjoint, harcèlement avéré…). Consultez votre conseiller France Travail.',
+    '0.5': '✅ Certaines démissions sont considérées comme légitimes (article 2 du règlement d\'assurance chômage) et ouvrent droit à l\'ARE.',
+  };
+
+  function fmt(n, suffix) {
+    if (!n && n !== 0) return '— €';
+    return new Intl.NumberFormat('fr-FR', {style:'currency', currency:'EUR', maximumFractionDigits:0}).format(n) + (suffix||'');
+  }
+
+  function recalc() {
+    var motifVal = document.getElementById('motif').value;
+    document.getElementById('motif-info').innerHTML = motifInfos[motifVal] || '';
+
+    var salM   = parseFloat(document.getElementById('salaire-m').value) || 0;
+    var affil  = parseFloat(document.getElementById('affiliation').value) || 0;
+    var age    = parseInt(document.getElementById('age').value, 10);
+
+    if (!salM || !affil) {
+      resetResults();
+      return;
+    }
+
+    if (motifVal === '0') {
+      resetResults();
+      document.getElementById('res-jour').textContent = 'Non éligible';
+      document.getElementById('res-mois').textContent = 'Non éligible';
+      return;
+    }
+
+    // SJR
+    var sjr = (salM * 12) / 365;
+
+    // ARE journalière
+    var are1 = 0.404 * sjr + ARE_FIXE;
+    var are2 = 0.57  * sjr;
+    var are  = Math.max(are1, are2);
+    are = Math.max(are, ARE_MIN_JOUR);     // plancher
+    are = Math.min(are, 0.75 * sjr);       // plafond
+
+    // Durée max
+    var durMax = 18;
+    if (age === 54)  durMax = 22;
+    if (age === 55)  durMax = 27;
+    var durJours = Math.min(affil, durMax * 30);
+
+    var areM   = are * JOURS_MOIS;
+    var tauxRemplacement = sjr > 0 ? (are / sjr * 100) : 0;
+
+    document.getElementById('res-sjr').textContent   = sjr.toFixed(2).replace('.',',') + ' €/j';
+    document.getElementById('res-jour').textContent  = are.toFixed(2).replace('.',',') + ' €/j';
+    document.getElementById('res-mois').textContent  = fmt(areM);
+    document.getElementById('res-duree').textContent = Math.round(durJours / 30) + ' mois';
+    document.getElementById('res-taux').textContent  = tauxRemplacement.toFixed(1).replace('.',',') + ' %';
+    document.getElementById('gauge').style.width     = Math.min(tauxRemplacement, 100) + '%';
+  }
+
+  function resetResults() {
+    ['res-sjr','res-jour','res-mois','res-duree','res-taux'].forEach(function(id){
+      document.getElementById(id).textContent = '—';
+    });
+    document.getElementById('gauge').style.width = '0%';
+  }
+
+  // Init motif info
+  document.getElementById('motif-info').innerHTML = motifInfos['1'];
+</script>
+</body>
+</html>

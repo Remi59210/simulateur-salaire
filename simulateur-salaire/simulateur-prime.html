@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulateur de Prime Net 2026 | Aide Salariés</title>
+  <meta name="description" content="Calculez le montant net perçu pour une prime brute : prime annuelle, 13e mois, intéressement, participation. Prélèvement à la source inclus." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+</head>
+<body>
+<div id="site-nav"></div>
+
+<header class="tool-header">
+  <div class="header-badge">Outil gratuit</div>
+  <h1>Simulateur de Prime</h1>
+  <p>Prime brute → net perçu : 13e mois, prime annuelle, participation, intéressement</p>
+</header>
+
+<main>
+  <div class="card">
+    <div class="card-title">Votre prime</div>
+    <div class="field-row-3">
+      <div class="field">
+        <label for="prime-type">Type de prime</label>
+        <div class="select-wrap">
+          <select id="prime-type" onchange="onTypeChange()">
+            <option value="normale">Prime habituelle / 13e mois</option>
+            <option value="exceptionnelle">Prime exceptionnelle</option>
+            <option value="interessement">Intéressement (exonéré CRDS/CSG)</option>
+            <option value="participation">Participation (exonérée si bloquée)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="statut">Statut professionnel</label>
+        <div class="select-wrap">
+          <select id="statut" onchange="recalc()">
+            <option value="0.22">Non-cadre (−22 %)</option>
+            <option value="0.25">Cadre (−25 %)</option>
+            <option value="0.15">Fonctionnaire (−15 %)</option>
+            <option value="0.35">Libéral (−35 %)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="prime-brut">Montant brut de la prime</label>
+        <div class="input-wrap">
+          <input type="number" id="prime-brut" min="0" step="50" placeholder="ex : 3 000" oninput="recalc()" />
+          <span class="input-unit">€</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="card-pas">
+    <div class="card-title">Prélèvement à la source</div>
+    <div class="slider-header">
+      <span class="slider-label">Taux PAS</span>
+      <span class="slider-value" id="slider-display">0 %</span>
+    </div>
+    <input type="range" id="taux-ir" min="0" max="45" step="0.5" value="0"
+           oninput="onSlider(this)" style="--range-pct:0%" />
+    <p style="font-size:.78rem;color:var(--text-soft);margin-top:8px">
+      Taux communiqué par la DGFiP sur votre espace impots.gouv.fr.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Résultats</div>
+    <div class="results-grid" style="margin-bottom:16px">
+      <div class="result-cell highlight">
+        <div class="rc-label">Prime nette</div>
+        <div class="rc-value" id="res-net">— €</div>
+      </div>
+      <div class="result-cell highlight">
+        <div class="rc-label">Net après PAS</div>
+        <div class="rc-value" id="res-pas">— €</div>
+      </div>
+      <div class="result-cell">
+        <div class="rc-label">Charges salariales</div>
+        <div class="rc-value" id="res-ch">— €</div>
+      </div>
+    </div>
+    <div class="results-grid-2">
+      <div class="result-cell">
+        <div class="rc-label">Taux de charges</div>
+        <div class="rc-value" id="res-taux">— %</div>
+      </div>
+      <div class="result-cell">
+        <div class="rc-label">Impôt retenu</div>
+        <div class="rc-value" id="res-impot">— €</div>
+      </div>
+    </div>
+    <div class="info-box" id="type-info" style="margin-top:16px"></div>
+  </div>
+</main>
+
+<footer>© 2026 Aide Salariés — Estimations à titre indicatif.</footer>
+
+<script src="/js/nav.js"></script>
+<script>
+  var typeInfos = {
+    'normale':       'La prime habituelle (13e mois, prime annuelle…) est soumise aux mêmes cotisations salariales et au PAS que le salaire ordinaire.',
+    'exceptionnelle':'La prime exceptionnelle est assujettie aux cotisations sociales et au PAS selon les mêmes règles. Elle peut faire l\'objet d\'un taux de PAS spécifique si elle est versée en dehors du mois habituel.',
+    'interessement': 'L\'intéressement est exonéré de cotisations sociales (sauf CSG/CRDS à 9,7 %) et de l\'impôt si placé sur un PEE ou PERCO dans les 15 jours. Ici calculé sans placement (soumis au PAS).',
+    'participation': 'La participation est exonérée de cotisations (sauf CSG/CRDS) et exonérée d\'impôt si les fonds restent bloqués 5 ans. En cas de déblocage anticipé ou de versement immédiat, le PAS s\'applique.',
+  };
+
+  var tauxByType = {
+    'normale':       null,        // use statut taux
+    'exceptionnelle': null,
+    'interessement': 0.097,       // CSG/CRDS seulement
+    'participation': 0.097,
+  };
+
+  function onTypeChange() {
+    recalc();
+  }
+
+  function onSlider(el) {
+    var v = parseFloat(el.value);
+    el.style.setProperty('--range-pct', (v/45*100) + '%');
+    document.getElementById('slider-display').textContent = v.toFixed(1).replace('.',',') + ' %';
+    recalc();
+  }
+
+  function fmt(n) {
+    return n >= 0
+      ? new Intl.NumberFormat('fr-FR', {style:'currency', currency:'EUR', maximumFractionDigits:0}).format(n)
+      : '— €';
+  }
+
+  function recalc() {
+    var brut  = parseFloat(document.getElementById('prime-brut').value) || 0;
+    var type  = document.getElementById('prime-type').value;
+    var ir    = parseFloat(document.getElementById('taux-ir').value) / 100;
+    var taux  = tauxByType[type] !== null ? tauxByType[type] : parseFloat(document.getElementById('statut').value);
+
+    document.getElementById('type-info').textContent = typeInfos[type];
+
+    if (!brut) {
+      ['res-net','res-pas','res-ch','res-taux','res-impot'].forEach(function(id){
+        document.getElementById(id).textContent = '— €';
+      });
+      document.getElementById('res-taux').textContent = '— %';
+      return;
+    }
+
+    var ch    = brut * taux;
+    var net   = brut - ch;
+    var impot = net * ir;
+    var apres = net - impot;
+
+    document.getElementById('res-net').textContent   = fmt(net);
+    document.getElementById('res-pas').textContent   = fmt(apres);
+    document.getElementById('res-ch').textContent    = fmt(ch);
+    document.getElementById('res-taux').textContent  = (taux*100).toFixed(1).replace('.',',') + ' %';
+    document.getElementById('res-impot').textContent = fmt(impot);
+  }
+</script>
+</body>
+</html>

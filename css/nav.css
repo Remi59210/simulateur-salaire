@@ -1,0 +1,189 @@
+/* ── GLOBAL NAVIGATION ───────────────────────────────────── */
+.g-nav {
+  background: #0F172A;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 1px 0 rgba(255,255,255,.07), 0 4px 20px rgba(0,0,0,.25);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.g-nav-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ── Brand ── */
+.g-nav-brand {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; font-weight: 700; font-size: 15px;
+  letter-spacing: -.01em; height: 56px; flex: 1;
+}
+.g-nav-brand-name { color: rgba(255,255,255,.88); transition: color .2s; }
+.g-nav-brand:hover .g-nav-brand-name { color: #fff; }
+.g-nav-logo {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, #FF6B00 0%, #D95000 100%);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; color: #fff;
+  letter-spacing: .04em; flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(255,107,0,.45);
+}
+
+/* ── Nav links row ── */
+.g-nav-links {
+  display: flex; align-items: center; gap: 2px; height: 56px;
+}
+
+/* ── Regular link ── */
+.g-nav-link {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 13px; border-radius: 9px;
+  text-decoration: none; font-size: 13.5px; font-weight: 500;
+  color: rgba(255,255,255,.5);
+  transition: background .17s, color .17s;
+  white-space: nowrap; position: relative;
+}
+.g-nav-link:hover   { background: rgba(255,255,255,.07); color: rgba(255,255,255,.88); }
+.g-nav-link.active  { background: rgba(255,255,255,.1); color: #fff; font-weight: 600; }
+.g-nav-link.active::after {
+  content: ''; position: absolute; bottom: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 16px; height: 2px; background: #FF6B00; border-radius: 2px;
+}
+.g-icon { width: 15px; height: 15px; flex-shrink: 0; opacity: .7; transition: opacity .17s; }
+.g-nav-link:hover .g-icon, .g-nav-link.active .g-icon { opacity: 1; }
+
+/* ── Dropdown ── */
+.g-nav-dd { position: relative; }
+
+.g-nav-dd-btn {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 13px; border-radius: 9px;
+  font-family: inherit; font-size: 13.5px; font-weight: 500;
+  color: rgba(255,255,255,.5);
+  background: none; border: none; cursor: pointer;
+  transition: background .17s, color .17s;
+  white-space: nowrap; position: relative;
+}
+.g-nav-dd-btn:hover,
+.g-nav-dd.open .g-nav-dd-btn { background: rgba(255,255,255,.07); color: rgba(255,255,255,.88); }
+.g-nav-dd-btn.active          { background: rgba(255,255,255,.1); color: #fff; font-weight: 600; }
+.g-nav-dd-btn.active::after {
+  content: ''; position: absolute; bottom: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 16px; height: 2px; background: #FF6B00; border-radius: 2px;
+}
+.g-nav-dd-btn .g-icon { opacity: .7; }
+.g-nav-dd-btn:hover .g-icon,
+.g-nav-dd-btn.active .g-icon { opacity: 1; }
+
+.g-nav-dd-chevron {
+  width: 11px; height: 11px; flex-shrink: 0;
+  opacity: .55; transition: transform .22s;
+}
+.g-nav-dd.open .g-nav-dd-chevron { transform: rotate(180deg); }
+
+.g-nav-dd-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px); left: -8px;
+  background: #1B2A45;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.4), 0 2px 8px rgba(0,0,0,.2);
+  min-width: 236px;
+  padding: 7px;
+  z-index: 200;
+}
+.g-nav-dd.open .g-nav-dd-menu {
+  display: block;
+  animation: ddIn .15s ease;
+}
+@keyframes ddIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.g-nav-dd-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 11px; border-radius: 9px;
+  text-decoration: none; font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,.62);
+  transition: background .14s, color .14s;
+}
+.g-nav-dd-item:hover  { background: rgba(255,255,255,.08); color: #fff; }
+.g-nav-dd-item.active { background: rgba(255,107,0,.18); color: #FF9550; font-weight: 600; }
+
+.g-nav-dd-icon { width: 14px; height: 14px; flex-shrink: 0; opacity: .65; }
+.g-nav-dd-item:hover .g-nav-dd-icon,
+.g-nav-dd-item.active .g-nav-dd-icon { opacity: 1; }
+
+.g-nav-dd-sep { height: 1px; background: rgba(255,255,255,.07); margin: 4px 6px; }
+
+/* ── Hamburger ── */
+.g-nav-toggle {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 38px; height: 38px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 9px; cursor: pointer; padding: 10px;
+  transition: background .18s;
+}
+.g-nav-toggle:hover { background: rgba(255,255,255,.12); }
+.g-nav-toggle span {
+  display: block; width: 100%; height: 1.8px;
+  background: rgba(255,255,255,.8); border-radius: 2px;
+  transition: transform .25s, opacity .2s; transform-origin: center;
+}
+.g-nav-toggle.open span:nth-child(1) { transform: translateY(6.8px) rotate(45deg); }
+.g-nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.g-nav-toggle.open span:nth-child(3) { transform: translateY(-6.8px) rotate(-45deg); }
+
+/* ── Mobile ── */
+@media (max-width: 680px) {
+  .g-nav-toggle { display: flex; }
+  .g-nav-links {
+    display: none; width: 100%; height: auto;
+    flex-direction: column; align-items: stretch;
+    padding: 8px 0 14px;
+    border-top: 1px solid rgba(255,255,255,.07); gap: 2px;
+  }
+  .g-nav-links.open { display: flex; }
+  .g-nav-link, .g-nav-dd-btn { padding: 11px 10px; border-radius: 10px; font-size: 14px; }
+  .g-nav-link.active::after, .g-nav-dd-btn.active::after { display: none; }
+
+  /* Dropdown becomes inline on mobile */
+  .g-nav-dd-menu {
+    position: static; box-shadow: none; border: none;
+    background: rgba(255,255,255,.04); border-radius: 10px;
+    margin: 3px 0; padding: 4px; animation: none;
+  }
+  .g-nav-dd-item { padding: 10px 10px; }
+}
+
+/* ── FIL D'ARIANE "Retour à l'accueil" ───────────────────── */
+.g-back {
+  background: #F0F5FF;
+  border-bottom: 1px solid #D6E0F5;
+  padding: 5px 20px;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.g-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #1A5CFF;
+  font-size: .78rem;
+  font-weight: 600;
+  text-decoration: none;
+  opacity: .8;
+  transition: opacity .15s;
+}
+.g-back-link:hover { opacity: 1; }
+.g-back-link .g-icon { width: 13px; height: 13px; }

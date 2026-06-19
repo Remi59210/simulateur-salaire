@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Générateur de lettre de démission et rupture conventionnelle gratuit — Aide Salariés</title>
+<meta name="description" content="Générez gratuitement votre modèle de lettre de démission, demande de rupture conventionnelle ou rupture de période d'essai. Conforme au droit du travail français. Copie et impression PDF en un clic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/nav.css">
+<style>
+:root{
+  --navy:#0B1D3A;
+  --blue:#1A5CFF;
+  --blue-soft:#E8F0FF;
+  --blue-mid:#C7D7F8;
+  --bg:#F6F9FF;
+  --ink:#1E293B;
+  --muted:#64748B;
+  --border:#DCE6F5;
+  --white:#FFFFFF;
+  --radius:14px;
+  --shadow-card:0 1px 2px rgba(11,29,58,.05),0 8px 24px rgba(11,29,58,.07);
+  --shadow-sheet:0 2px 6px rgba(11,29,58,.08),0 24px 60px -12px rgba(11,29,58,.22);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+header.site{
+  background:linear-gradient(135deg,var(--navy) 0%,#12305E 60%,#173E7E 100%);
+  color:var(--white);
+  padding:56px 0 72px;
+  position:relative;
+  overflow:hidden;
+}
+header.site::after{
+  content:"";
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 800px 400px at 85% -10%,rgba(26,92,255,.35),transparent 60%);
+  pointer-events:none;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;opacity:.92;margin-bottom:28px}
+.brand-dot{width:10px;height:10px;border-radius:3px;background:var(--blue);box-shadow:0 0 0 4px rgba(26,92,255,.25)}
+header.site h1{
+  font-size:clamp(28px,4.2vw,46px);
+  font-weight:800;
+  letter-spacing:-.02em;
+  line-height:1.12;
+  max-width:760px;
+}
+header.site h1 em{font-style:normal;color:#9DBCFF}
+header.site p.sub{margin-top:16px;font-size:17px;color:#C4D4F2;max-width:620px}
+
+main{margin-top:-36px;padding-bottom:64px;position:relative;z-index:2}
+.workspace{
+  display:grid;
+  grid-template-columns:400px 1fr;
+  gap:28px;
+  align-items:start;
+}
+
+.panel{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-card);
+  padding:28px;
+  position:sticky;
+  top:24px;
+}
+.panel h2{font-size:17px;font-weight:700;color:var(--navy);display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.progress-pill{
+  font-size:12px;font-weight:600;color:var(--blue);
+  background:var(--blue-soft);border-radius:999px;padding:3px 10px;
+  transition:background .3s,color .3s;
+}
+.progress-pill.done{background:#DCFCE7;color:#15803D}
+.panel p.hint{font-size:13px;color:var(--muted);margin-bottom:22px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px}
+.field label .opt{font-weight:400;color:var(--muted)}
+.field input,.field select{
+  width:100%;
+  font-family:inherit;
+  font-size:14.5px;
+  color:var(--ink);
+  background:#FBFDFF;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  padding:11px 13px;
+  transition:border-color .2s,box-shadow .2s,background .2s;
+  appearance:none;
+}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 13px center;
+  padding-right:38px;
+  cursor:pointer;
+}
+.field input:focus,.field select:focus{
+  outline:none;
+  border-color:var(--blue);
+  background:var(--white);
+  box-shadow:0 0 0 4px rgba(26,92,255,.12);
+}
+.field input:disabled{
+  background:#F1F5F9;
+  color:var(--muted);
+  cursor:not-allowed;
+  border-color:#E2E8F0;
+}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field-check{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 14px;
+  background:var(--blue-soft);
+  border:1.5px solid var(--blue-mid);
+  border-radius:10px;
+  cursor:pointer;
+  font-size:13px;font-weight:600;color:var(--navy);
+  user-select:none;
+  margin-bottom:18px;
+}
+.field-check input[type="checkbox"]{
+  width:16px;height:16px;margin:0;flex-shrink:0;
+  accent-color:var(--blue);cursor:pointer;
+}
+.alert-info{
+  padding:11px 14px;
+  background:#FFF7ED;
+  border:1.5px solid #FDBA74;
+  border-radius:10px;
+  font-size:12.5px;
+  color:#92400E;
+  line-height:1.55;
+  margin-bottom:18px;
+}
+.alert-info strong{color:#7C2D12}
+.legend{
+  margin-top:20px;
+  padding:14px 16px;
+  background:var(--blue-soft);
+  border-radius:10px;
+  font-size:12.5px;
+  color:#33538F;
+  line-height:1.55;
+}
+.legend strong{color:var(--navy)}
+
+.preview-zone{min-width:0}
+.sheet-wrap{position:relative}
+.sheet{
+  background:var(--white);
+  border-radius:6px;
+  box-shadow:var(--shadow-sheet);
+  padding:clamp(32px,5vw,68px) clamp(28px,6vw,76px);
+  min-height:760px;
+  position:relative;
+  overflow:hidden;
+  font-family:'Crimson Pro',Georgia,serif;
+  font-size:16.5px;
+  color:#222B3A;
+  line-height:1.75;
+}
+.sheet::before{
+  content:"APERÇU";
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-32deg);
+  font-family:'Inter',sans-serif;font-weight:800;font-size:110px;
+  letter-spacing:.18em;color:rgba(26,92,255,.045);
+  pointer-events:none;user-select:none;white-space:nowrap;
+}
+.sheet .sender{margin-bottom:8px}
+.sheet .sender .name{font-weight:600;font-size:17.5px}
+.sheet .recipient{text-align:right;margin:26px 0 6px}
+.sheet .dateline{text-align:right;margin-bottom:30px;font-style:italic}
+.sheet .objet{font-weight:600;margin-bottom:6px}
+.sheet .lr{font-size:14.5px;color:#5A6577;margin-bottom:26px}
+/* Mobile : pas de justify pour éviter les grands espaces */
+.sheet .body p{margin-bottom:16px;text-align:left}
+@media(min-width:641px){.sheet .body p{text-align:justify}}
+.sheet .signature{margin-top:44px;text-align:right}
+.sheet .signature .sig-name{margin-top:54px;font-weight:600}
+.placeholder-val{
+  background:rgba(26,92,255,.09);
+  border-bottom:1.5px dashed rgba(26,92,255,.45);
+  border-radius:2px;padding:0 3px;color:#33538F;
+}
+
+.actions{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap}
+.btn{
+  font-family:'Inter',sans-serif;font-size:14.5px;font-weight:600;
+  border-radius:11px;padding:13px 22px;cursor:pointer;border:none;
+  display:inline-flex;align-items:center;gap:9px;
+  transition:transform .15s,box-shadow .2s,background .2s;
+}
+.btn svg{flex-shrink:0}
+.btn-primary{background:var(--blue);color:var(--white);box-shadow:0 4px 14px rgba(26,92,255,.35)}
+.btn-primary:hover{background:#0E4BE6;transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,92,255,.4)}
+.btn-secondary{background:var(--white);color:var(--navy);border:1.5px solid var(--border)}
+.btn-secondary:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn:focus-visible{outline:3px solid rgba(26,92,255,.4);outline-offset:2px}
+.btn-secondary.copied{background:#DCFCE7;border-color:#86EFAC;color:#15803D}
+
+.seo{background:var(--white);border-top:1px solid var(--border);padding:72px 0 56px}
+.seo h2{font-size:26px;font-weight:800;color:var(--navy);letter-spacing:-.01em;margin-bottom:14px}
+.seo h3{font-size:18px;font-weight:700;color:var(--navy);margin:34px 0 10px}
+.seo p{color:#46556E;font-size:15.5px;max-width:820px;margin-bottom:14px}
+.seo .grid-faq{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;max-width:1100px}
+footer.site{background:var(--navy);color:#8FA6CC;font-size:13.5px;padding:26px 0;text-align:center}
+footer.site strong{color:#C4D4F2}
+
+@media(max-width:980px){
+  .workspace{grid-template-columns:1fr}
+  .panel{position:static}
+  .seo .grid-faq{grid-template-columns:1fr}
+  .sheet::before{font-size:64px}
+}
+@media(max-width:520px){
+  .field-row{grid-template-columns:1fr}
+  .actions .btn{flex:1;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+
+@media print{
+  @page{size:A4;margin:2cm 2.2cm}
+  body{background:var(--white)}
+  header.site,.panel,.actions,.seo,footer.site,#site-nav{display:none!important}
+  main{margin:0;padding:0}
+  .workspace{display:block}
+  .sheet-wrap,.preview-zone{all:unset}
+  .sheet{box-shadow:none;border-radius:0;padding:0;min-height:auto;font-size:12.5pt}
+  .sheet::before{display:none}
+  .sheet .body p{text-align:justify}
+  .placeholder-val{background:none;border-bottom:none;padding:0;color:inherit}
+}
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<header class="site">
+  <div class="container">
+    <div class="brand"><span class="brand-dot"></span>Aide Salariés — Lettres officielles</div>
+    <h1>Votre lettre officielle de départ, <em>rédigée en temps réel</em></h1>
+    <p class="sub">Démission, rupture conventionnelle ou fin de période d'essai : remplissez le formulaire et obtenez instantanément un courrier conforme au droit du travail français, prêt à copier ou à imprimer.</p>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="workspace">
+
+      <section class="panel" aria-label="Formulaire de la lettre">
+        <h2>Vos informations <span class="progress-pill" id="progressPill">0 / 6</span></h2>
+        <p class="hint">La lettre à droite se met à jour à chaque frappe.</p>
+
+        <div class="field">
+          <label for="letterType">Type de lettre</label>
+          <select id="letterType">
+            <option value="demission_preavis">Démission avec préavis</option>
+            <option value="demission_dispense">Démission — demande de dispense de préavis</option>
+            <option value="rupture_conventionnelle">Demande de rupture conventionnelle</option>
+            <option value="periode_essai">Rupture de période d'essai (à l'initiative du salarié)</option>
+          </select>
+        </div>
+
+        <!-- Ancienneté période d'essai — affiché uniquement si periode_essai -->
+        <div class="field" id="essaiField" style="display:none">
+          <label for="essaiAnciennete">Ancienneté dans l'entreprise</label>
+          <select id="essaiAnciennete">
+            <option value="less8">Moins de 8 jours — délai de prévenance : 24 h</option>
+            <option value="more8">8 jours ou plus — délai de prévenance : 48 h</option>
+          </select>
+        </div>
+
+        <div class="alert-info" id="essaiInfo" style="display:none"></div>
+
+        <div class="field">
+          <label for="fullName">Votre prénom et nom</label>
+          <input type="text" id="fullName" placeholder="Jean Martin" autocomplete="name">
+        </div>
+
+        <div class="field">
+          <label for="address">Votre adresse complète</label>
+          <input type="text" id="address" placeholder="12 rue des Lilas, 75011 Paris" autocomplete="street-address">
+        </div>
+
+        <div class="field">
+          <label for="company">Nom de l'entreprise</label>
+          <input type="text" id="company" placeholder="Société Exemple SAS" autocomplete="organization">
+        </div>
+
+        <!-- Civilité + nom du destinataire côte à côte -->
+        <div class="field-row" style="margin-bottom:18px">
+          <div class="field" style="margin-bottom:0">
+            <label for="managerCivilite">Civilité destinataire <span class="opt">(opt.)</span></label>
+            <select id="managerCivilite">
+              <option value="M.">M. — Monsieur</option>
+              <option value="Mme">Mme — Madame</option>
+            </select>
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label for="manager">Nom manager / RH <span class="opt">(opt.)</span></label>
+            <input type="text" id="manager" placeholder="Dupont">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="city">Ville (lieu de rédaction)</label>
+          <input type="text" id="city" placeholder="Paris">
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="todayDate">Date du jour</label>
+            <input type="date" id="todayDate">
+          </div>
+          <div class="field" id="targetDateWrapper">
+            <label for="targetDate" id="targetDateLabel">Date de départ souhaitée</label>
+            <input type="date" id="targetDate">
+          </div>
+        </div>
+
+        <!-- "Date ouverte" — affiché uniquement pour rupture_conventionnelle -->
+        <label class="field-check" id="openDateField" style="display:none" for="openDate">
+          <input type="checkbox" id="openDate">
+          Laisser la date ouverte à la négociation
+        </label>
+
+        <div class="legend">
+          <strong>Bon à savoir :</strong> l'envoi en <strong>lettre recommandée avec accusé de réception</strong> (ou remise en main propre contre décharge) est fortement recommandé pour dater officiellement la notification.
+        </div>
+      </section>
+
+      <section class="preview-zone" aria-label="Aperçu de la lettre">
+        <div class="sheet-wrap">
+          <article class="sheet" id="sheet" aria-live="polite"></article>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" id="printBtn" type="button">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Imprimer / Télécharger en PDF
+          </button>
+          <button class="btn btn-secondary" id="copyBtn" type="button">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span id="copyLabel">Copier le texte</span>
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<section class="seo">
+  <div class="container">
+    <h2>Modèle de lettre de démission et de rupture conventionnelle : tout comprendre</h2>
+    <p>Rédiger une <strong>lettre de démission</strong> ou une <strong>demande de rupture conventionnelle</strong> est une étape clé de toute fin de contrat de travail. Notre générateur gratuit vous permet de créer en quelques secondes un courrier conforme au <strong>droit du travail</strong> français, que vous soyez en CDI, en période d'essai, ou que vous souhaitiez négocier un départ à l'amiable avec votre employeur.</p>
+
+    <div class="grid-faq">
+      <div>
+        <h3>Lettre de démission et préavis</h3>
+        <p>En CDI, la démission n'a pas à être motivée, mais elle doit exprimer une volonté claire et non équivoque de quitter l'entreprise. Le <strong>préavis de démission</strong> est fixé par la convention collective, le contrat de travail ou les usages : en général un mois pour les employés, trois mois pour les cadres. Le préavis débute à la date de première présentation de la lettre recommandée.</p>
+
+        <h3>Demande de dispense de préavis</h3>
+        <p>Le salarié peut formuler une demande expresse de dispense totale de préavis. L'employeur est libre d'accepter ou de refuser. En cas d'accord, aucune indemnité compensatrice de préavis n'est due pour la période non effectuée. Notre générateur précise que la date souhaitée est soumise à l'acceptation de l'employeur.</p>
+      </div>
+      <div>
+        <h3>Demande de rupture conventionnelle</h3>
+        <p>La <strong>rupture conventionnelle</strong> est un mode de rupture amiable du CDI (art. L.1237-11 C. trav.). Contrairement à la démission, elle ouvre droit à l'allocation chômage et à une indemnité de rupture. La demande n'est qu'une invitation au dialogue : l'employeur peut refuser. Notre outil propose d'indiquer une date précise ou de la laisser ouverte à la négociation.</p>
+
+        <h3>Rupture de la période d'essai</h3>
+        <p>Pendant la période d'essai, salarié et employeur peuvent rompre le contrat librement. Le salarié doit respecter un délai de prévenance (art. L.1221-26 C. trav.) : <strong>24 heures</strong> si ancienneté &lt; 8 jours, <strong>48 heures</strong> au-delà. Notre générateur calcule automatiquement la date de fin et cite l'article applicable.</p>
+      </div>
+    </div>
+
+    <h3>Comment utiliser ce générateur gratuit ?</h3>
+    <p>Choisissez le type de courrier, renseignez vos informations, puis copiez ou imprimez votre lettre au format PDF. L'outil est entièrement gratuit, sans inscription, et aucune donnée n'est envoyée sur un serveur : tout reste dans votre navigateur.</p>
+    <p>Ce site fournit des modèles à valeur informative. Pour les situations complexes (non-concurrence, contentieux, statut protégé), consultez un avocat en droit du travail.</p>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container"><strong>Aide Salariés</strong> — Générateur gratuit de lettres de démission, rupture conventionnelle et période d'essai. Modèles fournis à titre informatif. © 2026 Aide Salariés — Tous droits réservés.</div>
+</footer>
+
+<script src="/js/nav.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var fields = {
+    letterType:      document.getElementById("letterType"),
+    fullName:        document.getElementById("fullName"),
+    address:         document.getElementById("address"),
+    company:         document.getElementById("company"),
+    managerCivilite: document.getElementById("managerCivilite"),
+    manager:         document.getElementById("manager"),
+    city:            document.getElementById("city"),
+    todayDate:       document.getElementById("todayDate"),
+    targetDate:      document.getElementById("targetDate")
+  };
+  var sheet           = document.getElementById("sheet");
+  var progressPill    = document.getElementById("progressPill");
+  var targetDateLabel = document.getElementById("targetDateLabel");
+  var targetDateWrap  = document.getElementById("targetDateWrapper");
+  var copyBtn         = document.getElementById("copyBtn");
+  var copyLabel       = document.getElementById("copyLabel");
+  var printBtn        = document.getElementById("printBtn");
+  var essaiField      = document.getElementById("essaiField");
+  var essaiAnciennete = document.getElementById("essaiAnciennete");
+  var essaiInfo       = document.getElementById("essaiInfo");
+  var openDateField   = document.getElementById("openDateField");
+  var openDate        = document.getElementById("openDate");
+
+  var todayISO = new Date().toISOString().slice(0,10);
+  fields.todayDate.value = todayISO;
+
+  function escapeHTML(s){
+    return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+
+  function formatDateFR(iso){
+    if(!iso) return null;
+    var parts = iso.split("-");
+    var d = new Date(parseInt(parts[0],10), parseInt(parts[1],10)-1, parseInt(parts[2],10));
+    var months = ["janvier","f\xe9vrier","mars","avril","mai","juin","juillet","ao\xfbt","septembre","octobre","novembre","d\xe9cembre"];
+    return d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
+  }
+
+  function addDays(iso, n){
+    var parts = iso.split("-");
+    var d = new Date(parseInt(parts[0],10), parseInt(parts[1],10)-1, parseInt(parts[2],10));
+    d.setDate(d.getDate() + n);
+    return d.toISOString().slice(0,10);
+  }
+
+  function val(key, fallback){
+    var v = fields[key].value.trim();
+    if(v) return { text: escapeHTML(v), filled: true };
+    return { text: '<span class="placeholder-val">' + fallback + '</span>', filled: false };
+  }
+
+  function dateVal(key, fallback){
+    var v = fields[key].value;
+    if(v) return { text: formatDateFR(v), filled: true };
+    return { text: '<span class="placeholder-val">' + fallback + '</span>', filled: false };
+  }
+
+  var targetLabels = {
+    demission_preavis:       "Date de fin de pr\xe9avis",
+    demission_dispense:      "Date de d\xe9part souhait\xe9e",
+    rupture_conventionnelle: "Date de d\xe9part envisag\xe9e",
+    periode_essai:           "Date de fin de contrat (calcul\xe9e)"
+  };
+
+  function updateFieldVisibility(){
+    var type = fields.letterType.value;
+    var isPE = (type === "periode_essai");
+    var isRC = (type === "rupture_conventionnelle");
+
+    essaiField.style.display    = isPE ? "" : "none";
+    openDateField.style.display = isRC ? "" : "none";
+
+    if(isPE){
+      var days = essaiAnciennete.value === "less8" ? 1 : 2;
+      var h    = essaiAnciennete.value === "less8" ? "24 heures" : "48 heures";
+      fields.targetDate.value = addDays(fields.todayDate.value || todayISO, days);
+      essaiInfo.style.display = "";
+      essaiInfo.innerHTML = "<strong>D\xe9lai de pr\xe9venance (art.\xa0L.1221-26\xa0C.\xa0trav.)\xa0:</strong> " + h +
+        " — date de fin calcul\xe9e automatiquement.";
+    } else {
+      essaiInfo.style.display = "none";
+    }
+
+    var dateOpen = isRC && openDate.checked;
+    fields.targetDate.disabled       = dateOpen;
+    targetDateWrap.style.opacity     = dateOpen ? "0.45" : "";
+    targetDateLabel.textContent      = targetLabels[type] || "Date souhait\xe9e";
+  }
+
+  function buildLetter(){
+    updateFieldVisibility();
+
+    var type       = fields.letterType.value;
+    var name       = val("fullName","[Pr\xe9nom Nom]");
+    var address    = val("address","[Adresse]");
+    var company    = val("company","[Nom de l'entreprise]");
+    var managerRaw = fields.manager.value.trim();
+    var civRaw     = fields.managerCivilite.value;
+    var city       = val("city","[Ville]");
+    var today      = dateVal("todayDate","[date du jour]");
+    var target     = dateVal("targetDate","[date]");
+
+    var civText    = civRaw === "Mme" ? "Madame" : "Monsieur";
+    var salutation = managerRaw
+      ? civText + " " + escapeHTML(managerRaw) + ","
+      : "Madame, Monsieur,";
+    var conge = managerRaw
+      ? civText + " " + escapeHTML(managerRaw)
+      : "Madame, Monsieur";
+    var recipientLine = managerRaw
+      ? "\xc0 l'attention de " + civText + " " + escapeHTML(managerRaw) + "<br>" + company.text
+      : "\xc0 l'attention de la Direction<br>" + company.text;
+
+    var objet = "";
+    var bodyParas = [];
+
+    if(type === "demission_preavis"){
+      objet = "Objet\xa0: Notification de d\xe9mission";
+      bodyParas = [
+        salutation,
+        "Par la pr\xe9sente, je vous informe de ma d\xe9cision de d\xe9missionner de mon poste au sein de la soci\xe9t\xe9\xa0" + company.text + ".",
+        "Conform\xe9ment aux dispositions de ma convention collective et de mon contrat de travail, je respecterai le pr\xe9avis qui m'incombe. Celui-ci d\xe9butera \xe0 compter de la premi\xe8re pr\xe9sentation de ce courrier, pour s'ach\xe9ver le\xa0" + target.text + ", date \xe0 laquelle je quitterai d\xe9finitivement mes fonctions.",
+        "Je reste naturellement \xe0 votre disposition pour organiser au mieux la transmission de mes dossiers en cours et assurer une transition sereine.",
+        "Je vous remercie de bien vouloir me faire parvenir, \xe0 l'issue de mon contrat, les documents de fin de contrat qui me sont dus\xa0: certificat de travail, re\xe7u pour solde de tout compte et attestation France Travail.",
+        "Je vous prie d'agr\xe9er, " + conge + ", l'expression de mes salutations distingu\xe9es."
+      ];
+    } else if(type === "demission_dispense"){
+      objet = "Objet\xa0: Notification de d\xe9mission et demande de dispense de pr\xe9avis";
+      bodyParas = [
+        salutation,
+        "Par la pr\xe9sente, je vous informe de ma d\xe9cision de d\xe9missionner de mon poste au sein de la soci\xe9t\xe9\xa0" + company.text + ".",
+        "Je vous adresse \xe9galement une demande expresse de dispense totale de pr\xe9avis, afin que mon contrat prenne fin le\xa0" + target.text + ". Je suis pleinement conscient(e) que cette dispense rel\xe8ve de votre seule d\xe9cision\xa0: en cas d'acceptation, aucune indemnit\xe9 compensatrice de pr\xe9avis ne me sera due pour la p\xe9riode non effectu\xe9e.",
+        "Dans l'attente de votre r\xe9ponse, je demeure pleinement mobilis\xe9(e) sur mes missions et disponible pour organiser la transmission de mes dossiers dans les meilleures conditions. Je vous remercie de bien vouloir me confirmer votre d\xe9cision par \xe9crit dans les meilleurs d\xe9lais.",
+        "Je vous remercie de bien vouloir me remettre, au terme de mon contrat, le certificat de travail, le re\xe7u pour solde de tout compte et l'attestation France Travail.",
+        "Je vous prie d'agr\xe9er, " + conge + ", l'expression de mes salutations distingu\xe9es."
+      ];
+    } else if(type === "rupture_conventionnelle"){
+      objet = "Objet\xa0: Demande de rupture conventionnelle du contrat de travail";
+      var dateRCText = openDate.checked
+        ? "dans quelques semaines, \xe0 d\xe9finir d'un commun accord lors de nos \xe9changes, dans le respect des d\xe9lais l\xe9gaux d'homologation"
+        : "aux alentours du\xa0" + target.text;
+      bodyParas = [
+        salutation,
+        "Salari\xe9(e) de la soci\xe9t\xe9\xa0" + company.text + ", je souhaite, par la pr\xe9sente, vous faire part de mon souhait d'engager une proc\xe9dure de rupture conventionnelle de mon contrat de travail \xe0 dur\xe9e ind\xe9termin\xe9e, conform\xe9ment aux articles L.1237-11 et suivants du Code du travail.",
+        "Cette d\xe9marche s'inscrit dans une volont\xe9 de mettre fin \xe0 notre collaboration d'un commun accord, dans un esprit constructif et respectueux des int\xe9r\xeats de chacun. J'envisagerais, si vous y \xeates favorable, une fin de contrat\xa0" + dateRCText + ".",
+        "Je vous propose de convenir d'un entretien, \xe0 la date de votre choix, afin d'\xe9voquer ensemble les modalit\xe9s de cette rupture\xa0: date de fin de contrat, montant de l'indemnit\xe9 sp\xe9cifique de rupture conventionnelle et organisation de la transition.",
+        "Je pr\xe9cise que cette demande ne constitue en aucun cas une d\xe9mission et que je reste pleinement investi(e) dans mes fonctions dans l'attente de votre retour.",
+        "Je vous prie d'agr\xe9er, " + conge + ", l'expression de mes salutations distingu\xe9es."
+      ];
+    } else {
+      var anc   = essaiAnciennete.value;
+      var prevH = anc === "less8" ? "24 heures" : "48 heures";
+      var ancTxt = anc === "less8" ? "inf\xe9rieure \xe0 8 jours" : "\xe9gale ou sup\xe9rieure \xe0 8 jours";
+      objet = "Objet\xa0: Rupture de la p\xe9riode d'essai \xe0 mon initiative";
+      bodyParas = [
+        salutation,
+        "Par la pr\xe9sente, je vous informe de ma d\xe9cision de mettre fin \xe0 la p\xe9riode d'essai pr\xe9vue par mon contrat de travail me liant \xe0 la soci\xe9t\xe9\xa0" + company.text + ", conform\xe9ment aux dispositions de l'article L.1221-26 du Code du travail.",
+        "Ma situation correspond \xe0 une anciennet\xe9\xa0" + ancTxt + " au sein de l'entreprise. Conform\xe9ment \xe0 l'article L.1221-26 du Code du travail, le d\xe9lai de pr\xe9venance applicable est de\xa0" + prevH + ". Mon contrat prendra donc fin le\xa0" + target.text + ". Je reste \xe0 votre disposition jusqu'\xe0 cette date pour assurer la bonne transmission des t\xe2ches qui m'ont \xe9t\xe9 confi\xe9es.",
+        "Je vous remercie de bien vouloir me remettre, au terme de mon contrat, les documents de fin de contrat\xa0: certificat de travail, re\xe7u pour solde de tout compte et attestation France Travail.",
+        "Je vous prie d'agr\xe9er, " + conge + ", l'expression de mes salutations distingu\xe9es."
+      ];
+    }
+
+    var html = "";
+    html += '<div class="sender"><div class="name">' + name.text + '</div><div>' + address.text + '</div></div>';
+    html += '<div class="recipient">' + recipientLine + '</div>';
+    html += '<div class="dateline">' + city.text + ', le ' + today.text + '</div>';
+    html += '<div class="objet">' + objet + '</div>';
+    html += '<div class="lr">Lettre recommand\xe9e avec accus\xe9 de r\xe9ception<br>ou remise en main propre contre d\xe9charge</div>';
+    html += '<div class="body">';
+    for(var i=0;i<bodyParas.length;i++){ html += '<p>' + bodyParas[i] + '</p>'; }
+    html += '</div>';
+    html += '<div class="signature"><div>Signature</div><div class="sig-name">' + name.text + '</div></div>';
+    sheet.innerHTML = html;
+
+    var filled = 0;
+    var checks = [name, address, company, city, today, { filled: !!fields.letterType.value }];
+    for(var j=0;j<checks.length;j++){ if(checks[j].filled) filled++; }
+    progressPill.textContent = filled + " / 6";
+    progressPill.classList.toggle("done", filled === 6);
+  }
+
+  function getPlainText(){
+    var clone = sheet.cloneNode(true);
+    var lines = [];
+    var topLevel = clone.children;
+    for(var i=0;i<topLevel.length;i++){
+      var section = topLevel[i];
+      if(section.classList.contains("body")){
+        var parts = section.querySelectorAll("p");
+        for(var k=0;k<parts.length;k++){
+          lines.push(parts[k].innerText.trim());
+          lines.push("");
+        }
+      } else {
+        lines.push(section.innerText.trim());
+        lines.push("");
+      }
+    }
+    return lines.join("\n").replace(/\n{3,}/g,"\n\n").trim();
+  }
+
+  copyBtn.addEventListener("click", function(){
+    var text = getPlainText();
+    function ok(){
+      copyLabel.textContent = "Copi\xe9\xa0!";
+      copyBtn.classList.add("copied");
+      setTimeout(function(){
+        copyLabel.textContent = "Copier le texte";
+        copyBtn.classList.remove("copied");
+      }, 2200);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(ok).catch(function(){ fallbackCopy(text, ok); });
+    } else {
+      fallbackCopy(text, ok);
+    }
+  });
+
+  function fallbackCopy(text, ok){
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try{ document.execCommand("copy"); ok(); }catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  printBtn.addEventListener("click", function(){ window.print(); });
+
+  var keys = Object.keys(fields);
+  for(var i=0;i<keys.length;i++){
+    fields[keys[i]].addEventListener("input", buildLetter);
+    fields[keys[i]].addEventListener("change", buildLetter);
+  }
+  essaiAnciennete.addEventListener("change", buildLetter);
+  openDate.addEventListener("change", buildLetter);
+
+  buildLetter();
+})();
+</script>
+</body>
+</html>

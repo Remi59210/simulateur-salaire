@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparateur de Statuts Salariaux 2026 | Aide Salariés</title>
+  <meta name="description" content="Comparez deux statuts côte à côte : salarié cadre, non-cadre, fonctionnaire, libéral ou portage salarial pour un même salaire brut." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+</head>
+<body>
+<div id="site-nav"></div>
+
+<header class="tool-header">
+  <div class="header-badge">Comparaison instantanée</div>
+  <h1>Comparateur de Statuts</h1>
+  <p>Même brut, deux statuts — voyez la différence nette en un coup d'œil</p>
+</header>
+
+<main>
+  <div class="card">
+    <div class="card-title">Salaire de référence</div>
+    <div class="field-row">
+      <div class="field">
+        <label for="brut-m">Mensuel brut</label>
+        <div class="input-wrap">
+          <input type="number" id="brut-m" min="0" step="50" placeholder="ex : 3 500" oninput="onChange('m')" />
+          <span class="input-unit">€/mois</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="brut-a">Annuel brut</label>
+        <div class="input-wrap">
+          <input type="number" id="brut-a" min="0" step="500" placeholder="ex : 42 000" oninput="onChange('a')" />
+          <span class="input-unit">€/an</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-row" style="margin-top:14px">
+      <div class="field">
+        <label for="taux-ir">Taux PAS (prélèvement à la source)</label>
+        <div class="slider-header" style="margin-bottom:6px">
+          <span class="slider-label">Taux d'imposition</span>
+          <span class="slider-value" id="slider-display">0 %</span>
+        </div>
+        <input type="range" id="taux-ir" min="0" max="45" step="0.5" value="0"
+               oninput="onSlider(this)" style="--range-pct:0%"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Choisissez deux statuts à comparer</div>
+    <div class="field-row">
+      <div class="field">
+        <label for="statut-a">Statut A</label>
+        <div class="select-wrap">
+          <select id="statut-a" onchange="recalc()">
+            <option value="non-cadre">Salarié non-cadre (−22 %)</option>
+            <option value="cadre" selected>Salarié cadre (−25 %)</option>
+            <option value="fp">Fonction publique (−15 %)</option>
+            <option value="liberal">Profession libérale (−35 %)</option>
+            <option value="portage">Portage salarial (−48 %)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="statut-b">Statut B</label>
+        <div class="select-wrap">
+          <select id="statut-b" onchange="recalc()">
+            <option value="non-cadre" selected>Salarié non-cadre (−22 %)</option>
+            <option value="cadre">Salarié cadre (−25 %)</option>
+            <option value="fp">Fonction publique (−15 %)</option>
+            <option value="liberal">Profession libérale (−35 %)</option>
+            <option value="portage">Portage salarial (−48 %)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="results-card" style="display:none">
+    <div class="card-title">Comparaison</div>
+    <div class="compare-grid" id="compare-grid"></div>
+    <div class="info-box" id="diff-box" style="margin-top:18px"></div>
+  </div>
+</main>
+
+<footer>© 2026 Aide Salariés — Estimations à titre indicatif.</footer>
+
+<script src="/js/nav.js"></script>
+<script>
+  var STATUTS = {
+    'non-cadre': { label: 'Non-cadre',          taux: 0.22 },
+    'cadre':     { label: 'Cadre',              taux: 0.25 },
+    'fp':        { label: 'Fonctionnaire',      taux: 0.15 },
+    'liberal':   { label: 'Libéral',            taux: 0.35 },
+    'portage':   { label: 'Portage salarial',   taux: 0.48 },
+  };
+  var H_MONTH = 151.67;
+  var brutM = 0, brutA = 0;
+
+  function fmt(n) {
+    return n > 0
+      ? new Intl.NumberFormat('fr-FR', {style:'currency', currency:'EUR', maximumFractionDigits:0}).format(n)
+      : '— €';
+  }
+
+  function onChange(field) {
+    if (field === 'm') {
+      brutM = parseFloat(document.getElementById('brut-m').value) || 0;
+      brutA = brutM * 12;
+      document.getElementById('brut-a').value = brutA || '';
+    } else {
+      brutA = parseFloat(document.getElementById('brut-a').value) || 0;
+      brutM = brutA / 12;
+      document.getElementById('brut-m').value = brutM ? parseFloat(brutM.toFixed(0)) : '';
+    }
+    recalc();
+  }
+
+  function onSlider(el) {
+    var v = parseFloat(el.value);
+    el.style.setProperty('--range-pct', (v/45*100) + '%');
+    document.getElementById('slider-display').textContent = v.toFixed(1).replace('.',',') + ' %';
+    recalc();
+  }
+
+  function calcStatut(key) {
+    var t = STATUTS[key].taux;
+    var ir = parseFloat(document.getElementById('taux-ir').value) / 100;
+    var netM   = brutM * (1 - t);
+    var netA   = brutA * (1 - t);
+    var netH   = (brutM / H_MONTH) * (1 - t);
+    var apresM = netM * (1 - ir);
+    var apresA = netA * (1 - ir);
+    var chM    = brutM * t;
+    return { key:key, t:t, netM:netM, netA:netA, netH:netH, apresM:apresM, apresA:apresA, chM:chM };
+  }
+
+  function colHTML(r, letter) {
+    var ir = parseFloat(document.getElementById('taux-ir').value);
+    return '<div class="compare-col">' +
+      '<h3>Statut ' + letter + ' — ' + STATUTS[r.key].label + '</h3>' +
+      '<div class="compare-row main"><span class="cr-label">Net mensuel</span><span class="cr-val">' + fmt(r.netM) + '</span></div>' +
+      '<div class="compare-row"><span class="cr-label">Net horaire</span><span class="cr-val">' + fmt(r.netH) + '</span></div>' +
+      '<div class="compare-row"><span class="cr-label">Net annuel</span><span class="cr-val">' + fmt(r.netA) + '</span></div>' +
+      (ir > 0 ? '<div class="compare-row"><span class="cr-label">Net après PAS (' + ir.toFixed(1) + ' %)</span><span class="cr-val">' + fmt(r.apresM) + '/mois</span></div>' : '') +
+      '<div class="compare-row"><span class="cr-label">Charges salariales / mois</span><span class="cr-val">' + fmt(r.chM) + '</span></div>' +
+      '<div class="compare-row"><span class="cr-label">Taux de charges</span><span class="cr-val">' + (r.t*100).toFixed(0) + ' %</span></div>' +
+    '</div>';
+  }
+
+  function recalc() {
+    if (!brutM) { document.getElementById('results-card').style.display = 'none'; return; }
+    var ka = document.getElementById('statut-a').value;
+    var kb = document.getElementById('statut-b').value;
+    var ra = calcStatut(ka), rb = calcStatut(kb);
+    document.getElementById('compare-grid').innerHTML = colHTML(ra, 'A') + colHTML(rb, 'B');
+    var diff = ra.netM - rb.netM;
+    var sign = diff >= 0 ? '+' : '';
+    var cls  = diff >= 0 ? '' : 'green';
+    document.getElementById('diff-box').className = 'info-box ' + cls;
+    document.getElementById('diff-box').innerHTML =
+      '<strong>Écart mensuel : ' + sign + fmt(diff) + '</strong> — ' +
+      'Le statut ' + (diff >= 0 ? 'A (' + STATUTS[ka].label + ')' : 'B (' + STATUTS[kb].label + ')') +
+      ' génère un net mensuel <strong>' + fmt(Math.abs(diff)) + '</strong> de plus.';
+    document.getElementById('results-card').style.display = '';
+  }
+</script>
+</body>
+</html>

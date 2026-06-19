@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur Indemnité Rupture Conventionnelle 2026 | Aide Salariés</title>
+  <meta name="description" content="Calculez l'indemnité légale minimale de rupture conventionnelle selon votre ancienneté et salaire de référence. Formule officielle Code du travail." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+  <style>
+    .timeline {
+      display: flex; flex-direction: column; gap: 0;
+      border-left: 3px solid var(--orange-mid);
+      padding-left: 20px; margin: 4px 0;
+    }
+    .tl-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 8px 0; border-bottom: 1px dashed var(--border);
+      font-size: .87rem;
+    }
+    .tl-row:last-child { border-bottom: none; }
+    .tl-label { color: var(--text-soft); }
+    .tl-val   { font-weight: 700; color: var(--orange-dark); }
+    .tl-total {
+      font-weight: 800; font-size: .95rem;
+      color: var(--orange); border-top: 2px solid var(--orange);
+      padding-top: 10px; margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<header class="tool-header">
+  <div class="header-badge">Droit du travail</div>
+  <h1>Indemnité de Rupture Conventionnelle</h1>
+  <p>Calcul du minimum légal selon l'art. L.1237-13 du Code du travail</p>
+</header>
+
+<main>
+  <div class="card">
+    <div class="card-title">Vos données</div>
+    <div class="field-row">
+      <div class="field">
+        <label for="salaire-ref">Salaire de référence mensuel brut</label>
+        <div class="input-wrap">
+          <input type="number" id="salaire-ref" min="0" step="50" placeholder="ex : 3 200" oninput="recalc()" />
+          <span class="input-unit">€/mois</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="base-ref">Base de calcul</label>
+        <div class="select-wrap">
+          <select id="base-ref" onchange="recalc()">
+            <option value="1">Salaire mensuel saisi (1/12 de l'annuel)</option>
+            <option value="1" selected>Moyenne des 3 derniers mois</option>
+            <option value="1">Moyenne des 12 derniers mois (si plus favorable)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="field-row" style="margin-top:14px">
+      <div class="field">
+        <label for="anc-ans">Ancienneté — années complètes</label>
+        <div class="input-wrap">
+          <input type="number" id="anc-ans" min="0" max="60" step="1" placeholder="ex : 8" oninput="recalc()" />
+          <span class="input-unit">ans</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="anc-mois">Ancienneté — mois supplémentaires</label>
+        <div class="input-wrap">
+          <input type="number" id="anc-mois" min="0" max="11" step="1" placeholder="ex : 4" oninput="recalc()" />
+          <span class="input-unit">mois</span>
+        </div>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:16px">
+      <strong>Base de calcul :</strong> la loi retient le plus favorable entre (1) la moyenne des 3 derniers mois de salaire brut ou (2) la moyenne des 12 derniers mois. Saisissez ici le montant le plus favorable pour vous.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Indemnité légale minimale</div>
+    <div class="results-grid" style="margin-bottom:20px">
+      <div class="result-cell highlight" style="grid-column:span 2">
+        <div class="rc-label">Indemnité minimale légale brute</div>
+        <div class="rc-value" id="res-indem" style="font-size:1.5rem">— €</div>
+      </div>
+      <div class="result-cell">
+        <div class="rc-label">Durée totale</div>
+        <div class="rc-value" id="res-duree">—</div>
+      </div>
+    </div>
+
+    <div class="section-sep">Détail du calcul</div>
+    <div class="timeline" id="timeline"></div>
+
+    <div class="info-box green" id="fiscalite-box" style="margin-top:18px;display:none"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">À savoir sur la rupture conventionnelle</div>
+    <div style="display:grid;gap:10px;font-size:.87rem;color:var(--text-soft);line-height:1.65">
+      <p>✅ <strong>Indemnité minimale</strong> : 1/4 de mois de salaire brut par année d'ancienneté pour les 10 premières années, puis 1/3 au-delà (art. L.1237-13).</p>
+      <p>✅ <strong>Ouvre droit au chômage</strong> (ARE) contrairement à la démission.</p>
+      <p>✅ <strong>Exonération fiscale</strong> : l'indemnité est exonérée d'impôt dans la limite du plus élevé de ces montants : 2 fois la rémunération annuelle brute, ou 50 % de l'indemnité, dans la limite de 6 PASS (≈ 271 296 € en 2026).</p>
+      <p>⚠️ <strong>Convention collective</strong> : votre CCN peut prévoir une indemnité plus favorable. Ce calculateur affiche uniquement le minimum légal.</p>
+      <p>⚠️ <strong>Délai de rétractation</strong> : 15 jours calendaires après signature de la convention pour chaque partie. Homologation par la DREETS sous 15 jours ouvrables.</p>
+    </div>
+  </div>
+</main>
+
+<footer>© 2026 Aide Salariés — Calcul du minimum légal. Ne constitue pas un conseil juridique.</footer>
+
+<script src="/js/nav.js"></script>
+<script>
+  var PASS_2026 = 47100; // Plafond annuel Sécurité Sociale 2026 (estimation)
+
+  function fmt(n) {
+    if (!n && n !== 0) return '— €';
+    return new Intl.NumberFormat('fr-FR', {style:'currency', currency:'EUR', maximumFractionDigits:0}).format(n);
+  }
+
+  function recalc() {
+    var salM  = parseFloat(document.getElementById('salaire-ref').value) || 0;
+    var ans   = parseInt(document.getElementById('anc-ans').value,  10) || 0;
+    var mois  = parseInt(document.getElementById('anc-mois').value, 10) || 0;
+
+    if (!salM || (ans === 0 && mois === 0)) {
+      document.getElementById('res-indem').textContent = '— €';
+      document.getElementById('res-duree').textContent = '—';
+      document.getElementById('timeline').innerHTML = '';
+      document.getElementById('fiscalite-box').style.display = 'none';
+      return;
+    }
+
+    var dureeLabel = ans + ' an' + (ans > 1 ? 's' : '') + (mois > 0 ? ' et ' + mois + ' mois' : '');
+    document.getElementById('res-duree').textContent = dureeLabel;
+
+    // Calcul tranche 1 : années ≤ 10
+    var ans1 = Math.min(ans, 10);
+    var indem1 = salM * ans1 * (1/4);
+
+    // Calcul tranche 2 : années > 10
+    var ans2 = Math.max(ans - 10, 0);
+    var indem2 = salM * ans2 * (1/3);
+
+    // Fraction d'année prorata (mois supplémentaires)
+    var tauxProrata = ans < 10 ? (1/4) : (1/3);
+    var indemProrata = salM * (mois / 12) * tauxProrata;
+
+    var total = indem1 + indem2 + indemProrata;
+    document.getElementById('res-indem').textContent = fmt(total);
+
+    // Timeline
+    var rows = [];
+    if (ans1 > 0) {
+      rows.push('<div class="tl-row"><span class="tl-label">Tranche 1 (1 à ' + ans1 + ' an' + (ans1>1?'s':'') + ') : ' + ans1 + ' × ¼ mois</span><span class="tl-val">' + fmt(indem1) + '</span></div>');
+    }
+    if (ans2 > 0) {
+      rows.push('<div class="tl-row"><span class="tl-label">Tranche 2 (' + (10+1) + ' à ' + ans + ' ans) : ' + ans2 + ' × ⅓ mois</span><span class="tl-val">' + fmt(indem2) + '</span></div>');
+    }
+    if (mois > 0) {
+      rows.push('<div class="tl-row"><span class="tl-label">Fraction d\'année (' + mois + ' mois, taux ' + (tauxProrata===1/4?'¼':'⅓') + ')</span><span class="tl-val">' + fmt(indemProrata) + '</span></div>');
+    }
+    rows.push('<div class="tl-row tl-total"><span>Total indemnité légale minimale</span><span>' + fmt(total) + '</span></div>');
+    document.getElementById('timeline').innerHTML = rows.join('');
+
+    // Fiscalité
+    var salA = salM * 12;
+    var plafondExo = Math.min(Math.max(2 * salA, total * 0.5), 6 * PASS_2026);
+    var imposable = Math.max(total - plafondExo, 0);
+    var box = document.getElementById('fiscalite-box');
+    box.style.display = '';
+    if (imposable === 0) {
+      box.innerHTML = '✅ <strong>Exonération totale d\'impôt</strong> : l\'indemnité (' + fmt(total) + ') est inférieure au plafond d\'exonération (' + fmt(plafondExo) + '). Elle sera totalement exonérée d\'impôt sur le revenu.';
+    } else {
+      box.innerHTML = '⚠️ <strong>Exonération partielle</strong> : ' + fmt(plafondExo) + ' exonéré, ' + fmt(imposable) + ' soumis à l\'IR (au-delà du plafond).';
+      box.className = 'info-box';
+    }
+  }
+</script>
+</body>
+</html>

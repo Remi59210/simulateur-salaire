@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TJM vers Net Mensuel — Freelance & Portage 2026 | Aide Salariés</title>
+  <meta name="description" content="Calculez votre net mensuel à partir de votre TJM (tarif journalier moyen) en portage salarial ou en profession libérale. Simulation inverse : quel TJM viser pour un net cible ?" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+  <style>
+    .tab-row { display: flex; gap: 8px; margin-bottom: 18px; }
+    .tab-btn {
+      flex: 1; padding: 10px 12px; border-radius: 10px;
+      font-family: inherit; font-size: .88rem; font-weight: 600;
+      cursor: pointer; border: 1.5px solid var(--border);
+      background: var(--bg); color: var(--text-soft);
+      transition: all .18s;
+    }
+    .tab-btn.active {
+      background: var(--orange); border-color: var(--orange);
+      color: #fff; box-shadow: 0 2px 10px rgba(255,107,0,.3);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .net-target-wrap { position: relative; }
+    .net-target-wrap input {
+      width: 100%; padding: 11px 52px 11px 14px;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      font-size: 1rem; font-family: inherit; font-weight: 600;
+      color: var(--text); background: #FAFAFA;
+      transition: border-color .18s, box-shadow .18s;
+      -moz-appearance: textfield;
+    }
+    .net-target-wrap input:focus {
+      outline: none; border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,107,0,.13); background: #fff;
+    }
+    .net-target-wrap input::-webkit-inner-spin-button { -webkit-appearance: none; }
+  </style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<header class="tool-header">
+  <div class="header-badge">Freelance &amp; Portage</div>
+  <h1>TJM → Net Mensuel</h1>
+  <p>Portage salarial · Profession libérale · Simulation inverse (quel TJM pour mon net cible ?)</p>
+</header>
+
+<main>
+  <div class="card">
+    <div class="card-title">Régime</div>
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="setRegime('portage',this)">Portage salarial</button>
+      <button class="tab-btn" onclick="setRegime('liberal',this)">Profession libérale</button>
+      <button class="tab-btn" onclick="setRegime('micro',this)">Micro-entrepreneur</button>
+    </div>
+    <div class="info-box" id="regime-info"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Paramètres</div>
+
+    <div class="tab-panel active" id="panel-portage">
+      <div class="field-row">
+        <div class="field">
+          <label for="tjm-p">TJM (tarif journalier moyen HT)</label>
+          <div class="input-wrap">
+            <input type="number" id="tjm-p" min="0" step="10" placeholder="ex : 600" oninput="recalc()" />
+            <span class="input-unit">€/j</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="jours-p">Jours facturés / mois</label>
+          <div class="input-wrap">
+            <input type="number" id="jours-p" min="1" max="23" step="1" value="18" oninput="recalc()" />
+            <span class="input-unit">jours</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:14px">
+        <div class="field">
+          <label for="commission">Commission société de portage</label>
+          <div class="select-wrap">
+            <select id="commission" onchange="recalc()">
+              <option value="0.05">5 %</option>
+              <option value="0.07">7 %</option>
+              <option value="0.08" selected>8 % (moyenne)</option>
+              <option value="0.10">10 %</option>
+              <option value="0.12">12 %</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="frais-p">Frais professionnels remboursés</label>
+          <div class="input-wrap">
+            <input type="number" id="frais-p" min="0" step="50" placeholder="ex : 300" oninput="recalc()" />
+            <span class="input-unit">€/mois</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="panel-liberal">
+      <div class="field-row">
+        <div class="field">
+          <label for="tjm-l">TJM ou honoraires journaliers</label>
+          <div class="input-wrap">
+            <input type="number" id="tjm-l" min="0" step="10" placeholder="ex : 500" oninput="recalc()" />
+            <span class="input-unit">€/j</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="jours-l">Jours facturés / mois</label>
+          <div class="input-wrap">
+            <input type="number" id="jours-l" min="1" max="23" step="1" value="18" oninput="recalc()" />
+            <span class="input-unit">jours</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:14px">
+        <div class="field">
+          <label for="charges-lib">Taux de charges</label>
+          <div class="select-wrap">
+            <select id="charges-lib" onchange="recalc()">
+              <option value="0.30">30 % (faible, débutant)</option>
+              <option value="0.35" selected>35 % (moyen — CIPAV…)</option>
+              <option value="0.40">40 % (élevé)</option>
+              <option value="0.45">45 % (très élevé)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="taux-ir-l">Taux PAS</label>
+          <div class="select-wrap">
+            <select id="taux-ir-l" onchange="recalc()">
+              <option value="0">0 % (non imposable)</option>
+              <option value="0.05">5 %</option>
+              <option value="0.08">8 %</option>
+              <option value="0.11">11 %</option>
+              <option value="0.15">15 %</option>
+              <option value="0.20">20 %</option>
+              <option value="0.30">30 %</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="panel-micro">
+      <div class="field-row">
+        <div class="field">
+          <label for="ca-micro">Chiffre d'affaires mensuel HT</label>
+          <div class="input-wrap">
+            <input type="number" id="ca-micro" min="0" step="100" placeholder="ex : 7 000" oninput="recalc()" />
+            <span class="input-unit">€/mois</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="activite-micro">Type d'activité</label>
+          <div class="select-wrap">
+            <select id="activite-micro" onchange="recalc()">
+              <option value="0.221">Services (BIC) — 22,1 %</option>
+              <option value="0.221" selected>Services libéraux (BNC) — 22,1 %</option>
+              <option value="0.127">Vente de marchandises — 12,7 %</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:.8rem;color:var(--text-soft);margin-top:10px">
+        En micro-entreprise, les cotisations sociales sont un % du CA. Pas de TVA si sous le seuil de franchise (36 800 € pour les services).
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Résultats</div>
+    <div class="results-grid" style="margin-bottom:14px">
+      <div class="result-cell highlight">
+        <div class="rc-label">CA mensuel HT</div>
+        <div class="rc-value" id="res-ca">— €</div>
+      </div>
+      <div class="result-cell highlight">
+        <div class="rc-label">Net mensuel</div>
+        <div class="rc-value" id="res-net-m">— €</div>
+      </div>
+      <div class="result-cell highlight">
+        <div class="rc-label">Net annuel</div>
+        <div class="rc-value" id="res-net-a">— €</div>
+      </div>
+    </div>
+    <div class="results-grid-2">
+      <div class="result-cell">
+        <div class="rc-label">Prélèvements totaux</div>
+        <div class="rc-value" id="res-prelev">— €</div>
+        <div class="rc-sub" id="res-taux-eff"></div>
+      </div>
+      <div class="result-cell green">
+        <div class="rc-label">Taux de rétention</div>
+        <div class="rc-value" id="res-retention">— %</div>
+        <div class="rc-sub">% du CA conservé</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Simulation inverse — quel TJM pour atteindre mon net cible ?</div>
+    <div class="field-row">
+      <div class="field">
+        <label for="net-cible">Net mensuel cible</label>
+        <div class="net-target-wrap">
+          <input type="number" id="net-cible" min="0" step="100" placeholder="ex : 4 000" oninput="recalcInverse()" />
+          <span class="input-unit">€/mois</span>
+        </div>
+      </div>
+      <div class="result-cell" style="align-self:flex-end">
+        <div class="rc-label">TJM à facturer</div>
+        <div class="rc-value" id="res-tjm-cible">— €/j</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>© 2026 Aide Salariés — Estimations à titre indicatif.</footer>
+
+<script src="/js/nav.js"></script>
+<script>
+  var regime = 'portage';
+  var regimeInfos = {
+    portage: '🏢 En <strong>portage salarial</strong>, la société de portage prélève une commission (~5-12 % du CA HT), puis calcule un bulletin de paie sur le solde. Vous bénéficiez du statut salarié (chômage, retraite, prévoyance).',
+    liberal: '🧾 En <strong>profession libérale</strong>, vous payez vous-même vos cotisations sociales (URSSAF, caisse spécifique). Les charges représentent 30-45 % du CA selon la caisse et le régime (réel ou micro-BNC).',
+    micro:   '🧩 En <strong>micro-entreprise</strong>, les cotisations sont calculées sur le CA (pas sur le bénéfice). Simple mais défavorable au-delà de ~40 k€ de CA annuel.',
+  };
+
+  function setRegime(r, btn) {
+    regime = r;
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+    document.getElementById('panel-' + r).classList.add('active');
+    document.getElementById('regime-info').innerHTML = regimeInfos[r];
+    recalc();
+  }
+
+  function fmt(n) {
+    if (!n && n !== 0) return '— €';
+    return new Intl.NumberFormat('fr-FR', {style:'currency', currency:'EUR', maximumFractionDigits:0}).format(n);
+  }
+
+  function recalc() {
+    var ca = 0, net = 0, prelev = 0;
+
+    if (regime === 'portage') {
+      var tjm    = parseFloat(document.getElementById('tjm-p').value)    || 0;
+      var jours  = parseFloat(document.getElementById('jours-p').value)  || 18;
+      var comm   = parseFloat(document.getElementById('commission').value)|| 0.08;
+      var frais  = parseFloat(document.getElementById('frais-p').value)  || 0;
+      ca = tjm * jours;
+      if (!ca) { resetResults(); return; }
+      var apresComm = ca * (1 - comm) + frais;
+      var chargesTot = 0.48;
+      net = apresComm * (1 - chargesTot);
+      prelev = ca - net;
+    } else if (regime === 'liberal') {
+      var tjmL   = parseFloat(document.getElementById('tjm-l').value)   || 0;
+      var joursL = parseFloat(document.getElementById('jours-l').value) || 18;
+      var chLib  = parseFloat(document.getElementById('charges-lib').value) || 0.35;
+      var irL    = parseFloat(document.getElementById('taux-ir-l').value)   || 0;
+      ca = tjmL * joursL;
+      if (!ca) { resetResults(); return; }
+      var netAvtIR = ca * (1 - chLib);
+      net = netAvtIR * (1 - irL);
+      prelev = ca - net;
+    } else {
+      var caMicro  = parseFloat(document.getElementById('ca-micro').value) || 0;
+      var tauxMicro = parseFloat(document.getElementById('activite-micro').value) || 0.221;
+      ca = caMicro;
+      if (!ca) { resetResults(); return; }
+      var cotis = ca * tauxMicro;
+      net = ca - cotis;
+      prelev = cotis;
+    }
+
+    var retention = ca > 0 ? (net / ca * 100) : 0;
+    document.getElementById('res-ca').textContent       = fmt(ca);
+    document.getElementById('res-net-m').textContent    = fmt(net);
+    document.getElementById('res-net-a').textContent    = fmt(net * 12);
+    document.getElementById('res-prelev').textContent   = fmt(prelev);
+    document.getElementById('res-taux-eff').textContent = (prelev/ca*100).toFixed(1).replace('.',',') + ' % du CA';
+    document.getElementById('res-retention').textContent= retention.toFixed(1).replace('.',',') + ' %';
+    recalcInverse();
+  }
+
+  function recalcInverse() {
+    var netCible = parseFloat(document.getElementById('net-cible').value) || 0;
+    if (!netCible) { document.getElementById('res-tjm-cible').textContent = '— €/j'; return; }
+
+    var jours = 18;
+    var tjmCible = 0;
+
+    if (regime === 'portage') {
+      jours = parseFloat(document.getElementById('jours-p').value) || 18;
+      var comm = parseFloat(document.getElementById('commission').value) || 0.08;
+      var frais = parseFloat(document.getElementById('frais-p').value) || 0;
+      var caCible = (netCible / (1 - 0.48) - frais) / (1 - comm);
+      tjmCible = caCible / jours;
+    } else if (regime === 'liberal') {
+      jours = parseFloat(document.getElementById('jours-l').value) || 18;
+      var chLib = parseFloat(document.getElementById('charges-lib').value) || 0.35;
+      var ir    = parseFloat(document.getElementById('taux-ir-l').value)   || 0;
+      var caCible = netCible / ((1 - chLib) * (1 - ir));
+      tjmCible = caCible / jours;
+    } else {
+      var tauxM = parseFloat(document.getElementById('activite-micro').value) || 0.221;
+      jours = 20;
+      var caCible = netCible / (1 - tauxM);
+      tjmCible = caCible / jours;
+    }
+
+    document.getElementById('res-tjm-cible').textContent =
+      new Intl.NumberFormat('fr-FR', {style:'currency', currency:'EUR', maximumFractionDigits:0}).format(tjmCible) + '/j';
+  }
+
+  function resetResults() {
+    ['res-ca','res-net-m','res-net-a','res-prelev'].forEach(function(id){ document.getElementById(id).textContent = '— €'; });
+    document.getElementById('res-retention').textContent = '— %';
+    document.getElementById('res-taux-eff').textContent  = '';
+    document.getElementById('res-tjm-cible').textContent = '— €/j';
+  }
+
+  // Init
+  document.getElementById('regime-info').innerHTML = regimeInfos['portage'];
+</script>
+</body>
+</html>

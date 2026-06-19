@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur Coût Employeur 2026 | Aide Salariés</title>
+  <meta name="description" content="Calculez le coût total employeur à partir du salaire brut : charges patronales détaillées pour cadre, non-cadre et fonction publique." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+  <style>
+    .breakdown { display: flex; flex-direction: column; gap: 0; }
+    .bk-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 9px 0; border-bottom: 1px solid var(--border);
+      font-size: .88rem;
+    }
+    .bk-row:last-child { border-bottom: none; }
+    .bk-row .bk-label { color: var(--text-soft); }
+    .bk-row .bk-val   { font-weight: 700; color: var(--text); font-size: .92rem; }
+    .bk-row.bk-total  { border-top: 2px solid var(--orange); margin-top: 4px; padding-top: 12px; }
+    .bk-row.bk-total .bk-label { font-weight: 700; color: var(--text); }
+    .bk-row.bk-total .bk-val   { font-size: 1.05rem; color: var(--orange); }
+  </style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<header class="tool-header">
+  <div class="header-badge">Outil gratuit</div>
+  <h1>Calculateur Coût Employeur</h1>
+  <p>Charges patronales détaillées — ce que coûte réellement un salarié</p>
+</header>
+
+<main>
+  <div class="card">
+    <div class="card-title">Paramètres</div>
+    <div class="field-row">
+      <div class="field">
+        <label for="statut">Statut du salarié</label>
+        <div class="select-wrap">
+          <select id="statut" onchange="recalc()">
+            <option value="non-cadre">Salarié non-cadre</option>
+            <option value="cadre">Salarié cadre</option>
+            <option value="fp">Fonction publique</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="region">Zone versement mobilité</label>
+        <div class="select-wrap">
+          <select id="region" onchange="recalc()">
+            <option value="0">Hors zone (0 %)</option>
+            <option value="0.01">Zone B (1 %)</option>
+            <option value="0.0175">Zone A — grande ville (1,75 %)</option>
+            <option value="0.027">Île-de-France (2,7 %)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="field-row" style="margin-top:14px">
+      <div class="field">
+        <label for="brut-m">Salaire brut mensuel</label>
+        <div class="input-wrap">
+          <input type="number" id="brut-m" min="0" step="50" placeholder="ex : 3 000" oninput="recalc()" />
+          <span class="input-unit">€/mois</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="brut-a">Salaire brut annuel</label>
+        <div class="input-wrap">
+          <input type="number" id="brut-a" min="0" step="500" placeholder="ex : 36 000" oninput="syncFromAnnuel()" />
+          <span class="input-unit">€/an</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Résultats</div>
+    <div class="results-grid" style="margin-bottom:20px">
+      <div class="result-cell highlight">
+        <div class="rc-label">Coût total / mois</div>
+        <div class="rc-value" id="res-total-m">— €</div>
+      </div>
+      <div class="result-cell highlight">
+        <div class="rc-label">Coût total / an</div>
+        <div class="rc-value" id="res-total-a">— €</div>
+      </div>
+      <div class="result-cell">
+        <div class="rc-label">Charges patronales</div>
+        <div class="rc-value" id="res-taux">— %</div>
+      </div>
+    </div>
+
+    <div class="section-sep">Décomposition des charges patronales</div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <div class="card" style="background:var(--orange-light);border-color:var(--orange-mid)">
+    <div class="card-title">À savoir</div>
+    <p style="font-size:.88rem;color:var(--orange-dark);line-height:1.65">
+      Ces taux sont des <strong>estimations 2026</strong> basées sur les cotisations obligatoires. Le taux réel varie selon la convention collective, le taux AT/MP propre à l'entreprise (ici estimé à 2,5 % en moyenne), la taille de l'entreprise et les éventuels allégements de charges (Fillon, ZFU, etc.). Pour un devis précis, consultez votre expert-comptable.
+    </p>
+  </div>
+</main>
+
+<footer>© 2026 Aide Salariés — Calcul estimatif, ne constitue pas un conseil juridique ou fiscal.</footer>
+
+<script src="/js/nav.js"></script>
+<script>
+  var STATUTS = {
+    'non-cadre': {
+      label: 'Salarié non-cadre',
+      items: [
+        { l: 'Assurance maladie / maternité',   r: 0.1300 },
+        { l: 'Allocations familiales',           r: 0.0525 },
+        { l: 'Accidents du travail (moyenne)',   r: 0.0250 },
+        { l: 'Retraite de base (CNAV)',          r: 0.0855 },
+        { l: 'Retraite compl. AGIRC-ARRCO T1',  r: 0.0472 },
+        { l: 'Assurance chômage',               r: 0.0405 },
+        { l: 'FNAL',                             r: 0.0100 },
+        { l: 'Formation professionnelle',        r: 0.0100 },
+        { l: 'Taxe d\'apprentissage',            r: 0.0068 },
+        { l: 'Contribution solidarité (CSA)',    r: 0.0030 },
+        { l: 'Contribution dialogue social',     r: 0.0002 },
+      ]
+    },
+    'cadre': {
+      label: 'Salarié cadre',
+      items: [
+        { l: 'Assurance maladie / maternité',   r: 0.1300 },
+        { l: 'Allocations familiales',           r: 0.0525 },
+        { l: 'Accidents du travail (moyenne)',   r: 0.0200 },
+        { l: 'Retraite de base (CNAV)',          r: 0.0855 },
+        { l: 'Retraite compl. AGIRC-ARRCO T1+2',r: 0.0608 },
+        { l: 'Prévoyance cadre (CCN 14/03/47)', r: 0.0150 },
+        { l: 'Assurance chômage',               r: 0.0405 },
+        { l: 'FNAL',                             r: 0.0100 },
+        { l: 'Formation professionnelle',        r: 0.0100 },
+        { l: 'Taxe d\'apprentissage',            r: 0.0068 },
+        { l: 'Contribution solidarité (CSA)',    r: 0.0030 },
+        { l: 'Contribution dialogue social',     r: 0.0002 },
+      ]
+    },
+    'fp': {
+      label: 'Fonction publique (part employeur)',
+      items: [
+        { l: 'Contribution retraite CNRACL',    r: 0.3038 },
+        { l: 'RAFP (retraite additionnelle)',    r: 0.0500 },
+        { l: 'Allocations familiales',           r: 0.0525 },
+        { l: 'Formation (DIF)',                  r: 0.0100 },
+        { l: 'Contribution solidarité (CSA)',    r: 0.0030 },
+      ]
+    }
+  };
+
+  function fmt(n) {
+    if (!n) return '— €';
+    return new Intl.NumberFormat('fr-FR', { style:'currency', currency:'EUR', maximumFractionDigits:0 }).format(n);
+  }
+  function pct(r) { return (r * 100).toFixed(2).replace('.', ',') + ' %'; }
+
+  function recalc() {
+    var brutM  = parseFloat(document.getElementById('brut-m').value) || 0;
+    var vm     = parseFloat(document.getElementById('region').value) || 0;
+    var statut = document.getElementById('statut').value;
+    var items  = STATUTS[statut].items.slice();
+    if (vm > 0) items.push({ l: 'Versement mobilité', r: vm });
+
+    if (!brutM) {
+      document.getElementById('res-total-m').textContent = '— €';
+      document.getElementById('res-total-a').textContent = '— €';
+      document.getElementById('res-taux').textContent    = '— %';
+      document.getElementById('breakdown').innerHTML = '';
+      document.getElementById('brut-a').value = '';
+      return;
+    }
+
+    var totalR = items.reduce(function(s, i){ return s + i.r; }, 0);
+    var charges = brutM * totalR;
+    var totalM  = brutM + charges;
+    var totalA  = totalM * 12;
+
+    document.getElementById('res-total-m').textContent = fmt(totalM);
+    document.getElementById('res-total-a').textContent = fmt(totalA);
+    document.getElementById('res-taux').textContent    = pct(totalR);
+    document.getElementById('brut-a').value            = Math.round(brutM * 12);
+
+    var html = items.map(function(i) {
+      return '<div class="bk-row"><span class="bk-label">' + i.l + ' <small>(' + pct(i.r) + ')</small></span><span class="bk-val">' + fmt(brutM * i.r) + '</span></div>';
+    }).join('');
+    html += '<div class="bk-row bk-total"><span class="bk-label">Total charges patronales</span><span class="bk-val">' + fmt(charges) + '</span></div>';
+    document.getElementById('breakdown').innerHTML = html;
+  }
+
+  function syncFromAnnuel() {
+    var brutA = parseFloat(document.getElementById('brut-a').value) || 0;
+    document.getElementById('brut-m').value = brutA ? Math.round(brutA / 12) : '';
+    recalc();
+  }
+</script>
+</body>
+</html>
