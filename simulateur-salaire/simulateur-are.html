@@ -199,9 +199,9 @@
     var tauxRemplacement = sjr > 0 ? (are / sjr * 100) : 0;
 
     document.getElementById('res-sjr').textContent      = sjr.toFixed(2).replace('.',',') + ' €/j';
-    document.getElementById('res-jour').textContent     = are.toFixed(2).replace('.',',') + ' €/j';
-    document.getElementById('res-mois').textContent     = fmt(areM);
-    document.getElementById('res-mois-net').textContent = fmt(areMNet);
+    document.getElementById('res-jour').textContent     = are.toFixed(2).replace('.',',') + ' €/j brut';
+    document.getElementById('res-mois').textContent     = fmt(areM, ' brut/mois');
+    document.getElementById('res-mois-net').textContent = fmt(areMNet, ' net/mois');
     document.getElementById('res-duree').textContent    = Math.round(durJours / 30) + ' mois';
     document.getElementById('res-taux').textContent     = tauxRemplacement.toFixed(1).replace('.',',') + ' %';
     document.getElementById('gauge').style.width        = Math.min(tauxRemplacement, 100) + '%';
