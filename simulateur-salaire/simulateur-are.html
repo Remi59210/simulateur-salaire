@@ -81,18 +81,26 @@
     <div class="card-title">Estimation de l'ARE</div>
     <div class="results-grid" style="margin-bottom:16px">
       <div class="result-cell highlight">
-        <div class="rc-label">ARE journalière</div>
+        <div class="rc-label">ARE journalière <span style="font-weight:400;font-size:.75em;opacity:.75">(brute)</span></div>
         <div class="rc-value" id="res-jour">— €/j</div>
       </div>
       <div class="result-cell highlight">
-        <div class="rc-label">ARE mensuelle estimée</div>
+        <div class="rc-label">ARE mensuelle <span style="font-weight:400;font-size:.75em;opacity:.75">(brute)</span></div>
         <div class="rc-value" id="res-mois">— €/mois</div>
-        <div class="rc-sub">(× 30,42 jours)</div>
+        <div class="rc-sub">× 30,42 j · avant CSG/CRDS</div>
       </div>
+      <div class="result-cell green">
+        <div class="rc-label">ARE mensuelle <span style="font-weight:400;font-size:.75em;opacity:.75">(nette)</span></div>
+        <div class="rc-value" id="res-mois-net">— €/mois</div>
+        <div class="rc-sub">après CSG 6,2 % + CRDS 0,5 %</div>
+      </div>
+    </div>
+    <div class="results-grid-2" style="margin-bottom:10px">
       <div class="result-cell">
         <div class="rc-label">Durée max d'indemnisation</div>
         <div class="rc-value" id="res-duree">— mois</div>
       </div>
+      <div class="result-cell" style="display:none" id="dummy-cell"></div>
     </div>
 
     <div class="results-grid-2" style="margin-bottom:16px">
@@ -110,10 +118,12 @@
     <div class="gauge-bar"><div class="gauge-fill" id="gauge" style="width:0%"></div></div>
 
     <div class="formula-box">
-      <strong>Formule ARE :</strong><br>
+      <strong>Formule ARE (montant brut journalier) :</strong><br>
       <code>ARE = max(40,4 % × SJR + 12,47 €&nbsp;;&nbsp; 57 % × SJR)</code><br>
       Plafond : <code>75 % du SJR</code> — Minimum légal : <code>32,46 €/jour</code> (2024)<br>
-      Le SJR est calculé sur les 12 derniers mois de salaire brut.
+      Le SJR est calculé sur les 12 derniers mois de salaire brut.<br><br>
+      <strong>Montant net = brut − CSG (6,2 %) − CRDS (0,5 %)</strong><br>
+      ⚠️ Si l'ARE est inférieure à environ 1 466 €/mois, la CSG/CRDS peut être réduite ou nulle.
     </div>
   </div>
 
@@ -162,8 +172,9 @@
 
     if (motifVal === '0') {
       resetResults();
-      document.getElementById('res-jour').textContent = 'Non éligible';
-      document.getElementById('res-mois').textContent = 'Non éligible';
+      document.getElementById('res-jour').textContent     = 'Non éligible';
+      document.getElementById('res-mois').textContent     = 'Non éligible';
+      document.getElementById('res-mois-net').textContent = 'Non éligible';
       return;
     }
 
@@ -183,19 +194,21 @@
     if (age === 55)  durMax = 27;
     var durJours = Math.min(affil, durMax * 30);
 
-    var areM   = are * JOURS_MOIS;
+    var areM    = are * JOURS_MOIS;
+    var areMNet = areM * (1 - 0.067);   // CSG 6,2 % + CRDS 0,5 %
     var tauxRemplacement = sjr > 0 ? (are / sjr * 100) : 0;
 
-    document.getElementById('res-sjr').textContent   = sjr.toFixed(2).replace('.',',') + ' €/j';
-    document.getElementById('res-jour').textContent  = are.toFixed(2).replace('.',',') + ' €/j';
-    document.getElementById('res-mois').textContent  = fmt(areM);
-    document.getElementById('res-duree').textContent = Math.round(durJours / 30) + ' mois';
-    document.getElementById('res-taux').textContent  = tauxRemplacement.toFixed(1).replace('.',',') + ' %';
-    document.getElementById('gauge').style.width     = Math.min(tauxRemplacement, 100) + '%';
+    document.getElementById('res-sjr').textContent      = sjr.toFixed(2).replace('.',',') + ' €/j';
+    document.getElementById('res-jour').textContent     = are.toFixed(2).replace('.',',') + ' €/j';
+    document.getElementById('res-mois').textContent     = fmt(areM);
+    document.getElementById('res-mois-net').textContent = fmt(areMNet);
+    document.getElementById('res-duree').textContent    = Math.round(durJours / 30) + ' mois';
+    document.getElementById('res-taux').textContent     = tauxRemplacement.toFixed(1).replace('.',',') + ' %';
+    document.getElementById('gauge').style.width        = Math.min(tauxRemplacement, 100) + '%';
   }
 
   function resetResults() {
-    ['res-sjr','res-jour','res-mois','res-duree','res-taux'].forEach(function(id){
+    ['res-sjr','res-jour','res-mois','res-mois-net','res-duree','res-taux'].forEach(function(id){
       document.getElementById(id).textContent = '—';
     });
     document.getElementById('gauge').style.width = '0%';
