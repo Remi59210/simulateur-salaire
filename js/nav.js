@@ -33,6 +33,7 @@
     shield:    '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
     grid:      '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>',
     home:      '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+    car:       '<path d="M5 17H3a2 2 0 0 1-2-2V9l2-4h14l2 4v6a2 2 0 0 1-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/>',
   };
 
   var dropTools = [
@@ -45,6 +46,8 @@
     { sep: true },
     { href: '/simulateur-salaire/rupture-conventionnelle.html', label: 'Indemnité rupture conv.', patterns: ['/simulateur-salaire/rupture-conventionnelle.html'],            i: ic.handshake },
     { href: '/simulateur-salaire/simulateur-are.html',       label: 'Simulateur ARE',              patterns: ['/simulateur-salaire/simulateur-are.html'],                          i: ic.shield },
+    { sep: true },
+    { href: '/calculateur-frais-kilometriques/', label: 'Frais kilométriques',  patterns: ['/calculateur-frais-kilometriques/', '/calculateur-frais-kilometriques/index.html'], i: ic.car },
   ];
 
   var isSimActive = dropTools.filter(function(t){return t.href;}).some(function(t){ return isActive(t.patterns); });
@@ -75,7 +78,7 @@
       '<div class="g-nav-dd-menu" id="gNavDdMenu">' + ddItemsHTML + '</div>' +
     '</div>';
 
-  var isSubpage = path.startsWith('/simulateur-salaire/') || path.startsWith('/generateur-lettre/');
+  var isSubpage = path.startsWith('/simulateur-salaire/') || path.startsWith('/generateur-lettre/') || path.startsWith('/calculateur-frais-kilometriques/');
   var backHTML = isSubpage
     ? '<div class="g-back"><a class="g-back-link" href="/">' + icon(ic.home) + '<span>Accueil</span></a></div>'
     : '';

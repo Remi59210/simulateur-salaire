@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur Frais Kilométriques 2026 — Barème Officiel & Déduction Fiscale | Aide Salariés</title>
+  <meta name="description" content="Calculez vos frais kilométriques déductibles 2026 selon le barème officiel DGFiP. Voiture, moto, calcul par trajet ou annuel, estimation d'économie d'impôt incluse." />
+  <meta name="robots" content="index, follow" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculateur Frais Kilométriques 2026","description":"Calcul des frais kilométriques déductibles selon le barème officiel DGFiP 2026 pour voitures et motos.","url":"https://simulateur-salaire.fr/calculateur-frais-kilometriques/","applicationCategory":"FinanceApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+  <style>
+    /* ── Toggle véhicule / mode ── */
+    .toggle-group {
+      display: flex;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 3px;
+    }
+    .toggle-btn {
+      flex: 1;
+      padding: 9px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: background .18s, color .18s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+    .toggle-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .toggle-btn.active {
+      background: var(--white);
+      color: var(--orange);
+      box-shadow: 0 1px 4px rgba(0,0,0,.1);
+    }
+
+    /* ── Barème inline ── */
+    .bareme-mini {
+      background: var(--orange-light);
+      border: 1px solid var(--orange-mid);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: .8rem;
+      color: var(--orange-dark);
+      line-height: 1.7;
+    }
+    .bareme-mini strong { color: var(--orange-dark); }
+    .bareme-mini .bm-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 0;
+      border-bottom: 1px dashed var(--orange-mid);
+    }
+    .bareme-mini .bm-row:last-child { border-bottom: none; }
+    .bm-tranche { font-weight: 500; }
+    .bm-formula { font-family: monospace; font-size: .79rem; color: var(--orange-dark); font-weight: 600; }
+
+    /* ── Résultat principal ── */
+    .big-result {
+      background: var(--green-light);
+      border: 2px solid var(--green-border);
+      border-radius: 14px;
+      padding: 22px 24px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .big-result .br-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #16a34a;
+      margin-bottom: 6px;
+    }
+    .big-result .br-value {
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      font-weight: 800;
+      color: #15803d;
+      line-height: 1.1;
+    }
+    .big-result .br-sub {
+      font-size: .82rem;
+      color: #166534;
+      margin-top: 4px;
+      opacity: .85;
+    }
+
+    /* ── Ligne de formule ── */
+    .formula-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 9px 0;
+      border-bottom: 1px dashed var(--border);
+      font-size: .86rem;
+    }
+    .formula-row:last-child { border-bottom: none; }
+    .formula-row .fr-label { color: var(--text-soft); }
+    .formula-row .fr-val   { font-weight: 700; color: var(--text); font-family: monospace; font-size: .85rem; }
+
+    /* ── Économie d'impôt ── */
+    .saving-box {
+      background: var(--blue-light);
+      border: 1.5px solid var(--blue-border);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .saving-box .sb-title {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .saving-amount {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    /* ── CTA ── */
+    .cta-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 700;
+      font-size: .92rem;
+      text-decoration: none;
+      padding: 13px 24px;
+      border-radius: 10px;
+      transition: background .18s;
+    }
+    .cta-back:hover { background: var(--orange-dark); }
+    .cta-back svg { width: 17px; height: 17px; }
+
+    /* ── Section hidden ── */
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<header class="tool-header">
+  <div class="header-badge">Fiscalité</div>
+  <h1>Frais Kilométriques 2026</h1>
+  <p>Barème officiel DGFiP — Montant déductible instantané</p>
+</header>
+
+<main>
+
+  <!-- ── Carte 1 : Véhicule ── -->
+  <div class="card">
+    <div class="card-title">Votre véhicule</div>
+
+    <div class="field" style="margin-bottom:16px">
+      <label>Type de véhicule</label>
+      <div class="toggle-group">
+        <button class="toggle-btn active" id="btn-voiture" onclick="setVehicle('voiture')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V9l2-4h14l2 4v6a2 2 0 0 1-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>
+          Voiture
+        </button>
+        <button class="toggle-btn" id="btn-moto" onclick="setVehicle('moto')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6h-5l-2 6h8l-1-6z"/><path d="M9 12l-4.5 5.5"/><path d="M15 6l4 5.5"/></svg>
+          Deux-roues
+        </button>
+      </div>
+    </div>
+
+    <div class="field" id="field-puissance">
+      <label for="puissance">Puissance fiscale</label>
+      <div class="select-wrap">
+        <select id="puissance" onchange="recalc()">
+          <option value="3">3 CV et moins</option>
+          <option value="4">4 CV</option>
+          <option value="5" selected>5 CV</option>
+          <option value="6">6 CV</option>
+          <option value="7">7 CV et plus</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field hidden" id="field-cylindree">
+      <label for="cylindree">Cylindrée</label>
+      <div class="select-wrap">
+        <select id="cylindree" onchange="recalc()">
+          <option value="50">≤ 50 cm³ (scooter, cyclomoteur)</option>
+          <option value="51" selected>> 50 cm³ (moto, scooter 125)</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="margin-top:14px" id="bareme-display"></div>
+  </div>
+
+  <!-- ── Carte 2 : Kilométrage ── -->
+  <div class="card">
+    <div class="card-title">Kilométrage parcouru</div>
+
+    <div class="field" style="margin-bottom:16px">
+      <label>Mode de saisie</label>
+      <div class="toggle-group">
+        <button class="toggle-btn active" id="btn-annuel" onclick="setMode('annuel')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Total annuel
+        </button>
+        <button class="toggle-btn" id="btn-quotidien" onclick="setMode('quotidien')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Par trajet
+        </button>
+      </div>
+    </div>
+
+    <!-- Mode annuel -->
+    <div id="mode-annuel">
+      <div class="field">
+        <label for="km-annuel">Distance totale parcourue dans l'année</label>
+        <div class="input-wrap">
+          <input type="number" id="km-annuel" min="0" max="200000" step="100" placeholder="ex : 8 500" oninput="recalc()" />
+          <span class="input-unit">km</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mode par trajet -->
+    <div id="mode-quotidien" class="hidden">
+      <div class="field-row" style="margin-bottom:12px">
+        <div class="field">
+          <label for="km-aller-retour">Distance aller-retour domicile → travail</label>
+          <div class="input-wrap">
+            <input type="number" id="km-aller-retour" min="0" max="500" step="1" placeholder="ex : 40" oninput="recalcFromTrajet()" />
+            <span class="input-unit">km</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="jours-travailles">Jours travaillés dans l'année</label>
+          <div class="input-wrap">
+            <input type="number" id="jours-travailles" min="0" max="365" step="1" placeholder="ex : 218" oninput="recalcFromTrajet()" />
+            <span class="input-unit">j</span>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="jours-teletravail">Dont jours en télétravail <span class="opt">(à déduire)</span></label>
+        <div class="input-wrap">
+          <input type="number" id="jours-teletravail" min="0" max="365" step="1" placeholder="ex : 80" oninput="recalcFromTrajet()" />
+          <span class="input-unit">j/télétravail</span>
+        </div>
+      </div>
+      <div class="info-box" id="km-computed" style="margin-top:12px;display:none">
+        📍 Distance annuelle calculée : <strong id="km-computed-val">—</strong> km
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Carte 3 : Résultats ── -->
+  <div class="card">
+    <div class="card-title">Résultat</div>
+
+    <div class="big-result">
+      <div class="br-label">Montant déductible (frais réels)</div>
+      <div class="br-value" id="res-total">— €</div>
+      <div class="br-sub" id="res-sub">Renseignez les informations ci-dessus</div>
+    </div>
+
+    <div id="res-details" class="hidden">
+      <div class="section-sep">Détail du calcul</div>
+      <div id="formula-lines"></div>
+
+      <div class="section-sep" style="margin-top:20px">Estimation d'économie d'impôt</div>
+      <div class="saving-box">
+        <div class="sb-title">Tranche marginale d'imposition (TMI)</div>
+        <div class="field-row" style="margin-bottom:12px">
+          <div class="field">
+            <label for="tmi">Votre TMI 2026</label>
+            <div class="select-wrap">
+              <select id="tmi" onchange="recalcSaving()">
+                <option value="0">0 % (non imposable)</option>
+                <option value="11" selected>11 % (jusqu'à ~28 797 €)</option>
+                <option value="30">30 % (jusqu'à ~82 341 €)</option>
+                <option value="41">41 % (jusqu'à ~177 106 €)</option>
+                <option value="45">45 % (au-delà)</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" style="justify-content:flex-end">
+            <div class="result-cell green" style="height:auto">
+              <div class="rc-label">Économie d'impôt estimée</div>
+              <div class="rc-value saving-amount" id="res-saving">— €</div>
+              <div class="rc-sub">sur vos frais réels déclarés</div>
+            </div>
+          </div>
+        </div>
+        <div class="info-box blue" style="margin-top:0">
+          Cette estimation compare la déduction des frais réels à la déduction forfaitaire automatique de 10 %. Elle est indicative et ne tient pas compte de votre situation fiscale complète.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CTA retour ── -->
+  <div style="text-align:center;padding:8px 0 16px">
+    <a class="cta-back" href="/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Retourner au Dashboard des outils
+    </a>
+  </div>
+
+</main>
+
+<section class="tool-seo">
+  <div class="tool-seo-inner">
+    <h2>Frais kilométriques 2026 : comment optimiser votre déduction fiscale ?</h2>
+    <div class="tool-seo-grid">
+      <div>
+        <h3>Qui peut déduire des frais kilométriques ?</h3>
+        <p>Tout salarié qui utilise son véhicule personnel pour se rendre à son lieu de travail habituel peut opter pour la <strong>déduction des frais réels</strong> lors de sa déclaration de revenus. Cette option remplace la déduction forfaitaire de 10 % appliquée par défaut par l'administration fiscale.</p>
+        <p>Elle est pertinente lorsque vos frais réels dépassent 10 % de votre salaire brut annuel — ce qui est fréquent pour les salariés habitant à plus de 20 km de leur lieu de travail.</p>
+
+        <h3>Comment fonctionne le barème officiel ?</h3>
+        <p>Le barème, publié chaque année par la DGFiP dans le Bulletin Officiel des Finances Publiques, prévoit <strong>trois tranches selon la distance parcourue</strong>. Chaque tranche combine un taux par kilomètre et, pour la tranche intermédiaire, une majoration forfaitaire qui compense les coûts fixes (assurance, amortissement).</p>
+        <p>Le taux augmente avec la puissance fiscale de votre véhicule, car un moteur plus puissant consomme davantage et coûte plus cher à l'entretien.</p>
+      </div>
+      <div>
+        <h3>Télétravail et frais kilométriques</h3>
+        <p>Depuis la généralisation du télétravail, vous ne pouvez déduire les frais de trajet que pour les jours où vous vous rendez <strong>physiquement</strong> au bureau. Les jours en télétravail doivent être soustraits du calcul.</p>
+        <p>En contrepartie, vous pouvez ajouter des <strong>frais de télétravail</strong> : 2,50 €/jour forfaitaire (jusqu'à 580 €/an sans justificatif) ou le montant réel des frais d'électricité, internet et matériel pro.</p>
+
+        <h3>Frais réels : ce que vous pouvez ajouter en plus</h3>
+        <ul>
+          <li>Frais de stationnement au bureau (non remboursés)</li>
+          <li>Péages sur le trajet domicile-travail habituel</li>
+          <li>Part non prise en charge du passe transport (au-delà des 50 % employeur)</li>
+          <li>Frais de repas si votre lieu de travail ne permet pas de rentrer déjeuner</li>
+        </ul>
+        <p>Conservez toujours vos justificatifs (relevés kilométriques, tickets de péage, factures d'entretien) pendant 3 ans en cas de contrôle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Aide Salariés — Barème indicatif. Vérifiez les taux exacts sur <strong>bofip.impots.gouv.fr</strong>. Ne constitue pas un conseil fiscal.</footer>
+
+<script src="/js/nav.js"></script>
+<script>
+  // ── Barèmes officiels 2026 ──
+  var BAREME = {
+    voiture: {
+      3: { t1lim: 5000,  t1r: 0.529, t2lim: 20000, t2r: 0.316, t2f: 1065, t3r: 0.370 },
+      4: { t1lim: 5000,  t1r: 0.606, t2lim: 20000, t2r: 0.340, t2f: 1330, t3r: 0.407 },
+      5: { t1lim: 5000,  t1r: 0.636, t2lim: 20000, t2r: 0.357, t2f: 1395, t3r: 0.427 },
+      6: { t1lim: 5000,  t1r: 0.665, t2lim: 20000, t2r: 0.374, t2f: 1457, t3r: 0.447 },
+      7: { t1lim: 5000,  t1r: 0.697, t2lim: 20000, t2r: 0.394, t2f: 1515, t3r: 0.497 }
+    },
+    moto: {
+      50: { t1lim: 3000,  t1r: 0.315, t2lim: 6000,  t2r: 0.079, t2f: 711, t3r: 0.198 },
+      51: { t1lim: 3000,  t1r: 0.595, t2lim: 6000,  t2r: 0.267, t2f: 983, t3r: 0.430 }
+    }
+  };
+
+  var vehicleType = 'voiture';
+  var inputMode   = 'annuel';
+  var lastKm = 0;
+  var lastTotal = 0;
+
+  function setVehicle(v) {
+    vehicleType = v;
+    document.getElementById('btn-voiture').classList.toggle('active', v === 'voiture');
+    document.getElementById('btn-moto').classList.toggle('active', v === 'moto');
+    document.getElementById('field-puissance').classList.toggle('hidden', v !== 'voiture');
+    document.getElementById('field-cylindree').classList.toggle('hidden', v !== 'moto');
+    recalc();
+  }
+
+  function setMode(m) {
+    inputMode = m;
+    document.getElementById('btn-annuel').classList.toggle('active', m === 'annuel');
+    document.getElementById('btn-quotidien').classList.toggle('active', m === 'quotidien');
+    document.getElementById('mode-annuel').classList.toggle('hidden', m !== 'annuel');
+    document.getElementById('mode-quotidien').classList.toggle('hidden', m !== 'quotidien');
+    recalc();
+  }
+
+  function recalcFromTrajet() {
+    var ar  = parseFloat(document.getElementById('km-aller-retour').value) || 0;
+    var jt  = parseInt(document.getElementById('jours-travailles').value, 10) || 0;
+    var jtt = parseInt(document.getElementById('jours-teletravail').value, 10) || 0;
+    var joursPresentiels = Math.max(jt - jtt, 0);
+    var km = ar * joursPresentiels;
+    var box = document.getElementById('km-computed');
+    var val = document.getElementById('km-computed-val');
+    if (km > 0) {
+      box.style.display = '';
+      val.textContent = fmt0(km);
+    } else {
+      box.style.display = 'none';
+    }
+    recalcWithKm(km);
+  }
+
+  function recalc() {
+    if (inputMode === 'annuel') {
+      var km = parseFloat(document.getElementById('km-annuel').value) || 0;
+      recalcWithKm(km);
+    } else {
+      recalcFromTrajet();
+    }
+  }
+
+  function recalcWithKm(km) {
+    updateBaremeDisplay();
+    lastKm = km;
+
+    if (!km || km <= 0) {
+      document.getElementById('res-total').textContent = '— €';
+      document.getElementById('res-sub').textContent = 'Renseignez les informations ci-dessus';
+      document.getElementById('res-details').classList.add('hidden');
+      lastTotal = 0;
+      return;
+    }
+
+    var key = vehicleType === 'voiture'
+      ? parseInt(document.getElementById('puissance').value, 10)
+      : parseInt(document.getElementById('cylindree').value, 10);
+    var b = BAREME[vehicleType][key];
+
+    var total, tranche, formula, tauxStr;
+    if (km <= b.t1lim) {
+      total   = km * b.t1r;
+      tranche = 1;
+      formula = fmt0(km) + ' km × ' + b.t1r.toFixed(3) + ' €/km';
+      tauxStr = b.t1r.toFixed(3) + ' €/km';
+    } else if (km <= b.t2lim) {
+      total   = km * b.t2r + b.t2f;
+      tranche = 2;
+      formula = '(' + fmt0(km) + ' × ' + b.t2r.toFixed(3) + ') + ' + fmt0(b.t2f) + ' €';
+      tauxStr = b.t2r.toFixed(3) + ' €/km + ' + fmt0(b.t2f) + ' € fixe';
+    } else {
+      total   = km * b.t3r;
+      tranche = 3;
+      formula = fmt0(km) + ' km × ' + b.t3r.toFixed(3) + ' €/km';
+      tauxStr = b.t3r.toFixed(3) + ' €/km';
+    }
+
+    lastTotal = total;
+
+    document.getElementById('res-total').textContent = fmtEur(total);
+    document.getElementById('res-sub').textContent = fmt0(km) + ' km — ' + vehicleLabel() + ' — Tranche ' + tranche;
+    document.getElementById('res-details').classList.remove('hidden');
+
+    var linesHTML =
+      row('Distance prise en compte', fmt0(km) + ' km') +
+      row('Tranche barème appliquée', 'Tranche ' + tranche + ' (' + trancheLabel(b, tranche) + ')') +
+      row('Taux applicable', tauxStr) +
+      row('Formule', formula) +
+      row('Total déductible', fmtEur(total));
+    document.getElementById('formula-lines').innerHTML = linesHTML;
+
+    recalcSaving();
+  }
+
+  function recalcSaving() {
+    if (!lastTotal) return;
+    var tmi = parseInt(document.getElementById('tmi').value, 10) || 0;
+    var forfait10 = lastKm ? Math.min(lastTotal * 0.1 / lastTotal * lastTotal, lastTotal) : 0;
+    // Gain par rapport au forfait 10 % : (frais réels - déduction forfaitaire) × TMI
+    // Pour la déduction forfaitaire, on approxime sur la base du revenu
+    // Ici on simplifie : économie = total × TMI (le gain brut si pas de forfait concurrentiel)
+    // Plus rigoureusement : gain vs forfait = MAX(0, totalFraisReels - 10% salaire brut) × TMI
+    // Comme on n'a pas le salaire brut, on affiche l'économie d'impôt liée aux frais déductibles × TMI
+    var saving = lastTotal * (tmi / 100);
+    document.getElementById('res-saving').textContent = tmi === 0 ? '0 €' : fmtEur(saving);
+  }
+
+  function updateBaremeDisplay() {
+    var key = vehicleType === 'voiture'
+      ? parseInt(document.getElementById('puissance').value, 10)
+      : parseInt(document.getElementById('cylindree').value, 10);
+    var b = BAREME[vehicleType][key];
+    var lim1 = fmt0(b.t1lim);
+    var lim2 = fmt0(b.t2lim);
+    document.getElementById('bareme-display').innerHTML =
+      '<div class="bareme-mini">' +
+        '<div style="font-weight:700;margin-bottom:8px;font-size:.82rem">Barème ' + vehicleLabel() + ' — ' + (vehicleType === 'voiture' ? puissanceLabel() : cylindreeLabel()) + '</div>' +
+        '<div class="bm-row"><span class="bm-tranche">Jusqu\'à ' + lim1 + ' km</span><span class="bm-formula">d × ' + b.t1r.toFixed(3) + ' €</span></div>' +
+        '<div class="bm-row"><span class="bm-tranche">De ' + lim1 + ' à ' + lim2 + ' km</span><span class="bm-formula">(d × ' + b.t2r.toFixed(3) + ') + ' + fmt0(b.t2f) + ' €</span></div>' +
+        '<div class="bm-row"><span class="bm-tranche">Au-delà de ' + lim2 + ' km</span><span class="bm-formula">d × ' + b.t3r.toFixed(3) + ' €</span></div>' +
+      '</div>';
+  }
+
+  function trancheLabel(b, t) {
+    if (t === 1) return 'jusqu\'à ' + fmt0(b.t1lim) + ' km';
+    if (t === 2) return fmt0(b.t1lim) + ' – ' + fmt0(b.t2lim) + ' km';
+    return 'au-delà de ' + fmt0(b.t2lim) + ' km';
+  }
+
+  function vehicleLabel() {
+    return vehicleType === 'voiture' ? 'Voiture' : 'Deux-roues';
+  }
+  function puissanceLabel() {
+    var v = parseInt(document.getElementById('puissance').value, 10);
+    return v === 3 ? '3 CV et moins' : v === 7 ? '7 CV et plus' : v + ' CV';
+  }
+  function cylindreeLabel() {
+    return parseInt(document.getElementById('cylindree').value, 10) <= 50 ? '≤ 50 cm³' : '> 50 cm³';
+  }
+
+  function row(label, val) {
+    return '<div class="formula-row"><span class="fr-label">' + label + '</span><span class="fr-val">' + val + '</span></div>';
+  }
+
+  function fmt0(n) {
+    return new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 }).format(n);
+  }
+  function fmtEur(n) {
+    return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+  }
+
+  // Initialiser le barème affiché
+  updateBaremeDisplay();
+</script>
+</body>
+</html>
