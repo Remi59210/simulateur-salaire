@@ -122,7 +122,7 @@
     <div class="formula-box">
       <strong>Formule ARE (montant brut journalier) :</strong><br>
       <code>ARE = max(40,4 % × SJR + 12,47 €&nbsp;;&nbsp; 57 % × SJR)</code><br>
-      Plafond : <code>75 % du SJR</code> — Minimum légal : <code>32,46 €/jour</code> (2024)<br>
+      Plafond : <code>75 % du SJR</code> — Minimum légal : <code>32,46 €/jour</code> (2025-2026)<br>
       Le SJR est calculé sur les 12 derniers mois de salaire brut.<br><br>
       <strong>Montant net = brut − CSG (6,2 %) − CRDS (0,5 %)</strong><br>
       ⚠️ Si l'ARE est inférieure à environ 1 466 €/mois, la CSG/CRDS peut être réduite ou nulle.
@@ -154,7 +154,7 @@
           <li><strong>SJR</strong> = Salaire brut des 12 derniers mois ÷ 365</li>
           <li><strong>ARE brute</strong> = max (40,4 % × SJR + 12,47 € ; 57 % × SJR)</li>
           <li><strong>Plafond :</strong> 75 % du SJR</li>
-          <li><strong>Plancher :</strong> 32,46 €/jour (2024-2026)</li>
+          <li><strong>Plancher :</strong> 32,46 €/jour (depuis juillet 2024)</li>
         </ul>
         <p>Le montant brut est ensuite diminué de <strong>CSG (6,2 %) + CRDS (0,5 %)</strong> pour obtenir le montant net versé. Les allocataires avec une ARE inférieure à un seuil (≈ 1 466 €/mois) peuvent bénéficier d'une exonération partielle ou totale de CSG/CRDS.</p>
 
@@ -242,11 +242,11 @@
     are = Math.max(are, ARE_MIN_JOUR);     // plancher
     are = Math.min(are, 0.75 * sjr);       // plafond
 
-    // Durée max
-    var durMax = 18;
-    if (age === 54)  durMax = 22;
-    if (age === 55)  durMax = 27;
-    var durJours = Math.min(affil, durMax * 30);
+    // Durée max en jours (réforme 2023 : -25 % vs ancien régime)
+    var durMaxJours = 548;   // 18 mois — moins de 53 ans
+    if (age === 54) durMaxJours = 685;   // 22,5 mois — 53-54 ans
+    if (age === 55) durMaxJours = 822;   // 27 mois  — 55 ans et plus
+    var durJours = Math.min(affil, durMaxJours);
 
     var areM    = are * JOURS_MOIS;
     var areMNet = areM * (1 - 0.067);   // CSG 6,2 % + CRDS 0,5 %
@@ -256,7 +256,8 @@
     document.getElementById('res-jour').textContent     = are.toFixed(2).replace('.',',') + ' €/j brut';
     document.getElementById('res-mois').textContent     = fmt(areM, ' brut/mois');
     document.getElementById('res-mois-net').textContent = fmt(areMNet, ' net/mois');
-    document.getElementById('res-duree').textContent    = Math.round(durJours / 30) + ' mois';
+    var durMoisLabel = age === 54 && durJours >= 685 ? '22,5 mois' : Math.round(durJours / 30) + ' mois';
+    document.getElementById('res-duree').textContent    = durMoisLabel;
     document.getElementById('res-taux').textContent     = tauxRemplacement.toFixed(1).replace('.',',') + ' %';
     document.getElementById('gauge').style.width        = Math.min(tauxRemplacement, 100) + '%';
   }
