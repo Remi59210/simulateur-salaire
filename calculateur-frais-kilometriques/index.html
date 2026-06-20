@@ -148,6 +148,42 @@
     .cta-back:hover { background: var(--orange-dark); }
     .cta-back svg { width: 17px; height: 17px; }
 
+    /* ── Checkbox véhicule électrique ── */
+    .ev-check {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-radius: 10px;
+      padding: 13px 16px;
+      cursor: pointer;
+      margin-top: 14px;
+      transition: background .18s, border-color .18s;
+      user-select: none;
+    }
+    .ev-check:hover { background: #dcfce7; border-color: #4ade80; }
+    .ev-check input[type="checkbox"] {
+      width: 18px; height: 18px;
+      accent-color: #16a34a;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .ev-label { font-size: .88rem; font-weight: 700; color: #15803d; }
+    .ev-sub   { font-size: .74rem; color: #166534; opacity: .85; margin-top: 2px; }
+    .ev-badge {
+      display: inline-block;
+      background: #16a34a;
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      padding: 2px 7px;
+      border-radius: 999px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
     /* ── Section hidden ── */
     .hidden { display: none !important; }
   </style>
@@ -204,6 +240,15 @@
       </div>
     </div>
 
+    <!-- Checkbox électrique — visible uniquement pour les voitures -->
+    <label class="ev-check" id="ev-check-wrap" for="ev-electric">
+      <input type="checkbox" id="ev-electric" onchange="recalc()" />
+      <div>
+        <div class="ev-label">🔌 Mon véhicule est 100 % électrique <span class="ev-badge">+20 %</span></div>
+        <div class="ev-sub">Majoration légale de 20 % sur le barème kilométrique (art. 1 arrêté DGFiP)</div>
+      </div>
+    </label>
+
     <div style="margin-top:14px" id="bareme-display"></div>
   </div>
 
@@ -236,11 +281,11 @@
       </div>
     </div>
 
-    <!-- Mode par trajet -->
+    <!-- Mode par trajet — 2 champs -->
     <div id="mode-quotidien" class="hidden">
-      <div class="field-row" style="margin-bottom:12px">
+      <div class="field-row">
         <div class="field">
-          <label for="km-aller-retour">Distance aller-retour domicile → travail</label>
+          <label for="km-aller-retour">Distance Aller-Retour quotidienne</label>
           <div class="input-wrap">
             <input type="number" id="km-aller-retour" min="0" max="500" step="1" placeholder="ex : 40" oninput="recalcFromTrajet()" />
             <span class="input-unit">km</span>
@@ -254,15 +299,8 @@
           </div>
         </div>
       </div>
-      <div class="field">
-        <label for="jours-teletravail">Dont jours en télétravail <span class="opt">(à déduire)</span></label>
-        <div class="input-wrap">
-          <input type="number" id="jours-teletravail" min="0" max="365" step="1" placeholder="ex : 80" oninput="recalcFromTrajet()" />
-          <span class="input-unit">j/télétravail</span>
-        </div>
-      </div>
       <div class="info-box" id="km-computed" style="margin-top:12px;display:none">
-        📍 Distance annuelle calculée : <strong id="km-computed-val">—</strong> km
+        📍 Distance annuelle calculée : <strong id="km-computed-val">—</strong> km (= <span id="km-computed-detail">—</span>)
       </div>
     </div>
   </div>
@@ -383,6 +421,9 @@
     document.getElementById('btn-moto').classList.toggle('active', v === 'moto');
     document.getElementById('field-puissance').classList.toggle('hidden', v !== 'voiture');
     document.getElementById('field-cylindree').classList.toggle('hidden', v !== 'moto');
+    // La majoration électrique ne s'applique qu'aux voitures
+    document.getElementById('ev-check-wrap').classList.toggle('hidden', v !== 'voiture');
+    if (v !== 'voiture') document.getElementById('ev-electric').checked = false;
     recalc();
   }
 
@@ -396,16 +437,14 @@
   }
 
   function recalcFromTrajet() {
-    var ar  = parseFloat(document.getElementById('km-aller-retour').value) || 0;
-    var jt  = parseInt(document.getElementById('jours-travailles').value, 10) || 0;
-    var jtt = parseInt(document.getElementById('jours-teletravail').value, 10) || 0;
-    var joursPresentiels = Math.max(jt - jtt, 0);
-    var km = ar * joursPresentiels;
+    var ar = parseFloat(document.getElementById('km-aller-retour').value) || 0;
+    var jt = parseInt(document.getElementById('jours-travailles').value, 10) || 0;
+    var km = ar * jt;
     var box = document.getElementById('km-computed');
-    var val = document.getElementById('km-computed-val');
     if (km > 0) {
       box.style.display = '';
-      val.textContent = fmt0(km);
+      document.getElementById('km-computed-val').textContent = fmt0(km);
+      document.getElementById('km-computed-detail').textContent = fmt0(ar) + ' km × ' + jt + ' jours';
     } else {
       box.style.display = 'none';
     }
@@ -456,18 +495,26 @@
       tauxStr = b.t3r.toFixed(3) + ' €/km';
     }
 
-    lastTotal = total;
+    // Majoration électrique +20 % (art. 1 arrêté DGFiP — voitures uniquement)
+    var isElectric = vehicleType === 'voiture' && document.getElementById('ev-electric').checked;
+    var totalFinal = isElectric ? total * 1.20 : total;
+    lastTotal = totalFinal;
 
-    document.getElementById('res-total').textContent = fmtEur(total);
-    document.getElementById('res-sub').textContent = fmt0(km) + ' km — ' + vehicleLabel() + ' — Tranche ' + tranche;
+    var evLabel = isElectric ? ' ⚡ électrique' : '';
+    document.getElementById('res-total').textContent = fmtEur(totalFinal);
+    document.getElementById('res-sub').textContent = fmt0(km) + ' km — ' + vehicleLabel() + evLabel + ' — Tranche ' + tranche;
     document.getElementById('res-details').classList.remove('hidden');
 
     var linesHTML =
       row('Distance prise en compte', fmt0(km) + ' km') +
       row('Tranche barème appliquée', 'Tranche ' + tranche + ' (' + trancheLabel(b, tranche) + ')') +
       row('Taux applicable', tauxStr) +
-      row('Formule', formula) +
-      row('Total déductible', fmtEur(total));
+      row('Formule barème', formula) +
+      row('Sous-total barème', fmtEur(total));
+    if (isElectric) {
+      linesHTML += row('Majoration électrique (+20 %)', '+' + fmtEur(total * 0.20));
+    }
+    linesHTML += row('Total déductible', fmtEur(totalFinal));
     document.getElementById('formula-lines').innerHTML = linesHTML;
 
     recalcSaving();
