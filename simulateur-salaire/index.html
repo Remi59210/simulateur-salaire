@@ -16,17 +16,23 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --orange:      #FF6B00;
-      --orange-dark: #e05e00;
-      --orange-light:#FFF0E5;
-      --orange-mid:  #FFD9B8;
-      --bg:          #FAF7F4;
+      --navy:        #0B1D3A;
+      --navy-mid:    #12305E;
+      --blue:        #1A5CFF;
+      --blue-dark:   #0E4BE6;
+      --blue-soft:   #E8F0FF;
+      --blue-mid:    #C7D7F8;
+      --orange:       #1A5CFF;
+      --orange-dark:  #0E4BE6;
+      --orange-light: #E8F0FF;
+      --orange-mid:   #C7D7F8;
+      --bg:          #F6F9FF;
       --white:       #FFFFFF;
-      --text:        #1A1A1A;
-      --text-soft:   #6B6B6B;
-      --border:      #EDE8E2;
+      --text:        #1E293B;
+      --text-soft:   #64748B;
+      --border:      #DCE6F5;
       --radius:      16px;
-      --shadow:      0 2px 16px rgba(255,107,0,.08);
+      --shadow:      0 1px 3px rgba(11,29,58,.06), 0 4px 12px rgba(11,29,58,.07);
     }
 
     body {
@@ -38,7 +44,7 @@
 
     /* ─── HEADER ─────────────────────────────────────────── */
     header {
-      background: var(--orange);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #173E7E 100%);
       padding: 20px 24px 28px;
       text-align: center;
       position: relative;
@@ -47,23 +53,15 @@
     header::before {
       content: '';
       position: absolute;
-      right: -60px; top: -60px;
-      width: 260px; height: 260px;
-      background: rgba(255,255,255,.07);
-      border-radius: 50%;
-    }
-    header::after {
-      content: '';
-      position: absolute;
-      left: -40px; bottom: -80px;
-      width: 200px; height: 200px;
-      background: rgba(255,255,255,.05);
-      border-radius: 50%;
+      inset: 0;
+      background: radial-gradient(ellipse 700px 300px at 70% -20%, rgba(26,92,255,.35), transparent 65%);
+      pointer-events: none;
     }
     .header-badge {
       display: inline-block;
-      background: rgba(255,255,255,.18);
-      color: #fff;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      color: #9DBCFF;
       font-size: .72rem;
       font-weight: 600;
       letter-spacing: .08em;
@@ -98,7 +96,7 @@
       background: var(--white);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       padding: 24px;
       margin-bottom: 18px;
     }
@@ -107,7 +105,7 @@
       font-weight: 700;
       letter-spacing: .09em;
       text-transform: uppercase;
-      color: var(--orange);
+      color: var(--blue);
       margin-bottom: 16px;
     }
 
@@ -140,7 +138,7 @@
       font-family: inherit;
       font-weight: 600;
       color: var(--text);
-      background: #FAFAFA;
+      background: #FAFBFF;
       transition: border-color .18s, box-shadow .18s;
       -moz-appearance: textfield;
     }
@@ -148,8 +146,8 @@
     .input-wrap input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
     .input-wrap input[type="number"]:focus {
       outline: none;
-      border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgba(255,107,0,.13);
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(26,92,255,.13);
       background: #fff;
     }
     .input-unit {
@@ -172,31 +170,31 @@
       font-family: inherit;
       font-weight: 600;
       color: var(--text);
-      background: #FAFAFA;
+      background: #FAFBFF;
       cursor: pointer;
       appearance: none;
       -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B6B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 14px center;
       transition: border-color .18s;
     }
     .select-wrap select:focus {
       outline: none;
-      border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgba(255,107,0,.13);
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(26,92,255,.13);
     }
 
     /* ─── NOTE LIBÉRALE ──────────────────────────────────── */
     .statut-note {
       display: none;
       margin-top: 10px;
-      background: var(--orange-light);
-      border-left: 3px solid var(--orange);
+      background: var(--blue-soft);
+      border-left: 3px solid var(--blue);
       border-radius: 8px;
       padding: 10px 14px;
       font-size: .82rem;
-      color: var(--orange-dark);
+      color: #1d4ed8;
       font-weight: 500;
       line-height: 1.5;
     }
@@ -221,8 +219,8 @@
     .slider-value {
       font-size: 1.05rem;
       font-weight: 800;
-      color: var(--orange);
-      background: var(--orange-light);
+      color: var(--blue);
+      background: var(--blue-soft);
       padding: 2px 10px;
       border-radius: 8px;
     }
@@ -231,7 +229,7 @@
       width: 100%;
       height: 6px;
       border-radius: 3px;
-      background: linear-gradient(to right, var(--orange) 0%, var(--orange) var(--range-pct, 0%), var(--border) var(--range-pct, 0%), var(--border) 100%);
+      background: linear-gradient(to right, var(--blue) 0%, var(--blue) var(--range-pct, 0%), var(--border) var(--range-pct, 0%), var(--border) 100%);
       outline: none;
       cursor: pointer;
     }
@@ -239,17 +237,17 @@
       -webkit-appearance: none;
       width: 20px; height: 20px;
       border-radius: 50%;
-      background: var(--orange);
+      background: var(--blue);
       border: 3px solid #fff;
-      box-shadow: 0 1px 6px rgba(255,107,0,.35);
+      box-shadow: 0 1px 6px rgba(26,92,255,.35);
       cursor: pointer;
     }
     input[type="range"]::-moz-range-thumb {
       width: 20px; height: 20px;
       border-radius: 50%;
-      background: var(--orange);
+      background: var(--blue);
       border: 3px solid #fff;
-      box-shadow: 0 1px 6px rgba(255,107,0,.35);
+      box-shadow: 0 1px 6px rgba(26,92,255,.35);
       cursor: pointer;
     }
 
@@ -283,10 +281,10 @@
       white-space: nowrap;
     }
     .result-cell.highlight {
-      background: var(--orange-light);
-      border-color: var(--orange-mid);
+      background: var(--blue-soft);
+      border-color: var(--blue-mid);
     }
-    .result-cell.highlight .rc-value { color: var(--orange); }
+    .result-cell.highlight .rc-value { color: var(--blue); }
 
     /* Section divider */
     .section-sep {
@@ -318,7 +316,7 @@
       font-size: .97rem;
       font-weight: 700;
       margin: 22px 0 6px;
-      color: var(--orange-dark);
+      color: var(--navy);
     }
     .seo-section p {
       font-size: .9rem;
@@ -335,10 +333,10 @@
 
     footer {
       text-align: center;
-      padding: 24px;
-      font-size: .78rem;
-      color: var(--text-soft);
-      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      font-size: .82rem;
+      background: #0B1D3A;
+      color: #8FA6CC;
     }
     .guide-grid {
       display: grid;
@@ -545,7 +543,7 @@
 
 </main>
 
-<section style="background:#fff;border-top:1px solid #EDE8E2;padding:60px 24px 56px">
+<section style="background:#fff;border-top:1px solid #DCE6F5;padding:60px 24px 56px">
   <div style="max-width:900px;margin:0 auto">
     <h2 style="font-family:'Inter',system-ui,sans-serif;font-size:clamp(1.2rem,3vw,1.55rem);font-weight:800;color:#1A1A1A;letter-spacing:-.02em;line-height:1.25;margin-bottom:10px">
       Guide pratique : Tout comprendre sur le salaire en 2026
@@ -563,7 +561,7 @@
           Le <strong style="color:#1A1A1A">salaire brut</strong> est le montant inscrit dans votre contrat de travail et sur votre fiche de paie avant toute déduction. C'est la base sur laquelle s'appliquent les cotisations sociales obligatoires. Le <strong style="color:#1A1A1A">salaire net</strong> est ce que vous percevez réellement sur votre compte bancaire, après déduction des cotisations à la charge du salarié.
         </p>
         <p style="font-family:'Inter',system-ui,sans-serif;font-size:.875rem;color:#6B6B6B;line-height:1.75;margin-bottom:10px">
-          Pour un <strong style="color:#1A1A1A">salarié non-cadre</strong>, les cotisations salariales représentent environ <strong style="color:#FF6B00">22 % du brut</strong> : assurance maladie (0,75 %), retraite de base (6,9 %), retraite complémentaire AGIRC-ARRCO (3,15 %), assurance chômage (0 % depuis 2019), CSG/CRDS (9,7 %). Pour un <strong style="color:#1A1A1A">cadre</strong>, le taux est légèrement supérieur (~25 %) en raison des cotisations prévoyance et de taux ARRCO différents.
+          Pour un <strong style="color:#1A1A1A">salarié non-cadre</strong>, les cotisations salariales représentent environ <strong style="color:#1A5CFF">22 % du brut</strong> : assurance maladie (0,75 %), retraite de base (6,9 %), retraite complémentaire AGIRC-ARRCO (3,15 %), assurance chômage (0 % depuis 2019), CSG/CRDS (9,7 %). Pour un <strong style="color:#1A1A1A">cadre</strong>, le taux est légèrement supérieur (~25 %) en raison des cotisations prévoyance et de taux ARRCO différents.
         </p>
         <p style="font-family:'Inter',system-ui,sans-serif;font-size:.875rem;color:#6B6B6B;line-height:1.75;margin-bottom:10px">
           <strong style="color:#1A1A1A">Exemple concret :</strong> un salarié non-cadre avec un brut de 3 000 €/mois perçoit environ 2 340 € net, soit un taux de 78 %. Un cadre à 4 000 € brut reçoit environ 3 040 € net (76 %). La fonction publique affiche un taux de rétention plus élevé (~85 %) car ses cotisations sont structurellement différentes.
@@ -590,7 +588,7 @@
           Le <strong style="color:#1A1A1A">salaire super-brut</strong>, aussi appelé <strong style="color:#1A1A1A">coût employeur</strong> ou coût total du travail, est le montant que votre employeur débourse réellement pour vous employer. Il s'agit du salaire brut auquel s'ajoutent les <strong style="color:#1A1A1A">cotisations patronales</strong>, à la charge exclusive de l'entreprise.
         </p>
         <p style="font-family:'Inter',system-ui,sans-serif;font-size:.875rem;color:#6B6B6B;line-height:1.75;margin-bottom:10px">
-          Ces charges patronales couvrent notamment : l'assurance maladie (13 %), les allocations familiales (5,25 %), l'accident du travail (variable), la retraite de base et complémentaire, l'assurance chômage (4,05 %), la formation professionnelle et le FNAL. Au total, elles représentent entre <strong style="color:#FF6B00">40 et 55 % du salaire brut</strong> selon le statut et l'effectif de l'entreprise.
+          Ces charges patronales couvrent notamment : l'assurance maladie (13 %), les allocations familiales (5,25 %), l'accident du travail (variable), la retraite de base et complémentaire, l'assurance chômage (4,05 %), la formation professionnelle et le FNAL. Au total, elles représentent entre <strong style="color:#1A5CFF">40 et 55 % du salaire brut</strong> selon le statut et l'effectif de l'entreprise.
         </p>
         <p style="font-family:'Inter',system-ui,sans-serif;font-size:.875rem;color:#6B6B6B;line-height:1.75;margin-bottom:10px">
           <strong style="color:#1A1A1A">Exemple :</strong> pour un brut de 3 000 €, le coût employeur dépasse 4 200 € en non-cadre. Cela signifie que seuls 55 € sur chaque 100 € investis par l'employeur atteignent le compte bancaire du salarié (après cotisations et PAS).
@@ -604,7 +602,7 @@
       </div>
     </div>
 
-    <p style="font-family:'Inter',system-ui,sans-serif;font-size:.8rem;color:#9B9B9B;margin-top:36px;padding-top:20px;border-top:1px solid #EDE8E2">
+    <p style="font-family:'Inter',system-ui,sans-serif;font-size:.8rem;color:#9B9B9B;margin-top:36px;padding-top:20px;border-top:1px solid #DCE6F5">
       📌 Ce guide est fourni à titre informatif. Les taux indiqués sont des estimations 2026. Pour votre situation personnelle, consultez votre fiche de paie ou un expert-comptable.
     </p>
   </div>
