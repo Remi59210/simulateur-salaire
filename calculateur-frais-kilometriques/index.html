@@ -184,6 +184,18 @@
       vertical-align: middle;
     }
 
+    /* ── Verdict comparatif 10 % ── */
+    .verdict {
+      display: flex; align-items: flex-start; gap: 12px;
+      border-radius: 12px; padding: 16px 18px; margin-bottom: 14px;
+    }
+    .verdict-green  { background: var(--green-light);  border: 2px solid var(--green-border); }
+    .verdict-orange { background: #fff7ed; border: 2px solid #fed7aa; }
+    .verdict .verdict-icon { font-size: 1.4rem; line-height: 1; flex-shrink: 0; }
+    .verdict .verdict-text { font-size: .88rem; line-height: 1.6; }
+    .verdict-green  .verdict-text { color: #14532d; }
+    .verdict-orange .verdict-text { color: #7c2d12; }
+
     /* ── Section hidden ── */
     .hidden { display: none !important; }
   </style>
@@ -305,7 +317,22 @@
     </div>
   </div>
 
-  <!-- ── Carte 3 : Résultats ── -->
+  <!-- ── Carte 3 : Salaire imposable (facultatif) ── -->
+  <div class="card">
+    <div class="card-title">Votre situation fiscale <span style="font-size:.75rem;font-weight:500;color:var(--text-soft)">(facultatif)</span></div>
+    <div class="field">
+      <label for="salaire-net">💰 Salaire NET imposable annuel</label>
+      <div class="input-wrap">
+        <input type="number" id="salaire-net" min="0" step="1000" placeholder="ex : 32 000" oninput="recalcVerdict()" />
+        <span class="input-unit">€/an</span>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:12px">
+      Renseignez votre revenu net imposable (case 1AJ de votre déclaration de revenus) pour voir si les <strong>frais réels sont plus avantageux</strong> que l'abattement forfaitaire de 10 % appliqué automatiquement par l'État.
+    </div>
+  </div>
+
+  <!-- ── Carte 4 : Résultats ── -->
   <div class="card">
     <div class="card-title">Résultat</div>
 
@@ -318,6 +345,12 @@
     <p style="font-size:.8rem;color:var(--text-soft);line-height:1.6;margin-bottom:16px">
       💡 Ce montant sera déduit à 100 % de votre salaire net imposable lors de votre déclaration de revenus (option des frais réels). L'économie réelle sur vos impôts dépendra ensuite de votre Tranche Marginale d'Imposition (TMI).
     </p>
+
+    <!-- Verdict comparatif abattement 10 % -->
+    <div id="verdict-box" class="hidden">
+      <div class="section-sep">Verdict : Quelle est la meilleure option ?</div>
+      <div id="verdict-content"></div>
+    </div>
 
     <div id="res-details" class="hidden">
       <div class="section-sep">Détail du calcul</div>
@@ -351,6 +384,10 @@
           Cette estimation compare la déduction des frais réels à la déduction forfaitaire automatique de 10 %. Elle est indicative et ne tient pas compte de votre situation fiscale complète.
         </div>
       </div>
+    </div>
+
+    <div class="info-box" style="margin-top:16px">
+      👥 <strong>En couple (Marié/Pacsé) ?</strong> Le choix des frais réels est individuel. Chaque conjoint doit faire sa propre simulation séparément pour vérifier s'il a intérêt à y passer !
     </div>
   </div>
 
@@ -522,6 +559,32 @@
     document.getElementById('formula-lines').innerHTML = linesHTML;
 
     recalcSaving();
+    recalcVerdict();
+  }
+
+  function recalcVerdict() {
+    var salaire = parseFloat(document.getElementById('salaire-net').value) || 0;
+    var box = document.getElementById('verdict-box');
+    if (!salaire || !lastTotal) { box.classList.add('hidden'); return; }
+
+    var abattement = salaire * 0.10;
+    var diff = lastTotal - abattement;
+    var html;
+    if (diff > 0) {
+      html = '<div class="verdict verdict-green">' +
+        '<div class="verdict-icon">✅</div>' +
+        '<div class="verdict-text"><strong>Option Frais Réels avantageuse !</strong><br>' +
+        'Vous déduisez <strong>' + fmtEur(diff) + ' de plus</strong> que l\'abattement automatique de 10 % (' + fmtEur(abattement) + ').' +
+        '</div></div>';
+    } else {
+      html = '<div class="verdict verdict-orange">' +
+        '<div class="verdict-icon">⚠️</div>' +
+        '<div class="verdict-text"><strong>Gardez l\'abattement automatique de 10 %.</strong><br>' +
+        'Vos frais réels (' + fmtEur(lastTotal) + ') sont inférieurs à l\'abattement par défaut de l\'État (' + fmtEur(abattement) + ').' +
+        '</div></div>';
+    }
+    document.getElementById('verdict-content').innerHTML = html;
+    box.classList.remove('hidden');
   }
 
   function recalcSaving() {
