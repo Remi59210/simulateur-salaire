@@ -315,29 +315,26 @@
         📍 Distance annuelle calculée : <strong id="km-computed-val">—</strong> km (= <span id="km-computed-detail">—</span>)
       </div>
     </div>
-  </div>
 
-  <!-- ── Carte 3 : Salaire imposable (facultatif) ── -->
-  <div class="card">
-    <div class="card-title">Votre situation fiscale <span style="font-size:.75rem;font-weight:500;color:var(--text-soft)">(facultatif)</span></div>
+    <div class="section-sep" style="margin-top:18px">Comparer avec l'abattement forfaitaire de 10 %</div>
     <div class="field">
-      <label for="salaire-net">💰 Salaire NET imposable annuel</label>
+      <label for="salaire-net">💰 Votre salaire NET imposable annuel</label>
       <div class="input-wrap">
-        <input type="number" id="salaire-net" min="0" step="1000" placeholder="ex : 32 000" oninput="recalcVerdict()" />
+        <input type="number" id="salaire-net" min="0" step="1000" placeholder="ex : 24 000" oninput="recalcVerdict()" />
         <span class="input-unit">€/an</span>
       </div>
     </div>
-    <div class="info-box" style="margin-top:12px">
-      Renseignez votre revenu net imposable (case 1AJ de votre déclaration de revenus) pour voir si les <strong>frais réels sont plus avantageux</strong> que l'abattement forfaitaire de 10 % appliqué automatiquement par l'État.
+    <div class="info-box" style="margin-top:10px">
+      Facultatif — renseignez votre revenu net imposable (case 1AJ) pour savoir si les frais réels vous sont <strong>plus avantageux</strong> que l'abattement de 10 % appliqué automatiquement par l'État.
     </div>
   </div>
 
-  <!-- ── Carte 4 : Résultats ── -->
+  <!-- ── Carte 3 : Résultats ── -->
   <div class="card">
     <div class="card-title">Résultat</div>
 
     <div class="big-result">
-      <div class="br-label">Montant déductible (frais réels)</div>
+      <div class="br-label">Somme déduite de vos revenus imposables</div>
       <div class="br-value" id="res-total">— €</div>
       <div class="br-sub" id="res-sub">Renseignez les informations ci-dessus</div>
     </div>
@@ -346,17 +343,11 @@
       💡 Ce montant sera déduit à 100 % de votre salaire net imposable lors de votre déclaration de revenus (option des frais réels). L'économie réelle sur vos impôts dépendra ensuite de votre Tranche Marginale d'Imposition (TMI).
     </p>
 
-    <!-- Verdict comparatif abattement 10 % -->
-    <div id="verdict-box" class="hidden">
-      <div class="section-sep">Verdict : Quelle est la meilleure option ?</div>
-      <div id="verdict-content"></div>
-    </div>
-
     <div id="res-details" class="hidden">
       <div class="section-sep">Détail du calcul</div>
       <div id="formula-lines"></div>
 
-      <div class="section-sep" style="margin-top:20px">Estimation d'économie d'impôt</div>
+      <div class="section-sep" style="margin-top:20px">💰 Économie réelle sur votre impôt</div>
       <div class="saving-box">
         <div class="sb-title">Tranche marginale d'imposition (TMI)</div>
         <div class="field-row" style="margin-bottom:12px">
@@ -374,7 +365,7 @@
           </div>
           <div class="field" style="justify-content:flex-end">
             <div class="result-cell green" style="height:auto">
-              <div class="rc-label">Économie d'impôt estimée</div>
+              <div class="rc-label" style="font-size:.72rem;line-height:1.4">💰 ÉCONOMIE RÉELLE SUR VOTRE IMPÔT<br><span style="font-weight:500;text-transform:none;letter-spacing:0">(Gain net sur votre facture finale)</span></div>
               <div class="rc-value saving-amount" id="res-saving">— €</div>
               <div class="rc-sub">sur vos frais réels déclarés</div>
             </div>
@@ -386,7 +377,13 @@
       </div>
     </div>
 
-    <div class="info-box" style="margin-top:16px">
+  </div>
+
+  <!-- ── Carte 4 : Verdict comparatif (affichée dynamiquement) ── -->
+  <div class="card hidden" id="verdict-card">
+    <div class="card-title">Verdict : Quelle est la meilleure option ?</div>
+    <div id="verdict-content"></div>
+    <div class="info-box" style="margin-top:12px">
       👥 <strong>En couple (Marié/Pacsé) ?</strong> Le choix des frais réels est individuel. Chaque conjoint doit faire sa propre simulation séparément pour vérifier s'il a intérêt à y passer !
     </div>
   </div>
@@ -564,8 +561,8 @@
 
   function recalcVerdict() {
     var salaire = parseFloat(document.getElementById('salaire-net').value) || 0;
-    var box = document.getElementById('verdict-box');
-    if (!salaire || !lastTotal) { box.classList.add('hidden'); return; }
+    var card = document.getElementById('verdict-card');
+    if (!salaire || !lastTotal) { card.classList.add('hidden'); return; }
 
     var abattement = salaire * 0.10;
     var diff = lastTotal - abattement;
@@ -574,17 +571,17 @@
       html = '<div class="verdict verdict-green">' +
         '<div class="verdict-icon">✅</div>' +
         '<div class="verdict-text"><strong>Option Frais Réels avantageuse !</strong><br>' +
-        'Vous déduisez <strong>' + fmtEur(diff) + ' de plus</strong> que l\'abattement automatique de 10 % (' + fmtEur(abattement) + ').' +
+        'En choisissant les frais réels, vous déduisez <strong>' + fmtEur(diff) + ' de plus</strong> que l\'abattement automatique de 10 % (' + fmtEur(abattement) + ').' +
         '</div></div>';
     } else {
       html = '<div class="verdict verdict-orange">' +
         '<div class="verdict-icon">⚠️</div>' +
-        '<div class="verdict-text"><strong>Gardez l\'abattement automatique de 10 %.</strong><br>' +
-        'Vos frais réels (' + fmtEur(lastTotal) + ') sont inférieurs à l\'abattement par défaut de l\'État (' + fmtEur(abattement) + ').' +
+        '<div class="verdict-text"><strong>Option non rentable.</strong><br>' +
+        'L\'abattement automatique de 10 % par défaut de l\'État (' + fmtEur(abattement) + ') reste plus avantageux pour vous que vos frais réels (' + fmtEur(lastTotal) + ').' +
         '</div></div>';
     }
     document.getElementById('verdict-content').innerHTML = html;
-    box.classList.remove('hidden');
+    card.classList.remove('hidden');
   }
 
   function recalcSaving() {
