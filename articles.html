@@ -20,10 +20,10 @@
     .disabled{opacity:.5;pointer-events:none}
   </style>
 </head>
-<body class="bg-orange-50 min-h-screen flex flex-col">
+<body class="bg-slate-50 min-h-screen flex flex-col">
 <div id="site-nav"></div>
 
-  <header class="bg-gradient-to-r from-orange-500 to-orange-600 text-white py-6">
+  <header class="text-white py-6" style="background:linear-gradient(135deg,#0B1D3A 0%,#12305E 60%,#173E7E 100%);position:relative;overflow:hidden">
     <div class="container mx-auto px-4 text-center">
       <h1 class="text-3xl font-bold">Nos Articles</h1>
       <p class="mt-2 text-sm opacity-90">Comprendre, calculer, optimiser.</p>
@@ -53,7 +53,7 @@
           <option value="ancien">Plus anciens</option>
         </select>
       </div>
-      <button id="apply-filters" class="bg-orange-500 hover:bg-orange-600 text-white font-medium px-4 py-2 rounded-lg">
+      <button id="apply-filters" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg">
         Appliquer les filtres
       </button>
     </div>
@@ -63,13 +63,13 @@
 
     <!-- Pagination -->
     <div class="flex justify-center items-center gap-4 mt-10">
-      <button id="prev-page" class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">Précédent</button>
+      <button id="prev-page" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Précédent</button>
       <span class="text-sm text-gray-700">Page <span id="current-page">1</span> sur <span id="total-pages">1</span></span>
-      <button id="next-page" class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">Suivant</button>
+      <button id="next-page" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Suivant</button>
     </div>
   </main>
 
-  <footer class="bg-gradient-to-r from-orange-700 to-orange-800 text-white py-6 text-center">
+  <footer class="text-white py-6 text-center" style="background:#0B1D3A">
     <p class="text-sm">© 2025 Convertisseur Brut-Net</p>
   </footer>
 
@@ -103,7 +103,7 @@
       const start=(currentPage-1)*articlesPerPage, end=start+articlesPerPage;
       filteredArticles.slice(start,end).forEach(a=>{
         const card=document.createElement("div");
-        card.className="bg-white shadow rounded-lg overflow-hidden border border-orange-100";
+        card.className="bg-white shadow rounded-lg overflow-hidden border border-slate-200";
         const date=dFR(a.date);
         card.innerHTML = `
           <div class="p-4">
@@ -111,7 +111,7 @@
             <h3 class="font-bold text-lg mt-2">${a.title}</h3>
             <p class="text-sm text-gray-700 mt-2">${a.excerpt}</p>
             <p class="text-xs text-gray-400 mt-2">${a.readingTime || ""}</p>
-            <a href="${a.link}" class="inline-block mt-3 text-orange-600 font-medium hover:underline">Lire la suite</a>
+            <a href="${a.link}" class="inline-block mt-3 text-blue-600 font-medium hover:underline">Lire la suite →</a>
           </div>`;
         container.appendChild(card);
       });
