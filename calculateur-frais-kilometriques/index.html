@@ -196,6 +196,30 @@
     .verdict-green  .verdict-text { color: #14532d; }
     .verdict-orange .verdict-text { color: #7c2d12; }
 
+    /* ── Tableau comparatif impôt ── */
+    .comp-table {
+      margin-top: 14px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+    }
+    .comp-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: .87rem;
+      gap: 12px;
+    }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-label { color: var(--text-soft); flex: 1; min-width: 0; }
+    .comp-val   { font-weight: 700; color: var(--text); white-space: nowrap; }
+    .comp-gain  { background: var(--green-light); }
+    .comp-gain .comp-label { color: #15803d; font-weight: 600; }
+    .comp-gain-val { color: #15803d !important; font-size: .95rem; }
+    .comp-neut  { background: #fff7ed; }
+
     /* ── Section hidden ── */
     .hidden { display: none !important; }
   </style>
@@ -324,7 +348,10 @@
         <span class="input-unit">€/an</span>
       </div>
     </div>
-    <div class="info-box" style="margin-top:10px">
+    <p style="margin-top:7px;font-size:.78rem;color:var(--text-soft)">
+      🔍 <a href="/simulateur-salaire/" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:underline;font-weight:600">Je ne connais pas mon net annuel ? Calculer mon salaire</a>
+    </p>
+    <div class="info-box" style="margin-top:8px">
       Facultatif — renseignez votre revenu net imposable (case 1AJ) pour savoir si les frais réels vous sont <strong>plus avantageux</strong> que l'abattement de 10 % appliqué automatiquement par l'État.
     </div>
   </div>
@@ -340,41 +367,12 @@
     </div>
 
     <p style="font-size:.8rem;color:var(--text-soft);line-height:1.6;margin-bottom:16px">
-      💡 Ce montant sera déduit à 100 % de votre salaire net imposable lors de votre déclaration de revenus (option des frais réels). L'économie réelle sur vos impôts dépendra ensuite de votre Tranche Marginale d'Imposition (TMI).
+      💡 Ce montant sera déduit à 100 % de votre revenu net imposable lors de votre déclaration de revenus (option des frais réels).
     </p>
 
     <div id="res-details" class="hidden">
       <div class="section-sep">Détail du calcul</div>
       <div id="formula-lines"></div>
-
-      <div class="section-sep" style="margin-top:20px">💰 Économie réelle sur votre impôt</div>
-      <div class="saving-box">
-        <div class="sb-title">Tranche marginale d'imposition (TMI)</div>
-        <div class="field-row" style="margin-bottom:12px">
-          <div class="field">
-            <label for="tmi">Votre TMI 2026</label>
-            <div class="select-wrap">
-              <select id="tmi" onchange="recalcSaving()">
-                <option value="0">0 % (non imposable)</option>
-                <option value="11" selected>11 % (jusqu'à ~28 797 €)</option>
-                <option value="30">30 % (jusqu'à ~82 341 €)</option>
-                <option value="41">41 % (jusqu'à ~177 106 €)</option>
-                <option value="45">45 % (au-delà)</option>
-              </select>
-            </div>
-          </div>
-          <div class="field" style="justify-content:flex-end">
-            <div class="result-cell green" style="height:auto">
-              <div class="rc-label" style="font-size:.72rem;line-height:1.4">💰 ÉCONOMIE RÉELLE SUR VOTRE IMPÔT<br><span style="font-weight:500;text-transform:none;letter-spacing:0">(Gain net sur votre facture finale)</span></div>
-              <div class="rc-value saving-amount" id="res-saving">— €</div>
-              <div class="rc-sub">sur vos frais réels déclarés</div>
-            </div>
-          </div>
-        </div>
-        <div class="info-box blue" style="margin-top:0">
-          Cette estimation compare la déduction des frais réels à la déduction forfaitaire automatique de 10 %. Elle est indicative et ne tient pas compte de votre situation fiscale complète.
-        </div>
-      </div>
     </div>
 
   </div>
@@ -555,8 +553,17 @@
     linesHTML += row('Total déductible', fmtEur(totalFinal));
     document.getElementById('formula-lines').innerHTML = linesHTML;
 
-    recalcSaving();
     recalcVerdict();
+  }
+
+  // Barème simplifié IR 2026 — célibataire 1 part (estimation indicative)
+  function calcImpot(revenu) {
+    if (revenu <= 0) return 0;
+    var impot = 0;
+    if (revenu > 12000) impot += Math.min(revenu - 12000, 17000) * 0.11; // tranche 11 %
+    if (revenu > 29000) impot += Math.min(revenu - 29000, 53000) * 0.30; // tranche 30 %
+    if (revenu > 82000) impot += (revenu - 82000) * 0.41;                // tranche 41 %
+    return Math.round(impot);
   }
 
   function recalcVerdict() {
@@ -565,7 +572,13 @@
     if (!salaire || !lastTotal) { card.classList.add('hidden'); return; }
 
     var abattement = salaire * 0.10;
-    var diff = lastTotal - abattement;
+    var revenuA  = Math.max(salaire - abattement, 0);
+    var revenuB  = Math.max(salaire - lastTotal,  0);
+    var impotA   = calcImpot(revenuA);
+    var impotB   = calcImpot(revenuB);
+    var gain     = impotA - impotB;
+    var diff     = lastTotal - abattement;
+
     var html;
     if (diff > 0) {
       html = '<div class="verdict verdict-green">' +
@@ -577,24 +590,39 @@
       html = '<div class="verdict verdict-orange">' +
         '<div class="verdict-icon">⚠️</div>' +
         '<div class="verdict-text"><strong>Option non rentable.</strong><br>' +
-        'L\'abattement automatique de 10 % par défaut de l\'État (' + fmtEur(abattement) + ') reste plus avantageux pour vous que vos frais réels (' + fmtEur(lastTotal) + ').' +
+        'L\'abattement automatique de 10 % (' + fmtEur(abattement) + ') reste plus avantageux que vos frais réels (' + fmtEur(lastTotal) + ').' +
         '</div></div>';
     }
+
+    // Tableau comparatif des impôts estimés
+    html += '<div class="comp-table">' +
+      '<div class="comp-row">' +
+        '<span class="comp-label">📊 Votre impôt estimé (Option par défaut 10 %)</span>' +
+        '<span class="comp-val">' + fmtEur(impotA) + '</span>' +
+      '</div>' +
+      '<div class="comp-row">' +
+        '<span class="comp-label">💰 Votre impôt estimé (Option Frais Réels)</span>' +
+        '<span class="comp-val">' + fmtEur(impotB) + '</span>' +
+      '</div>';
+
+    if (gain > 0) {
+      html += '<div class="comp-row comp-gain">' +
+        '<span class="comp-label">🎯 Gain net dans votre poche</span>' +
+        '<span class="comp-val comp-gain-val">' + fmtEur(gain) + ' d\'impôts en moins à payer !</span>' +
+      '</div>';
+    } else {
+      html += '<div class="comp-row comp-neut">' +
+        '<span class="comp-label">ℹ️ Résultat</span>' +
+        '<span class="comp-val">Pas d\'économie supplémentaire avec les frais réels</span>' +
+      '</div>';
+    }
+    html += '</div>' +
+      '<p style="margin-top:10px;font-size:.74rem;color:var(--text-soft);line-height:1.5">' +
+      'Estimation simplifiée pour un célibataire (1 part). Calcul indicatif — consultez votre avis d\'imposition pour votre situation exacte.' +
+      '</p>';
+
     document.getElementById('verdict-content').innerHTML = html;
     card.classList.remove('hidden');
-  }
-
-  function recalcSaving() {
-    if (!lastTotal) return;
-    var tmi = parseInt(document.getElementById('tmi').value, 10) || 0;
-    var forfait10 = lastKm ? Math.min(lastTotal * 0.1 / lastTotal * lastTotal, lastTotal) : 0;
-    // Gain par rapport au forfait 10 % : (frais réels - déduction forfaitaire) × TMI
-    // Pour la déduction forfaitaire, on approxime sur la base du revenu
-    // Ici on simplifie : économie = total × TMI (le gain brut si pas de forfait concurrentiel)
-    // Plus rigoureusement : gain vs forfait = MAX(0, totalFraisReels - 10% salaire brut) × TMI
-    // Comme on n'a pas le salaire brut, on affiche l'économie d'impôt liée aux frais déductibles × TMI
-    var saving = lastTotal * (tmi / 100);
-    document.getElementById('res-saving').textContent = tmi === 0 ? '0 €' : fmtEur(saving);
   }
 
   function updateBaremeDisplay() {
