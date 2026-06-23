@@ -220,6 +220,22 @@
     .comp-gain-val { color: #15803d !important; font-size: .95rem; }
     .comp-neut  { background: #fff7ed; }
 
+    /* ── Variantes du big-result ── */
+    .big-result.is-orange {
+      background: #fff7ed;
+      border-color: #fed7aa;
+    }
+    .big-result.is-orange .br-label { color: #c2410c; }
+    .big-result.is-orange .br-value { color: #9a3412; }
+    .big-result.is-orange .br-sub   { color: #c2410c; opacity: 1; }
+    .big-result.is-neutral {
+      background: var(--blue-soft);
+      border-color: var(--blue-mid);
+    }
+    .big-result.is-neutral .br-label { color: var(--blue); }
+    .big-result.is-neutral .br-value { color: var(--text-soft); }
+    .big-result.is-neutral .br-sub   { color: var(--text-soft); opacity: 1; }
+
     /* ── Section hidden ── */
     .hidden { display: none !important; }
   </style>
@@ -351,9 +367,7 @@
         <span class="input-unit">€/an</span>
       </div>
     </div>
-    <p style="margin-top:7px;font-size:.78rem;color:var(--text-soft)">
-      🔍 <a href="/simulateur-salaire/" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:underline;font-weight:600">Je ne connais pas mon net annuel ? Calculer mon salaire</a>
-    </p>
+    <p style="margin-top:6px;font-size:.8rem;color:var(--text-soft)">🔍 Un doute sur ce chiffre ? <a href="/simulateur-salaire/" target="_blank" style="color:var(--blue);font-weight:500;text-decoration:underline">Calculez votre net annuel imposable ici</a></p>
     <div class="info-box" style="margin-top:8px">
       Facultatif — renseignez votre revenu net imposable (case 1AJ) pour savoir si les frais réels vous sont <strong>plus avantageux</strong> que l'abattement de 10 % appliqué automatiquement par l'État.
     </div>
@@ -363,19 +377,16 @@
   <div class="card">
     <div class="card-title">Résultat</div>
 
-    <div class="big-result">
-      <div class="br-label">Somme déduite de vos revenus imposables</div>
-      <div class="br-value" id="res-total">— €</div>
-      <div class="br-sub" id="res-sub">Renseignez les informations ci-dessus</div>
+    <div class="big-result is-neutral" id="main-result-block">
+      <div class="br-label" id="main-result-label">💰 ARGENT ÉCONOMISÉ SUR VOS IMPÔTS</div>
+      <div class="br-value" id="res-gain">— €</div>
+      <div class="br-sub" id="main-result-sub">Renseignez votre salaire net ci-dessus pour voir votre économie réelle</div>
     </div>
-
-    <p style="font-size:.8rem;color:var(--text-soft);line-height:1.6;margin-bottom:16px">
-      💡 Ce montant sera déduit à 100 % de votre revenu net imposable lors de votre déclaration de revenus (option des frais réels).
-    </p>
 
     <div id="res-details" class="hidden">
       <div class="section-sep">Détail du calcul</div>
       <div id="formula-lines"></div>
+      <div id="formula-fiscal"></div>
     </div>
 
   </div>
@@ -506,10 +517,10 @@
     lastKm = km;
 
     if (!km || km <= 0) {
-      document.getElementById('res-total').textContent = '— €';
-      document.getElementById('res-sub').textContent = 'Renseignez les informations ci-dessus';
+      setMainBlock('neutral', '💰 ARGENT ÉCONOMISÉ SUR VOS IMPÔTS', '— €', 'Renseignez les informations ci-dessus');
       document.getElementById('res-details').classList.add('hidden');
       lastTotal = 0;
+      recalcVerdict();
       return;
     }
 
@@ -541,42 +552,57 @@
     var totalFinal = isElectric ? total * 1.20 : total;
     lastTotal = totalFinal;
 
-    var evLabel = isElectric ? ' ⚡ électrique' : '';
-    document.getElementById('res-total').textContent = fmtEur(totalFinal);
-    document.getElementById('res-sub').textContent = fmt0(km) + ' km — ' + vehicleLabel() + evLabel + ' — Tranche ' + tranche;
     document.getElementById('res-details').classList.remove('hidden');
+    document.getElementById('formula-fiscal').innerHTML = '';
 
     var linesHTML =
       row('Distance prise en compte', fmt0(km) + ' km') +
       row('Tranche barème appliquée', 'Tranche ' + tranche + ' (' + trancheLabel(b, tranche) + ')') +
       row('Taux applicable', tauxStr) +
-      row('Formule barème', formula) +
-      row('Sous-total barème', fmtEur(total));
+      row('Formule barème', formula);
     if (isElectric) {
+      linesHTML += row('Sous-total avant majoration', fmtEur(total));
       linesHTML += row('Majoration électrique (+20 %)', '+' + fmtEur(total * 0.20));
     }
-    linesHTML += row('Total déductible', fmtEur(totalFinal));
+    linesHTML += row('Montant déductible du revenu imposable', fmtEur(totalFinal));
     document.getElementById('formula-lines').innerHTML = linesHTML;
 
     recalcVerdict();
   }
 
-  // Barème simplifié IR 2026 — célibataire 1 part (estimation indicative)
+  // Barème IR 2026 — célibataire 1 part (art. 197 CGI, estimation indicative)
   function calcImpot(revenu) {
     if (revenu <= 0) return 0;
     var impot = 0;
-    if (revenu > 12000) impot += Math.min(revenu - 12000, 17000) * 0.11; // tranche 11 %
-    if (revenu > 29000) impot += Math.min(revenu - 29000, 53000) * 0.30; // tranche 30 %
-    if (revenu > 82000) impot += (revenu - 82000) * 0.41;                // tranche 41 %
+    if (revenu > 12000)  impot += Math.min(revenu - 12000,  17000) * 0.11;
+    if (revenu > 29000)  impot += Math.min(revenu - 29000,  53000) * 0.30;
+    if (revenu > 82000)  impot += Math.min(revenu - 82000,  95106) * 0.41;
+    if (revenu > 177106) impot += (revenu - 177106) * 0.45;
     return Math.round(impot);
   }
 
   function recalcVerdict() {
     var salaire = parseFloat(document.getElementById('salaire-net').value) || 0;
     var card = document.getElementById('verdict-card');
-    if (!salaire || !lastTotal) { card.classList.add('hidden'); return; }
 
-    var abattement = salaire * 0.10;
+    if (!lastTotal) {
+      setMainBlock('neutral', '💰 ARGENT ÉCONOMISÉ SUR VOS IMPÔTS', '— €', 'Renseignez les informations ci-dessus');
+      document.getElementById('formula-fiscal').innerHTML = '';
+      card.classList.add('hidden');
+      return;
+    }
+
+    if (!salaire) {
+      setMainBlock('neutral', '💰 ARGENT ÉCONOMISÉ SUR VOS IMPÔTS', '?', 'Renseignez votre salaire net annuel ci-dessus pour voir votre économie réelle');
+      document.getElementById('formula-fiscal').innerHTML = '';
+      card.classList.add('hidden');
+      return;
+    }
+
+    // Abattement 10 % — plancher 495 €, plafond 14 171 € (art. 83 CGI 2026)
+    var abattement = Math.min(Math.max(salaire * 0.10, 495), 14171);
+    if (salaire < 495) abattement = salaire;
+
     var revenuA  = Math.max(salaire - abattement, 0);
     var revenuB  = Math.max(salaire - lastTotal,  0);
     var impotA   = calcImpot(revenuA);
@@ -584,6 +610,20 @@
     var gain     = impotA - impotB;
     var diff     = lastTotal - abattement;
 
+    // Lignes fiscales dans la section Détail du calcul
+    document.getElementById('formula-fiscal').innerHTML =
+      row('Abattement 10 % retenu', fmtEur(abattement) + ' <span style="color:var(--text-soft);font-size:.76rem;font-weight:400">(min 495 € / max 14 171 €)</span>') +
+      row('Revenu imposable — Option 10 %', fmtEur(revenuA)) +
+      row('Revenu imposable — Option Frais Réels', fmtEur(revenuB));
+
+    // Grand bloc : gain d'impôt ou alerte si non rentable
+    if (gain > 0) {
+      setMainBlock('green', '💰 ARGENT ÉCONOMISÉ SUR VOS IMPÔTS', fmtEur(gain), 'Gain réel net sur votre facture fiscale finale grâce aux frais réels.');
+    } else {
+      setMainBlock('orange', '⚠️ Aucun gain d\'impôt avec les frais réels', fmtEur(0), 'L\'abattement automatique de 10 % est plus avantageux.');
+    }
+
+    // Bandeau verdict
     var html;
     if (diff > 0) {
       html = '<div class="verdict verdict-green">' +
@@ -599,14 +639,14 @@
         '</div></div>';
     }
 
-    // Tableau comparatif des impôts estimés
+    // Tableau comparatif impôt estimé
     html += '<div class="comp-table">' +
       '<div class="comp-row">' +
-        '<span class="comp-label">📊 Votre impôt estimé (Option par défaut 10 %)</span>' +
+        '<span class="comp-label">📊 Impôt estimé — Option 10 % (par défaut)</span>' +
         '<span class="comp-val">' + fmtEur(impotA) + '</span>' +
       '</div>' +
       '<div class="comp-row">' +
-        '<span class="comp-label">💰 Votre impôt estimé (Option Frais Réels)</span>' +
+        '<span class="comp-label">💰 Impôt estimé — Option Frais Réels</span>' +
         '<span class="comp-val">' + fmtEur(impotB) + '</span>' +
       '</div>';
 
@@ -623,11 +663,20 @@
     }
     html += '</div>' +
       '<p style="margin-top:10px;font-size:.74rem;color:var(--text-soft);line-height:1.5">' +
-      'Estimation simplifiée pour un célibataire (1 part). Calcul indicatif — consultez votre avis d\'imposition pour votre situation exacte.' +
+      'Estimation simplifiée pour un célibataire (1 part). Barème IR 2026 — abattement 10 % (min 495 € / max 14 171 €). ' +
+      'Calcul indicatif — consultez votre avis d\'imposition pour votre situation exacte.' +
       '</p>';
 
     document.getElementById('verdict-content').innerHTML = html;
     card.classList.remove('hidden');
+  }
+
+  function setMainBlock(state, label, value, sub) {
+    var block = document.getElementById('main-result-block');
+    block.className = 'big-result' + (state === 'orange' ? ' is-orange' : state === 'neutral' ? ' is-neutral' : '');
+    document.getElementById('main-result-label').textContent = label;
+    document.getElementById('res-gain').textContent = value;
+    document.getElementById('main-result-sub').textContent = sub;
   }
 
   function updateBaremeDisplay() {

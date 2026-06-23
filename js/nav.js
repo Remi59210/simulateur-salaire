@@ -68,16 +68,6 @@
       icon(p.i) + '<span>' + p.label + '</span></a>';
   }).join('');
 
-  var ddHTML =
-    '<div class="g-nav-dd" id="gNavDd">' +
-      '<button class="g-nav-dd-btn' + (isSimActive ? ' active' : '') + '" id="gNavDdBtn" aria-expanded="false" aria-haspopup="true">' +
-        icon(ic.grid) +
-        '<span>Simulateurs</span>' +
-        '<svg class="g-nav-dd-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>' +
-      '</button>' +
-      '<div class="g-nav-dd-menu" id="gNavDdMenu">' + ddItemsHTML + '</div>' +
-    '</div>';
-
   var isSubpage = path.startsWith('/simulateur-salaire/') || path.startsWith('/generateur-lettre/') || path.startsWith('/calculateur-frais-kilometriques/');
   var backHTML = isSubpage
     ? '<div class="g-back"><a class="g-back-link" href="/">' + icon(ic.home) + '<span>Accueil</span></a></div>'
@@ -90,7 +80,17 @@
           '<div class="g-nav-logo" aria-hidden="true">AS</div>' +
           '<span class="g-nav-brand-name">Aide Salariés</span>' +
         '</a>' +
-        '<div class="g-nav-links" id="gNavLinks">' + ddHTML + regHTML + '</div>' +
+        '<div class="g-nav-links" id="gNavLinks">' +
+          '<div class="g-nav-dd" id="gNavDd">' +
+            '<button class="g-nav-dd-btn' + (isSimActive ? ' active' : '') + '" id="gNavDdBtn" aria-expanded="false" aria-haspopup="true">' +
+              icon(ic.grid) +
+              '<span>Simulateurs</span>' +
+              '<svg class="g-nav-dd-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>' +
+            '</button>' +
+            '<div class="g-nav-dd-menu" id="gNavDdMenu">' + ddItemsHTML + '</div>' +
+          '</div>' +
+          regHTML +
+        '</div>' +
         '<button class="g-nav-toggle" id="gNavToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="gNavLinks">' +
           '<span></span><span></span><span></span>' +
         '</button>' +
