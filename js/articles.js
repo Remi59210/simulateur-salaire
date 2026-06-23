@@ -28,9 +28,9 @@ const articles = [
     link: "/articles/frais-kilometriques-impots.html"
   },
   {
-    title: "Calculer son salaire net en 2025 : guide complet",
+    title: "Calculer son salaire net en 2026 : guide complet",
     slug: "calculer-salaire-net-2025",
-    date: "2025-08-08",
+    date: "2026-06-23",
     category: "salaire",
     excerpt: "Différence brut/net, simulateur, erreurs à éviter et exemples chiffrés simples.",
     readingTime: "8 min",
