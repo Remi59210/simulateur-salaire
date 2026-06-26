@@ -236,6 +236,52 @@
     .big-result.is-neutral .br-value { color: var(--text-soft); }
     .big-result.is-neutral .br-sub   { color: var(--text-soft); opacity: 1; }
 
+    /* ── Montant des frais km à reporter (mis en évidence) ── */
+    .km-amount {
+      background: var(--blue-soft);
+      border: 2px solid var(--blue-mid);
+      border-radius: 14px;
+      padding: 20px 24px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .km-amount .ka-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+    .km-amount .ka-value {
+      font-size: clamp(1.9rem, 6vw, 2.7rem);
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1.1;
+    }
+    .km-amount .ka-sub {
+      font-size: .82rem;
+      color: var(--text-soft);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+    .km-amount .ka-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 700;
+      font-size: .88rem;
+      text-decoration: none;
+      padding: 11px 20px;
+      border-radius: 10px;
+      margin-top: 14px;
+      transition: background .18s;
+    }
+    .km-amount .ka-cta:hover { background: var(--blue-dark); }
+    .km-amount .ka-cta svg { width: 16px; height: 16px; }
+
     /* ── Section hidden ── */
     .hidden { display: none !important; }
   </style>
@@ -377,6 +423,17 @@
   <div class="card">
     <div class="card-title">Résultat</div>
 
+    <!-- ── Montant des frais km déductibles — donnée à reporter ── -->
+    <div class="km-amount hidden" id="km-amount-block">
+      <div class="ka-label">📋 Vos frais kilométriques déductibles</div>
+      <div class="ka-value" id="km-amount-value">— €</div>
+      <div class="ka-sub">C'est le montant à reporter dans votre déclaration (case 1AK) ou dans le simulateur global de frais réels.</div>
+      <a class="ka-cta" href="/calculateur-frais-reels/">
+        Reporter dans le Simulateur Global de Frais Réels
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
     <div class="big-result is-neutral" id="main-result-block">
       <div class="br-label" id="main-result-label">💰 ARGENT ÉCONOMISÉ SUR VOS IMPÔTS</div>
       <div class="br-value" id="res-gain">— €</div>
@@ -517,6 +574,7 @@
     lastKm = km;
 
     if (!km || km <= 0) {
+      document.getElementById('km-amount-block').classList.add('hidden');
       setMainBlock('neutral', '💰 ARGENT ÉCONOMISÉ SUR VOS IMPÔTS', '— €', 'Renseignez les informations ci-dessus');
       document.getElementById('res-details').classList.add('hidden');
       lastTotal = 0;
@@ -551,6 +609,10 @@
     var isElectric = vehicleType === 'voiture' && document.getElementById('ev-electric').checked;
     var totalFinal = isElectric ? total * 1.20 : total;
     lastTotal = totalFinal;
+
+    // Met en évidence le montant déductible à reporter dans le simulateur global
+    document.getElementById('km-amount-block').classList.remove('hidden');
+    document.getElementById('km-amount-value').textContent = fmtEur(totalFinal);
 
     document.getElementById('res-details').classList.remove('hidden');
     document.getElementById('formula-fiscal').innerHTML = '';
