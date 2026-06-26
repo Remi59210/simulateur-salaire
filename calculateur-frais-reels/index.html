@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulateur Global de Frais Réels 2026 — 10 % ou Frais Réels ? | Aide Salariés</title>
+  <meta name="description" content="Frais réels ou abattement 10 % : faites le bon choix en 30 secondes. Centralisez frais kilométriques, repas et télétravail, et découvrez l'argent réellement économisé sur vos impôts 2026." />
+  <meta name="robots" content="index, follow" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulateur Global de Frais Réels 2026","description":"Comparez l'abattement forfaitaire de 10 % et la déduction des frais réels (kilomètres, repas, télétravail) pour connaître votre économie d'impôt 2026.","url":"https://simulateur-salaire.fr/calculateur-frais-reels/","applicationCategory":"FinanceApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/css/tools.css" />
+  <style>
+    /* ── Résultat principal (verdict géant) ── */
+    .big-result {
+      background: var(--green-light);
+      border: 2px solid var(--green-border);
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .big-result .br-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #16a34a;
+      margin-bottom: 6px;
+    }
+    .big-result .br-value {
+      font-size: clamp(2rem, 7vw, 3rem);
+      font-weight: 800;
+      color: #15803d;
+      line-height: 1.1;
+    }
+    .big-result .br-sub {
+      font-size: .82rem;
+      color: #166534;
+      margin-top: 6px;
+      opacity: .9;
+      line-height: 1.5;
+    }
+    /* Variante orange : l'abattement 10 % gagne */
+    .big-result.is-orange  { background: #fff7ed; border-color: #fed7aa; }
+    .big-result.is-orange .br-label { color: #c2410c; }
+    .big-result.is-orange .br-value { color: #9a3412; font-size: clamp(1.1rem, 4.5vw, 1.5rem); }
+    .big-result.is-orange .br-sub   { color: #c2410c; opacity: 1; }
+    /* Variante neutre : en attente de saisie */
+    .big-result.is-neutral { background: var(--blue-soft); border-color: var(--blue-mid); }
+    .big-result.is-neutral .br-label { color: var(--blue); }
+    .big-result.is-neutral .br-value { color: var(--text-soft); }
+    .big-result.is-neutral .br-sub   { color: var(--text-soft); opacity: 1; }
+
+    /* ── Ligne de détail ── */
+    .formula-row {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding: 9px 0; border-bottom: 1px dashed var(--border); font-size: .86rem;
+    }
+    .formula-row:last-child { border-bottom: none; }
+    .formula-row .fr-label { color: var(--text-soft); }
+    .formula-row .fr-val   { font-weight: 700; color: var(--text); font-family: monospace; font-size: .85rem; white-space: nowrap; }
+    .formula-row.total { border-top: 1.5px solid var(--border); border-bottom: none; margin-top: 4px; padding-top: 12px; }
+    .formula-row.total .fr-label { font-weight: 700; color: var(--text); }
+    .formula-row.total .fr-val   { color: var(--blue); font-size: .95rem; }
+
+    /* ── Tableau comparatif impôt ── */
+    .comp-table { margin-top: 14px; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--border); }
+    .comp-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: .87rem; gap: 12px;
+    }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-label { color: var(--text-soft); flex: 1; min-width: 0; }
+    .comp-val   { font-weight: 700; color: var(--text); white-space: nowrap; }
+    .comp-gain  { background: var(--green-light); }
+    .comp-gain .comp-label { color: #15803d; font-weight: 600; }
+    .comp-gain-val { color: #15803d !important; font-size: .95rem; }
+    .comp-neut  { background: #fff7ed; }
+    .comp-neut .comp-label { color: #9a3412; font-weight: 600; }
+    .comp-neut .comp-val   { color: #9a3412; }
+
+    /* ── Verdict bandeau ── */
+    .verdict { display: flex; align-items: flex-start; gap: 12px; border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; }
+    .verdict-green  { background: var(--green-light); border: 2px solid var(--green-border); }
+    .verdict-orange { background: #fff7ed; border: 2px solid #fed7aa; }
+    .verdict .verdict-icon { font-size: 1.4rem; line-height: 1; flex-shrink: 0; }
+    .verdict .verdict-text { font-size: .88rem; line-height: 1.6; }
+    .verdict-green  .verdict-text { color: #14532d; }
+    .verdict-orange .verdict-text { color: #7c2d12; }
+
+    /* ── Récap repas auto ── */
+    .repas-auto {
+      margin-top: 8px; background: var(--green-light); border: 1.5px solid var(--green-border);
+      border-radius: 10px; padding: 11px 14px; font-size: .82rem; color: #15803d; font-weight: 600;
+      display: none;
+    }
+    .repas-auto strong { color: #15803d; }
+
+    /* ── CTA ── */
+    .cta-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue); color: #fff; font-weight: 700; font-size: .92rem;
+      text-decoration: none; padding: 13px 24px; border-radius: 10px; transition: background .18s;
+    }
+    .cta-back:hover { background: var(--blue-dark); }
+    .cta-back svg { width: 17px; height: 17px; }
+
+    .mini-link { font-size: .8rem; color: var(--text-soft); margin-top: 6px; }
+    .mini-link a { color: var(--blue); font-weight: 500; text-decoration: underline; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<header class="tool-header">
+  <div class="header-badge">Fiscalité</div>
+  <h1>Simulateur Global de Frais Réels 2026</h1>
+  <p>10 % ou frais réels ? Découvrez l'option qui vous fait payer le moins d'impôt</p>
+</header>
+
+<main>
+
+  <!-- ── Carte 1 : Saisie ── -->
+  <div class="card">
+    <div class="card-title">Vos informations</div>
+
+    <!-- Case 1 : Salaire net imposable -->
+    <div class="field">
+      <label for="salaire-net">💰 Votre salaire NET imposable annuel</label>
+      <div class="input-wrap">
+        <input type="number" id="salaire-net" min="0" step="500" placeholder="ex : 28 000" oninput="recalc()" />
+        <span class="input-unit">€/an</span>
+      </div>
+    </div>
+    <p class="mini-link">🔍 Un doute sur ce chiffre ? <a href="/simulateur-salaire/" target="_blank" rel="noopener">Calculez votre net imposable annuel ici</a> (case 1AJ de votre déclaration).</p>
+
+    <div class="section-sep" style="margin-top:20px">Vos dépenses professionnelles</div>
+
+    <!-- Case 2 : Frais kilométriques -->
+    <div class="field" style="margin-bottom:4px">
+      <label for="frais-km">🚗 Total de vos frais kilométriques annuels</label>
+      <div class="input-wrap">
+        <input type="number" id="frais-km" min="0" step="50" placeholder="ex : 3 200" oninput="recalc()" />
+        <span class="input-unit">€</span>
+      </div>
+    </div>
+    <p class="mini-link">📐 Besoin de calculer vos kilomètres ? <a href="/calculateur-frais-kilometriques/" target="_blank" rel="noopener">Utilisez notre outil dédié au barème DGFiP</a>.</p>
+
+    <!-- Case 3 : Jours pour repas -->
+    <div class="field" style="margin-top:16px">
+      <label for="jours-repas">🍽️ Nombre de jours travaillés (frais de repas)</label>
+      <div class="input-wrap">
+        <input type="number" id="jours-repas" min="0" max="300" step="1" placeholder="ex : 210" oninput="recalc()" />
+        <span class="input-unit">jours</span>
+      </div>
+    </div>
+    <div class="repas-auto" id="repas-auto"></div>
+    <p class="mini-link">Si vous déjeunez sur place (gamelle ou restaurant), l'État admet une déduction forfaitaire de <strong>5,30 € par jour travaillé</strong>, sans justificatif détaillé.</p>
+
+    <!-- Case 4 : Autres frais -->
+    <div class="field" style="margin-top:16px">
+      <label for="autres-frais">📦 Autres frais réels (télétravail, matériel, double résidence…)</label>
+      <div class="input-wrap">
+        <input type="number" id="autres-frais" min="0" step="50" placeholder="ex : 600" oninput="recalc()" />
+        <span class="input-unit">€</span>
+      </div>
+    </div>
+    <p class="mini-link">Électricité &amp; internet au prorata, mobilier de bureau, loyer d'un studio professionnel, formations payées de votre poche, honoraires d'avocat aux Prud'hommes…</p>
+  </div>
+
+  <!-- ── Carte 2 : Verdict ── -->
+  <div class="card">
+    <div class="card-title">Votre verdict</div>
+
+    <div class="big-result is-neutral" id="main-block">
+      <div class="br-label" id="main-label">💰 ARGENT ÉCONOMISÉ SUR VOS IMPÔTS</div>
+      <div class="br-value" id="main-value">— €</div>
+      <div class="br-sub" id="main-sub">Renseignez votre salaire net imposable et vos dépenses ci-dessus.</div>
+    </div>
+
+    <div id="verdict-zone" class="hidden"></div>
+  </div>
+
+  <!-- ── Carte 3 : Détail transparent ── -->
+  <div class="card hidden" id="detail-card">
+    <div class="card-title">Le détail transparent du calcul</div>
+
+    <div class="section-sep">Total de vos frais réels</div>
+    <div id="frais-lines"></div>
+
+    <div class="section-sep" style="margin-top:18px">Comparaison de l'impôt</div>
+    <div id="fiscal-lines"></div>
+
+    <div class="info-box" style="margin-top:14px">
+      👥 <strong>En couple (marié ou pacsé) ?</strong> Le choix des frais réels est <strong>individuel</strong> : chaque conjoint décide séparément s'il a intérêt à y passer. Faites une simulation pour chacun.
+    </div>
+    <div class="info-box warn" style="margin-top:10px">
+      ⚠️ Si vous optez pour les frais réels, vous devez <strong>réintégrer</strong> dans vos revenus la part employeur de vos titres-restaurant et de l'abonnement transport (les 50 % remboursés). Le logiciel des impôts vous guide sur cette ligne.
+    </div>
+  </div>
+
+  <!-- ── CTA retour ── -->
+  <div style="text-align:center;padding:8px 0 16px">
+    <a class="cta-back" href="/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Retourner au Dashboard des outils
+    </a>
+  </div>
+
+</main>
+
+<section class="tool-seo">
+  <div class="tool-seo-inner">
+    <h2>Frais réels ou abattement de 10 % : comment choisir en 2026 ?</h2>
+    <div class="tool-seo-grid">
+      <div>
+        <h3>Comment fonctionne ce simulateur ?</h3>
+        <p>Chaque salarié bénéficie automatiquement d'un <strong>abattement forfaitaire de 10 %</strong> sur son salaire imposable. Mais vous pouvez y renoncer pour déclarer vos <strong>frais réels</strong> si ceux-ci sont plus élevés. Notre outil centralise toutes vos dépenses (kilomètres, repas, télétravail, double résidence) et les compare automatiquement à l'abattement de 10 %.</p>
+        <p>Le résultat affiché n'est pas un montant abstrait de déduction : c'est l'<strong>argent réellement économisé sur votre facture d'impôt finale</strong>, calculé via le barème progressif de l'impôt sur le revenu 2026.</p>
+
+        <h3>Le plancher et le plafond de l'abattement 10 %</h3>
+        <p>L'abattement de 10 % n'est jamais inférieur à <strong>495 €</strong> ni supérieur à <strong>14 171 €</strong>. Concrètement, au-delà d'environ 141 700 € de salaire net imposable, l'abattement est plafonné : les frais réels deviennent alors très souvent gagnants pour les hauts revenus avec de gros trajets.</p>
+      </div>
+      <div>
+        <h3>Quand les frais réels sont-ils gagnants ?</h3>
+        <p>Les frais réels deviennent intéressants dès que vos dépenses professionnelles dépassent l'abattement de 10 %. C'est fréquent si vous habitez <strong>loin de votre travail</strong>, si vous déjeunez tous les jours à l'extérieur, ou si vous avez engagé des frais importants de <strong>télétravail</strong> ou de <strong>formation</strong>.</p>
+
+        <h3>Quels justificatifs conserver ?</h3>
+        <ul>
+          <li>Relevé kilométrique et carte grise (puissance fiscale)</li>
+          <li>Factures de carburant, d'entretien, de péages</li>
+          <li>Quittances de loyer pour une double résidence professionnelle</li>
+          <li>Factures d'électricité, internet et matériel pour le télétravail</li>
+          <li>Justificatifs de formation et honoraires d'avocat</li>
+        </ul>
+        <p>Conservez l'ensemble de ces pièces pendant <strong>3 ans</strong> : l'administration fiscale peut vous les réclamer en cas de contrôle. La déclaration aux frais réels ne se justifie qu'avec des preuves solides.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Aide Salariés — Estimation indicative basée sur le barème IR 2026 (1 part). Ne constitue pas un conseil fiscal. Vérifiez les montants sur <strong>impots.gouv.fr</strong>.</footer>
+
+<script src="/js/nav.js"></script>
+<script>
+  // Valeur forfaitaire déductible d'un repas pris hors domicile (DGFiP 2026)
+  var VALEUR_REPAS = 5.30;
+
+  // ── Barème IR 2026 — célibataire 1 part (art. 197 CGI, estimation indicative) ──
+  function calcImpot(revenu) {
+    if (revenu <= 0) return 0;
+    var impot = 0;
+    if (revenu > 12000)  impot += Math.min(revenu - 12000,  17000) * 0.11;
+    if (revenu > 29000)  impot += Math.min(revenu - 29000,  53000) * 0.30;
+    if (revenu > 82000)  impot += Math.min(revenu - 82000,  95106) * 0.41;
+    if (revenu > 177106) impot += (revenu - 177106) * 0.45;
+    return Math.round(impot);
+  }
+
+  function val(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+  function recalc() {
+    var salaire   = val('salaire-net');
+    var fraisKm   = val('frais-km');
+    var joursRep  = Math.round(val('jours-repas'));
+    var autres    = val('autres-frais');
+
+    // Calcul automatique des repas : jours × 5,30 €
+    var repas = joursRep * VALEUR_REPAS;
+    var repasBox = document.getElementById('repas-auto');
+    if (joursRep > 0) {
+      repasBox.style.display = 'block';
+      repasBox.innerHTML = '🍽️ Frais de repas déductibles calculés : <strong>' +
+        joursRep + ' jours × 5,30 € = ' + fmtEur(repas) + '</strong>';
+    } else {
+      repasBox.style.display = 'none';
+    }
+
+    var totalFR = fraisKm + repas + autres;
+
+    var mainBlock = document.getElementById('main-block');
+    var verdictZone = document.getElementById('verdict-zone');
+    var detailCard = document.getElementById('detail-card');
+
+    // Pas assez d'informations
+    if (salaire <= 0 || totalFR <= 0) {
+      setMain('neutral', '💰 ARGENT ÉCONOMISÉ SUR VOS IMPÔTS', '— €',
+        'Renseignez votre salaire net imposable et au moins une dépense ci-dessus.');
+      verdictZone.classList.add('hidden');
+      detailCard.classList.add('hidden');
+      return;
+    }
+
+    // ── Abattement 10 % : plancher 495 €, plafond 14 171 € ──
+    var abattement = Math.min(Math.max(salaire * 0.10, 495), 14171);
+    if (salaire < 495) abattement = salaire;
+
+    var revenu10  = Math.max(salaire - abattement, 0);   // option par défaut
+    var revenuFR  = Math.max(salaire - totalFR,    0);   // option frais réels
+    var impot10   = calcImpot(revenu10);
+    var impotFR   = calcImpot(revenuFR);
+    var gain      = impot10 - impotFR;
+    var ecartDed  = totalFR - abattement;
+
+    // ── Bloc verdict géant ──
+    if (gain > 0) {
+      setMain('green', '💰 ARGENT ÉCONOMISÉ SUR VOS IMPÔTS',
+        fmtEur(gain) + ' ÉCONOMISÉS !',
+        'En passant aux frais réels, vous payez ' + fmtEur(gain) + ' d\'impôt en moins cette année.');
+    } else {
+      setMain('orange', '⚠️ L\'option par défaut est plus avantageuse',
+        'Restez sur les 10 %',
+        'L\'abattement automatique de 10 % (' + fmtEur(abattement) + ') vous fait économiser plus d\'argent que vos frais réels (' + fmtEur(totalFR) + ').');
+    }
+
+    // ── Bandeau verdict détaillé ──
+    var vHtml;
+    if (ecartDed > 0) {
+      vHtml = '<div class="verdict verdict-green">' +
+        '<div class="verdict-icon">✅</div>' +
+        '<div class="verdict-text"><strong>Cochez la case « Frais réels » sur votre déclaration.</strong><br>' +
+        'Vous déduisez <strong>' + fmtEur(ecartDed) + ' de plus</strong> que l\'abattement automatique de 10 % (' + fmtEur(abattement) + ').' +
+        '</div></div>';
+    } else {
+      vHtml = '<div class="verdict verdict-orange">' +
+        '<div class="verdict-icon">⚠️</div>' +
+        '<div class="verdict-text"><strong>Ne touchez à rien : laissez l\'abattement de 10 %.</strong><br>' +
+        'Vos frais réels (' + fmtEur(totalFR) + ') sont inférieurs à l\'abattement automatique (' + fmtEur(abattement) + '). Les déclarer vous ferait perdre de l\'argent.' +
+        '</div></div>';
+    }
+    document.getElementById('verdict-zone').innerHTML = vHtml;
+    verdictZone.classList.remove('hidden');
+
+    // ── Détail des frais réels ──
+    var fraisHtml = '';
+    if (fraisKm > 0) fraisHtml += line('🚗 Frais kilométriques', fmtEur(fraisKm));
+    if (repas  > 0)  fraisHtml += line('🍽️ Frais de repas (' + joursRep + ' j × 5,30 €)', fmtEur(repas));
+    if (autres > 0)  fraisHtml += line('📦 Autres frais (télétravail, etc.)', fmtEur(autres));
+    fraisHtml += '<div class="formula-row total"><span class="fr-label">Total de vos frais réels</span><span class="fr-val">' + fmtEur(totalFR) + '</span></div>';
+    document.getElementById('frais-lines').innerHTML = fraisHtml;
+
+    // ── Détail fiscal + tableau comparatif ──
+    var fiscalHtml =
+      line('Abattement 10 % retenu', fmtEur(abattement) + ' <span style="color:var(--text-soft);font-size:.76rem;font-weight:400">(min 495 € / max 14 171 €)</span>') +
+      line('Revenu imposable — option 10 %', fmtEur(revenu10)) +
+      line('Revenu imposable — option frais réels', fmtEur(revenuFR));
+
+    fiscalHtml += '<div class="comp-table">' +
+      '<div class="comp-row">' +
+        '<span class="comp-label">📊 Impôt SANS frais réels (option 10 % par défaut)</span>' +
+        '<span class="comp-val">' + fmtEur(impot10) + '</span>' +
+      '</div>' +
+      '<div class="comp-row">' +
+        '<span class="comp-label">💼 Impôt AVEC frais réels</span>' +
+        '<span class="comp-val">' + fmtEur(impotFR) + '</span>' +
+      '</div>';
+
+    if (gain > 0) {
+      fiscalHtml += '<div class="comp-row comp-gain">' +
+        '<span class="comp-label">🎯 Gain net dans votre poche</span>' +
+        '<span class="comp-val comp-gain-val">− ' + fmtEur(gain) + ' d\'impôt !</span>' +
+      '</div>';
+    } else {
+      fiscalHtml += '<div class="comp-row comp-neut">' +
+        '<span class="comp-label">ℹ️ Résultat</span>' +
+        '<span class="comp-val">Aucune économie : gardez les 10 %</span>' +
+      '</div>';
+    }
+    fiscalHtml += '</div>' +
+      '<p style="margin-top:10px;font-size:.74rem;color:var(--text-soft);line-height:1.5">' +
+      'Estimation simplifiée pour un célibataire (1 part). Barème IR 2026 — abattement 10 % (min 495 € / max 14 171 €). ' +
+      'Calcul indicatif : votre quotient familial réel (enfants, mariage) peut modifier le résultat.' +
+      '</p>';
+    document.getElementById('fiscal-lines').innerHTML = fiscalHtml;
+
+    detailCard.classList.remove('hidden');
+  }
+
+  function setMain(state, label, value, sub) {
+    var block = document.getElementById('main-block');
+    block.className = 'big-result' + (state === 'orange' ? ' is-orange' : state === 'neutral' ? ' is-neutral' : '');
+    document.getElementById('main-label').textContent = label;
+    document.getElementById('main-value').textContent = value;
+    document.getElementById('main-sub').textContent = sub;
+  }
+
+  function line(label, val) {
+    return '<div class="formula-row"><span class="fr-label">' + label + '</span><span class="fr-val">' + val + '</span></div>';
+  }
+
+  function fmtEur(n) {
+    return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+  }
+</script>
+</body>
+</html>

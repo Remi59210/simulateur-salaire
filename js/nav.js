@@ -34,6 +34,7 @@
     grid:      '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>',
     home:      '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
     car:       '<path d="M5 17H3a2 2 0 0 1-2-2V9l2-4h14l2 4v6a2 2 0 0 1-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/>',
+    receipt:   '<path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 7h8"/><path d="M8 11h8"/><path d="M8 15h5"/>',
   };
 
   var dropTools = [
@@ -48,6 +49,7 @@
     { href: '/simulateur-salaire/simulateur-are.html',       label: 'Simulateur ARE',              patterns: ['/simulateur-salaire/simulateur-are.html'],                          i: ic.shield },
     { sep: true },
     { href: '/calculateur-frais-kilometriques/', label: 'Frais kilométriques',  patterns: ['/calculateur-frais-kilometriques/', '/calculateur-frais-kilometriques/index.html'], i: ic.car },
+    { href: '/calculateur-frais-reels/',         label: 'Frais réels (global)', patterns: ['/calculateur-frais-reels/', '/calculateur-frais-reels/index.html'], i: ic.receipt },
   ];
 
   var isSimActive = dropTools.filter(function(t){return t.href;}).some(function(t){ return isActive(t.patterns); });
@@ -68,7 +70,7 @@
       icon(p.i) + '<span>' + p.label + '</span></a>';
   }).join('');
 
-  var isSubpage = path.startsWith('/simulateur-salaire/') || path.startsWith('/generateur-lettre/') || path.startsWith('/calculateur-frais-kilometriques/');
+  var isSubpage = path.startsWith('/simulateur-salaire/') || path.startsWith('/generateur-lettre/') || path.startsWith('/calculateur-frais-kilometriques/') || path.startsWith('/calculateur-frais-reels/');
   var backHTML = isSubpage
     ? '<div class="g-back"><a class="g-back-link" href="/">' + icon(ic.home) + '<span>Accueil</span></a></div>'
     : '';

@@ -1,6 +1,15 @@
 // js/articles.js
 const articles = [
   {
+    title: "Tutoriel : Tout ce que vous pouvez déduire aux frais réels et comment le déclarer",
+    slug: "guide-frais-reels-deductibles",
+    date: "2026-06-26",
+    category: "fiscalite",
+    excerpt: "Transport, repas à 5,30 €, télétravail, double résidence, formations, avocat aux Prud'hommes : la liste complète des frais réels et le tuto déclaration pas-à-pas.",
+    readingTime: "9 min",
+    link: "/articles/guide-frais-reels-deductibles.html"
+  },
+  {
     title: "Droits France Travail 2026 : Tout comprendre au calcul de l'ARE",
     slug: "calcul-are-chomage",
     date: "2026-06-20",

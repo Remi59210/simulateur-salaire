@@ -70,16 +70,29 @@ simulateur-salaire/
 │   ├── rupture-conventionnelle.html
 │   └── simulateur-are.html
 ├── calculateur-frais-kilometriques/
-│   └── index.html                      # Calculateur frais km 2026
+│   └── index.html                      # Calculateur frais km 2026 (barème DGFiP)
+├── calculateur-frais-reels/
+│   └── index.html                      # Simulateur GLOBAL de frais réels (10% vs réels)
 ├── generateur-lettre/
 │   └── index.html                      # Générateur lettres RH
 └── articles/
+    ├── guide-frais-reels-deductibles.html  # Guide ultime frais réels (pilier SEO/AdSense)
     ├── calcul-are-chomage.html
     ├── frais-kilometriques-impots.html
     ├── optimiser-prelevement-source.html
     ├── statut-freelance-2026.html
     └── calculer-salaire-net-2025.html
 ```
+
+### 🧩 Écosystème "Frais Réels" (maillage interne)
+
+Trois pages interconnectées forment un entonnoir de conversion fiscal :
+
+1. **Article pilier** `articles/guide-frais-reels-deductibles.html` — guide pédagogique ~1200 mots (transport/40 km, repas 5,30 €, frais cachés, tuto impots.gouv case 1AK + modèle à copier-coller). Contient 2 CTA vers le simulateur global.
+2. **Outil de synthèse** `calculateur-frais-reels/index.html` — centralise TOUTES les dépenses (km + repas auto + autres), compare l'abattement 10 % aux frais réels et affiche le gain d'impôt réel. Renvoie vers le calculateur km dédié pour le détail.
+3. **Outil amont** `calculateur-frais-kilometriques/index.html` — fournit le chiffre "frais km" à reporter dans l'outil global.
+
+Les deux outils partagent **la même fonction `calcImpot()`** (barème IR 2026) et **les mêmes bornes d'abattement** (495 € / 14 171 €) — à garder synchronisées si l'une change.
 
 ---
 
@@ -94,8 +107,9 @@ simulateur-salaire/
 | 5 | TJM → Net Mensuel | `/simulateur-salaire/tjm-net.html` | ✅ Actif (portage, libéral, micro) |
 | 6 | Rupture Conventionnelle | `/simulateur-salaire/rupture-conventionnelle.html` | ✅ Actif (indemnité légale) |
 | 7 | Simulateur ARE | `/simulateur-salaire/simulateur-are.html` | ✅ Actif (SJR, durée) |
-| 8 | Calculateur Frais Km 2026 | `/calculateur-frais-kilometriques/` | ✅ Actif (voir détail §7) |
-| 9 | Générateur Lettres RH | `/generateur-lettre/` | ✅ Actif (démission + rupture) |
+| 8 | Calculateur Frais Km 2026 | `/calculateur-frais-kilometriques/` | ✅ Actif (voir détail §8) |
+| 9 | Simulateur Global Frais Réels | `/calculateur-frais-reels/` | ✅ Actif (10 % vs réels, verdict débutant) |
+| 10 | Générateur Lettres RH | `/generateur-lettre/` | ✅ Actif (démission + rupture) |
 
 ---
 
@@ -105,6 +119,7 @@ Gérés via `js/articles.js` (tableau statique) + `articles.html` (listing avec 
 
 | Titre | Catégorie | Date |
 |---|---|---|
+| Tutoriel : tout déduire aux frais réels (guide pilier) | fiscalite | 2026-06-26 |
 | Droits France Travail 2026 : calcul de l'ARE | chomage | 2026-06-20 |
 | Micro-entreprise vs Portage salarial 2026 | freelance | 2026-06-20 |
 | Barème Frais Kilométriques 2026 | fiscalite | 2026-06-20 |
@@ -130,13 +145,14 @@ IIFE unique qui s'exécute sur toutes les pages. Elle lit `window.location.pathn
 
 ## 🗓️ 8. Données Fiscales (à mettre à jour chaque année)
 
-Le calculateur de frais kilométriques intègre le barème DGFiP directement en JS. Valeurs à réviser annuellement :
+Les deux outils fiscaux intègrent les barèmes directement en JS. Valeurs à réviser annuellement (**dans les deux fichiers**) :
 
-- Objet `BAREME` : taux par puissance fiscale et par tranche de km
-- Fonction `calcImpot()` : tranches IR (actuellement 0%/11%/30%/41%/45% avec leurs seuils)
-- Majoration électrique : +20 % (intégrée)
-- Abattement 10 % forfaitaire : min **495 €**, max **14 171 €**
+- Objet `BAREME` (frais km uniquement) : taux par puissance fiscale et par tranche de km
+- Fonction `calcImpot()` : tranches IR (actuellement 0%/11%/30%/41%/45% — seuils 12000/29000/82000/177106). **Dupliquée à l'identique** dans `calculateur-frais-kilometriques/` et `calculateur-frais-reels/`.
+- Abattement 10 % forfaitaire : min **495 €**, max **14 171 €** (dans les deux outils)
+- Majoration électrique : +20 % (frais km uniquement)
 - Règle sécurité 40 km : alerte si trajet AR > 40 km (sauf justification)
+- Valeur forfaitaire repas (`VALEUR_REPAS`) : **5,30 €/jour** travaillé (frais réels global)
 
 ---
 
@@ -150,6 +166,8 @@ Le calculateur de frais kilométriques intègre le barème DGFiP directement en 
 - **Problème :** Les robots AdSense voient trop de JS, pas assez de texte lisible.
 - **Action :** Ajouter sous chaque outil majeur un bloc `<section class="tool-seo">` avec FAQ + guide d'environ 600 mots.
 - **Stratégie éditoriale :** Publier de nouveaux articles (rupture conventionnelle, coût d'une augmentation, décodage fiche de paie) pour éliminer le statut "Thin Content".
+- **✅ Fait (26/06/2026) :** Création de l'écosystème Frais Réels — nouvel outil `/calculateur-frais-reels/` (avec bloc `tool-seo` ~350 mots) + article pilier `guide-frais-reels-deductibles.html` (~1200 mots). Sitemap.xml reconstruit avec les 18 URL réelles du site.
+- **Prochaines pistes :** Articles "Décoder sa fiche de paie", "Combien coûte une augmentation", "Rupture conventionnelle : calcul et négociation".
 
 ---
 
