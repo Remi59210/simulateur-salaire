@@ -88,11 +88,11 @@ simulateur-salaire/
 
 Trois pages interconnectées forment un entonnoir de conversion fiscal :
 
-1. **Article pilier** `articles/guide-frais-reels-deductibles.html` — guide pédagogique ~1200 mots (transport/40 km, repas 5,30 €, frais cachés, tuto impots.gouv case 1AK + modèle à copier-coller). Contient 2 CTA vers le simulateur global.
+1. **Article pilier** `articles/guide-frais-reels-deductibles.html` — guide pédagogique ~1750 mots (transport/40 km, repas 5,45 €, frais cachés, tuto impots.gouv case 1AK + modèle à copier-coller). Contient 2 CTA vers le simulateur global.
 2. **Outil de synthèse** `calculateur-frais-reels/index.html` — centralise TOUTES les dépenses (km + repas auto + autres), compare l'abattement 10 % aux frais réels et affiche le gain d'impôt réel. Renvoie vers le calculateur km dédié pour le détail.
 3. **Outil amont** `calculateur-frais-kilometriques/index.html` — fournit le chiffre "frais km" à reporter dans l'outil global.
 
-Les deux outils partagent **la même fonction `calcImpot()`** (barème IR 2026) et **les mêmes bornes d'abattement** (495 € / 14 171 €) — à garder synchronisées si l'une change.
+Les deux outils partagent **la même fonction `calcImpot()`** (barème IR 2026) et **les mêmes bornes d'abattement** (495 € / 14 426 €) — à garder synchronisées si l'une change.
 
 ---
 
@@ -149,10 +149,11 @@ Les deux outils fiscaux intègrent les barèmes directement en JS. Valeurs à r�
 
 - Objet `BAREME` (frais km uniquement) : taux par puissance fiscale et par tranche de km
 - Fonction `calcImpot()` : tranches IR (actuellement 0%/11%/30%/41%/45% — seuils 12000/29000/82000/177106). **Dupliquée à l'identique** dans `calculateur-frais-kilometriques/` et `calculateur-frais-reels/`.
-- Abattement 10 % forfaitaire : min **495 €**, max **14 171 €** (dans les deux outils)
+- Abattement 10 % forfaitaire : min **495 €**, max **14 426 €** (revenus 2024 ; dans les deux outils)
 - Majoration électrique : +20 % (frais km uniquement)
 - Règle sécurité 40 km : alerte si trajet AR > 40 km (sauf justification)
-- Valeur forfaitaire repas (`VALEUR_REPAS`) : **5,30 €/jour** travaillé (frais réels global)
+- Valeur forfaitaire repas (`VALEUR_REPAS`) : **5,45 €/jour** travaillé (frais réels global ; revenus 2025)
+- **ARE** (`simulateur-are.html`) : partie fixe **13,18 €**, plancher **32,13 €/jour** (revalorisation Unédic 1er juillet 2025). Mêmes valeurs reprises dans l'article `calcul-are-chomage.html` et le générateur de lettres — à synchroniser à chaque revalorisation (1er juillet).
 
 ---
 

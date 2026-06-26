@@ -204,13 +204,17 @@
     var ra = calcStatut(ka), rb = calcStatut(kb);
     document.getElementById('compare-grid').innerHTML = colHTML(ra, 'A') + colHTML(rb, 'B');
     var diff = ra.netM - rb.netM;
-    var sign = diff >= 0 ? '+' : '';
     var cls  = diff >= 0 ? '' : 'green';
     document.getElementById('diff-box').className = 'info-box ' + cls;
-    document.getElementById('diff-box').innerHTML =
-      '<strong>Écart mensuel : ' + sign + fmt(diff) + '</strong> — ' +
-      'Le statut ' + (diff >= 0 ? 'A (' + STATUTS[ka].label + ')' : 'B (' + STATUTS[kb].label + ')') +
-      ' génère un net mensuel <strong>' + fmt(Math.abs(diff)) + '</strong> de plus.';
+    if (Math.abs(diff) < 1) {
+      document.getElementById('diff-box').innerHTML =
+        '<strong>Net mensuel identique</strong> — les deux statuts génèrent le même net mensuel pour ce salaire brut.';
+    } else {
+      document.getElementById('diff-box').innerHTML =
+        '<strong>Écart mensuel : ' + fmt(Math.abs(diff)) + '</strong> — ' +
+        'Le statut ' + (diff > 0 ? 'A (' + STATUTS[ka].label + ')' : 'B (' + STATUTS[kb].label + ')') +
+        ' génère un net mensuel <strong>' + fmt(Math.abs(diff)) + '</strong> de plus.';
+    }
     document.getElementById('results-card').style.display = '';
   }
 </script>

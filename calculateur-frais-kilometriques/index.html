@@ -661,8 +661,8 @@
       return;
     }
 
-    // Abattement 10 % — plancher 495 €, plafond 14 171 € (art. 83 CGI 2026)
-    var abattement = Math.min(Math.max(salaire * 0.10, 495), 14171);
+    // Abattement 10 % — plancher 495 €, plafond 14 426 € (art. 83 CGI 2026)
+    var abattement = Math.min(Math.max(salaire * 0.10, 495), 14426);
     if (salaire < 495) abattement = salaire;
 
     var revenuA  = Math.max(salaire - abattement, 0);
@@ -674,7 +674,7 @@
 
     // Lignes fiscales dans la section Détail du calcul
     document.getElementById('formula-fiscal').innerHTML =
-      row('Abattement 10 % retenu', fmtEur(abattement) + ' <span style="color:var(--text-soft);font-size:.76rem;font-weight:400">(min 495 € / max 14 171 €)</span>') +
+      row('Abattement 10 % retenu', fmtEur(abattement) + ' <span style="color:var(--text-soft);font-size:.76rem;font-weight:400">(min 495 € / max 14 426 €)</span>') +
       row('Revenu imposable — Option 10 %', fmtEur(revenuA)) +
       row('Revenu imposable — Option Frais Réels', fmtEur(revenuB));
 
@@ -725,7 +725,7 @@
     }
     html += '</div>' +
       '<p style="margin-top:10px;font-size:.74rem;color:var(--text-soft);line-height:1.5">' +
-      'Estimation simplifiée pour un célibataire (1 part). Barème IR 2026 — abattement 10 % (min 495 € / max 14 171 €). ' +
+      'Estimation simplifiée pour un célibataire (1 part). Barème IR 2026 — abattement 10 % (min 495 € / max 14 426 €). ' +
       'Calcul indicatif — consultez votre avis d\'imposition pour votre situation exacte.' +
       '</p>';
 

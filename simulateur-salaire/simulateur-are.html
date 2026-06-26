@@ -121,8 +121,8 @@
 
     <div class="formula-box">
       <strong>Formule ARE (montant brut journalier) :</strong><br>
-      <code>ARE = max(40,4 % × SJR + 12,47 €&nbsp;;&nbsp; 57 % × SJR)</code><br>
-      Plafond : <code>75 % du SJR</code> — Minimum légal : <code>32,46 €/jour</code> (2025-2026)<br>
+      <code>ARE = max(40,4 % × SJR + 13,18 €&nbsp;;&nbsp; 57 % × SJR)</code><br>
+      Plafond : <code>75 % du SJR</code> — Minimum légal : <code>32,13 €/jour</code> (depuis juillet 2025)<br>
       Le SJR est calculé sur les 12 derniers mois de salaire brut.<br><br>
       <strong>Montant net = brut − CSG (6,2 %) − CRDS (0,5 %)</strong><br>
       ⚠️ Si l'ARE est inférieure à environ 1 466 €/mois, la CSG/CRDS peut être réduite ou nulle.
@@ -134,7 +134,7 @@
     <div style="display:grid;gap:10px;font-size:.87rem;color:var(--text-soft);line-height:1.65">
       <p>✅ <strong>Délai de carence</strong> : 7 jours + différé d'indemnisation (congés payés non pris + indemnités supra-légales) avant le versement des premières allocations.</p>
       <p>✅ <strong>Durée maximale</strong> : 18 mois (< 53 ans), 22,5 mois (53-54 ans), 27 mois (≥ 55 ans). Réduite à 1 jour d'affiliation = 1 jour d'indemnisation.</p>
-      <p>✅ <strong>Dégressivité</strong> : après 6 mois d'indemnisation (si ARE > 1,3 × SMIC net), l'allocation est réduite de 30 % pour les moins de 57 ans avec salaire de réf. > 4 716,36 €/mois.</p>
+      <p>✅ <strong>Dégressivité</strong> : au-delà du 6e mois d'indemnisation, l'allocation est réduite de 30 % pour les allocataires de moins de 57 ans dont l'ancien salaire brut était élevé (seuil revalorisé chaque année par l'Unédic, de l'ordre de 4 900 €/mois).</p>
       <p>⚠️ <strong>Ce simulateur est une estimation</strong> — le calcul réel effectué par France Travail prend en compte le nombre exact de jours travaillés sur les 24 derniers mois, les primes, les heures supplémentaires, etc.</p>
     </div>
   </div>
@@ -152,9 +152,9 @@
         <p>France Travail applique la formule suivante :</p>
         <ul>
           <li><strong>SJR</strong> = Salaire brut des 12 derniers mois ÷ 365</li>
-          <li><strong>ARE brute</strong> = max (40,4 % × SJR + 12,47 € ; 57 % × SJR)</li>
+          <li><strong>ARE brute</strong> = max (40,4 % × SJR + 13,18 € ; 57 % × SJR)</li>
           <li><strong>Plafond :</strong> 75 % du SJR</li>
-          <li><strong>Plancher :</strong> 32,46 €/jour (depuis juillet 2024)</li>
+          <li><strong>Plancher :</strong> 32,13 €/jour (depuis juillet 2025)</li>
         </ul>
         <p>Le montant brut est ensuite diminué de <strong>CSG (6,2 %) + CRDS (0,5 %)</strong> pour obtenir le montant net versé. Les allocataires avec une ARE inférieure à un seuil (≈ 1 466 €/mois) peuvent bénéficier d'une exonération partielle ou totale de CSG/CRDS.</p>
 
@@ -196,8 +196,8 @@
 
 <script src="/js/nav.js"></script>
 <script>
-  var ARE_MIN_JOUR = 32.46;
-  var ARE_FIXE     = 12.47;
+  var ARE_MIN_JOUR = 32.13;   // Allocation minimale (revalorisation 1er juillet 2025)
+  var ARE_FIXE     = 13.18;   // Partie fixe ARE (revalorisation 1er juillet 2025)
   var JOURS_MOIS   = 30.42;
 
   var motifInfos = {

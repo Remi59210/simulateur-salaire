@@ -159,7 +159,7 @@
       </div>
     </div>
     <div class="repas-auto" id="repas-auto"></div>
-    <p class="mini-link">Si vous déjeunez sur place (gamelle ou restaurant), l'État admet une déduction forfaitaire de <strong>5,30 € par jour travaillé</strong>, sans justificatif détaillé.</p>
+    <p class="mini-link">Si vous apportez votre repas (gamelle), l'État admet une déduction forfaitaire de <strong>5,45 € par jour travaillé</strong>, sans justificatif détaillé. Au restaurant, vous pouvez déduire davantage (différence entre le prix réel, plafonné à 21,10 €, et 5,45 €).</p>
 
     <!-- Case 4 : Autres frais -->
     <div class="field" style="margin-top:16px">
@@ -223,7 +223,7 @@
         <p>Le résultat affiché n'est pas un montant abstrait de déduction : c'est l'<strong>argent réellement économisé sur votre facture d'impôt finale</strong>, calculé via le barème progressif de l'impôt sur le revenu 2026.</p>
 
         <h3>Le plancher et le plafond de l'abattement 10 %</h3>
-        <p>L'abattement de 10 % n'est jamais inférieur à <strong>495 €</strong> ni supérieur à <strong>14 171 €</strong>. Concrètement, au-delà d'environ 141 700 € de salaire net imposable, l'abattement est plafonné : les frais réels deviennent alors très souvent gagnants pour les hauts revenus avec de gros trajets.</p>
+        <p>L'abattement de 10 % n'est jamais inférieur à <strong>495 €</strong> ni supérieur à <strong>14 426 €</strong>. Concrètement, au-delà d'environ 144 300 € de salaire net imposable, l'abattement est plafonné : les frais réels deviennent alors très souvent gagnants pour les hauts revenus avec de gros trajets.</p>
       </div>
       <div>
         <h3>Quand les frais réels sont-ils gagnants ?</h3>
@@ -248,7 +248,7 @@
 <script src="/js/nav.js"></script>
 <script>
   // Valeur forfaitaire déductible d'un repas pris hors domicile (DGFiP 2026)
-  var VALEUR_REPAS = 5.30;
+  var VALEUR_REPAS = 5.45;
 
   // ── Barème IR 2026 — célibataire 1 part (art. 197 CGI, estimation indicative) ──
   function calcImpot(revenu) {
@@ -269,13 +269,13 @@
     var joursRep  = Math.round(val('jours-repas'));
     var autres    = val('autres-frais');
 
-    // Calcul automatique des repas : jours × 5,30 €
+    // Calcul automatique des repas : jours × 5,45 €
     var repas = joursRep * VALEUR_REPAS;
     var repasBox = document.getElementById('repas-auto');
     if (joursRep > 0) {
       repasBox.style.display = 'block';
       repasBox.innerHTML = '🍽️ Frais de repas déductibles calculés : <strong>' +
-        joursRep + ' jours × 5,30 € = ' + fmtEur(repas) + '</strong>';
+        joursRep + ' jours × 5,45 € = ' + fmtEur(repas) + '</strong>';
     } else {
       repasBox.style.display = 'none';
     }
@@ -295,8 +295,8 @@
       return;
     }
 
-    // ── Abattement 10 % : plancher 495 €, plafond 14 171 € ──
-    var abattement = Math.min(Math.max(salaire * 0.10, 495), 14171);
+    // ── Abattement 10 % : plancher 495 €, plafond 14 426 € ──
+    var abattement = Math.min(Math.max(salaire * 0.10, 495), 14426);
     if (salaire < 495) abattement = salaire;
 
     var revenu10  = Math.max(salaire - abattement, 0);   // option par défaut
@@ -338,14 +338,14 @@
     // ── Détail des frais réels ──
     var fraisHtml = '';
     if (fraisKm > 0) fraisHtml += line('🚗 Frais kilométriques', fmtEur(fraisKm));
-    if (repas  > 0)  fraisHtml += line('🍽️ Frais de repas (' + joursRep + ' j × 5,30 €)', fmtEur(repas));
+    if (repas  > 0)  fraisHtml += line('🍽️ Frais de repas (' + joursRep + ' j × 5,45 €)', fmtEur(repas));
     if (autres > 0)  fraisHtml += line('📦 Autres frais (télétravail, etc.)', fmtEur(autres));
     fraisHtml += '<div class="formula-row total"><span class="fr-label">Total de vos frais réels</span><span class="fr-val">' + fmtEur(totalFR) + '</span></div>';
     document.getElementById('frais-lines').innerHTML = fraisHtml;
 
     // ── Détail fiscal + tableau comparatif ──
     var fiscalHtml =
-      line('Abattement 10 % retenu', fmtEur(abattement) + ' <span style="color:var(--text-soft);font-size:.76rem;font-weight:400">(min 495 € / max 14 171 €)</span>') +
+      line('Abattement 10 % retenu', fmtEur(abattement) + ' <span style="color:var(--text-soft);font-size:.76rem;font-weight:400">(min 495 € / max 14 426 €)</span>') +
       line('Revenu imposable — option 10 %', fmtEur(revenu10)) +
       line('Revenu imposable — option frais réels', fmtEur(revenuFR));
 
@@ -372,7 +372,7 @@
     }
     fiscalHtml += '</div>' +
       '<p style="margin-top:10px;font-size:.74rem;color:var(--text-soft);line-height:1.5">' +
-      'Estimation simplifiée pour un célibataire (1 part). Barème IR 2026 — abattement 10 % (min 495 € / max 14 171 €). ' +
+      'Estimation simplifiée pour un célibataire (1 part). Barème IR 2026 — abattement 10 % (min 495 € / max 14 426 €). ' +
       'Calcul indicatif : votre quotient familial réel (enfants, mariage) peut modifier le résultat.' +
       '</p>';
     document.getElementById('fiscal-lines').innerHTML = fiscalHtml;

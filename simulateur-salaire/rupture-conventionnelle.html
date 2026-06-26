@@ -45,23 +45,11 @@
 <main>
   <div class="card">
     <div class="card-title">Vos données</div>
-    <div class="field-row">
-      <div class="field">
-        <label for="salaire-ref">Salaire de référence mensuel brut</label>
-        <div class="input-wrap">
-          <input type="number" id="salaire-ref" min="0" step="50" placeholder="ex : 3 200" oninput="recalc()" />
-          <span class="input-unit">€/mois</span>
-        </div>
-      </div>
-      <div class="field">
-        <label for="base-ref">Base de calcul</label>
-        <div class="select-wrap">
-          <select id="base-ref" onchange="recalc()">
-            <option value="1">Salaire mensuel saisi (1/12 de l'annuel)</option>
-            <option value="1" selected>Moyenne des 3 derniers mois</option>
-            <option value="1">Moyenne des 12 derniers mois (si plus favorable)</option>
-          </select>
-        </div>
+    <div class="field">
+      <label for="salaire-ref">Salaire de référence mensuel brut</label>
+      <div class="input-wrap">
+        <input type="number" id="salaire-ref" min="0" step="50" placeholder="ex : 3 200" oninput="recalc()" />
+        <span class="input-unit">€/mois</span>
       </div>
     </div>
     <div class="field-row" style="margin-top:14px">

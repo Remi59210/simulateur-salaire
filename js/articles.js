@@ -5,7 +5,7 @@ const articles = [
     slug: "guide-frais-reels-deductibles",
     date: "2026-06-26",
     category: "fiscalite",
-    excerpt: "Transport, repas à 5,30 €, télétravail, double résidence, formations, avocat aux Prud'hommes : la liste complète des frais réels et le tuto déclaration pas-à-pas.",
+    excerpt: "Transport, repas à 5,45 €, télétravail, double résidence, formations, avocat aux Prud'hommes : la liste complète des frais réels et le tuto déclaration pas-à-pas.",
     readingTime: "9 min",
     link: "/articles/guide-frais-reels-deductibles.html"
   },
