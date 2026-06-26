@@ -1,6 +1,24 @@
 // js/articles.js
 const articles = [
   {
+    title: "Dons aux associations 2026 : réduction d'impôt 66 % et 75 % (avec les cases)",
+    slug: "reduction-impot-dons",
+    date: "2026-06-26",
+    category: "fiscalite",
+    excerpt: "Dons à 66 % ou 75 %, plafonds, cotisations syndicales (7AC), partis politiques : tout récupérer sur vos dons, avec le numéro de case exact (7UD, 7UF).",
+    readingTime: "8 min",
+    link: "/articles/reduction-impot-dons.html"
+  },
+  {
+    title: "Mariage, naissance, déménagement : déclarer un changement de situation aux impôts",
+    slug: "changement-situation-impots",
+    date: "2026-06-26",
+    category: "fiscalite",
+    excerpt: "Mariage, PACS, divorce, naissance, décès, déménagement : les démarches, les délais (60 jours) et les cases pour ajuster votre impôt en temps réel.",
+    readingTime: "9 min",
+    link: "/articles/changement-situation-impots.html"
+  },
+  {
     title: "Impôts et enfants 2026 : toutes les déductions et crédits (avec les cases)",
     slug: "deductions-impots-enfants",
     date: "2026-06-26",
