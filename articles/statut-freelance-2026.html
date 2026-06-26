@@ -50,6 +50,12 @@
   .badge-good { display: inline-block; background: #dcfce7; color: #15803d; border-radius: 4px; padding: 1px 7px; font-size: .78rem; font-weight: 600; }
   .badge-warn { display: inline-block; background: #fef3c7; color: #b45309; border-radius: 4px; padding: 1px 7px; font-size: .78rem; font-weight: 600; }
   .badge-bad  { display: inline-block; background: #fee2e2; color: #b91c1c; border-radius: 4px; padding: 1px 7px; font-size: .78rem; font-weight: 600; }
+  .case-tag { display:inline-block; background:#E8F0FF; color:#1d4ed8; font-weight:700; font-family:'Courier New',monospace; padding:0 6px; border-radius:5px; font-size:.92em; white-space:nowrap; }
+  .declare-box { background:#0B1D3A; border-radius:10px; padding:14px 18px; margin:16px 0; }
+  .declare-box .db-head { font-size:.7rem; text-transform:uppercase; letter-spacing:.09em; color:#9DBCFF; font-weight:700; margin-bottom:8px; }
+  .declare-box .db-case { display:inline-block; background:#1A5CFF; color:#fff; font-weight:700; padding:2px 9px; border-radius:6px; font-family:'Courier New',monospace; margin:2px 4px 2px 0; }
+  .declare-box p { color:#C4D4F2; margin:8px 0 0; font-size:.88rem; line-height:1.6; }
+  .declare-box .db-form { font-size:.76rem; color:#7d93b8; margin-top:8px; }
 </style>
 </head>
 <body class="min-h-screen flex flex-col" style="background:#F6F9FF">
@@ -197,6 +203,26 @@
 
     <div class="callout-blue">
       <strong>📌 Résumé en une phrase :</strong> Choisissez la <strong>micro-entreprise</strong> pour sa simplicité et sa rentabilité court terme ; optez pour le <strong>portage salarial</strong> si vous avez besoin d'une protection sociale solide, notamment l'assurance-chômage.
+    </div>
+
+    <h2>6. Comment déclarer ses revenus à l'impôt ?</h2>
+    <p>
+      En <strong>portage salarial</strong>, c'est simple : vous êtes salarié, votre revenu est pré-rempli en <span class="case-tag">case 1AJ</span> comme n'importe quel salaire. Rien de plus à faire.
+    </p>
+    <p>
+      En <strong>micro-entreprise</strong>, vous reportez chaque année votre chiffre d'affaires <strong>brut encaissé</strong> (avant tout abattement : l'administration applique elle-même l'abattement forfaitaire). La case dépend de votre activité :
+    </p>
+    <div class="declare-box">
+      <div class="db-head">📍 Où déclarer son CA de micro-entrepreneur ?</div>
+      <span class="db-case">5HQ</span> prestations BNC (libéral) ·
+      <span class="db-case">5KP</span> prestations de services BIC ·
+      <span class="db-case">5KO</span> ventes de marchandises BIC
+      <p>Si vous avez opté pour le <strong>versement fiscal libératoire</strong>, reportez plutôt votre CA en <strong>5TE</strong> (BNC), <strong>5TB</strong> (services BIC) ou <strong>5TA</strong> (ventes) : l'impôt a déjà été payé avec vos cotisations.</p>
+      <div class="db-form">Déclaration complémentaire 2042-C-PRO</div>
+    </div>
+
+    <div class="callout-green">
+      <strong>💡 À ne pas oublier :</strong> même en micro-entreprise, votre revenu entre dans le calcul du foyer et de votre taux de prélèvement à la source (sous forme d'acomptes prélevés par la DGFiP). Pensez-y pour <a href="/articles/optimiser-prelevement-source.html" style="color:#1d4ed8">optimiser votre taux</a>.
     </div>
 
     <hr class="my-8"/>

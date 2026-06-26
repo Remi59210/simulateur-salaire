@@ -40,6 +40,12 @@
   tr:last-child td { border-bottom: none; }
   .callout { border-left: 4px solid #1A5CFF; background: #E8F0FF; padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .callout-green { border-left: 4px solid #22c55e; background: #f0fdf4; padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .case-tag { display:inline-block; background:#E8F0FF; color:#1d4ed8; font-weight:700; font-family:'Courier New',monospace; padding:0 6px; border-radius:5px; font-size:.92em; white-space:nowrap; }
+  .declare-box { background:#0B1D3A; border-radius:10px; padding:14px 18px; margin:16px 0; }
+  .declare-box .db-head { font-size:.7rem; text-transform:uppercase; letter-spacing:.09em; color:#9DBCFF; font-weight:700; margin-bottom:8px; }
+  .declare-box .db-case { display:inline-block; background:#1A5CFF; color:#fff; font-weight:700; padding:2px 9px; border-radius:6px; font-family:'Courier New',monospace; margin:2px 4px 2px 0; }
+  .declare-box p { color:#C4D4F2; margin:8px 0 0; font-size:.88rem; line-height:1.6; }
+  .declare-box .db-form { font-size:.76rem; color:#7d93b8; margin-top:8px; }
 </style>
 </head>
 <body class="min-h-screen flex flex-col" style="background:#F6F9FF">
@@ -180,6 +186,18 @@
 
     <div class="callout-green">
       <strong>💡 Bon à savoir :</strong> Le cumul ARE + revenus d'activité est possible pendant votre indemnisation, sous conditions. France Travail recalcule l'ARE perçue en fonction des jours travaillés.
+    </div>
+
+    <h2>7. L'ARE et votre déclaration d'impôt</h2>
+    <p>
+      L'allocation chômage est <strong>imposable</strong> à l'impôt sur le revenu. Bonne nouvelle : France Travail transmet le montant à l'administration, qui le <strong>pré-remplit</strong> sur votre déclaration. Vérifiez simplement que le montant correspond à votre relevé annuel.
+    </p>
+    <div class="declare-box">
+      <div class="db-head">📍 Où la retrouver ?</div>
+      <span class="db-case">1AP</span> allocations chômage (déclarant 1) ·
+      <span class="db-case">1BP</span> déclarant 2
+      <p>Le montant est généralement pré-rempli. L'ARE ouvre droit, comme un salaire, à l'abattement de 10 % ou aux frais réels. Pendant l'indemnisation, votre taux de prélèvement à la source est recalculé automatiquement.</p>
+      <div class="db-form">Déclaration principale 2042</div>
     </div>
 
     <hr class="my-8"/>

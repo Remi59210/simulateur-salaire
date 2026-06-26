@@ -52,6 +52,12 @@
   .example-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 10px; padding: 18px 20px; margin: 20px 0; }
   .example-box .ex-title { font-weight: 700; color: #15803d; margin-bottom: 10px; }
   .example-box p { color: #166534; margin: 0; font-size: .9rem; }
+  .case-tag { display:inline-block; background:#E8F0FF; color:#1d4ed8; font-weight:700; font-family:'Courier New',monospace; padding:0 6px; border-radius:5px; font-size:.92em; white-space:nowrap; }
+  .declare-box { background:#0B1D3A; border-radius:10px; padding:14px 18px; margin:16px 0; }
+  .declare-box .db-head { font-size:.7rem; text-transform:uppercase; letter-spacing:.09em; color:#9DBCFF; font-weight:700; margin-bottom:8px; }
+  .declare-box .db-case { display:inline-block; background:#1A5CFF; color:#fff; font-weight:700; padding:2px 9px; border-radius:6px; font-family:'Courier New',monospace; margin:2px 4px 2px 0; }
+  .declare-box p { color:#C4D4F2; margin:8px 0 0; font-size:.88rem; line-height:1.6; }
+  .declare-box .db-form { font-size:.76rem; color:#7d93b8; margin-top:8px; }
 </style>
 </head>
 <body class="min-h-screen flex flex-col" style="background:#F6F9FF">
@@ -98,6 +104,14 @@
 
     <div class="callout-blue">
       <strong>⚠️ Attention :</strong> Si vous optez pour les frais réels, vous devez <strong>restituer votre déduction de participation employeur transport</strong> (les 50 % pris en charge par votre employeur). Le logiciel de déclaration vous guide sur cette ligne.
+    </div>
+
+    <div class="declare-box">
+      <div class="db-head">📍 Où le déclarer ?</div>
+      <span class="db-case">1AK</span> total de vos frais réels (déclarant 1) ·
+      <span class="db-case">1BK</span> déclarant 2
+      <p>Inscrivez le <strong>montant total</strong> de vos frais réels (kilomètres + péages + repas…) dans la case 1AK : cela remplace automatiquement l'abattement de 10 %. Détaillez votre calcul dans la rubrique « Informations complémentaires ». Ne modifiez jamais votre salaire en <span class="case-tag">case 1AJ</span>.</p>
+      <div class="db-form">Déclaration principale 2042</div>
     </div>
 
     <h2>3. Le barème kilométrique 2026 (voitures)</h2>

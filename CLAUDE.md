@@ -119,6 +119,8 @@ Gérés via `js/articles.js` (tableau statique) + `articles.html` (listing avec 
 
 | Titre | Catégorie | Date |
 |---|---|---|
+| Impôts et enfants : déductions case par case | famille | 2026-06-26 |
+| Impôts et maison : déductions case par case | immobilier | 2026-06-26 |
 | Tutoriel : tout déduire aux frais réels (guide pilier) | fiscalite | 2026-06-26 |
 | Droits France Travail 2026 : calcul de l'ARE | chomage | 2026-06-20 |
 | Micro-entreprise vs Portage salarial 2026 | freelance | 2026-06-20 |
@@ -129,6 +131,10 @@ Gérés via `js/articles.js` (tableau statique) + `articles.html` (listing avec 
 **Règle :** Quand un nouvel article est créé, ajouter une entrée dans `js/articles.js`. Le champ `link` doit pointer vers le chemin réel du fichier HTML.
 
 **⚠️ Split architectural :** Les pages `articles/` utilisent **Tailwind CDN**. Les pages d'outils utilisent `tools.css`. Ne jamais croiser les deux.
+
+**Catégories de filtre** (`articles.html` + champ `category` dans `articles.js`) : `salaire`, `fiscalite`, `famille`, `immobilier`, `chomage`, `freelance`. Ajouter une catégorie = mettre à jour le `<select id="category-filter">` dans `articles.html`.
+
+**Encarts « cases de déclaration »** : tous les articles fiscaux intègrent des blocs `.declare-box` (fond navy + badges `.db-case`) et des `.case-tag` inline qui citent les numéros de cases officiels (1AJ, 1AK, 7GA, 7DB, 7ZQ, 4BE…) pour guider l'utilisateur dans sa déclaration. Le CSS de ces classes est inline dans chaque article (pas de fichier partagé, cohérent avec le split Tailwind).
 
 ---
 

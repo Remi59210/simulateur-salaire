@@ -1,6 +1,24 @@
 // js/articles.js
 const articles = [
   {
+    title: "Impôts et enfants 2026 : toutes les déductions et crédits (avec les cases)",
+    slug: "deductions-impots-enfants",
+    date: "2026-06-26",
+    category: "famille",
+    excerpt: "Frais de garde (7GA), scolarité (7EA/7EC/7EF), pension alimentaire, quotient familial : tous les avantages fiscaux liés aux enfants, avec le numéro de case exact.",
+    readingTime: "9 min",
+    link: "/articles/deductions-impots-enfants.html"
+  },
+  {
+    title: "Impôts et maison 2026 : toutes les déductions et crédits (avec les cases)",
+    slug: "deductions-impots-maison",
+    date: "2026-06-26",
+    category: "immobilier",
+    excerpt: "Emploi à domicile (7DB), jardinage, borne de recharge (7ZQ), travaux, revenus locatifs (4BE) : les avantages fiscaux du logement, case par case.",
+    readingTime: "10 min",
+    link: "/articles/deductions-impots-maison.html"
+  },
+  {
     title: "Tutoriel : Tout ce que vous pouvez déduire aux frais réels et comment le déclarer",
     slug: "guide-frais-reels-deductibles",
     date: "2026-06-26",
