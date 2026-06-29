@@ -123,6 +123,9 @@ Gérés via `js/articles.js` (tableau statique) + `articles.html` (listing avec 
 
 | Titre | Catégorie | Date |
 |---|---|---|
+| Décoder sa fiche de paie (lignes, CSG, net imposable 1AJ) | salaire | 2026-06-29 |
+| Combien coûte une augmentation à l'employeur | salaire | 2026-06-29 |
+| Rupture conventionnelle : calcul et négociation | chomage | 2026-06-29 |
 | Dons aux associations : réduction 66 %/75 % | fiscalite | 2026-06-26 |
 | Mariage, naissance, déménagement : changement de situation | fiscalite | 2026-06-26 |
 | Impôts et enfants : déductions case par case | famille | 2026-06-26 |
@@ -188,7 +191,7 @@ Les deux outils fiscaux intègrent les barèmes directement en JS. Valeurs à r�
 - **Action :** Ajouter sous chaque outil majeur un bloc `<section class="tool-seo">` avec FAQ + guide d'environ 600 mots.
 - **Stratégie éditoriale :** Publier de nouveaux articles (rupture conventionnelle, coût d'une augmentation, décodage fiche de paie) pour éliminer le statut "Thin Content".
 - **✅ Fait (26/06/2026) :** Création de l'écosystème Frais Réels — nouvel outil `/calculateur-frais-reels/` (avec bloc `tool-seo` ~350 mots) + article pilier `guide-frais-reels-deductibles.html` (~1200 mots). Sitemap.xml reconstruit avec les 18 URL réelles du site.
-- **Prochaines pistes :** Articles "Décoder sa fiche de paie", "Combien coûte une augmentation", "Rupture conventionnelle : calcul et négociation".
+- **✅ Fait (29/06/2026) :** Création des 3 articles manquants — `decoder-fiche-paie.html` (case 1AJ, brut→net→PAS), `cout-augmentation-employeur.html` (charges patronales, réduction Fillon, PPV), `rupture-conventionnelle-negociation.html` (formule L.1237-13, exonération PASS, ARE, négociation). Sitemap.xml mis à jour avec les 3 nouvelles URL.
 
 ---
 

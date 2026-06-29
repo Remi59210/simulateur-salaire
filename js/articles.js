@@ -1,6 +1,33 @@
 // js/articles.js
 const articles = [
   {
+    title: "Décoder sa fiche de paie 2026 : toutes les lignes expliquées",
+    slug: "decoder-fiche-paie",
+    date: "2026-06-29",
+    category: "salaire",
+    excerpt: "Brut, net imposable, net à payer, CSG/CRDS, retraite complémentaire (case 1AJ) : comprenez chaque ligne de votre bulletin de salaire avec des exemples chiffrés.",
+    readingTime: "8 min",
+    link: "/articles/decoder-fiche-paie.html"
+  },
+  {
+    title: "Combien coûte une augmentation à l'employeur en 2026 ?",
+    slug: "cout-augmentation-employeur",
+    date: "2026-06-29",
+    category: "salaire",
+    excerpt: "+200 € brut, combien ça coûte réellement à l'entreprise ? Et combien de plus sur le compte du salarié ? Charges patronales, réduction Fillon et alternatives (PPV, intéressement).",
+    readingTime: "7 min",
+    link: "/articles/cout-augmentation-employeur.html"
+  },
+  {
+    title: "Rupture conventionnelle 2026 : calcul de l'indemnité et stratégie de négociation",
+    slug: "rupture-conventionnelle-negociation",
+    date: "2026-06-29",
+    category: "chomage",
+    excerpt: "Formule légale art. L.1237-13, salaire de référence optimal, exonération fiscale (6 PASS = 282 600 €), ARE après la rupture et leviers de négociation au-delà du minimum.",
+    readingTime: "9 min",
+    link: "/articles/rupture-conventionnelle-negociation.html"
+  },
+  {
     title: "Dons aux associations 2026 : réduction d'impôt 66 % et 75 % (avec les cases)",
     slug: "reduction-impot-dons",
     date: "2026-06-26",
