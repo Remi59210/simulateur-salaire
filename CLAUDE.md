@@ -208,6 +208,7 @@ Audit complet du code → corrections appliquées sur **les 25 pages** :
 - **`favicon.svg` créé** (logo "AS", dégradé orange `#FF6B00`→`#D95000`) — le site n'avait aucun favicon.
 - **SEO `<head>` complété** sur l'accueil + les 10 outils (les articles l'avaient déjà) : `rel="canonical"` (anti duplicate-content), Open Graph (`og:title/description/url/type/locale/site_name`), `twitter:card`. Favicon + manifest + `theme-color` ajoutés partout.
 - ✅ Vérifs : `calcImpot()` identique entre les 2 outils fiscaux, sitemap complet (24 URL). RAS de ce côté.
+- **🧹 Fichier parasite supprimé (29/06/2026) :** `articles/optimiser-prelevement-source.html html Copier Modifier` — doublon obsolète au nom corrompu (version pré-rebranding « Convertisseur Brut-Net », 2025) qui était déployé tel quel. Supprimé du dépôt ; l'article réel `optimiser-prelevement-source.html` est conservé. ⚠️ **Vigilance générale :** ce type d'artefact (suffixe « json/html Copier Modifier » dans un nom de fichier, résidu de copier-coller) est déjà apparu 2 fois (manifest + cet article) — vérifier `find . -name "*Copier Modifier*"` après tout ajout de fichier.
 
 **🧱 `<head>` standard (à reproduire sur CHAQUE nouvelle page) :** script AdSense + `<link rel="icon" href="/favicon.svg">` + `<link rel="manifest" href="/manifest.webmanifest">` + `<meta name="theme-color" content="#0B1D3A">` + `rel="canonical"` propre à la page + bloc Open Graph. Sans ça, la page ne monétise pas et n'a pas de canonical.
 
