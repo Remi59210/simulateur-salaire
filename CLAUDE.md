@@ -232,3 +232,38 @@ Le trafic Google Ads est payant ; l'enjeu désormais est de capter du **trafic o
 - Le site est entièrement en français. Tous les textes utilisateur, commentaires HTML et labels sont en français.
 - Les identifiants techniques JS/CSS restent en anglais (noms de variables, classes CSS, fonctions).
 - Ne jamais écrire de commentaires qui décrivent CE QUE fait le code — seulement le POURQUOI quand ce n'est pas évident.
+
+---
+
+## 🗂️ 11. Déploiement du 30/06/2026 — Pages légales + 10 articles SEO
+
+### Pages légales créées (racine, au niveau de `index.html`)
+Trois pages conformes AdSense/RGPD, design article (Tailwind + nav.js + footer avec liens légaux), au sitemap :
+
+| Page | Fichier | Points clés |
+|---|---|---|
+| Politique de confidentialité | `politique-confidentialite.html` | RGPD + AdSense : cookies, données collectées, droits (accès/rectif/effacement/opposition), **aucun DPO désigné**, contact via formulaire |
+| Mentions légales | `mentions-legales.html` | Éditeur = **Chapey Rémi**, hébergeur = **GitHub Pages / Microsoft**, propriété intellectuelle, droit applicable. **Aucun email exposé** → renvoi au formulaire |
+| Contact | `contact.html` | Formulaire (nom/sujet/message) **sans backend ni mailto** — JS affiche « Formulaire en cours d'activation ». **Aucun email affiché** (choix utilisateur explicite) |
+
+> ⚠️ **Règle email :** l'adresse `chapey.remi@gmail.com` **ne doit jamais apparaître** sur le site public (mentions légales, contact, etc.). Toujours renvoyer vers le formulaire de contact.
+
+**Liens légaux dans TOUS les footers :** un bloc `.footer-legal` (liens inline `#9DBCFF`) a été inséré avant chaque `</footer>` des 24 pages existantes via le script `footerlegal.pl` (scratchpad). Il fonctionne sur les 3 types de footer (Tailwind articles, `tools.css` inline, `.container` du générateur). Les 3 pages légales et les 10 nouveaux articles l'intègrent nativement.
+
+### 10 nouveaux articles SEO (longue traîne « droit du travail / paie »)
+Tous datés du **2026-06-30**, design article standard (head AdSense/favicon/manifest/canonical/OG + JSON-LD Article + BreadcrumbList), ajoutés à `js/articles.js` (en tête) et au `sitemap.xml`. Le sujet « bulletin de salaire ligne par ligne » a été **écarté** (doublon avec `decoder-fiche-paie.html`) et remplacé par « indemnité de licenciement ».
+
+| Titre | Fichier | Catégorie |
+|---|---|---|
+| Intéressement et participation (PEE) | `articles/prime-interessement-participation.html` | salaire |
+| Ticket-restaurant 2026 | `articles/ticket-restaurant-2026.html` | salaire |
+| Mutuelle d'entreprise obligatoire | `articles/mutuelle-entreprise-obligatoire.html` | salaire |
+| Congés payés : calcul et indemnité | `articles/conges-payes-calcul.html` | salaire |
+| Heures supplémentaires | `articles/heures-supplementaires-majoration.html` | salaire |
+| Arrêt maladie : IJSS et maintien | `articles/arret-maladie-indemnites.html` | salaire |
+| Solde de tout compte | `articles/solde-tout-compte.html` | chomage |
+| Indemnité de licenciement | `articles/indemnite-licenciement-calcul.html` | chomage |
+| Période d'essai | `articles/periode-essai-regles.html` | salaire |
+| Prime de précarité (CDD) | `articles/prime-precarite-cdd.html` | chomage |
+
+**Maillage :** chaque article comporte 1 CTA vers l'outil pertinent (prime, brut→net, rupture conv., ARE) + 2 liens « Voir aussi » vers d'autres articles (dont les nouveaux entre eux). **Total site : 23 articles + 10 outils + 3 pages légales.**

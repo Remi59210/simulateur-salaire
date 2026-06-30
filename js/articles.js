@@ -1,6 +1,96 @@
 // js/articles.js
 const articles = [
   {
+    title: "Intéressement et participation 2026 : fonctionnement, fiscalité, PEE",
+    slug: "prime-interessement-participation",
+    date: "2026-06-30",
+    category: "salaire",
+    excerpt: "Toucher la prime en cash ou la placer sur un PEE ? Abondement, blocage 5 ans, CSG-CRDS et exonération d'impôt : la bonne stratégie pour votre épargne salariale.",
+    readingTime: "8 min",
+    link: "/articles/prime-interessement-participation.html"
+  },
+  {
+    title: "Ticket-restaurant 2026 : montant max, règles et fiscalité",
+    slug: "ticket-restaurant-2026",
+    date: "2026-06-30",
+    category: "salaire",
+    excerpt: "Valeur faciale optimale, part employeur (50 à 60 %), exonération à 7,26 €, plafond de 25 €/jour : tout pour profiter au mieux de vos titres-restaurant.",
+    readingTime: "7 min",
+    link: "/articles/ticket-restaurant-2026.html"
+  },
+  {
+    title: "Mutuelle d'entreprise obligatoire : ce que l'employeur doit payer",
+    slug: "mutuelle-entreprise-obligatoire",
+    date: "2026-06-30",
+    category: "salaire",
+    excerpt: "Participation minimale de 50 %, cas de dispense, portabilité après le départ et impact sur le net imposable : le guide de la complémentaire santé collective.",
+    readingTime: "7 min",
+    link: "/articles/mutuelle-entreprise-obligatoire.html"
+  },
+  {
+    title: "Congés payés : calcul, acquisition et indemnité",
+    slug: "conges-payes-calcul",
+    date: "2026-06-30",
+    category: "salaire",
+    excerpt: "2,5 jours par mois, règle du dixième vs maintien de salaire, acquisition pendant un arrêt maladie et indemnité compensatrice : tout comprendre à vos congés.",
+    readingTime: "8 min",
+    link: "/articles/conges-payes-calcul.html"
+  },
+  {
+    title: "Heures supplémentaires : majoration, exonération d'impôt, contingent",
+    slug: "heures-supplementaires-majoration",
+    date: "2026-06-30",
+    category: "salaire",
+    excerpt: "Majoration 25 %/50 %, exonération d'impôt jusqu'à 7 500 €/an (case 1GH), réduction de cotisations et contingent de 220 h : combien rapportent vraiment vos heures sup.",
+    readingTime: "7 min",
+    link: "/articles/heures-supplementaires-majoration.html"
+  },
+  {
+    title: "Arrêt maladie : IJSS, délai de carence et maintien de salaire",
+    slug: "arret-maladie-indemnites",
+    date: "2026-06-30",
+    category: "salaire",
+    excerpt: "Délai de carence de 3 jours, indemnités journalières à 50 %, maintien de salaire employeur (90 % puis 66 %) et subrogation : quel revenu pendant un arrêt ?",
+    readingTime: "8 min",
+    link: "/articles/arret-maladie-indemnites.html"
+  },
+  {
+    title: "Solde de tout compte : contenu, reçu et comment le contester",
+    slug: "solde-tout-compte",
+    date: "2026-06-30",
+    category: "chomage",
+    excerpt: "Ce que doit contenir le solde de tout compte, la valeur du reçu, le délai de 6 mois pour le contester et les postes à vérifier avant de signer.",
+    readingTime: "7 min",
+    link: "/articles/solde-tout-compte.html"
+  },
+  {
+    title: "Indemnité de licenciement 2026 : calcul légal et fiscalité",
+    slug: "indemnite-licenciement-calcul",
+    date: "2026-06-30",
+    category: "chomage",
+    excerpt: "Formule 1/4 et 1/3 de mois par année d'ancienneté, salaire de référence, exonération d'impôt et différence avec la rupture conventionnelle. Exemple chiffré.",
+    readingTime: "8 min",
+    link: "/articles/indemnite-licenciement-calcul.html"
+  },
+  {
+    title: "Période d'essai : durée légale, renouvellement et rupture",
+    slug: "periode-essai-regles",
+    date: "2026-06-30",
+    category: "salaire",
+    excerpt: "Durée max (2, 3 ou 4 mois), conditions strictes de renouvellement, délai de prévenance et règles de rupture côté salarié et employeur : tout sur la période d'essai.",
+    readingTime: "7 min",
+    link: "/articles/periode-essai-regles.html"
+  },
+  {
+    title: "Prime de précarité (CDD) : qui y a droit, calcul et exceptions",
+    slug: "prime-precarite-cdd",
+    date: "2026-06-30",
+    category: "chomage",
+    excerpt: "10 % de la rémunération brute, mais pas toujours : CDI refusé, saisonnier, faute, rupture par le salarié… Tous les cas où la prime de précarité n'est pas due.",
+    readingTime: "6 min",
+    link: "/articles/prime-precarite-cdd.html"
+  },
+  {
     title: "Décoder sa fiche de paie 2026 : toutes les lignes expliquées",
     slug: "decoder-fiche-paie",
     date: "2026-06-29",
