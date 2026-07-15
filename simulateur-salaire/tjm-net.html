@@ -178,9 +178,9 @@
           <label for="activite-micro">Type d'activité</label>
           <div class="select-wrap">
             <select id="activite-micro" onchange="recalc()">
-              <option value="0.221">Services (BIC) — 22,1 %</option>
-              <option value="0.221" selected>Services libéraux (BNC) — 22,1 %</option>
-              <option value="0.127">Vente de marchandises — 12,7 %</option>
+              <option value="0.212">Services (BIC) — 21,2 %</option>
+              <option value="0.261" selected>Services libéraux (BNC) — 26,1 %</option>
+              <option value="0.123">Vente de marchandises — 12,3 %</option>
             </select>
           </div>
         </div>
@@ -255,7 +255,7 @@
         <p>La profession libérale offre davantage de liberté dans les déductions de charges réelles, mais nécessite une comptabilité rigoureuse et une trésorerie suffisante pour les acomptes.</p>
 
         <h3>TJM en micro-entrepreneur</h3>
-        <p>Le <strong>micro-entrepreneur</strong> (auto-entrepreneur) bénéficie d'un régime ultra-simplifié : cotisations forfaitaires sur le CA encaissé, sans distinction entre revenus et charges. Le taux est de <strong>22,1 % pour les services</strong> et <strong>12,7 % pour la vente de marchandises</strong>.</p>
+        <p>Le <strong>micro-entrepreneur</strong> (auto-entrepreneur) bénéficie d'un régime ultra-simplifié : cotisations forfaitaires sur le CA encaissé, sans distinction entre revenus et charges. Les taux 2026 sont de <strong>26,1 % pour les services libéraux (BNC)</strong>, <strong>21,2 % pour les services commerciaux (BIC)</strong> et <strong>12,3 % pour la vente de marchandises</strong>.</p>
         <p>Limite : le plafond de CA est de 77 700 € pour les services (2026). Au-delà, le passage en régime réel devient obligatoire. Ce régime convient à une activité complémentaire ou débutante.</p>
       </div>
       <div>
@@ -339,7 +339,7 @@
       prelev = ca - net;
     } else {
       var caMicro  = parseFloat(document.getElementById('ca-micro').value) || 0;
-      var tauxMicro = parseFloat(document.getElementById('activite-micro').value) || 0.221;
+      var tauxMicro = parseFloat(document.getElementById('activite-micro').value) || 0.261;
       ca = caMicro;
       if (!ca) { resetResults(); return; }
       var cotis = ca * tauxMicro;
@@ -377,7 +377,7 @@
       var caCible = netCible / ((1 - chLib) * (1 - ir));
       tjmCible = caCible / jours;
     } else {
-      var tauxM = parseFloat(document.getElementById('activite-micro').value) || 0.221;
+      var tauxM = parseFloat(document.getElementById('activite-micro').value) || 0.261;
       jours = 20;
       var caCible = netCible / (1 - tauxM);
       tjmCible = caCible / jours;

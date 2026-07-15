@@ -172,13 +172,14 @@ IIFE unique qui s'exécute sur toutes les pages. Elle lit `window.location.pathn
 Les deux outils fiscaux intègrent les barèmes directement en JS. Valeurs à réviser annuellement (**dans les deux fichiers**) :
 
 - Objet `BAREME` (frais km uniquement) : taux par puissance fiscale et par tranche de km
-- Fonction `calcImpot()` : tranches IR (actuellement 0%/11%/30%/41%/45% — seuils 12000/29000/82000/177106). **Dupliquée à l'identique** dans `calculateur-frais-kilometriques/` et `calculateur-frais-reels/`.
+- Fonction `calcImpot()` : tranches IR 0%/11%/30%/41%/45% — seuils officiels **11 497 / 29 315 / 83 823 / 180 294** (mis à jour 15/07/2026, remplaçant les arrondis 12000/29000/82000/177106). **Dupliquée à l'identique** dans `calculateur-frais-kilometriques/` et `calculateur-frais-reels/`.
 - Abattement 10 % forfaitaire : min **495 €**, max **14 426 €** (revenus 2024 ; dans les deux outils)
 - Majoration électrique : +20 % (frais km uniquement)
 - Règle sécurité 40 km : alerte si trajet AR > 40 km (sauf justification)
 - Valeur forfaitaire repas (`VALEUR_REPAS`) : **5,45 €/jour** travaillé (frais réels global ; revenus 2025)
 - **ARE** (`simulateur-are.html`) : partie fixe **13,18 €**, plancher **32,13 €/jour** (revalorisation Unédic 1er juillet 2025). Mêmes valeurs reprises dans l'article `calcul-are-chomage.html` et le générateur de lettres — à synchroniser à chaque revalorisation (1er juillet).
-- **PASS 2026 :** 47 100 € — utilisé dans `rupture-conventionnelle.html` pour le calcul du plafond d'exonération de l'indemnité légale (2× PASS = 94 200 €).
+- **PASS 2026 :** 47 100 € — utilisé dans `rupture-conventionnelle.html`. ⚠️ Deux plafonds distincts à ne pas confondre : exonération **fiscale** (IR) plafonnée à **6 PASS = 282 600 €** (c'est ce que la page affiche, correct) ; exonération **sociale** (cotisations) plafonnée à 2 PASS = 94 200 €.
+- **Micro-entrepreneur (tjm-net.html) :** taux 2026 corrigés le 15/07/2026 — vente **12,3 %**, services BIC **21,2 %**, services libéraux BNC **26,1 %** (décret 2024-484 : trajectoire BNC 23,1 % → 24,6 % → 26,1 % au 01/01/2026). Les anciens taux (22,1 %/12,7 %) dataient d'avant 2022. NB : plafond CA services affiché 77 700 € (valable 2023-2025) — vérifier la revalorisation triennale 2026.
 - **Dons aux associations :**
   - Taux **75 %** → case **7UD** (aide aux personnes en difficulté) ; plafond **2 000 €** (relevé de 1 000 € à 2 000 € pour les dons effectués depuis le **14/10/2025**)
   - Taux **66 %** → case **7UF** (intérêt général) ; plafond 20 % du revenu imposable, excédent reportable 4 ans
@@ -213,6 +214,13 @@ Audit complet du code → corrections appliquées sur **les 25 pages** :
 - **🧹 Fichier parasite supprimé (29/06/2026) :** `articles/optimiser-prelevement-source.html html Copier Modifier` — doublon obsolète au nom corrompu (version pré-rebranding « Convertisseur Brut-Net », 2025) qui était déployé tel quel. Supprimé du dépôt ; l'article réel `optimiser-prelevement-source.html` est conservé. ⚠️ **Vigilance générale :** ce type d'artefact (suffixe « json/html Copier Modifier » dans un nom de fichier, résidu de copier-coller) est déjà apparu 2 fois (manifest + cet article) — vérifier `find . -name "*Copier Modifier*"` après tout ajout de fichier.
 
 **🧱 `<head>` standard (à reproduire sur CHAQUE nouvelle page) :** script AdSense + `<link rel="icon" href="/favicon.svg">` + `<link rel="manifest" href="/manifest.webmanifest">` + `<meta name="theme-color" content="#0B1D3A">` + `rel="canonical"` propre à la page + bloc Open Graph. Sans ça, la page ne monétise pas et n'a pas de canonical.
+
+### ✅ Audit global pré-resoumission AdSense (15/07/2026)
+Contrôle complet des 38 pages + calculateurs :
+- **Technique (38/38)** : AdSense, canonical, OG, favicon, manifest, theme-color, meta description, liens légaux — tout présent partout. Sitemap = correspondance 1:1 avec les fichiers (0 fantôme). JSON-LD tous valides. Aucune unité pub `<ins>` vide (Auto Ads only → pas d'emplacement trompeur). `BreadcrumbList` ajouté à `articles.html` (manquait).
+- **Calculateurs vérifiés** : brut→net (22/25/15/35/48 %) ✅ · coût employeur (13/5,25/8,55/4,72/4,05/2,5 %) ✅ · prime ✅ · rupture (¼-⅓, 6 PASS) ✅ · ARE (13,18/32,13) ✅ · frais réels/km (495/14 426, repas 5,45) ✅.
+- **2 corrections appliquées** : taux micro du TJM (obsolètes pré-2022 → taux 2026) et tranches `calcImpot()` (arrondis → barème officiel). Détail en §8.
+- **Reste côté utilisateur** : activer le message RGPD (CMP Google certifié) dans AdSense → Confidentialité et messages, attendre 24-48 h, puis resoumettre.
 
 ### 🎯 Priorité actuelle : LE RÉFÉRENCEMENT (SEO organique)
 Le trafic Google Ads est payant ; l'enjeu désormais est de capter du **trafic organique gratuit et durable**. La base technique est saine (canonical, OG, sitemap, mobile-first, pages légères). Leviers par ordre d'impact :

@@ -276,10 +276,10 @@
   function calcImpot(revenu) {
     if (revenu <= 0) return 0;
     var impot = 0;
-    if (revenu > 12000)  impot += Math.min(revenu - 12000,  17000) * 0.11;
-    if (revenu > 29000)  impot += Math.min(revenu - 29000,  53000) * 0.30;
-    if (revenu > 82000)  impot += Math.min(revenu - 82000,  95106) * 0.41;
-    if (revenu > 177106) impot += (revenu - 177106) * 0.45;
+    if (revenu > 11497)  impot += Math.min(revenu - 11497,  17818) * 0.11;
+    if (revenu > 29315)  impot += Math.min(revenu - 29315,  54508) * 0.30;
+    if (revenu > 83823)  impot += Math.min(revenu - 83823,  96471) * 0.41;
+    if (revenu > 180294) impot += (revenu - 180294) * 0.45;
     return Math.round(impot);
   }
 
