@@ -246,10 +246,10 @@ Trois pages conformes AdSense/RGPD, design article (Tailwind + nav.js + footer a
 | Page | Fichier | Points clés |
 |---|---|---|
 | Politique de confidentialité | `politique-confidentialite.html` | RGPD + AdSense : cookies, données collectées, droits (accès/rectif/effacement/opposition), **aucun DPO désigné**, contact via formulaire |
-| Mentions légales | `mentions-legales.html` | Éditeur = **Chapey Rémi**, hébergeur = **GitHub Pages / Microsoft**, propriété intellectuelle, droit applicable. **Aucun email exposé** → renvoi au formulaire |
-| Contact | `contact.html` | Formulaire (nom/sujet/message) **sans backend ni mailto** — JS affiche « Formulaire en cours d'activation ». **Aucun email affiché** (choix utilisateur explicite) |
+| Mentions légales | `mentions-legales.html` | Éditeur = **Chapey Rémi**, hébergeur = **GitHub Pages / Microsoft**, propriété intellectuelle, droit applicable. **Contact = email `chapey.remi01@gmail.com`** exposé au §1 Éditeur (+ lien page contact) |
+| Contact | `contact.html` | **Email de contact affiché** en méthode principale : `chapey.remi01@gmail.com` (lien `mailto:`). Le faux formulaire « en cours d'activation » a été retiré (il ne fonctionnait pas → problème AdSense). |
 
-> ⚠️ **Règle email :** l'adresse `chapey.remi@gmail.com` **ne doit jamais apparaître** sur le site public (mentions légales, contact, etc.). Toujours renvoyer vers le formulaire de contact.
+> ⚠️ **Règle email (MISE À JOUR — inversée par l'utilisateur, contexte AdSense) :** l'adresse de contact publique est **`chapey.remi01@gmail.com`** (noter le `01`). Elle **doit** apparaître sur `contact.html` et dans les mentions légales (§1 Éditeur) — un moyen de contact réel et visible est **éliminatoire pour AdSense**. ⚠️ Ne pas confondre avec `chapey.remi@gmail.com` (l'email du compte, à ne pas publier). L'ancienne consigne « ne jamais afficher d'email, renvoyer au formulaire » est **caduque**.
 
 **Liens légaux dans TOUS les footers :** un bloc `.footer-legal` (liens inline `#9DBCFF`) a été inséré avant chaque `</footer>` des 24 pages existantes via le script `footerlegal.pl` (scratchpad). Il fonctionne sur les 3 types de footer (Tailwind articles, `tools.css` inline, `.container` du générateur). Les 3 pages légales et les 10 nouveaux articles l'intègrent nativement.
 
