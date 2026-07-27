@@ -154,7 +154,7 @@ Gérés via `js/articles.js` (tableau statique) + `articles.html` (listing avec 
 
 **✅ Rétrofit `.declare-box` (28/06/2026) :** les 6 articles pré-existants (ARE, frais km, prélèvement source, freelance, salaire net) ont tous reçu des encarts `.declare-box` et `.case-tag` rétroactivement. Tous les articles du site intègrent désormais les numéros de cases officiels.
 
-**🎨 Infographies SVG inline (depuis le 27/07/2026) :** 7 articles en sont dotés. **Règle : SVG inline, jamais de photo ni de fichier image.** Le SVG coûte 0 requête réseau, préserve le chargement instantané sur mobile (majorité du trafic), reste net sur tout écran et — c'est le point clé — **porte une information chiffrée**, ce qu'une photo d'illustration n'apporte pas. Structure type :
+**🎨 Infographies SVG inline (depuis le 27/07/2026) :** 8 articles en sont dotés (liste en §9). **Règle : SVG inline, jamais de photo ni de fichier image.** Le SVG coûte 0 requête réseau, préserve le chargement instantané sur mobile (majorité du trafic), reste net sur tout écran et — c'est le point clé — **porte une information chiffrée**, ce qu'une photo d'illustration n'apporte pas. Structure type :
 
 ```html
 <figure class="figure">
@@ -226,7 +226,7 @@ Les deux outils fiscaux intègrent les barèmes directement en JS. Valeurs à r�
 - Le contenu, bien que factuellement juste, **reformulait des règles publiques** déjà présentes sur service-public.fr / urssaf.fr → faible différenciation aux yeux de Google.
 - Signal aggravant : **10 articles publiés le même jour** (motif de production en masse).
 
-**✅ Correctif engagé — enrichissement éditorial (27/07/2026) :** 7 articles réécrits en profondeur, tous dotés d'une **infographie SVG inline** :
+**✅ Correctif engagé — enrichissement éditorial (27/07/2026) :** **8 articles sur 10** réécrits en profondeur, tous dotés d'une **infographie SVG inline** :
 | Article | Avant | Après | Infographie SVG |
 |---|---|---|---|
 | `indemnite-licenciement-calcul.html` | 539 mots | **2 231** | Barres : indemnité selon l'ancienneté (rupture de pente à 10 ans) |
