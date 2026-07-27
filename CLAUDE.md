@@ -179,6 +179,10 @@ Les deux outils fiscaux intègrent les barèmes directement en JS. Valeurs à r�
 - Valeur forfaitaire repas (`VALEUR_REPAS`) : **5,45 €/jour** travaillé (frais réels global ; revenus 2025)
 - **ARE** (`simulateur-are.html`) : partie fixe **13,18 €**, plancher **32,13 €/jour** (revalorisation Unédic 1er juillet 2025). Mêmes valeurs reprises dans l'article `calcul-are-chomage.html` et le générateur de lettres — à synchroniser à chaque revalorisation (1er juillet).
 - **PASS 2026 :** 47 100 € — utilisé dans `rupture-conventionnelle.html`. ⚠️ Deux plafonds distincts à ne pas confondre : exonération **fiscale** (IR) plafonnée à **6 PASS = 282 600 €** (c'est ce que la page affiche, correct) ; exonération **sociale** (cotisations) plafonnée à 2 PASS = 94 200 €.
+- **⚠️ Différé spécifique d'indemnisation France Travail (indemnités supra-légales) :** diviseur **111,8** depuis le **1<sup>er</sup> janvier 2026** (circulaire Unédic du 02/01/2026). **L'ancienne valeur 94,4 est périmée** mais reste publiée par une majorité de sites concurrents — c'est un angle de différenciation. Plafond **150 jours** calendaires (**75 jours** en licenciement économique), auxquels s'ajoutent le délai d'attente de **7 jours** et le différé congés payés (max 30 j). Ce différé **retarde** le versement de l'ARE sans réduire la durée des droits. Cité dans `indemnite-licenciement-calcul.html`. Le diviseur évolue chaque année avec le plafond de la Sécurité sociale → **à revérifier chaque janvier**.
+- **Heures supplémentaires (`heures-supplementaires-majoration.html`) :** exonération d'IR plafonnée à **7 500 € nets/an** (case **1GH**, entre dans le revenu fiscal de référence) ; réduction de cotisations salariales au taux max de **11,31 %** (vieillesse de base + AGIRC-ARRCO uniquement — **CSG/CRDS restent dues**) ; majorations 25 % / 50 %, plancher conventionnel 10 % ; contingent annuel **220 h**. NB : une défiscalisation intégrale a été discutée dans les débats budgétaires 2026 — vérifier avant de modifier le plafond.
+- **Prime de précarité — effet de cascade (`prime-precarite-cdd.html`) :** la prime = 10 % du brut **hors** indemnité de congés payés ; l'**ICCP se calcule ensuite sur le brut + la prime**. Total réel d'une fin de CDD ≈ **21 %** du brut, et non 20 %. Exemple de référence : 11 400 € brut → prime 1 140 € → ICCP 1 254 € (et non 1 140 €).
+- **Refus de CDI après un CDD (L.1243-11-1) :** perte de la prime de précarité **et**, depuis 2024, possible privation de l'ARE après **2 refus en 12 mois** (décret 2023-1307, dispositif validé par le Conseil d'État). La proposition n'est opposable que si elle est **écrite**, sur le même emploi ou un emploi similaire, à rémunération, durée de travail, classification et lieu de travail équivalents.
 - **Micro-entrepreneur (tjm-net.html) :** taux 2026 corrigés le 15/07/2026 — vente **12,3 %**, services BIC **21,2 %**, services libéraux BNC **26,1 %** (décret 2024-484 : trajectoire BNC 23,1 % → 24,6 % → 26,1 % au 01/01/2026). Les anciens taux (22,1 %/12,7 %) dataient d'avant 2022. NB : plafond CA services affiché 77 700 € (valable 2023-2025) — vérifier la revalorisation triennale 2026.
 - **Dons aux associations :**
   - Taux **75 %** → case **7UD** (aide aux personnes en difficulté) ; plafond **2 000 €** (relevé de 1 000 € à 2 000 € pour les dons effectués depuis le **14/10/2025**)
@@ -202,23 +206,36 @@ Les deux outils fiscaux intègrent les barèmes directement en JS. Valeurs à r�
 - Le contenu, bien que factuellement juste, **reformulait des règles publiques** déjà présentes sur service-public.fr / urssaf.fr → faible différenciation aux yeux de Google.
 - Signal aggravant : **10 articles publiés le même jour** (motif de production en masse).
 
-**✅ Correctif engagé — enrichissement éditorial (27/07/2026) :** les 3 articles les plus courts ont été réécrits en profondeur :
-| Article | Avant | Après |
-|---|---|---|
-| `periode-essai-regles.html` | 611 mots | **1 789** |
-| `conges-payes-calcul.html` | 636 mots | **1 634** |
-| `ticket-restaurant-2026.html` | 697 mots | **1 384** |
+**✅ Correctif engagé — enrichissement éditorial (27/07/2026) :** 7 articles réécrits en profondeur, tous dotés d'une **infographie SVG inline** :
+| Article | Avant | Après | Infographie SVG |
+|---|---|---|---|
+| `indemnite-licenciement-calcul.html` | 539 mots | **2 231** | Barres : indemnité selon l'ancienneté (rupture de pente à 10 ans) |
+| `heures-supplementaires-majoration.html` | 613 mots | **1 789** | Barres empilées : net réel heure normale vs heure sup |
+| `periode-essai-regles.html` | 611 mots | **1 841** | Frise chronologique du cas Julien |
+| `solde-tout-compte.html` | 600 mots | **1 750** | Maquette de décompte + 3 lignes à vérifier |
+| `conges-payes-calcul.html` | 636 mots | **1 680** | Calendrier ouvrables vs ouvrés (piège du samedi) |
+| `prime-precarite-cdd.html` | 544 mots | **1 624** | Cascade des deux 10 % (précarité → congés payés) |
+| `ticket-restaurant-2026.html` | 697 mots | **1 445** | Barres : coût employeur TR vs augmentation |
 
-**🧭 Méthode d'enrichissement à répliquer sur les 7 articles restants** (c'est ce qui crée la valeur unique que Google réclame) :
+**🎨 Choix assumé : infographies SVG inline, PAS de photos.** Motif : le refus vise le contenu *informatif*, qu'une photo d'illustration n'améliore pas ; le site n'a **aucun fichier binaire** (chargement instantané sur mobile, majorité du trafic) et il n'y a pas de build system pour optimiser des images. Le SVG inline coûte **0 requête réseau**, reste net sur tout écran, suit la charte (`#1A5CFF` / `#0B1D3A`) et **porte une information**. Conventions : `<figure class="figure">` + `viewBox` + `role="img"` + `<title>`/`<desc>` (accessibilité et lecture par les robots) + `<figcaption>`. CSS `.figure` à ajouter au `<style>` de l'article. ⚠️ **Accents obligatoires dans les libellés SVG** comme partout ailleurs.
+
+**🧭 Méthode d'enrichissement (validée, à répliquer)** — c'est ce qui crée la valeur unique que Google réclame :
 1. **Cas concrets chiffrés nominatifs** (ex. « Julien, technicien, 2 400 € brut » → calcul complet aboutissant à 1 920 € d'indemnité) ;
 2. **Le chiffrage du gain réel en poche** + comparaison avec l'alternative (ex. titres-restaurant = 1 307 € net/an, contre 2 671 € de coût employeur pour la même somme via une augmentation) — c'est l'ADN du site ;
-3. **Pièges et subtilités peu couverts ailleurs** (déduction du CDD/stage sur la période d'essai, jours de fractionnement, indemnité compensatrice quand le délai de prévenance dépasse l'essai, ouvrables vs ouvrés) ;
+3. **Pièges et subtilités peu couverts ailleurs** (déduction du CDD/stage sur la période d'essai, jours de fractionnement, ouvrables vs ouvrés, cascade prime de précarité → congés payés, contrepartie de non-concurrence oubliée) ;
 4. **Section « erreurs fréquentes »** (5-6 items) ;
 5. **FAQ de 5-6 questions** + bloc JSON-LD `FAQPage` correspondant (bonus rich snippets) ;
-6. **Liens contextuels vers les calculateurs** du site — le seul actif réellement unique.
-7. Mettre à jour l'en-tête : « Mis à jour le JJ/MM/AAAA • N min de lecture ».
+6. **Liens contextuels vers les calculateurs** du site — le seul actif réellement unique ;
+7. Mettre à jour l'en-tête « Mis à jour le JJ/MM/AAAA • N min de lecture » **et** ajouter `"dateModified"` au JSON-LD `Article` ;
+8. **Une infographie SVG** portant le chiffre-clé de l'article.
 
-**⚠️ Règle de publication à respecter désormais :** ne **plus jamais publier en lot** (2-3 articles/semaine maximum). Privilégier l'approfondissement d'articles existants à la création de nouveaux.
+**🔍 Vérifier les chiffres avant publication.** Plusieurs valeurs « connues » se sont révélées périmées lors de cette passe — voir §8. Toujours confirmer à la source les coefficients et plafonds avant de les écrire ; c'est précisément l'actualité des chiffres qui différencie le site des pages concurrentes.
+
+**⚙️ Script de contrôle :** `check.ps1` (scratchpad) vérifie en un appel, pour une liste d'articles : nombre de mots du texte visible, validité de chaque bloc JSON-LD, bonne formation XML de chaque SVG, absence de mojibake et présence des 5 éléments de `<head>` (AdSense, canonical, OG, favicon, manifest). ⚠️ Le script est **volontairement en ASCII pur** : PowerShell 5.1 lit les `.ps1` sans BOM en ANSI et corromprait tout littéral accentué (le motif de détection de mojibake compris).
+
+**⚠️ Règle de publication à respecter désormais :** ne **plus jamais publier en lot** (2-3 articles/semaine maximum). Cette règle vise la **création** d'articles neufs, **pas l'enrichissement** de pages existantes — améliorer 7 articles le même jour n'envoie aucun signal négatif, et laisser le site à moitié enrichi pendant des semaines fait courir le risque d'un nouveau refus. Privilégier l'approfondissement à la création.
+
+**📌 Reste à enrichir (3 articles du lot du 30/06) :** `mutuelle-entreprise-obligatoire.html` (667 mots), `arret-maladie-indemnites.html` (605), `prime-interessement-participation.html` (825). À traiter avant toute resoumission AdSense.
 
 ### Historique — correctif crawlabilité (précédent refus)
 - **Contexte :** L'ancienne alerte "Contenu à faible valeur informative" datait de l'époque où le site n'avait que **3 articles**. Elle est **périmée** : le site compte désormais **23 articles + 10 outils + 3 pages légales**, le SEO technique est complet (canonical, OG, sitemap, ads.txt) et AdSense est sur **toutes les pages** (38/38 vérifié).

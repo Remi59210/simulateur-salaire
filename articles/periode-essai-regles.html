@@ -24,6 +24,7 @@
   "headline":"Période d'essai 2026 : durée légale, renouvellement et rupture",
   "description":"Durée maximale de la période d'essai selon le statut, conditions de renouvellement, délai de prévenance et règles de rupture.",
   "datePublished":"2026-06-30",
+  "dateModified":"2026-07-27",
   "author":{"@type":"Organization","name":"Aide Salariés"},
   "mainEntityOfPage":{"@type":"WebPage","@id":"https://simulateur-salaire.fr/articles/periode-essai-regles.html"}
 }
@@ -50,6 +51,10 @@
   td:first-child { font-weight:600; color:#1e293b; }
   tbody tr:nth-child(even) { background: #f8fafc; }
   tr:last-child td { border-bottom: none; }
+  .figure { margin: 1.5rem 0; padding: 18px 14px 10px; background:#fff; border:1.5px solid #DCE6F5; border-radius:12px; }
+  .figure svg { width:100%; height:auto; display:block; margin:0 auto; }
+  .figure figcaption { font-size:.8rem; color:#64748B; text-align:center; margin-top:10px; line-height:1.5; }
+  .table-scroll { overflow-x:auto; }
 </style>
 </head>
 <body class="min-h-screen flex flex-col" style="background:#F6F9FF">
@@ -165,6 +170,52 @@
       </ul>
       <p style="margin-bottom:0">Sans cette règle, Julien serait reparti les mains vides. Vérifiez systématiquement la date de notification par rapport au terme réel de votre essai.</p>
     </div>
+
+    <figure class="figure">
+      <svg viewBox="0 0 700 275" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="titrePE descPE">
+        <title id="titrePE">Chronologie de la période d'essai de Julien</title>
+        <desc id="descPE">Embauche le 2 mars avec un essai de 3 mois se terminant théoriquement le 1er juin. Dix jours d'arrêt maladie reportent ce terme au 11 juin. La rupture est notifiée le 5 juin, ouvrant un délai de prévenance d'un mois jusqu'au 5 juillet. Comme le contrat s'arrête le 11 juin, 24 jours de prévenance restent non exécutés et donnent droit à 1 920 € brut.</desc>
+
+        <line x1="60" y1="110" x2="650" y2="110" stroke="#DCE6F5" stroke-width="3"/>
+        <line x1="495" y1="110" x2="635" y2="110" stroke="#fb923c" stroke-width="3"/>
+
+        <g font-family="Inter,Arial" font-size="12.5" font-weight="700" fill="#1e293b" text-anchor="middle">
+          <text x="75" y="88">2 mars</text>
+          <text x="215" y="88">1er juin</text>
+          <text x="355" y="88">5 juin</text>
+          <text x="495" y="88">11 juin</text>
+          <text x="635" y="88">5 juillet</text>
+        </g>
+
+        <circle cx="75"  cy="110" r="9" fill="#1A5CFF"/>
+        <circle cx="215" cy="110" r="9" fill="#94A3B8"/>
+        <circle cx="355" cy="110" r="9" fill="#1A5CFF"/>
+        <circle cx="495" cy="110" r="9" fill="#0B1D3A"/>
+        <circle cx="635" cy="110" r="9" fill="#fb923c"/>
+
+        <g font-family="Inter,Arial" font-size="10.5" fill="#475569" text-anchor="middle">
+          <text x="75"  y="140">Embauche</text>
+          <text x="75"  y="155">essai de 3 mois</text>
+          <text x="215" y="140">Fin d'essai</text>
+          <text x="215" y="155">théorique</text>
+          <text x="355" y="140">Rupture</text>
+          <text x="355" y="155">notifiée</text>
+          <text x="495" y="140">Fin d'essai reportée</text>
+          <text x="495" y="155">+10 j d'arrêt</text>
+          <text x="635" y="140">Fin du délai</text>
+          <text x="635" y="155">de prévenance</text>
+        </g>
+
+        <line x1="495" y1="190" x2="635" y2="190" stroke="#fb923c" stroke-width="1.6"/>
+        <line x1="495" y1="184" x2="495" y2="196" stroke="#fb923c" stroke-width="1.6"/>
+        <line x1="635" y1="184" x2="635" y2="196" stroke="#fb923c" stroke-width="1.6"/>
+        <text x="565" y="214" font-family="Inter,Arial" font-size="12" font-weight="700" fill="#9a3412" text-anchor="middle">24 jours non exécutés</text>
+        <text x="565" y="236" font-family="Inter,Arial" font-size="15" font-weight="700" fill="#9a3412" text-anchor="middle">1 920 € brut dus</text>
+
+        <text x="60" y="264" font-family="Inter,Arial" font-size="11" fill="#64748B">Le contrat s'arrête au terme de l'essai, mais le délai de prévenance entamé reste dû.</text>
+      </svg>
+      <figcaption>Chronologie schématique : les intervalles ne sont pas à l'échelle. Le décalage entre le terme de l'essai (11 juin) et la fin du délai de prévenance (5 juillet) est ce qui déclenche l'indemnité.</figcaption>
+    </figure>
 
     <h2>6. La rupture pendant l'essai</h2>
     <p>

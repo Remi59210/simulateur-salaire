@@ -24,6 +24,7 @@
   "headline":"Congés payés 2026 : calcul, acquisition et indemnité",
   "description":"Comment s'acquièrent les congés payés (2,5 jours/mois), et comment se calcule l'indemnité de congés (règle du dixième ou maintien de salaire).",
   "datePublished":"2026-06-30",
+  "dateModified":"2026-07-27",
   "author":{"@type":"Organization","name":"Aide Salariés"},
   "mainEntityOfPage":{"@type":"WebPage","@id":"https://simulateur-salaire.fr/articles/conges-payes-calcul.html"}
 }
@@ -50,6 +51,10 @@
   td:first-child { font-weight:600; color:#1e293b; }
   tbody tr:nth-child(even) { background: #f8fafc; }
   tr:last-child td { border-bottom: none; }
+  .figure { margin: 1.5rem 0; padding: 18px 14px 10px; background:#fff; border:1.5px solid #DCE6F5; border-radius:12px; }
+  .figure svg { width:100%; height:auto; display:block; margin:0 auto; }
+  .figure figcaption { font-size:.8rem; color:#64748B; text-align:center; margin-top:10px; line-height:1.5; }
+  .table-scroll { overflow-x:auto; }
 </style>
 </head>
 <body class="min-h-screen flex flex-col" style="background:#F6F9FF">
@@ -102,6 +107,67 @@
     <p>
       <strong>30 jours ouvrables et 25 jours ouvrés, c'est exactement la même chose : 5 semaines.</strong> Si votre entreprise compte en jours ouvrés, ne vous alarmez pas de voir « 25 » sur votre bulletin — vous n'avez rien perdu.
     </p>
+    <figure class="figure">
+      <svg viewBox="0 0 660 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="titreCP descCP">
+        <title id="titreCP">Décompte d'une semaine de congés en jours ouvrables et en jours ouvrés</title>
+        <desc id="descCP">Pour une absence du lundi au vendredi, le décompte en jours ouvrables retient 6 jours car le samedi est compté, alors que le décompte en jours ouvrés n'en retient que 5.</desc>
+
+        <g font-family="Inter,Arial" font-size="12" font-weight="600" fill="#94A3B8" text-anchor="middle">
+          <text x="182" y="30">L</text>
+          <text x="254" y="30">M</text>
+          <text x="326" y="30">M</text>
+          <text x="398" y="30">J</text>
+          <text x="470" y="30">V</text>
+          <text x="542" y="30">S</text>
+          <text x="614" y="30">D</text>
+        </g>
+
+        <text x="20" y="75" font-family="Inter,Arial" font-size="13" font-weight="700" fill="#1e293b">Jours ouvrables</text>
+        <text x="20" y="93" font-family="Inter,Arial" font-size="11" fill="#94A3B8">lundi au samedi</text>
+        <g>
+          <rect x="150" y="46" width="64" height="54" rx="7" fill="#1A5CFF"/>
+          <rect x="222" y="46" width="64" height="54" rx="7" fill="#1A5CFF"/>
+          <rect x="294" y="46" width="64" height="54" rx="7" fill="#1A5CFF"/>
+          <rect x="366" y="46" width="64" height="54" rx="7" fill="#1A5CFF"/>
+          <rect x="438" y="46" width="64" height="54" rx="7" fill="#1A5CFF"/>
+          <rect x="510" y="46" width="64" height="54" rx="7" fill="#fb923c"/>
+          <rect x="582" y="46" width="64" height="54" rx="7" fill="#E2E8F0"/>
+        </g>
+        <g font-family="Inter,Arial" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+          <text x="182" y="80">1</text>
+          <text x="254" y="80">2</text>
+          <text x="326" y="80">3</text>
+          <text x="398" y="80">4</text>
+          <text x="470" y="80">5</text>
+          <text x="542" y="80">6</text>
+        </g>
+        <text x="150" y="124" font-family="Inter,Arial" font-size="12.5" font-weight="700" fill="#9a3412">6 jours décomptés — le samedi est compté alors que vous ne travaillez pas</text>
+
+        <text x="20" y="185" font-family="Inter,Arial" font-size="13" font-weight="700" fill="#1e293b">Jours ouvrés</text>
+        <text x="20" y="203" font-family="Inter,Arial" font-size="11" fill="#94A3B8">lundi au vendredi</text>
+        <g>
+          <rect x="150" y="156" width="64" height="54" rx="7" fill="#1A5CFF"/>
+          <rect x="222" y="156" width="64" height="54" rx="7" fill="#1A5CFF"/>
+          <rect x="294" y="156" width="64" height="54" rx="7" fill="#1A5CFF"/>
+          <rect x="366" y="156" width="64" height="54" rx="7" fill="#1A5CFF"/>
+          <rect x="438" y="156" width="64" height="54" rx="7" fill="#1A5CFF"/>
+          <rect x="510" y="156" width="64" height="54" rx="7" fill="#E2E8F0"/>
+          <rect x="582" y="156" width="64" height="54" rx="7" fill="#E2E8F0"/>
+        </g>
+        <g font-family="Inter,Arial" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+          <text x="182" y="190">1</text>
+          <text x="254" y="190">2</text>
+          <text x="326" y="190">3</text>
+          <text x="398" y="190">4</text>
+          <text x="470" y="190">5</text>
+        </g>
+        <text x="150" y="234" font-family="Inter,Arial" font-size="12.5" font-weight="700" fill="#1A5CFF">5 jours décomptés</text>
+
+        <text x="150" y="272" font-family="Inter,Arial" font-size="11.5" fill="#64748B">Absence posée du lundi au vendredi, avec retour le lundi suivant.</text>
+      </svg>
+      <figcaption>Les deux systèmes aboutissent au même total annuel (30 ouvrables = 25 ouvrés), mais le décompte d'une absence donnée n'est pas identique.</figcaption>
+    </figure>
+
     <div class="callout-warn">
       <strong>⚠️ Le piège du samedi.</strong> En décompte <em>ouvrable</em>, le samedi est décompté même si vous ne travaillez jamais le samedi, dès lors qu'il tombe dans votre période d'absence. Poser du lundi au vendredi avec retour le lundi suivant vous coûte donc <strong>6 jours</strong>, pas 5. En revanche, poser du lundi au mercredi ne coûte que 3 jours : le samedi n'est pas dans la période.
     </div>
