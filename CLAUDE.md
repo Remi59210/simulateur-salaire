@@ -154,6 +154,24 @@ Gérés via `js/articles.js` (tableau statique) + `articles.html` (listing avec 
 
 **✅ Rétrofit `.declare-box` (28/06/2026) :** les 6 articles pré-existants (ARE, frais km, prélèvement source, freelance, salaire net) ont tous reçu des encarts `.declare-box` et `.case-tag` rétroactivement. Tous les articles du site intègrent désormais les numéros de cases officiels.
 
+**🎨 Infographies SVG inline (depuis le 27/07/2026) :** 7 articles en sont dotés. **Règle : SVG inline, jamais de photo ni de fichier image.** Le SVG coûte 0 requête réseau, préserve le chargement instantané sur mobile (majorité du trafic), reste net sur tout écran et — c'est le point clé — **porte une information chiffrée**, ce qu'une photo d'illustration n'apporte pas. Structure type :
+
+```html
+<figure class="figure">
+  <svg viewBox="0 0 660 290" xmlns="http://www.w3.org/2000/svg"
+       role="img" aria-labelledby="titreX descX">
+    <title id="titreX">…</title>
+    <desc id="descX">Description chiffrée complète, lue par les robots et les lecteurs d'écran</desc>
+    …
+  </svg>
+  <figcaption>…</figcaption>
+</figure>
+```
+
+Ajouter au `<style>` de l'article les classes `.figure`, `.figure svg` (`width:100%; height:auto`) et `.figure figcaption`. Palette imposée : `#1A5CFF` (valeur mise en avant), `#0B1D3A` (second niveau), `#94A3B8`/`#CBD5E1` (prélèvements, parts neutres), `#fb923c` (piège, alerte). **Accents obligatoires dans les libellés SVG**, comme dans tout le site. Le `<desc>` doit reprendre tous les chiffres du graphique : c'est ce que lit un robot qui n'affiche pas l'image.
+
+**📏 Longueur cible d'un article : 1 500 mots minimum.** Les 10 articles du lot du 30/06 faisaient 540-830 mots — c'est ce qui a motivé le refus AdSense (voir §9). Ne plus jamais publier en dessous de ce seuil.
+
 ---
 
 ## 🔧 7. Navigation Globale (`js/nav.js`)
@@ -232,6 +250,8 @@ Les deux outils fiscaux intègrent les barèmes directement en JS. Valeurs à r�
 **🔍 Vérifier les chiffres avant publication.** Plusieurs valeurs « connues » se sont révélées périmées lors de cette passe — voir §8. Toujours confirmer à la source les coefficients et plafonds avant de les écrire ; c'est précisément l'actualité des chiffres qui différencie le site des pages concurrentes.
 
 **⚙️ Script de contrôle :** `check.ps1` (scratchpad) vérifie en un appel, pour une liste d'articles : nombre de mots du texte visible, validité de chaque bloc JSON-LD, bonne formation XML de chaque SVG, absence de mojibake et présence des 5 éléments de `<head>` (AdSense, canonical, OG, favicon, manifest). ⚠️ Le script est **volontairement en ASCII pur** : PowerShell 5.1 lit les `.ps1` sans BOM en ANSI et corromprait tout littéral accentué (le motif de détection de mojibake compris).
+
+**🔬 Limite connue — pas de vérification visuelle possible.** Le navigateur intégré refuse les URL `file://` sans approbation manuelle par action, et Python n'est pas installé (seul le shim du Microsoft Store) : impossible de lancer un serveur local ou de faire une capture d'écran d'une page avant déploiement. **Conséquence pratique :** un SVG ne peut être validé que par (1) contrôle XML de bonne formation via `[xml]` en PowerShell et (2) vérification arithmétique des coordonnées — hauteurs de barres proportionnelles à l'échelle, `text-anchor` cohérent avec les centres, libellés dont la largeur estimée (≈ 0,55 × taille de police × nb de caractères) ne chevauche pas l'élément voisin. Cette méthode a déjà rattrapé une collision de libellés, mais elle ne remplace pas un œil humain : **demander à l'utilisateur de contrôler le rendu après déploiement**.
 
 **⚠️ Règle de publication à respecter désormais :** ne **plus jamais publier en lot** (2-3 articles/semaine maximum). Cette règle vise la **création** d'articles neufs, **pas l'enrichissement** de pages existantes — améliorer 7 articles le même jour n'envoie aucun signal négatif, et laisser le site à moitié enrichi pendant des semaines fait courir le risque d'un nouveau refus. Privilégier l'approfondissement à la création.
 
