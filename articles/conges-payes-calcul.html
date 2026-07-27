@@ -29,6 +29,7 @@
 }
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur-salaire.fr/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://simulateur-salaire.fr/articles.html"},{"@type":"ListItem","position":3,"name":"Congés payés 2026 : calcul, acquisition et indemnité","item":"https://simulateur-salaire.fr/articles/conges-payes-calcul.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Mon employeur peut-il refuser mes dates de congés ?","acceptedAnswer":{"@type":"Answer","text":"Oui. C'est l'employeur qui fixe l'ordre des départs selon les nécessités de service, l'ancienneté et la situation familiale. Il peut refuser vos dates, mais il a l'obligation de vous mettre en mesure de prendre vos congés. Il ne peut plus modifier vos dates dans le mois précédant le départ, sauf circonstances exceptionnelles."}},{"@type":"Question","name":"Puis-je me faire payer mes congés au lieu de les prendre ?","acceptedAnswer":{"@type":"Answer","text":"Non, pas tant que le contrat est en cours : les congés payés ont une finalité de repos et doivent être pris. Le versement d'une indemnité à la place n'est possible qu'à la rupture du contrat (indemnité compensatrice), ou via un compte épargne-temps."}},{"@type":"Question","name":"J'ai été en arrêt maladie pendant mes congés : suis-je remboursé de mes jours ?","acceptedAnswer":{"@type":"Answer","text":"Si l'arrêt commence avant le départ en congés, les congés sont reportés. Si l'arrêt survient pendant les congés, la jurisprudence européenne permet de récupérer les jours correspondants : réclamez par écrit si l'employeur ne l'applique pas."}},{"@type":"Question","name":"Combien de jours ai-je acquis après 6 mois dans l'entreprise ?","acceptedAnswer":{"@type":"Answer","text":"15 jours ouvrables, soit 12,5 jours ouvrés, à raison de 2,5 jours ouvrables par mois de travail effectif. Vous pouvez les poser dès leur acquisition : depuis 2016, il n'est plus nécessaire d'attendre l'ouverture de la période de prise."}},{"@type":"Question","name":"Les jours fériés comptent-ils dans mes congés ?","acceptedAnswer":{"@type":"Answer","text":"Non. Un jour férié chômé tombant pendant vos congés n'est pas décompté de votre solde. Si le 14 juillet tombe un mardi au milieu de votre semaine de congés, cette semaine ne vous coûte que 5 jours ouvrables au lieu de 6."}}]}</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="/css/nav.css"/>
 <style>
@@ -58,7 +59,7 @@
   <div class="container mx-auto px-4 max-w-3xl">
     <a href="/articles.html" class="text-white/80 hover:text-white text-sm font-medium">← Tous les articles</a>
     <h1 class="text-2xl md:text-3xl font-bold mt-3 leading-snug">Congés payés :<br>calcul, acquisition et indemnité</h1>
-    <p class="mt-2 text-white/80 text-sm">Mis à jour le 30/06/2026 • 8 min de lecture</p>
+    <p class="mt-2 text-white/80 text-sm">Mis à jour le 27/07/2026 • 13 min de lecture</p>
   </div>
 </header>
 
@@ -85,10 +86,47 @@
       <strong>📌 Période de référence.</strong> Les congés s'acquièrent en général du 1<sup>er</sup> juin de l'année N au 31 mai de l'année N+1, sauf accord d'entreprise prévoyant une autre période (souvent l'année civile).
     </div>
 
-    <h2>2. Acquisition pendant un arrêt maladie</h2>
+    <h3>Jours ouvrables ou jours ouvrés ? La confusion n°1</h3>
     <p>
-      Depuis une réforme entrée en vigueur en 2024, les salariés <strong>continuent d'acquérir des congés payés pendant un arrêt maladie</strong>, y compris pour une maladie non professionnelle (à hauteur de 2 jours ouvrables par mois, dans une certaine limite). C'est un changement majeur : auparavant, l'arrêt maladie « gelait » l'acquisition.
+      C'est de loin le point qui génère le plus d'erreurs sur les bulletins. Les deux décomptes sont légaux, mais ils ne se comptent pas pareil :
     </p>
+    <table>
+      <thead><tr><th>&nbsp;</th><th>Jours ouvrables</th><th>Jours ouvrés</th></tr></thead>
+      <tbody>
+        <tr><td>Jours comptés</td><td>Lundi → samedi (6 j/semaine)</td><td>Lundi → vendredi (5 j/semaine)</td></tr>
+        <tr><td>Acquisition mensuelle</td><td>2,5 jours</td><td>2,08 jours</td></tr>
+        <tr><td>Total annuel</td><td>30 jours</td><td>25 jours</td></tr>
+        <tr><td>Une semaine de congés</td><td>6 jours</td><td>5 jours</td></tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>30 jours ouvrables et 25 jours ouvrés, c'est exactement la même chose : 5 semaines.</strong> Si votre entreprise compte en jours ouvrés, ne vous alarmez pas de voir « 25 » sur votre bulletin — vous n'avez rien perdu.
+    </p>
+    <div class="callout-warn">
+      <strong>⚠️ Le piège du samedi.</strong> En décompte <em>ouvrable</em>, le samedi est décompté même si vous ne travaillez jamais le samedi, dès lors qu'il tombe dans votre période d'absence. Poser du lundi au vendredi avec retour le lundi suivant vous coûte donc <strong>6 jours</strong>, pas 5. En revanche, poser du lundi au mercredi ne coûte que 3 jours : le samedi n'est pas dans la période.
+    </div>
+
+    <h2>2. Acquisition pendant un arrêt maladie : ce qui a changé</h2>
+    <p>
+      La loi du 22 avril 2024 a bouleversé une règle vieille de plusieurs décennies. Auparavant, un arrêt maladie non professionnel « gelait » totalement l'acquisition. Ce n'est plus le cas : <strong>vous acquérez désormais des congés pendant votre arrêt</strong>, mais le rythme dépend de l'origine de l'arrêt.
+    </p>
+    <table>
+      <thead><tr><th>Type d'arrêt</th><th>Acquisition</th><th>Plafond sur la période</th></tr></thead>
+      <tbody>
+        <tr><td>Maladie non professionnelle</td><td>2 jours ouvrables / mois</td><td>24 jours ouvrables (4 semaines)</td></tr>
+        <tr><td>Accident du travail / maladie professionnelle</td><td>2,5 jours ouvrables / mois</td><td>30 jours ouvrables (5 semaines)</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Deux points complémentaires à connaître :
+    </p>
+    <ul>
+      <li><strong>Un délai de report de 15 mois</strong> vous est accordé pour prendre les congés acquis pendant l'arrêt, afin de ne pas les perdre au retour ;</li>
+      <li><strong>L'employeur doit vous informer</strong> du nombre de jours acquis et de la date limite pour les prendre, <strong>dans le mois suivant votre reprise</strong>. Tant qu'il ne l'a pas fait, le délai de report ne commence pas à courir.</li>
+    </ul>
+    <div class="callout">
+      <strong>💡 Et pour le passé ?</strong> La réforme a ouvert une régularisation rétroactive remontant à décembre 2009. Pour les salariés <strong>encore en poste</strong>, la fenêtre pour agir était limitée à deux ans et s'est refermée le <strong>23 avril 2026</strong>. Pour les salariés <strong>ayant quitté l'entreprise</strong>, la prescription reste de 3 ans à compter de la rupture du contrat : une réclamation peut donc encore être possible.
+    </div>
 
     <h2>3. Le calcul de l'indemnité : deux méthodes</h2>
     <p>
@@ -105,6 +143,39 @@
     <div class="callout-green">
       <strong>✅ L'employeur compare obligatoirement les deux</strong> et retient le montant le plus élevé. Vous ne pouvez donc jamais être perdant : si la règle du dixième est plus avantageuse (grosse prime dans l'année), c'est elle qui s'applique.
     </div>
+
+    <h3>Cas concret : quand le dixième rapporte 390 € de plus</h3>
+    <p>
+      Prenons <strong>Sophie</strong>, employée à 2 000 € brut/mois, qui a touché <strong>3 000 € de primes</strong> sur la période de référence (13<sup>e</sup> mois + prime variable). Elle a acquis ses 30 jours ouvrables.
+    </p>
+    <table>
+      <thead><tr><th>Méthode</th><th>Calcul</th><th>Pour 30 jours</th></tr></thead>
+      <tbody>
+        <tr><td>Règle du dixième</td><td>(2 000 × 12 + 3 000) = 27 000 € → 1/10 = 2 700 €<br>soit 90 € par jour ouvrable</td><td><strong>2 700 €</strong></td></tr>
+        <tr><td>Maintien de salaire</td><td>2 000 € ÷ 26 jours ouvrables = 76,92 € par jour</td><td>2 308 €</td></tr>
+      </tbody>
+    </table>
+    <p>
+      L'employeur doit retenir <strong>2 700 €</strong> : la règle du dixième est plus favorable de <strong>392 €</strong>. La raison est simple — le dixième intègre les primes dans la base, pas le maintien de salaire.
+    </p>
+    <div class="callout-warn">
+      <strong>⚠️ À vérifier absolument si vous touchez des primes.</strong> Beaucoup de logiciels de paie appliquent le maintien de salaire par défaut, sans faire la comparaison. Si vous avez perçu un 13<sup>e</sup> mois, des heures supplémentaires ou une prime d'objectifs, la règle du dixième est très souvent gagnante : demandez le détail du calcul à votre service paie.
+    </div>
+
+    <h2>Les jours de fractionnement : 1 à 2 jours en plus, rarement réclamés</h2>
+    <p>
+      Voici un droit que la plupart des salariés ignorent. Votre <strong>congé principal</strong> (les 4 premières semaines, soit 24 jours ouvrables) est censé être pris entre le <strong>1<sup>er</sup> mai et le 31 octobre</strong>. Si vous en reportez une partie hors de cette période, vous gagnez des jours supplémentaires :
+    </p>
+    <table>
+      <thead><tr><th>Jours du congé principal pris hors 1<sup>er</sup> mai – 31 octobre</th><th>Jours supplémentaires</th></tr></thead>
+      <tbody>
+        <tr><td>3 à 5 jours ouvrables</td><td>+ 1 jour</td></tr>
+        <tr><td>6 jours ouvrables ou plus</td><td>+ 2 jours</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Attention : la <strong>5<sup>e</sup> semaine n'ouvre pas droit</strong> au fractionnement, et un accord d'entreprise peut prévoir que vous y renoncez (vérifiez votre convention collective). Mais à défaut d'accord, ces jours vous sont dus <strong>automatiquement</strong> — sans avoir à les demander.
+    </p>
 
     <h2>4. Congés non pris : que deviennent-ils ?</h2>
     <p>
@@ -123,6 +194,45 @@
     <div class="callout-warn">
       <strong>⚠️ Vérifiez votre solde de tout compte.</strong> L'indemnité compensatrice de congés payés est l'un des postes les plus souvent mal calculés. Comptez vos jours acquis et comparez avec le montant versé.
     </div>
+    <p>
+      Elle vous est due <strong>quel que soit le motif de départ</strong> — y compris en cas de démission ou de licenciement pour faute grave. Seule la faute lourde pouvait autrefois la faire perdre, ce qui n'est plus le cas depuis une décision du Conseil constitutionnel de 2016.
+    </p>
+
+    <h2>6. Les 5 erreurs les plus fréquentes</h2>
+    <ol>
+      <li><strong>Confondre jours ouvrables et jours ouvrés</strong> et croire qu'on a perdu 5 jours. 30 ouvrables = 25 ouvrés = 5 semaines.</li>
+      <li><strong>Oublier le samedi dans le décompte ouvrable.</strong> Une semaine complète coûte 6 jours, pas 5.</li>
+      <li><strong>Ne pas réclamer la règle du dixième</strong> quand on a touché des primes : c'est plusieurs centaines d'euros qui passent à la trappe.</li>
+      <li><strong>Ignorer les jours de fractionnement</strong> alors qu'ils sont dus automatiquement à défaut d'accord contraire.</li>
+      <li><strong>Croire que les congés non pris sont toujours perdus.</strong> S'ils n'ont pas pu être posés du fait de l'employeur, ou après un arrêt maladie, ils sont reportés.</li>
+    </ol>
+
+    <h2>Questions fréquentes</h2>
+
+    <h3>Mon employeur peut-il refuser mes dates de congés ?</h3>
+    <p>
+      Oui. C'est l'employeur qui fixe l'ordre des départs en fonction des nécessités de service, de l'ancienneté et de la situation familiale. Il peut refuser vos dates, mais il ne peut pas vous empêcher de prendre vos congés : il a l'<strong>obligation</strong> de vous mettre en mesure de les poser. En revanche, il ne peut plus modifier vos dates dans le mois précédant le départ, sauf circonstances exceptionnelles.
+    </p>
+
+    <h3>Puis-je me faire payer mes congés au lieu de les prendre ?</h3>
+    <p>
+      Non, pas tant que le contrat est en cours : les congés payés ont une finalité de repos et doivent être pris. Le versement d'une indemnité à la place n'est possible qu'<strong>à la rupture du contrat</strong> (indemnité compensatrice), ou via un compte épargne-temps si votre entreprise en a un.
+    </p>
+
+    <h3>J'ai été en arrêt maladie pendant mes congés : suis-je remboursé de mes jours ?</h3>
+    <p>
+      Si l'arrêt commence <strong>avant</strong> le départ en congés, les congés sont reportés : vous les reprendrez plus tard. Si l'arrêt survient <strong>pendant</strong> les congés, la jurisprudence européenne vous permet de récupérer les jours correspondants — mais certaines entreprises l'appliquent mal : réclamez par écrit.
+    </p>
+
+    <h3>Combien de jours ai-je acquis après 6 mois dans l'entreprise ?</h3>
+    <p>
+      <strong>15 jours ouvrables</strong> (soit 12,5 jours ouvrés), à raison de 2,5 jours ouvrables par mois de travail effectif. Vous pouvez les poser dès leur acquisition : depuis 2016, il n'est plus nécessaire d'attendre l'ouverture de la période de prise.
+    </p>
+
+    <h3>Les jours fériés comptent-ils dans mes congés ?</h3>
+    <p>
+      Non. Un jour férié <strong>chômé</strong> tombant pendant vos congés n'est pas décompté de votre solde : il vous est « rendu ». Si le 14 juillet tombe un mardi au milieu de votre semaine de congés, cette semaine ne vous coûte que 5 jours ouvrables au lieu de 6.
+    </p>
 
     <hr class="my-8"/>
 

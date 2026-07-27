@@ -29,6 +29,7 @@
 }
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur-salaire.fr/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://simulateur-salaire.fr/articles.html"},{"@type":"ListItem","position":3,"name":"Période d'essai 2026 : durée légale, renouvellement et rupture","item":"https://simulateur-salaire.fr/articles/periode-essai-regles.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"La période d'essai peut-elle être suspendue pendant les congés ?","acceptedAnswer":{"@type":"Answer","text":"Elle n'est pas suspendue au sens strict : elle est prolongée d'une durée égale à celle de l'absence, décomptée en jours calendaires. Vos congés payés, arrêts maladie et RTT repoussent donc mécaniquement la date de fin de votre essai."}},{"@type":"Question","name":"Ai-je droit à des indemnités si mon employeur rompt ma période d'essai ?","acceptedAnswer":{"@type":"Answer","text":"Vous ne percevez aucune indemnité de licenciement. En revanche, l'employeur doit vous verser votre salaire jusqu'au dernier jour, votre indemnité compensatrice de congés payés (10 % des sommes perçues), et le cas échéant l'indemnité compensatrice de préavis si le délai de prévenance n'a pas pu être exécuté en totalité."}},{"@type":"Question","name":"Mon employeur peut-il rompre mon essai sans me donner de motif ?","acceptedAnswer":{"@type":"Answer","text":"Oui, il n'a pas à motiver sa décision par écrit. Mais si vous démontrez que le motif réel était discriminatoire (grossesse, état de santé, origine, activité syndicale) ou étranger à vos compétences (motif économique par exemple), la rupture est abusive et ouvre droit à des dommages et intérêts."}},{"@type":"Question","name":"Que se passe-t-il si mon contrat prévoit une période d'essai trop longue ?","acceptedAnswer":{"@type":"Answer","text":"La clause est réputée non écrite pour la partie excédant le maximum légal. Si votre contrat d'employé prévoit 4 mois d'essai initial au lieu de 2, seul le plafond de 2 mois s'applique. Une rupture notifiée au 3e mois serait alors un licenciement déguisé."}},{"@type":"Question","name":"La période d'essai est-elle obligatoire ?","acceptedAnswer":{"@type":"Answer","text":"Non. Elle est facultative et doit être expressément écrite dans le contrat ou la lettre d'engagement. En son absence, vous êtes définitivement embauché dès le premier jour, et toute rupture relève de la procédure de licenciement."}}]}</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="/css/nav.css"/>
 <style>
@@ -58,7 +59,7 @@
   <div class="container mx-auto px-4 max-w-3xl">
     <a href="/articles.html" class="text-white/80 hover:text-white text-sm font-medium">← Tous les articles</a>
     <h1 class="text-2xl md:text-3xl font-bold mt-3 leading-snug">Période d'essai :<br>durée, renouvellement et rupture</h1>
-    <p class="mt-2 text-white/80 text-sm">Mis à jour le 30/06/2026 • 7 min de lecture</p>
+    <p class="mt-2 text-white/80 text-sm">Mis à jour le 27/07/2026 • 12 min de lecture</p>
   </div>
 </header>
 
@@ -73,10 +74,13 @@
     <p>
       Une période d'essai n'existe que si elle est <strong>expressément prévue par le contrat de travail</strong> ou la lettre d'engagement. Si votre contrat n'en mentionne aucune, il n'y a pas de période d'essai : vous êtes embauché définitivement dès le premier jour.
     </p>
+    <p>
+      Ne confondez pas non plus la période d'essai avec la <strong>période probatoire</strong>. Cette dernière concerne un salarié <em>déjà embauché</em> qui change de poste en interne (promotion, mobilité). La différence est majeure : si la période probatoire n'est pas concluante, vous n'êtes pas licencié — vous <strong>retrouvez votre poste précédent</strong>.
+    </p>
 
     <h2>2. Les durées maximales en CDI</h2>
     <p>
-      La durée maximale de la période d'essai dépend de votre catégorie professionnelle :
+      La durée maximale de la période d'essai dépend de votre catégorie professionnelle (article L.1221-19 du Code du travail) :
     </p>
     <table>
       <thead><tr><th>Catégorie</th><th>Durée initiale</th><th>Maximum avec renouvellement</th></tr></thead>
@@ -87,7 +91,34 @@
       </tbody>
     </table>
 
-    <h2>3. Le renouvellement : sous conditions strictes</h2>
+    <h3>Comment se décompte-t-elle exactement ?</h3>
+    <p>
+      C'est là que beaucoup se trompent. La période d'essai se décompte en <strong>jours calendaires</strong> (week-ends et jours fériés compris), et non en jours travaillés. Elle démarre <strong>obligatoirement le premier jour de travail effectif</strong> — il n'est pas possible de la faire commencer plus tard, ni de la suspendre par accord.
+    </p>
+    <p>
+      Concrètement, une période d'essai de 2 mois débutant le <strong>15 mars</strong> se termine le <strong>14 mai à minuit</strong> (la veille de la date anniversaire).
+    </p>
+    <div class="callout-warn">
+      <strong>⚠️ Vos absences repoussent la fin de l'essai.</strong> Un arrêt maladie, des congés payés, des RTT ou un congé sans solde <strong>prolongent la période d'essai d'autant de jours calendaires</strong> d'absence. Si vous êtes arrêté 10 jours, votre essai se termine 10 jours plus tard que prévu. Beaucoup de salariés croient leur essai terminé alors qu'il court encore.
+    </div>
+
+    <h2>3. Ce qui se déduit de votre période d'essai (souvent oublié)</h2>
+    <p>
+      Si vous avez déjà travaillé pour l'entreprise avant votre CDI, une partie de votre essai doit être <strong>déduite</strong>. Ces règles sont très favorables au salarié et fréquemment ignorées par les employeurs :
+    </p>
+    <table>
+      <thead><tr><th>Situation antérieure</th><th>Ce qui est déduit</th></tr></thead>
+      <tbody>
+        <tr><td>Stage de fin d'études</td><td>La durée du stage, si l'embauche a lieu dans les 3 mois (déduction plafonnée à la moitié de l'essai, sauf accord plus favorable)</td></tr>
+        <tr><td>CDD suivi d'un CDI sur le même poste</td><td>La totalité de la durée du CDD</td></tr>
+        <tr><td>Mission d'intérim sur le même poste</td><td>La durée des missions des 3 mois précédant l'embauche</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <strong>💡 Exemple :</strong> vous avez effectué un CDD de 3 mois comme technicien, puis l'entreprise vous embauche en CDI sur ce même poste avec une période d'essai de 3 mois. Ces 3 mois de CDD s'imputent intégralement : votre période d'essai est <strong>déjà terminée le premier jour de votre CDI</strong>. Toute rupture ultérieure devient un licenciement, avec la procédure et les indemnités correspondantes.
+    </div>
+
+    <h2>4. Le renouvellement : sous conditions strictes</h2>
     <p>
       La période d'essai ne peut être renouvelée qu'une seule fois, et seulement si <strong>trois conditions</strong> sont réunies :
     </p>
@@ -100,7 +131,7 @@
       <strong>⚠️ Un accord clair est obligatoire.</strong> Le salarié ne peut pas se voir imposer le renouvellement. Une simple signature « pour accord » sur la lettre de renouvellement est requise — une absence de réponse ne vaut pas acceptation.
     </div>
 
-    <h2>4. Le délai de prévenance</h2>
+    <h2>5. Le délai de prévenance</h2>
     <p>
       Mettre fin à une période d'essai ne se fait pas du jour au lendemain : un <strong>délai de prévenance</strong> doit être respecté, dont la durée dépend du temps de présence.
     </p>
@@ -119,22 +150,100 @@
       Le délai est plus court : <strong>24 heures</strong> si le salarié est présent depuis moins de 8 jours, <strong>48 heures</strong> au-delà.
     </p>
 
-    <h2>5. La rupture pendant l'essai</h2>
+    <h3>Le piège : quand le délai dépasse la fin de l'essai</h3>
+    <p>
+      Point essentiel, et c'est celui qui rapporte le plus d'argent aux salariés : <strong>le délai de prévenance ne prolonge jamais la période d'essai</strong>. Si l'employeur vous prévient trop tard pour que le délai tienne dans l'essai, votre contrat s'arrête bien au terme de l'essai — mais l'employeur vous doit une <strong>indemnité compensatrice</strong> égale au salaire que vous auriez perçu jusqu'au bout du délai.
+    </p>
+    <div class="callout">
+      <strong>💡 Cas concret — Julien, technicien, 2 400 € brut/mois</strong>
+      <ul>
+        <li>Embauché le <strong>2 mars 2026</strong>, essai de 3 mois (statut technicien) → fin théorique le <strong>1<sup>er</sup> juin</strong>.</li>
+        <li>Il est en arrêt maladie <strong>10 jours</strong> en avril → l'essai est prolongé d'autant : nouvelle fin le <strong>11 juin</strong>.</li>
+        <li>L'employeur lui notifie la rupture le <strong>5 juin</strong>. Julien est présent depuis plus de 3 mois → délai de prévenance de <strong>1 mois</strong>, soit jusqu'au 5 juillet.</li>
+        <li>Or l'essai s'achève le 11 juin. Le contrat prend fin à cette date, mais il reste <strong>24 jours</strong> de prévenance non exécutés.</li>
+        <li><strong>Indemnité due :</strong> 2 400 € × 24/30 = <strong>1 920 € brut</strong>, majorés de l'indemnité de congés payés (+10 %), soit environ <strong>2 112 € brut</strong>.</li>
+      </ul>
+      <p style="margin-bottom:0">Sans cette règle, Julien serait reparti les mains vides. Vérifiez systématiquement la date de notification par rapport au terme réel de votre essai.</p>
+    </div>
+
+    <h2>6. La rupture pendant l'essai</h2>
     <p>
       Pendant la période d'essai, chacune des parties peut rompre le contrat <strong>sans motif et sans indemnité</strong>. Mais attention :
     </p>
     <ul>
-      <li>La rupture ne doit pas être <strong>abusive</strong> (elle doit être liée aux compétences, pas à un motif discriminatoire) ;</li>
-      <li>Le délai de prévenance doit être respecté : s'il dépasse la fin de l'essai, l'employeur doit verser une <strong>indemnité compensatrice</strong> ;</li>
-      <li>Pour une salariée enceinte ou un salarié protégé, des règles spécifiques s'appliquent.</li>
+      <li>La rupture ne doit pas être <strong>abusive</strong> : elle doit reposer sur l'appréciation de vos <strong>compétences professionnelles</strong>. Une rupture pour motif économique, pour un motif discriminatoire, ou intervenue avant même que vous ayez pu être évalué (quelques heures de présence) peut être contestée aux Prud'hommes ;</li>
+      <li>Le délai de prévenance doit être respecté (voir le cas de Julien ci-dessus) ;</li>
+      <li>Aucune procédure formelle n'est imposée, mais la rupture doit être <strong>notifiée par écrit</strong> en pratique — c'est la seule preuve de la date, donc du calcul du délai de prévenance. Exigez un écrit.</li>
+    </ul>
+    <h3>Les cas où vous êtes protégé</h3>
+    <ul>
+      <li><strong>Salariée enceinte :</strong> l'essai peut être rompu, mais jamais en raison de la grossesse — ce serait une discrimination nulle de plein droit ;</li>
+      <li><strong>Salarié protégé</strong> (délégué syndical, membre du CSE) : la rupture exige l'autorisation préalable de l'inspection du travail ;</li>
+      <li><strong>Accident du travail :</strong> pendant la suspension du contrat consécutive à un accident du travail, la rupture de l'essai est interdite.</li>
+    </ul>
+
+    <h2>7. Rompre son essai : quel impact sur le chômage ?</h2>
+    <p>
+      C'est la question la plus fréquente, et la réponse est plus nuancée qu'on ne le dit :
+    </p>
+    <ul>
+      <li><strong>Si l'employeur rompt votre essai :</strong> la perte d'emploi est involontaire. Vous ouvrez donc des droits à l'ARE dans les conditions habituelles (sous réserve de la durée d'affiliation requise).</li>
+      <li><strong>Si vous rompez vous-même :</strong> c'est assimilé à une démission, donc <strong>pas d'ARE en principe</strong>.</li>
     </ul>
     <div class="callout-green">
-      <strong>✅ Rompre sa période d'essai et le chômage.</strong> Si vous rompez votre essai, vous n'avez en principe pas droit à l'ARE — sauf si la rupture intervient après 65 jours travaillés et après une démission légitime. Vérifiez votre situation auprès de France Travail.
+      <strong>✅ L'exception des 65 jours travaillés — à connaître absolument.</strong> Si vous aviez déjà des droits ouverts après une <strong>perte d'emploi involontaire</strong> (fin de CDI, fin de CDD, rupture conventionnelle), que vous avez repris un nouvel emploi, et que vous le quittez pendant l'essai <strong>dans les 65 jours travaillés</strong> suivant l'embauche, vous <strong>conservez vos droits</strong> issus de l'emploi précédent. Au-delà de 65 jours travaillés, ce rattrapage disparaît : c'est un vrai couperet, comptez bien vos jours avant de démissionner.
     </div>
 
-    <h2>6. Période d'essai en CDD</h2>
+    <h2>8. Période d'essai en CDD</h2>
     <p>
-      Pour un CDD, la période d'essai est plus courte : <strong>1 jour par semaine de contrat</strong>, dans la limite de 2 semaines (contrat ≤ 6 mois) ou 1 mois (contrat &gt; 6 mois).
+      Pour un CDD, la période d'essai est bien plus courte : <strong>1 jour par semaine de contrat</strong>, dans la limite de 2 semaines (contrat ≤ 6 mois) ou 1 mois (contrat &gt; 6 mois). Pour un CDD sans terme précis, le calcul se fait sur la durée minimale prévue.
+    </p>
+    <table>
+      <thead><tr><th>Durée du CDD</th><th>Période d'essai maximale</th></tr></thead>
+      <tbody>
+        <tr><td>2 semaines</td><td>2 jours</td></tr>
+        <tr><td>1 mois</td><td>4 jours</td></tr>
+        <tr><td>3 mois</td><td>2 semaines (plafond atteint)</td></tr>
+        <tr><td>6 mois</td><td>2 semaines (plafond atteint)</td></tr>
+        <tr><td>12 mois</td><td>1 mois (plafond atteint)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>9. Les 6 erreurs les plus fréquentes</h2>
+    <ol>
+      <li><strong>Croire son essai terminé alors qu'une absence l'a prolongé.</strong> Recalculez toujours en ajoutant vos jours d'arrêt ou de congés.</li>
+      <li><strong>Accepter un renouvellement à l'oral</strong> ou par simple silence. Sans votre accord écrit et non équivoque, le renouvellement est nul — et la rupture qui suit devient un licenciement sans cause réelle et sérieuse.</li>
+      <li><strong>Oublier de déduire un CDD, un stage ou une mission d'intérim</strong> effectués sur le même poste. C'est l'erreur la plus coûteuse pour l'employeur, et la plus profitable au salarié.</li>
+      <li><strong>Ne pas réclamer l'indemnité compensatrice</strong> quand le délai de prévenance dépasse le terme de l'essai. Elle n'est presque jamais versée spontanément.</li>
+      <li><strong>Démissionner au 70<sup>e</sup> jour travaillé</strong> en pensant garder ses droits au chômage : le seuil est à <strong>65 jours travaillés</strong>.</li>
+      <li><strong>Accepter une période d'essai supérieure au maximum légal</strong> parce qu'elle figure au contrat. Une clause dépassant les durées légales est réputée non écrite : c'est le plafond légal qui s'applique.</li>
+    </ol>
+
+    <h2>Questions fréquentes</h2>
+
+    <h3>La période d'essai peut-elle être suspendue pendant les congés ?</h3>
+    <p>
+      Elle n'est pas « suspendue » au sens strict : elle est <strong>prolongée</strong> d'une durée égale à celle de l'absence, décomptée en jours calendaires. Vos congés payés, arrêts maladie et RTT repoussent donc mécaniquement la date de fin de votre essai.
+    </p>
+
+    <h3>Ai-je droit à des indemnités si mon employeur rompt ma période d'essai ?</h3>
+    <p>
+      Vous ne percevez <strong>aucune indemnité de licenciement</strong>. En revanche, l'employeur doit vous verser votre salaire jusqu'au dernier jour, votre <strong>indemnité compensatrice de congés payés</strong> (10 % des sommes perçues), et le cas échéant l'<strong>indemnité compensatrice de préavis</strong> si le délai de prévenance n'a pas pu être exécuté en totalité.
+    </p>
+
+    <h3>Mon employeur peut-il rompre mon essai sans me donner de motif ?</h3>
+    <p>
+      Oui, il n'a pas à motiver sa décision par écrit. Mais si vous démontrez que le motif réel était discriminatoire (grossesse, état de santé, origine, activité syndicale) ou étranger à vos compétences (motif économique, par exemple), la rupture est <strong>abusive</strong> et ouvre droit à des dommages et intérêts.
+    </p>
+
+    <h3>Que se passe-t-il si mon contrat prévoit une période d'essai trop longue ?</h3>
+    <p>
+      La clause est <strong>réputée non écrite</strong> pour la partie excédant le maximum légal. Concrètement, si votre contrat d'employé prévoit 4 mois d'essai initial au lieu de 2, seul le plafond de 2 mois s'applique. Une rupture notifiée au 3<sup>e</sup> mois serait alors un licenciement déguisé.
+    </p>
+
+    <h3>La période d'essai est-elle obligatoire ?</h3>
+    <p>
+      Non. Elle est facultative et doit être <strong>expressément écrite</strong> dans le contrat ou la lettre d'engagement. En son absence, vous êtes définitivement embauché dès le premier jour, et toute rupture relève de la procédure de licenciement.
     </p>
 
     <hr class="my-8"/>

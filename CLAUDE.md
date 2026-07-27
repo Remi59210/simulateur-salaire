@@ -194,7 +194,33 @@ Les deux outils fiscaux intègrent les barèmes directement en JS. Valeurs à r�
 - Campagne en mode responsive (titres/descriptions centrés sur le gain utilisateur).
 - Sitelinks pointent vers des URL distinctes (`/articles.html`) pour éviter les rejets de liens dupliqués.
 
-### Google AdSense — Statut : REFUSÉ une fois, correctif crawlabilité appliqué
+### 🔴 Google AdSense — MOTIF DE REFUS CONFIRMÉ : « Contenu à faible valeur informative » (27/07/2026)
+**C'est le seul motif affiché dans la console AdSense.** Point capital : « Valider la propriété du site » est ✅ **vert** → le domaine `.fr` + l'hébergement GitHub Pages sont **acceptés et validés**. Toute la partie technique (AdSense 38/38, ads.txt, RGPD/CMP publié, contact, crawlabilité, sitemap) est donc **hors de cause**. Ne plus chercher de ce côté, et surtout **ne pas changer d'hébergeur ni de domaine** — ce serait inutile.
+
+**Diagnostic éditorial (analyse du 27/07/2026) :**
+- Les 10 articles du lot du 30/06 faisaient **~600-700 mots** (et non 800+ comme estimé), boilerplate compris.
+- Le contenu, bien que factuellement juste, **reformulait des règles publiques** déjà présentes sur service-public.fr / urssaf.fr → faible différenciation aux yeux de Google.
+- Signal aggravant : **10 articles publiés le même jour** (motif de production en masse).
+
+**✅ Correctif engagé — enrichissement éditorial (27/07/2026) :** les 3 articles les plus courts ont été réécrits en profondeur :
+| Article | Avant | Après |
+|---|---|---|
+| `periode-essai-regles.html` | 611 mots | **1 789** |
+| `conges-payes-calcul.html` | 636 mots | **1 634** |
+| `ticket-restaurant-2026.html` | 697 mots | **1 384** |
+
+**🧭 Méthode d'enrichissement à répliquer sur les 7 articles restants** (c'est ce qui crée la valeur unique que Google réclame) :
+1. **Cas concrets chiffrés nominatifs** (ex. « Julien, technicien, 2 400 € brut » → calcul complet aboutissant à 1 920 € d'indemnité) ;
+2. **Le chiffrage du gain réel en poche** + comparaison avec l'alternative (ex. titres-restaurant = 1 307 € net/an, contre 2 671 € de coût employeur pour la même somme via une augmentation) — c'est l'ADN du site ;
+3. **Pièges et subtilités peu couverts ailleurs** (déduction du CDD/stage sur la période d'essai, jours de fractionnement, indemnité compensatrice quand le délai de prévenance dépasse l'essai, ouvrables vs ouvrés) ;
+4. **Section « erreurs fréquentes »** (5-6 items) ;
+5. **FAQ de 5-6 questions** + bloc JSON-LD `FAQPage` correspondant (bonus rich snippets) ;
+6. **Liens contextuels vers les calculateurs** du site — le seul actif réellement unique.
+7. Mettre à jour l'en-tête : « Mis à jour le JJ/MM/AAAA • N min de lecture ».
+
+**⚠️ Règle de publication à respecter désormais :** ne **plus jamais publier en lot** (2-3 articles/semaine maximum). Privilégier l'approfondissement d'articles existants à la création de nouveaux.
+
+### Historique — correctif crawlabilité (précédent refus)
 - **Contexte :** L'ancienne alerte "Contenu à faible valeur informative" datait de l'époque où le site n'avait que **3 articles**. Elle est **périmée** : le site compte désormais **23 articles + 10 outils + 3 pages légales**, le SEO technique est complet (canonical, OG, sitemap, ads.txt) et AdSense est sur **toutes les pages** (38/38 vérifié).
 - **À NE PAS refaire :** ne plus traiter le site comme du "Thin Content" — diagnostic périmé, le contenu est largement suffisant.
 - **🔎 Vraie cause probable du refus = CRAWLABILITÉ, pas le contenu :** la **nav est injectée en JS** (`nav.js`) et la **liste d'articles de `articles.html` est rendue en JS** (`articles.js` remplit un `<div id="articles-container">` vide). Un robot qui n'exécute pas JS ne voyait donc **aucun lien statique vers ~la moitié des articles** (seuls ~9 étaient en cartes `<a href>` sur l'accueil).
