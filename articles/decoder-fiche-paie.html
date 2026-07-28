@@ -22,10 +22,19 @@
   "headline":"Décoder sa fiche de paie 2026 : toutes les lignes expliquées",
   "description":"Guide complet pour comprendre chaque ligne d'un bulletin de paie français : brut, cotisations salariales, net imposable, prélèvement à la source et net à payer.",
   "datePublished":"2026-06-29",
+  "dateModified":"2026-07-28",
   "author":{"@type":"Organization","name":"Aide Salariés"},
   "mainEntityOfPage":{"@type":"WebPage","@id":"https://simulateur-salaire.fr/articles/decoder-fiche-paie.html"}
 }
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Pourquoi mon net imposable est-il supérieur à mon net à payer ?","acceptedAnswer":{"@type":"Answer","text":"Parce que la CSG non déductible de 2,40 %, la CRDS de 0,50 % et la part patronale de votre mutuelle sont réintégrées dans la base taxable, alors qu'elles ne sont jamais versées sur votre compte. Sur un salaire de 3 000 € brut, l'écart atteint environ 110 € par mois. Vous payez donc de l'impôt sur des sommes que vous n'encaissez pas : c'est la règle, et non une erreur de votre employeur."}},
+{"@type":"Question","name":"À quoi servent réellement mes cotisations salariales ?","acceptedAnswer":{"@type":"Answer","text":"Sur 650 € retenus pour un salaire de 3 000 € brut, environ 219 € financent la retraite de base, 120 € la retraite complémentaire AGIRC-ARRCO, 286 € la CSG et la CRDS qui couvrent la santé, la famille et la dette sociale, et 25 € votre mutuelle d'entreprise. Au total, plus de la moitié des cotisations reviennent sous forme de droits personnels, principalement des points de retraite."}},
+{"@type":"Question","name":"Combien de temps faut-il conserver ses fiches de paie ?","acceptedAnswer":{"@type":"Answer","text":"Sans limitation de durée. L'employeur n'a l'obligation de conserver un double que pendant cinq ans, mais le bulletin reste votre seule preuve en cas de période manquante sur le relevé de carrière. Les régularisations au moment de la retraite butent régulièrement sur des employeurs disparus ou des déclarations jamais transmises : sans bulletin, la période est perdue."}},
+{"@type":"Question","name":"Que vérifier en priorité sur son bulletin de paie ?","acceptedAnswer":{"@type":"Answer","text":"Six éléments suffisent : le taux horaire et le nombre d'heures, les heures supplémentaires et leur majoration, le compteur de congés payés, le taux de prélèvement à la source comparé à celui de votre espace impots.gouv.fr, le mode de décompte des absences, et surtout le cumul annuel en bas de bulletin, qui doit correspondre au montant pré-rempli en case 1AJ."}},
+{"@type":"Question","name":"Peut-on refuser le bulletin de paie électronique ?","acceptedAnswer":{"@type":"Answer","text":"Oui. L'employeur peut remettre un bulletin dématérialisé par défaut, mais vous pouvez vous y opposer et exiger le format papier, par une demande écrite. Si vous acceptez le format numérique, le bulletin est déposé dans un coffre-fort accessible même après votre départ de l'entreprise. Téléchargez malgré tout une copie personnelle chaque année : un prestataire peut cesser son activité."}},
+{"@type":"Question","name":"La cotisation maladie apparaît-elle encore sur la fiche de paie ?","acceptedAnswer":{"@type":"Answer","text":"La cotisation salariale d'assurance maladie a été supprimée en 2018 et remplacée par une hausse de la CSG. Elle n'apparaît donc plus, sauf en Alsace-Moselle où subsiste une cotisation locale d'environ 1,30 %. Si votre bulletin affiche encore une retenue maladie hors de ces départements, demandez une explication à votre service paie."}}
+]}</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="/css/nav.css"/>
 <style>
@@ -58,6 +67,11 @@
   .paystub .ps-section { font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:#94a3b8; font-weight:700; margin: 12px 0 4px; }
   .paystub .ps-total { font-weight:700; color:#0B1D3A; border-top: 2px solid #0B1D3A; padding-top:8px; margin-top:4px; }
   .paystub .ps-neg { color:#e11d48; }
+  .figure { margin: 1.5rem 0; }
+  .figure svg { width: 100%; height: auto; display: block; border: 1.5px solid #e2e8f0; border-radius: 10px; background: #fff; }
+  .figure figcaption { font-size: .8rem; color: #64748B; margin-top: .5rem; text-align: center; line-height: 1.5; }
+  .callout-warn { border-left: 4px solid #fb923c; background: #fff7ed; padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .callout-green { border-left: 4px solid #22c55e; background: #f0fdf4; padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
   .paystub .ps-pos { color:#15803d; }
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur-salaire.fr/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://simulateur-salaire.fr/articles.html"},{"@type":"ListItem","position":3,"name":"Décoder sa fiche de paie 2026 : toutes les lignes expliquées","item":"https://simulateur-salaire.fr/articles/decoder-fiche-paie.html"}]}</script>
@@ -69,7 +83,7 @@
   <div class="container mx-auto px-4 max-w-3xl">
     <a href="/articles.html" class="text-white/80 hover:text-white text-sm font-medium">← Tous les articles</a>
     <h1 class="text-2xl md:text-3xl font-bold mt-3 leading-snug">Décoder sa fiche de paie :<br>toutes les lignes expliquées</h1>
-    <p class="mt-2 text-white/80 text-sm">Mis à jour le 29/06/2026 • 8 min de lecture</p>
+    <p class="mt-2 text-white/80 text-sm">Mis à jour le 28/07/2026 • 12 min de lecture</p>
   </div>
 </header>
 
@@ -95,7 +109,7 @@
     <table>
       <thead><tr><th>Cotisation</th><th>Taux salarié (approx.)</th><th>Ce qu'elle finance</th></tr></thead>
       <tbody>
-        <tr><td>Sécurité sociale — maladie</td><td>0,75 %</td><td>Remboursements maladie, maternité</td></tr>
+        <tr><td>Sécurité sociale — maladie</td><td>0 % (1,30 % en Alsace-Moselle)</td><td>Supprimée en 2018, remplacée par la CSG</td></tr>
         <tr><td>Vieillesse plafonnée</td><td>6,90 %</td><td>Retraite de base (sur la part &lt; PASS)</td></tr>
         <tr><td>Vieillesse déplafonnée</td><td>0,40 %</td><td>Retraite de base (sur la totalité)</td></tr>
         <tr><td>Retraite complémentaire (AGIRC-ARRCO)</td><td>3,15 %</td><td>Retraite complémentaire (tranche 1)</td></tr>
@@ -109,21 +123,70 @@
       Au total, les cotisations salariales représentent environ <strong>22 à 24 % du brut</strong> pour un cadre, et légèrement moins pour un non-cadre. Pour 3 000 € brut, comptez environ 680 € de retenues salariales.
     </p>
 
-    <h2>3. Brut → Net imposable : la différence fondamentale</h2>
+    <h2>3. À quoi servent vos cotisations ?</h2>
     <p>
-      Le <strong>salaire net imposable</strong> (aussi appelé « net avant impôt ») est votre brut moins toutes les cotisations salariales — <em>sauf</em> la CSG non déductible (2,40 %) et la CRDS (0,50 %) qui restent dans votre assiette fiscale. En pratique, votre net imposable représente environ <strong>77 à 80 % de votre brut</strong>.
+      Avant de descendre vers le net, une question rarement posée : où part concrètement l'argent retenu ? Sur 3 000 € brut, les 650 € de cotisations salariales se répartissent ainsi.
+    </p>
+
+    <figure class="figure">
+      <svg viewBox="0 0 660 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="titrePaie descPaie">
+        <title id="titrePaie">Répartition des cotisations salariales retenues sur un salaire de 3 000 € brut</title>
+        <desc id="descPaie">Pour un salarié non-cadre à 3 000 € brut par mois, les cotisations salariales s'élèvent à 650 €. Elles se répartissent en 219 € pour la retraite de base, 120 € pour la retraite complémentaire AGIRC-ARRCO et la contribution d'équilibre général, 286 € de CSG et CRDS qui financent la santé, la famille et la dette sociale, et 25 € de mutuelle d'entreprise. Au total, 339 € soit 52 % des cotisations financent directement la retraite du salarié.</desc>
+
+        <text x="330" y="26" text-anchor="middle" font-family="Inter, Arial" font-size="13.5" font-weight="700" fill="#0B1D3A">À quoi servent vos 650 € de cotisations ?</text>
+        <text x="330" y="45" text-anchor="middle" font-family="Inter, Arial" font-size="11" fill="#64748B">Salarié non-cadre à 3 000 € brut par mois</text>
+
+        <line x1="100" y1="76" x2="225" y2="76" stroke="#94A3B8" stroke-width="1.2"/>
+        <line x1="435" y1="76" x2="560" y2="76" stroke="#94A3B8" stroke-width="1.2"/>
+        <line x1="100" y1="76" x2="100" y2="84" stroke="#94A3B8" stroke-width="1.2"/>
+        <line x1="560" y1="76" x2="560" y2="84" stroke="#94A3B8" stroke-width="1.2"/>
+        <text x="330" y="80" text-anchor="middle" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#0B1D3A">650 € de cotisations salariales</text>
+
+        <rect x="100" y="100" width="155" height="50" fill="#1A5CFF"/>
+        <rect x="255" y="100" width="85" height="50" fill="#0B1D3A"/>
+        <rect x="340" y="100" width="202" height="50" fill="#94A3B8"/>
+        <rect x="542" y="100" width="18" height="50" fill="#CBD5E1"/>
+
+        <text x="177" y="130" text-anchor="middle" font-family="Inter, Arial" font-size="11" fill="#FFFFFF">219 €</text>
+        <text x="297" y="130" text-anchor="middle" font-family="Inter, Arial" font-size="11" fill="#FFFFFF">120 €</text>
+        <text x="441" y="130" text-anchor="middle" font-family="Inter, Arial" font-size="11" fill="#FFFFFF">286 €</text>
+
+        <rect x="100" y="169" width="11" height="11" fill="#1A5CFF"/>
+        <text x="117" y="178" font-family="Inter, Arial" font-size="10.5" fill="#64748B">retraite de base 219 €</text>
+        <rect x="270" y="169" width="11" height="11" fill="#0B1D3A"/>
+        <text x="287" y="178" font-family="Inter, Arial" font-size="10.5" fill="#64748B">retraite complémentaire 120 €</text>
+        <rect x="100" y="187" width="11" height="11" fill="#94A3B8"/>
+        <text x="117" y="196" font-family="Inter, Arial" font-size="10.5" fill="#64748B">CSG-CRDS 286 €</text>
+        <rect x="270" y="187" width="11" height="11" fill="#CBD5E1"/>
+        <text x="287" y="196" font-family="Inter, Arial" font-size="10.5" fill="#64748B">mutuelle 25 €</text>
+
+        <text x="330" y="226" text-anchor="middle" font-family="Inter, Arial" font-size="12.5" font-weight="700" fill="#0B1D3A">52 % de vos cotisations financent directement votre retraite</text>
+      </svg>
+      <figcaption>Une cotisation n'est pas un impôt : plus de la moitié revient sous forme de droits personnels, points de retraite en tête.</figcaption>
+    </figure>
+
+    <h2>4. Brut, net à payer, net imposable : la hiérarchie qui piège tout le monde</h2>
+    <p>
+      Attention à une confusion très répandue, y compris dans de nombreux articles en ligne : le <strong>net imposable n'est pas le net à payer avant impôt</strong>. Il lui est <strong>supérieur</strong>, parce que la CSG non déductible (2,40 %), la CRDS (0,50 %) et la part patronale de votre mutuelle sont réintégrées dans l'assiette fiscale alors qu'elles ne sont jamais versées sur votre compte.
     </p>
 
     <div class="paystub">
-      <div class="ps-section">Exemple — 3 000 € brut mensuel</div>
+      <div class="ps-section">Exemple — 3 000 € brut mensuel, non-cadre</div>
       <div class="ps-row"><span>Salaire de base</span><span>3 000,00 €</span></div>
       <div class="ps-section">Cotisations salariales</div>
-      <div class="ps-row"><span>Sécurité sociale (maladie + vieillesse)</span><span class="ps-neg">− 232,00 €</span></div>
-      <div class="ps-row"><span>Retraite complémentaire + CEG</span><span class="ps-neg">− 120,00 €</span></div>
-      <div class="ps-row"><span>CSG déductible (6,80 %)</span><span class="ps-neg">− 196,00 €</span></div>
-      <div class="ps-row"><span>CSG non déductible + CRDS (2,90 %)</span><span class="ps-neg">− 84,00 €</span></div>
-      <div class="ps-row"><span>Mutuelle + prévoyance (part sal.)</span><span class="ps-neg">− 40,00 €</span></div>
-      <div class="ps-row ps-total"><span>Net imposable</span><span>≈ 2 328 €</span></div>
+      <div class="ps-row"><span>Vieillesse plafonnée + déplafonnée (7,30 %)</span><span class="ps-neg">− 219,00 €</span></div>
+      <div class="ps-row"><span>Retraite complémentaire + CEG (4,01 %)</span><span class="ps-neg">− 120,30 €</span></div>
+      <div class="ps-row"><span>CSG déductible (6,80 %)</span><span class="ps-neg">− 200,43 €</span></div>
+      <div class="ps-row"><span>CSG non déductible + CRDS (2,90 %)</span><span class="ps-neg">− 85,48 €</span></div>
+      <div class="ps-row"><span>Mutuelle (part salariale)</span><span class="ps-neg">− 25,00 €</span></div>
+      <div class="ps-row ps-total"><span>Net à payer avant impôt</span><span>≈ 2 350 €</span></div>
+      <div class="ps-section">Base de l'impôt</div>
+      <div class="ps-row"><span>Réintégration CSG-CRDS non déductible</span><span class="ps-pos">+ 85,48 €</span></div>
+      <div class="ps-row"><span>Réintégration part patronale mutuelle</span><span class="ps-pos">+ 25,00 €</span></div>
+      <div class="ps-row ps-total"><span>Net imposable</span><span>≈ 2 460 €</span></div>
+    </div>
+    <div class="callout-warn">
+      <strong>⚠️ Retenez la règle.</strong> Votre net imposable dépasse toujours votre net à payer, ici de <strong>110 €</strong>. Ce n'est pas une erreur de votre employeur : vous payez de l'impôt sur des sommes que vous n'encaissez pas. C'est aussi pour cela que le prélèvement à la source, appliqué au net imposable, retient un peu plus que ce qu'un calcul sur le net à payer laisserait attendre.
     </div>
 
     <div class="declare-box">
@@ -133,7 +196,7 @@
       <div class="db-form">Déclaration 2042</div>
     </div>
 
-    <h2>4. Le prélèvement à la source (PAS)</h2>
+    <h2>5. Le prélèvement à la source (PAS)</h2>
     <p>
       Depuis 2019, l'impôt sur le revenu est prélevé directement sur votre salaire chaque mois. La ligne « Impôt sur le revenu — prélèvement à la source » apparaît donc sur votre fiche de paie. Le taux appliqué — visible en clair sur le bulletin — est calculé par la DGFiP en fonction de votre dernière déclaration.
     </p>
@@ -146,47 +209,117 @@
       <strong>💡 Vous pouvez moduler votre taux</strong> à tout moment sur impots.gouv.fr → « Gérer mon prélèvement à la source ». Utile si votre situation change (naissance, baisse de revenus, départ en retraite en cours d'année).
     </div>
 
-    <h2>5. Le net à payer : ce qui arrive sur votre compte</h2>
+    <h2>6. Le net à payer : ce qui arrive sur votre compte</h2>
     <p>
-      Le <strong>net à payer</strong> est ce que vous recevez réellement sur votre compte bancaire : <em>net imposable − prélèvement à la source</em>. Pour 3 000 € brut avec un taux PAS de 8 % :
+      Dernière étape : le prélèvement à la source est calculé sur le <strong>net imposable</strong>, puis retiré du <strong>net à payer</strong>. Pour 3 000 € brut avec un taux de 8 % :
     </p>
     <div class="paystub">
-      <div class="ps-row"><span>Net imposable</span><span>2 328,00 €</span></div>
-      <div class="ps-row"><span>Prélèvement à la source (8 %)</span><span class="ps-neg">− 186,00 €</span></div>
-      <div class="ps-row ps-total"><span>Net à payer</span><span class="ps-pos">≈ 2 142 €</span></div>
+      <div class="ps-row"><span>Net à payer avant impôt</span><span>2 349,79 €</span></div>
+      <div class="ps-row"><span>Prélèvement à la source (8 % × 2 460 €)</span><span class="ps-neg">− 196,82 €</span></div>
+      <div class="ps-row ps-total"><span>Net à payer après impôt</span><span class="ps-pos">≈ 2 153 €</span></div>
     </div>
     <p>
-      Résultat : pour 3 000 € négociés, <strong>2 142 € arrivent sur votre compte</strong>, soit 71,4 % du brut. L'écart varie selon votre taux d'imposition et votre convention collective.
+      Résultat : pour 3 000 € négociés, <strong>2 153 € arrivent sur votre compte</strong>, soit environ 72 % du brut. Notez que l'impôt retenu (197 €) dépasse les 188 € qu'on obtiendrait en appliquant 8 % au net à payer : c'est l'effet du calcul sur le net imposable. Notre <a href="/simulateur-salaire/" class="text-blue-600 underline">simulateur brut → net</a> reproduit toute cette cascade à partir de votre brut réel.
     </p>
 
-    <h2>6. Les autres lignes à connaître</h2>
+    <h2>7. Les six lignes à vérifier chaque mois</h2>
+    <p>
+      Les erreurs de paie sont fréquentes et rarement détectées, parce que personne ne relit son bulletin. Un contrôle de deux minutes suffit :
+    </p>
+    <ol>
+      <li><strong>Le taux horaire et le nombre d'heures.</strong> Une erreur de base se répercute sur tout le reste du bulletin.</li>
+      <li><strong>Les heures supplémentaires</strong> et leur majoration (25 % puis 50 %). Elles doivent apparaître sur une ligne distincte, avec la réduction de cotisations associée.</li>
+      <li><strong>Le compteur de congés payés :</strong> acquis, pris, solde. Depuis la loi du 22 avril 2024, un arrêt maladie génère aussi des congés — vérifiez qu'ils sont bien crédités après un retour d'arrêt.</li>
+      <li><strong>Le taux de prélèvement à la source,</strong> affiché en clair. S'il ne correspond pas à celui de votre espace impots.gouv.fr, signalez-le : la transmission a échoué.</li>
+      <li><strong>Les absences et leur mode de retenue.</strong> Une absence peut être décomptée en jours ouvrés, ouvrables ou en heures réelles — les montants diffèrent sensiblement.</li>
+      <li><strong>Le cumul annuel</strong> en bas du bulletin. C'est la ligne la plus importante de l'année, et personne ne la regarde.</li>
+    </ol>
+    <div class="callout-green">
+      <strong>✅ Le réflexe de décembre.</strong> Sur votre dernier bulletin de l'année, le <strong>cumul annuel du net imposable</strong> doit correspondre exactement au montant pré-rempli en case <span class="case-tag">1AJ</span> de votre déclaration. Un écart signale soit une erreur de déclaration de l'employeur, soit un revenu oublié. Conservez ce bulletin à part : c'est votre pièce justificative en cas de contestation.
+    </div>
+
+    <h2>8. Conserver ses bulletins : sans limite de durée</h2>
+    <p>
+      L'employeur doit conserver un double des bulletins pendant <strong>cinq ans</strong>. Vous, en revanche, devez les garder <strong>sans limitation de durée</strong> — jusqu'à la liquidation de votre retraite, et même au-delà.
+    </p>
+    <p>
+      La raison est concrète : le bulletin de paie est la <strong>seule preuve de vos droits</strong> si une période manque à votre relevé de carrière. Les régularisations de carrière à 62 ans butent régulièrement sur des employeurs disparus, des caisses fusionnées ou des déclarations jamais transmises. Sans bulletin, la période est perdue.
+    </p>
+    <div class="callout">
+      <strong>📌 Bulletin dématérialisé et coffre-fort numérique.</strong> Votre employeur peut vous remettre un bulletin électronique sauf si vous vous y opposez — le format papier reste un droit, à demander par écrit. Si vous acceptez le format numérique, il est déposé dans un coffre-fort accessible <strong>même après votre départ de l'entreprise</strong>. Deux précautions : notez vos identifiants ailleurs que dans votre messagerie professionnelle, et <strong>téléchargez une copie personnelle chaque année</strong>. Un prestataire de coffre-fort peut cesser son activité ; vos droits à la retraite, non.
+    </div>
+
+    <h2>9. Les autres lignes à connaître</h2>
     <h3>Les heures supplémentaires</h3>
     <p>
       Les heures supplémentaires (au-delà de 35h/semaine) sont exonérées d'impôt dans la limite de <strong>7 500 € par an</strong> depuis 2019. Elles restent soumises aux cotisations sociales salariales, mais à un taux réduit.
     </p>
     <h3>Les avantages en nature</h3>
     <p>
-      Véhicule de fonction, logement, tickets restaurant au-delà du plafond : ces avantages sont <strong>réintégrés dans le brut</strong> et soumis à cotisations. Les tickets restaurant, eux, sont exonérés dans la limite de <strong>7,18 €/titre</strong> (part patronale, revenus 2025).
+      Véhicule de fonction, logement, tickets restaurant au-delà du plafond : ces avantages sont <strong>réintégrés dans le brut</strong> et soumis à cotisations. Effet contre-intuitif : votre brut augmente alors que votre net à payer <em>baisse</em>, puisque vous cotisez sur une somme que vous ne percevez pas en argent. Le plafond d'exonération de la part patronale des titres-restaurant est revalorisé chaque année — voir notre article sur <a href="/articles/ticket-restaurant-2026.html" class="text-blue-600 underline">les titres-restaurant</a>.
+    </p>
+    <h3>Le montant net social</h3>
+    <p>
+      Obligatoire depuis juillet 2023, cette ligne n'est pas un doublon du net à payer. C'est le <strong>montant de référence à déclarer pour le RSA et la prime d'activité</strong>, désormais transmis directement aux organismes sociaux et pré-rempli dans vos déclarations trimestrielles. Le confondre avec le net à payer fausse votre dossier.
     </p>
     <h3>Les congés payés</h3>
     <p>
       Les indemnités de congés payés sont intégrées au salaire mensuel selon le mode de calcul le plus favorable (maintien de salaire ou règle du dixième). Elles apparaissent généralement de façon invisible car déjà incluses dans le brut mensuel.
     </p>
 
-    <h2>7. Récapitulatif : les 4 montants clés</h2>
+    <h2>10. Récapitulatif : les cinq montants clés</h2>
     <table>
-      <thead><tr><th>Montant</th><th>Description</th><th>Ratio / 3 000 € brut</th></tr></thead>
+      <thead><tr><th>Montant</th><th>Description</th><th>Pour 3 000 € brut</th></tr></thead>
       <tbody>
+        <tr><td>Coût employeur</td><td>Brut + charges patronales (≈ 42 %)</td><td>≈ 4 260 € (142 %)</td></tr>
         <tr><td>Salaire brut</td><td>Ce qui est dans votre contrat</td><td>3 000 €</td></tr>
-        <tr><td>Net imposable</td><td>Brut − cotisations salariales</td><td>≈ 2 328 € (77,6 %)</td></tr>
-        <tr><td>Net à payer</td><td>Net imposable − PAS</td><td>≈ 2 142 € (71,4 %)</td></tr>
-        <tr><td>Coût employeur</td><td>Brut + charges patronales (~42 %)</td><td>≈ 4 260 € (142 %)</td></tr>
+        <tr><td>Net imposable</td><td>Base de l'impôt, supérieure au net perçu</td><td>≈ 2 460 € (82 %)</td></tr>
+        <tr><td>Net à payer avant impôt</td><td>Brut − toutes les cotisations salariales</td><td>≈ 2 350 € (78 %)</td></tr>
+        <tr><td>Net à payer après impôt</td><td>Ce qui arrive sur le compte</td><td>≈ 2 153 € (72 %)</td></tr>
       </tbody>
     </table>
 
-    <div class="callout-green">
-      <strong>✅ Le réflexe à avoir :</strong> chaque fin d'année, vérifiez le cumul annuel du net imposable sur votre dernière fiche de paie. Ce montant doit correspondre à ce qui est pré-rempli en case <span class="case-tag">1AJ</span> sur votre déclaration. En cas d'écart, c'est la déclaration qu'il faut corriger, pas la fiche de paie.
-    </div>
+    <h2>11. Les erreurs les plus fréquentes</h2>
+    <ol>
+      <li><strong>Croire que le net imposable est le net avant impôt.</strong> Il lui est supérieur d'environ 110 € sur ce bulletin.</li>
+      <li><strong>Appliquer son taux de prélèvement au net à payer</strong> plutôt qu'au net imposable, et s'étonner de l'écart.</li>
+      <li><strong>Ne jamais vérifier le cumul annuel</strong> contre la case 1AJ pré-remplie.</li>
+      <li><strong>Confondre montant net social et net à payer</strong> dans une déclaration CAF.</li>
+      <li><strong>Jeter ses anciens bulletins</strong> ou les laisser dans un coffre-fort numérique dont on perd l'accès en quittant l'entreprise.</li>
+      <li><strong>Ne pas signaler un taux de prélèvement erroné</strong> affiché sur le bulletin : la régularisation n'interviendra qu'un an plus tard.</li>
+    </ol>
+
+    <h2>Questions fréquentes</h2>
+
+    <h3>Pourquoi mon net imposable est-il supérieur à mon net à payer ?</h3>
+    <p>
+      Parce que la CSG non déductible de 2,40 %, la CRDS de 0,50 % et la part patronale de votre mutuelle sont réintégrées dans la base taxable, alors qu'elles ne sont jamais versées sur votre compte. Sur un salaire de 3 000 € brut, l'écart atteint environ 110 € par mois. Vous payez donc de l'impôt sur des sommes que vous n'encaissez pas : c'est la règle, et non une erreur de votre employeur.
+    </p>
+
+    <h3>À quoi servent réellement mes cotisations salariales ?</h3>
+    <p>
+      Sur 650 € retenus pour un salaire de 3 000 € brut, environ 219 € financent la retraite de base, 120 € la retraite complémentaire AGIRC-ARRCO, 286 € la CSG et la CRDS qui couvrent la santé, la famille et la dette sociale, et 25 € votre mutuelle d'entreprise. Au total, plus de la moitié des cotisations reviennent sous forme de droits personnels, principalement des points de retraite.
+    </p>
+
+    <h3>Combien de temps faut-il conserver ses fiches de paie ?</h3>
+    <p>
+      Sans limitation de durée. L'employeur n'a l'obligation de conserver un double que pendant cinq ans, mais le bulletin reste votre seule preuve en cas de période manquante sur le relevé de carrière. Les régularisations au moment de la retraite butent régulièrement sur des employeurs disparus ou des déclarations jamais transmises : sans bulletin, la période est perdue.
+    </p>
+
+    <h3>Que vérifier en priorité sur son bulletin ?</h3>
+    <p>
+      Six éléments suffisent : le taux horaire et le nombre d'heures, les heures supplémentaires et leur majoration, le compteur de congés payés, le taux de prélèvement à la source comparé à celui de votre espace impots.gouv.fr, le mode de décompte des absences, et surtout le cumul annuel en bas de bulletin, qui doit correspondre au montant pré-rempli en case 1AJ.
+    </p>
+
+    <h3>Peut-on refuser le bulletin de paie électronique ?</h3>
+    <p>
+      Oui. L'employeur peut remettre un bulletin dématérialisé par défaut, mais vous pouvez vous y opposer et exiger le format papier, par une demande écrite. Si vous acceptez le format numérique, le bulletin est déposé dans un coffre-fort accessible même après votre départ de l'entreprise. Téléchargez malgré tout une copie personnelle chaque année : un prestataire peut cesser son activité.
+    </p>
+
+    <h3>La cotisation maladie apparaît-elle encore sur la fiche de paie ?</h3>
+    <p>
+      La cotisation salariale d'assurance maladie a été supprimée en 2018 et remplacée par une hausse de la CSG. Elle n'apparaît donc plus, sauf en Alsace-Moselle où subsiste une cotisation locale d'environ 1,30 %. Si votre bulletin affiche encore une retenue maladie hors de ces départements, demandez une explication à votre service paie.
+    </p>
 
     <hr class="my-8"/>
 
