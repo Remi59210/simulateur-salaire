@@ -8,7 +8,7 @@ Ce fichier sert de mémoire globale pour Claude Code. Il récapitule la philosop
 
 - **Cible :** Salariés et indépendants en France, sans compétence juridique, fiscale ou technique.
 - **Règle d'or UI/UX :** Simplicité absolue. Chaque outil répond à un besoin précis. Pas de jargon sans exemple. Montrer toujours le **gain réel net dans la poche** (ex : l'impôt économisé, pas la somme déduite du revenu).
-- **Modèle économique :** 100 % gratuit, sans inscription, financé par Google AdSense, propulsé par trafic Google Ads.
+- **Modèle économique :** 100 % gratuit, sans inscription, financé par Google AdSense. ⚠️ **Aucune campagne Google Ads payante n'est active** (confirmé par l'utilisateur le 28/07/2026) — le trafic est **100 % organique**. Ne pas raisonner comme si le trafic était acheté.
 - **Déploiement :** GitHub Pages (`simulateur-salaire.fr`). `git push origin main` → live en ~60 secondes. Aucun build system, aucun package manager, aucune suite de tests.
 
 ---
@@ -232,9 +232,8 @@ Les deux outils fiscaux intègrent les barèmes directement en JS. Valeurs à r�
 
 ## 🚨 9. Chantiers & Priorités
 
-### Google Ads
-- Campagne en mode responsive (titres/descriptions centrés sur le gain utilisateur).
-- Sitelinks pointent vers des URL distinctes (`/articles.html`) pour éviter les rejets de liens dupliqués.
+### Google Ads — ⚠️ dispositif à l'arrêt
+Aucune campagne payante n'est active (confirmé le 28/07/2026). L'historique ci-dessous est conservé pour mémoire seulement : campagne responsive, sitelinks vers des URL distinctes (`/articles.html`) pour éviter les rejets de liens dupliqués. **Tout le trafic est organique** — c'est la seule source à travailler.
 
 ### 🔴 Google AdSense — MOTIF DE REFUS CONFIRMÉ : « Contenu à faible valeur informative » (27/07/2026)
 **C'est le seul motif affiché dans la console AdSense.** Point capital : « Valider la propriété du site » est ✅ **vert** → le domaine `.fr` + l'hébergement GitHub Pages sont **acceptés et validés**. Toute la partie technique (AdSense 38/38, ads.txt, RGPD/CMP publié, contact, crawlabilité, sitemap) est donc **hors de cause**. Ne plus chercher de ce côté, et surtout **ne pas changer d'hébergeur ni de domaine** — ce serait inutile.
@@ -326,8 +325,44 @@ Contrôle complet des 38 pages + calculateurs :
 - **2 corrections appliquées** : taux micro du TJM (obsolètes pré-2022 → taux 2026) et tranches `calcImpot()` (arrondis → barème officiel). Détail en §8.
 - **Reste côté utilisateur** : activer le message RGPD (CMP Google certifié) dans AdSense → Confidentialité et messages, attendre 24-48 h, puis resoumettre.
 
-### 🎯 Priorité actuelle : LE RÉFÉRENCEMENT (SEO organique)
-Le trafic Google Ads est payant ; l'enjeu désormais est de capter du **trafic organique gratuit et durable**. La base technique est saine (canonical, OG, sitemap, mobile-first, pages légères). Leviers par ordre d'impact :
+---
+
+## 🚀 12. Feuille de route SEO & revenus — À FAIRE APRÈS L'ENRICHISSEMENT DES 23 ARTICLES
+
+> Établie le 28/07/2026 à la demande de l'utilisateur. **Ne pas démarrer ces chantiers tant que les 4 derniers articles ne sont pas enrichis** (liste en §9), sauf la resoumission AdSense qui est possible dès maintenant.
+
+### 💶 Attentes de revenus — chiffres à ne pas gonfler
+Revenu AdSense = `(pages vues ÷ 1000) × RPM`. Pour de la finance personnelle en français, trafic majoritairement mobile : **RPM de 4 à 8 €** sur les articles, **2 à 5 €** sur les pages d'outils (l'utilisateur calcule son net et repart en 40 s → peu d'impressions). Le marché français rapporte environ deux fois moins que l'anglophone.
+
+| Pages vues / mois | Revenu mensuel réaliste |
+|---|---|
+| 5 000 | 20 – 35 € |
+| 20 000 | 80 – 140 € |
+| 50 000 | 200 – 350 € |
+| 100 000 | 400 – 700 € |
+
+**Trajectoire plausible :** 20-150 €/mois la première année ; quelques centaines d'euros à horizon 2-3 ans. Seuil de versement AdSense : **70 €** (donc paiement tous les 2-3 mois au début). ⚠️ **Ne jamais promettre mieux à l'utilisateur** : son objectif est un revenu passif, et une estimation optimiste lui ferait prendre de mauvaises décisions.
+
+### 📋 Chantiers par ordre de rapport effort/impact
+
+1. **🔴 Resoumettre à AdSense.** Tant que ce n'est pas fait, le revenu est nul quoi qu'on écrive. Possible dès maintenant (lot du 30/06 complet).
+2. **📊 Google Search Console.** L'utilisateur transmet ses données (28/07/2026). Jusqu'ici tout le travail SEO s'est fait à l'aveugle. À exploiter en priorité : requêtes où le site apparaît en position 5-20 (les gains les plus rapides), pages à fort taux d'impression mais faible CTR (titres/méta à réécrire).
+3. **🎯 Bloc `tool-seo` sur `/simulateur-salaire/`.** La page la plus stratégique du site — l'outil principal, cible de « salaire brut net » — est la **seule sans bloc `tool-seo`**, alors que 8 autres outils en ont un. Meilleur rapport effort/impact du moment, faisable en une session.
+4. **🔍 Longue traîne.** Le tableau brut → net de `calculer-salaire-net-2025.html` est le modèle : il vise « 2500 brut en net », « 3000 brut en net »… Volume énorme, intention parfaite. ⚠️ **Ne jamais générer des pages quasi identiques en série** — c'est précisément ce que Google sanctionne comme pages satellites. Pages substantielles uniquement.
+5. **🔗 Liens entrants — le vrai goulot d'étranglement.** Le site n'en a probablement aucun ; c'est ce qui le sépare des concurrents installés, bien plus que le contenu. Les **calculateurs gratuits sont le meilleur actif** pour en obtenir (un outil se cite naturellement). Pistes : forums droit du travail et freelance, communautés françaises, associations de salariés, comptables. Non automatisable, fastidieux, mais c'est le facteur limitant.
+6. **👤 E-E-A-T / YMYL — angle non exploité.** Le contenu fiscal et salarial est classé **YMYL** (« Your Money or Your Life ») par Google, qui lui applique une exigence supérieure sur l'expertise. Or le site est signé « Aide Salariés », entité sans visage. À créer : une page « Qui sommes-nous » avec le nom de **Chapey Rémi**, son parcours et sa légitimité sur ces sujets, + une signature d'auteur en bas d'article + `"author"` nommé dans le JSON-LD. Une heure de travail, effet direct sur un critère d'évaluation. **Ce n'est pas cosmétique sur cette catégorie de contenu.**
+
+### 💡 Idée écartée pour l'instant : conseil en investissement / affiliation
+L'utilisateur a envisagé (28/07/2026) d'ajouter du conseil en investissement avec des liens d'affiliation (type Trade Republic). **Écarté pour le moment**, pour trois raisons : (a) le **conseil en investissement financier est une activité réglementée** (statut CIF, immatriculation ORIAS, association agréée AMF) — la frontière est entre *pédagogie* (autorisée) et *recommandation personnalisée* (interdite sans statut) ; (b) introduire de l'affiliation **avant** la validation AdSense est exactement le profil que l'examinateur écarte ; (c) l'audience (« 2500 brut en net ») a une intention très faible d'ouvrir un compte-titres.
+
+**Le pont qui reste valable, à ouvrir APRÈS la validation :** une verticale « épargne et fiscalité du patrimoine » qui prolonge le site sans le dénaturer — PEA vs assurance-vie vs PER (fiscalité comparée), ce que la déduction PER rapporte selon la tranche, PFU 30 % ou barème. Ces sujets parlent d'**enveloppes fiscales**, pas de placements : aucun risque réglementaire, et ils prolongent directement `prime-interessement-participation.html`. Zéro affiliation au départ.
+
+---
+
+## 📈 13. Détail des leviers SEO (base technique)
+
+### 🎯 Priorité : LE RÉFÉRENCEMENT (SEO organique)
+Tout le trafic est organique (aucune campagne payante). La base technique est saine (canonical, OG, sitemap, mobile-first, pages légères). Leviers par ordre d'impact :
 
 1. **✅ Fait (29/06/2026) — Données structurées `FAQPage`** : les FAQ des 8 pages d'outils (questions en `<h3>` + réponses) sont balisées en JSON-LD `FAQPage` → éligibles aux **rich snippets** (questions dépliables dans Google). Le balisage est généré depuis le texte visible (règle Google) ; tous les JSON validés. Les sous-titres de `simulateur-prime.html` et `rupture-conventionnelle.html` ont été **reformulés en questions** → ces 2 pages passent de 1 à **5 questions** chacune. **Convention à suivre : rédiger les `<h3>` des blocs `tool-seo` sous forme de questions** pour qu'ils alimentent le FAQPage.
 2. **✅ Fait (29/06/2026) — `BreadcrumbList`** : fil d'Ariane JSON-LD sur **23 pages** — outils (`Accueil › [Outil]`, 2 niveaux) et articles (`Accueil › Articles › [Titre]`, 3 niveaux). L'accueil (racine) n'en a pas, c'est normal.
