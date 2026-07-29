@@ -22,10 +22,19 @@
   "headline":"Tutoriel : Tout ce que vous pouvez déduire aux frais réels et comment le déclarer",
   "description":"Guide complet des frais réels déductibles 2026 : transport, repas, télétravail, double résidence, formations, honoraires d'avocat, et tutoriel de déclaration sur impots.gouv.fr.",
   "datePublished":"2026-06-26",
+  "dateModified":"2026-07-28",
   "author":{"@type":"Organization","name":"Aide Salariés"},
   "mainEntityOfPage":{"@type":"WebPage","@id":"https://simulateur-salaire.fr/articles/guide-frais-reels-deductibles.html"}
 }
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Comment savoir si les frais réels sont plus avantageux que les 10 % ?","acceptedAnswer":{"@type":"Answer","text":"Additionnez vos frais professionnels réels — kilomètres, repas, formation, matériel — et comparez le total à 10 % de votre salaire net imposable. Pour un salarié déclarant 32 000 € avec 25 kilomètres de trajet aller et 210 jours travaillés, les frais réels atteignent environ 6 288 € contre 3 200 € d'abattement, soit 3 088 € de déduction supplémentaire et près de 926 € d'impôt en moins dans la tranche à 30 %."}},
+{"@type":"Question","name":"Peut-on déduire ses repas sans conserver les tickets ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Si vous ne pouvez pas rentrer déjeuner chez vous et que vous n'avez ni cantine ni titre-restaurant, vous pouvez déduire forfaitairement la valeur du repas pris à domicile, soit 5,45 € par jour travaillé, sans justificatif individuel. Sur 210 jours, cela représente 1 144 € qui s'ajoutent à vos autres frais. Si vous disposez de titres-restaurant, il faut retrancher la part financée par l'employeur."}},
+{"@type":"Question","name":"En couple, les deux conjoints doivent-ils choisir la même option ?","acceptedAnswer":{"@type":"Answer","text":"Non, et c'est un point mal connu. Le choix entre l'abattement de 10 % et les frais réels est strictement individuel : dans un couple, l'un peut opter pour les frais réels tandis que l'autre conserve l'abattement forfaitaire. Chacun remplit sa propre case, 1AK pour le déclarant 1 et 1BK pour le déclarant 2. Il faut donc faire la simulation deux fois, séparément."}},
+{"@type":"Question","name":"Combien de temps faut-il conserver ses justificatifs de frais réels ?","acceptedAnswer":{"@type":"Answer","text":"Trois ans, qui correspondent au délai de reprise de l'administration. Vous n'avez rien à joindre à votre déclaration, mais vous devez pouvoir produire sur demande la carte grise du véhicule, un relevé kilométrique, le détail de vos jours travaillés et les factures des autres dépenses. Un tableau récapitulatif tenu au fil de l'année suffit dans la grande majorité des cas."}},
+{"@type":"Question","name":"Faut-il réintégrer la participation de l'employeur aux transports ?","acceptedAnswer":{"@type":"Answer","text":"Oui, obligatoirement. En optant pour les frais réels, vous devez ajouter à vos revenus imposables les sommes versées par votre employeur au titre de la prise en charge de l'abonnement de transport ou du forfait mobilités durables. Vous déduisez ensuite l'intégralité de vos frais. Omettre cette réintégration est l'une des erreurs les plus systématiquement rectifiées par l'administration."}},
+{"@type":"Question","name":"Le choix des frais réels est-il définitif ?","acceptedAnswer":{"@type":"Answer","text":"Non, il se décide chaque année et n'engage que la déclaration en cours. Vous pouvez opter pour les frais réels une année puis revenir à l'abattement de 10 % l'année suivante, sans aucune formalité ni justification. Refaites donc la comparaison tous les ans : un déménagement, un passage au télétravail ou un changement de véhicule peut inverser le résultat."}}
+]}</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="/css/nav.css"/>
 <style>
@@ -58,6 +67,9 @@
   .cta-frais .cta-sub { font-size: .85rem; color: rgba(255,255,255,.78); line-height: 1.5; }
   .cta-frais a.cta-btn { display: inline-flex; align-items: center; gap: 8px; background: #1A5CFF; color: #fff; font-weight: 700; font-size: .92rem; text-decoration: none; padding: 13px 22px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; transition: background .18s; }
   .cta-frais a.cta-btn:hover { background: #0E4BE6; }
+  .figure { margin: 1.5rem 0; }
+  .figure svg { width: 100%; height: auto; display: block; border: 1.5px solid #e2e8f0; border-radius: 10px; background: #fff; }
+  .figure figcaption { font-size: .8rem; color: #64748B; margin-top: .5rem; text-align: center; line-height: 1.5; }
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://simulateur-salaire.fr/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://simulateur-salaire.fr/articles.html"},{"@type":"ListItem","position":3,"name":"Tutoriel : Tout ce que vous pouvez déduire aux frais réels et comment le déclarer","item":"https://simulateur-salaire.fr/articles/guide-frais-reels-deductibles.html"}]}</script>
 </head>
@@ -68,7 +80,7 @@
   <div class="container mx-auto px-4 max-w-3xl">
     <a href="/articles.html" class="text-white/80 hover:text-white text-sm font-medium">← Tous les articles</a>
     <h1 class="text-2xl md:text-3xl font-bold mt-3 leading-snug">Tutoriel : Tout ce que vous pouvez déduire<br>aux frais réels et comment le déclarer</h1>
-    <p class="mt-2 text-white/80 text-sm">Mis à jour le 26/06/2026 • 9 min de lecture</p>
+    <p class="mt-2 text-white/80 text-sm">Mis à jour le 28/07/2026 • 13 min de lecture</p>
   </div>
 </header>
 
@@ -81,6 +93,43 @@
 
     <div class="callout">
       <strong>📌 Le principe en une phrase :</strong> l'État retire automatiquement 10 % de votre salaire imposable. Si vous additionnez plus de 10 % en frais professionnels réels, vous avez tout intérêt à renoncer au forfait. Notre simulateur ci-dessous fait le calcul pour vous en 30 secondes.
+    </div>
+
+    <h2>L'arbitrage en un coup d'œil</h2>
+    <p>
+      Avant d'entrer dans le détail poste par poste, voici l'enjeu chiffré sur un cas courant. Karim déclare <strong>32 000 € de salaire net imposable</strong>, parcourt <strong>25 km aller</strong> pour se rendre au travail, sur <strong>210 jours</strong>, avec un véhicule de 5 chevaux fiscaux.
+    </p>
+
+    <figure class="figure">
+      <svg viewBox="0 0 660 272" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="titreFr descFr">
+        <title id="titreFr">Comparaison entre l'abattement forfaitaire de 10 % et les frais réels</title>
+        <desc id="descFr">Karim déclare 32 000 € de salaire net imposable, parcourt 25 kilomètres aller pour aller travailler sur 210 jours avec un véhicule de 5 chevaux fiscaux. L'abattement forfaitaire de 10 % lui accorde 3 200 € de déduction. Ses frais réels atteignent 6 288 €, dont 5 144 € de frais kilométriques et 1 144 € de frais de repas. La déduction supplémentaire s'élève donc à 3 088 €, ce qui représente environ 926 € d'impôt en moins dans la tranche marginale à 30 %.</desc>
+
+        <text x="330" y="26" text-anchor="middle" font-family="Inter, Arial" font-size="13.5" font-weight="700" fill="#0B1D3A">Abattement de 10 % ou frais réels ?</text>
+        <text x="330" y="45" text-anchor="middle" font-family="Inter, Arial" font-size="11" fill="#64748B">Karim, 32 000 € net imposable, 25 km aller, 210 jours travaillés</text>
+
+        <text x="140" y="108" text-anchor="end" font-family="Inter, Arial" font-size="11.5" font-weight="700" fill="#0B1D3A">Abattement</text>
+        <text x="140" y="123" text-anchor="end" font-family="Inter, Arial" font-size="11.5" font-weight="700" fill="#0B1D3A">de 10 %</text>
+        <rect x="150" y="90" width="217" height="46" fill="#94A3B8"/>
+        <text x="258" y="118" text-anchor="middle" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#FFFFFF">3 200 €</text>
+
+        <text x="140" y="173" text-anchor="end" font-family="Inter, Arial" font-size="11.5" font-weight="700" fill="#0B1D3A">Frais</text>
+        <text x="140" y="188" text-anchor="end" font-family="Inter, Arial" font-size="11.5" font-weight="700" fill="#0B1D3A">réels</text>
+        <rect x="150" y="155" width="426" height="46" fill="#1A5CFF"/>
+        <text x="363" y="183" text-anchor="middle" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#FFFFFF">6 288 €</text>
+
+        <line x1="367" y1="215" x2="576" y2="215" stroke="#fb923c" stroke-width="1.5"/>
+        <line x1="367" y1="207" x2="367" y2="215" stroke="#fb923c" stroke-width="1.5"/>
+        <line x1="576" y1="207" x2="576" y2="215" stroke="#fb923c" stroke-width="1.5"/>
+        <text x="471" y="232" text-anchor="middle" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#fb923c">+ 3 088 € de déduction</text>
+
+        <text x="330" y="258" text-anchor="middle" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#0B1D3A">Soit 926 € d'impôt en moins à 30 % de tranche marginale</text>
+      </svg>
+      <figcaption>Le détail : 5 144 € de frais kilométriques et 1 144 € de frais de repas. Deux postes seulement, et l'abattement forfaitaire est doublé.</figcaption>
+    </figure>
+
+    <div class="callout-warn">
+      <strong>⚠️ Ne retenez pas le montant déduit, retenez l'impôt économisé.</strong> C'est la confusion la plus fréquente : déduire 3 088 € de plus ne veut pas dire recevoir 3 088 €. Le gain réel est votre <strong>tranche marginale appliquée à cette déduction</strong> — 926 € à 30 %, mais seulement 340 € à 11 %. Autrement dit, plus vous êtes imposé, plus les frais réels rapportent. En dessous du seuil d'imposition, ils ne rapportent rien du tout.
     </div>
 
     <h2>1. Les frais de transport : le poste le plus rentable</h2>
@@ -198,6 +247,78 @@
     <div class="callout-green">
       <strong>✅ Dernier conseil :</strong> le choix des frais réels est <strong>individuel et révisable chaque année</strong>. En couple, chaque conjoint décide séparément. Refaites la simulation tous les ans : selon vos trajets et vos dépenses, le gagnant peut changer.
     </div>
+
+    <h2>5. Le choix est individuel — un piège dans les couples</h2>
+    <p>
+      C'est un point que presque personne n'exploite : dans un couple, <strong>chaque conjoint choisit indépendamment</strong>. Rien n'oblige les deux à prendre la même option.
+    </p>
+    <p>
+      Le cas typique : l'un fait 40 kilomètres par jour, l'autre travaille à cinq minutes de chez lui. Le premier a tout intérêt aux frais réels, le second à l'abattement de 10 %. Il suffit de remplir la case <span class="case-tag">1AK</span> pour le déclarant 1 et de laisser le déclarant 2 sur le forfait — ou l'inverse via la case <span class="case-tag">1BK</span>. <strong>Faites donc la simulation deux fois, séparément.</strong> Beaucoup de foyers renoncent aux frais réels parce que le calcul global n'était pas rentable, alors qu'il l'était largement pour l'un des deux.
+    </p>
+    <div class="callout">
+      <strong>📌 Et rien n'est définitif.</strong> L'option se décide chaque année, sans formalité ni justification, et n'engage que la déclaration en cours. Un déménagement, un passage au télétravail, un changement de véhicule ou une année à temps partiel peuvent inverser le résultat : refaites le calcul à chaque printemps.
+    </div>
+
+    <h2>6. Justificatifs : quoi garder, et combien de temps</h2>
+    <p>
+      Vous ne joignez rien à votre déclaration. Mais l'administration dispose d'un <strong>délai de reprise de trois ans</strong> pour vous demander de justifier. Voici ce qu'il faut pouvoir produire.
+    </p>
+    <table>
+      <thead><tr><th>Poste</th><th>Justificatif à conserver</th></tr></thead>
+      <tbody>
+        <tr><td>Frais kilométriques</td><td>Carte grise (puissance fiscale), relevé du compteur au 1<sup>er</sup> janvier et au 31 décembre, tableau des jours travaillés</td></tr>
+        <tr><td>Repas</td><td>Aucun si vous appliquez le forfait de 5,45 € ; les tickets si vous déduisez le surcoût réel</td></tr>
+        <tr><td>Péages et stationnement</td><td>Relevés de badge télépéage, factures de parking</td></tr>
+        <tr><td>Formation, documentation, matériel</td><td>Factures nominatives, preuve du lien avec l'activité professionnelle</td></tr>
+        <tr><td>Double résidence, déménagement</td><td>Bail, factures de déménagement, attestation de mutation de l'employeur</td></tr>
+      </tbody>
+    </table>
+    <div class="callout-green">
+      <strong>✅ La méthode qui prend cinq minutes par mois.</strong> Créez un dossier par année dans votre espace de stockage et déposez-y chaque facture à réception, plus un simple tableau à trois colonnes : date, poste, montant. En avril, tout est prêt, et en cas de demande vous répondez en une journée au lieu de reconstituer douze mois de mémoire.
+    </div>
+
+    <h2>7. Les erreurs qui coûtent le plus cher</h2>
+    <ol>
+      <li><strong>Confondre déduction et gain.</strong> Déduire 3 000 € ne rapporte pas 3 000 € mais votre tranche marginale appliquée à cette somme.</li>
+      <li><strong>Oublier de réintégrer la participation employeur</strong> aux transports ou le forfait mobilités durables : c'est l'erreur la plus systématiquement rectifiée.</li>
+      <li><strong>Ne faire la simulation qu'une fois pour le couple</strong>, alors que le choix est individuel.</li>
+      <li><strong>Compter les jours de télétravail</strong> parmi les jours de trajet.</li>
+      <li><strong>Ajouter les tickets de carburant au barème kilométrique</strong> : il les inclut déjà. Seuls péages, stationnement et intérêts d'emprunt s'ajoutent.</li>
+      <li><strong>Modifier la case 1AJ.</strong> Ne touchez jamais au salaire pré-rempli : les frais réels s'inscrivent uniquement en case 1AK.</li>
+      <li><strong>Opter pour les frais réels sans être imposable</strong> : la déduction ne rapporte alors strictement rien.</li>
+    </ol>
+
+    <h2>8. Questions fréquentes</h2>
+
+    <h3>Comment savoir si les frais réels sont plus avantageux que les 10 % ?</h3>
+    <p>
+      Additionnez vos frais professionnels réels — kilomètres, repas, formation, matériel — et comparez le total à 10 % de votre salaire net imposable. Pour un salarié déclarant 32 000 € avec 25 kilomètres de trajet aller et 210 jours travaillés, les frais réels atteignent environ 6 288 € contre 3 200 € d'abattement, soit 3 088 € de déduction supplémentaire et près de 926 € d'impôt en moins dans la tranche à 30 %.
+    </p>
+
+    <h3>Peut-on déduire ses repas sans conserver les tickets ?</h3>
+    <p>
+      Oui. Si vous ne pouvez pas rentrer déjeuner chez vous et que vous n'avez ni cantine ni titre-restaurant, vous pouvez déduire forfaitairement la valeur du repas pris à domicile, soit 5,45 € par jour travaillé, sans justificatif individuel. Sur 210 jours, cela représente 1 144 € qui s'ajoutent à vos autres frais. Si vous disposez de titres-restaurant, il faut retrancher la part financée par l'employeur.
+    </p>
+
+    <h3>En couple, les deux conjoints doivent-ils choisir la même option ?</h3>
+    <p>
+      Non, et c'est un point mal connu. Le choix entre l'abattement de 10 % et les frais réels est strictement individuel : dans un couple, l'un peut opter pour les frais réels tandis que l'autre conserve l'abattement forfaitaire. Chacun remplit sa propre case, <span class="case-tag">1AK</span> pour le déclarant 1 et <span class="case-tag">1BK</span> pour le déclarant 2. Il faut donc faire la simulation deux fois, séparément.
+    </p>
+
+    <h3>Combien de temps faut-il conserver ses justificatifs de frais réels ?</h3>
+    <p>
+      Trois ans, qui correspondent au délai de reprise de l'administration. Vous n'avez rien à joindre à votre déclaration, mais vous devez pouvoir produire sur demande la carte grise du véhicule, un relevé kilométrique, le détail de vos jours travaillés et les factures des autres dépenses. Un tableau récapitulatif tenu au fil de l'année suffit dans la grande majorité des cas.
+    </p>
+
+    <h3>Faut-il réintégrer la participation de l'employeur aux transports ?</h3>
+    <p>
+      Oui, obligatoirement. En optant pour les frais réels, vous devez ajouter à vos revenus imposables les sommes versées par votre employeur au titre de la prise en charge de l'abonnement de transport ou du forfait mobilités durables. Vous déduisez ensuite l'intégralité de vos frais. Omettre cette réintégration est l'une des erreurs les plus systématiquement rectifiées par l'administration.
+    </p>
+
+    <h3>Le choix des frais réels est-il définitif ?</h3>
+    <p>
+      Non, il se décide chaque année et n'engage que la déclaration en cours. Vous pouvez opter pour les frais réels une année puis revenir à l'abattement de 10 % l'année suivante, sans aucune formalité ni justification. Refaites donc la comparaison tous les ans : un déménagement, un passage au télétravail ou un changement de véhicule peut inverser le résultat.
+    </p>
 
     <!-- ── CTA fin d'article ── -->
     <div class="cta-frais">
