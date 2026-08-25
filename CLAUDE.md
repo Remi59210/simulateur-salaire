@@ -57,6 +57,10 @@ simulateur-salaire/
 ├── manifest.webmanifest                # PWA — branding "Aide Salariés", theme navy #0B1D3A
 ├── favicon.svg                         # Logo "AS" (dégradé orange) — favicon vectoriel
 ├── ads.txt                             # AdSense — google.com, pub-7503799878812047, DIRECT
+├── a-propos.html                       # « Qui sommes-nous » — auteur Chapey Rémi, méthode, E-E-A-T (§12.6)
+├── mentions-legales.html               # Éditeur, hébergeur, email de contact public
+├── politique-confidentialite.html      # RGPD + AdSense
+├── contact.html                        # Email public chapey.remi01@gmail.com
 ├── css/
 │   ├── nav.css                         # Barre de nav uniquement (fond #0F172A)
 │   └── tools.css                       # Palette, layout, cards, inputs, footer
@@ -340,9 +344,23 @@ Contrôle complet des 38 pages + calculateurs :
 
 ---
 
-## 🚀 12. Feuille de route SEO & revenus — À FAIRE APRÈS L'ENRICHISSEMENT DES 23 ARTICLES
+## 🚀 12. Feuille de route SEO & revenus — ⭐ SECTION DE RÉFÉRENCE, LIRE EN PREMIER
 
-> Établie le 28/07/2026. ✅ **L'enrichissement des 23 articles est terminé** — tous les chantiers ci-dessous sont désormais ouverts.
+> Établie le 28/07/2026, à jour au **25/08/2026**.
+
+### 🔔 Où en est-on ? (statut au 25/08/2026)
+
+| Chantier | Statut |
+|---|---|
+| Enrichissement des 23 articles | ✅ Terminé (28/07) |
+| Sitemap soumis à GSC | ✅ Fait le 25/08 — 38 pages découvertes (contre 8 URL connues) |
+| `lastmod` réalignés sur les dates réelles | ✅ Fait le 25/08 |
+| `FAQPage` sur `/simulateur-salaire/` + taux maladie périmé | ✅ Fait le 25/08 |
+| E-E-A-T : page auteur + signature + `Person` | ✅ Fait le 25/08 |
+| **Resoumission AdSense** | 🟡 **Demande d'examen lancée le 25/08 — en attente du verdict** |
+| **Liens entrants** | 🔴 **Seul chantier restant, non automatisable — voir « Acquisition de trafic »** |
+
+**➡️ En pratique : tout ce qui pouvait être fait dans le code est fait.** Les deux variables restantes sont le verdict AdSense et la notoriété. Ne pas inventer de nouveaux chantiers techniques pour meubler — d'autant que la position moyenne (~29,5) ne bougera pas sans liens entrants.
 
 ### 📐 État des lieux vérifié le 25/08/2026 (mesuré, pas estimé)
 
@@ -356,7 +374,7 @@ Contrôle complet des 38 pages + calculateurs :
 | Volume éditorial | **44 800 mots**, moyenne **1 947 mots/article** |
 | Articles sous la cible de 1 500 mots | **1 seul** — `ticket-restaurant-2026.html` (~1 400) |
 | Blocs `tool-seo` | 8/10 outils portent la *classe* — mais `/simulateur-salaire/` a bien ~1 470 mots de contenu SEO sans elle (voir §12.3) |
-| Sitemap | 38 URL, `lastmod` réels, **soumis à GSC** le 25/08/2026 |
+| Sitemap | **39 URL**, `lastmod` réels, **soumis à GSC** le 25/08/2026 (correspondance 1:1 vérifiée) |
 
 ⚠️ **Piège de mesure rencontré :** un `grep 'class="figure"'` fait croire à tort qu'un article n'a pas d'infographie, car certains utilisent `class="figure figure-narrow"`. **Toujours tester `<figure` ou `<svg`**, jamais la classe exacte.
 
@@ -392,6 +410,24 @@ Revenu AdSense = `(pages vues ÷ 1000) × RPM`. Pour de la finance personnelle e
    - **Signature d'auteur visible** en bas des **23 articles** (encart avec initiales, nom et lien vers la méthode), en styles *inline* pour ne pas dépendre du `<style>` de chaque article.
    - **`"author"` en `Person` nommée** dans les 23 JSON-LD `Article`, avec `url` pointant vers `a-propos.html`. ⚠️ **Le nom du JSON-LD et le nom visible doivent rester identiques** : Google compare les deux, et un auteur déclaré mais introuvable dans la page n'a aucune valeur.
    - **⭐ Angle éditorial retenu (choix de l'utilisateur) : « autodidacte rigoureux ».** La page **n'invente aucune qualification** — elle écrit noir sur blanc que l'auteur n'est ni expert-comptable, ni avocat, ni conseiller fiscal, et fonde la crédibilité sur la **méthode** : sources officielles listées par sujet (urssaf.fr, impots.gouv.fr/BOFiP, service-public.fr, Légifrance, unedic.org, ameli.fr), refus d'afficher un chiffre instable, et surtout une section « corrections » citant **des erreurs réellement rectifiées ici** (maladie 0,75 % → 0 %, diviseur 94,4 → 111,8, PPV non exonérée depuis 2024, cases 7UD/7UF inversées, micro-BNC à 26,1 %). **Démontrer la fiabilité par des cas concrets vaut mieux que l'affirmer** — et c'est vérifiable. ⚠️ **Ne jamais fabriquer de diplôme ou d'expérience sur ce site** : sur du YMYL, une fausse qualification est bien plus destructrice que l'absence de titre.
+
+### 🚫 Acquisition de trafic — arbitrages tranchés le 25/08/2026 (ne pas rouvrir le débat)
+
+**Repère de maturité :** dépôt créé le **23/07/2025** (136 commits), mais le contenu réel date de **juin-juillet 2026**, et **30 des 38 pages sont restées invisibles pour Google jusqu'au 25/08/2026** (sitemap non soumis). Conclusion à garder en tête : **le SEO du site n'a jamais encore été réellement testé.** Ne pas conclure à un échec avant d'avoir laissé passer quelques mois d'indexation effective.
+
+**❌ Publicité payante (Google Ads) — écartée, pour trois raisons cumulatives :**
+1. **Elle n'améliore pas le classement organique.** Les deux systèmes sont étanches — payer des clics ne fait pas monter d'un rang dans les résultats naturels. Le trafic s'arrête net à la coupure du budget : aucun acquis.
+2. **L'économie est structurellement perdante.** Une page vue rapporte **0,004 à 0,008 €** (RPM 4-8 €) ; un clic sur des mots-clés finance coûte **0,30 à 1,50 €**. Soit **50 à 300 fois** le revenu généré. Un site financé par AdSense ne peut pas acheter son trafic.
+3. **C'est risqué** : envoyer du trafic payant vers des pages monétisées AdSense est précisément ce que Google surveille.
+
+**❌ Link building sur forums délégué à l'assistant — refusé, et de toute façon inefficace :**
+- **Techniquement inutile :** les liens de forums et d'espaces contributifs sont en **`nofollow` / `ugc`** — Google les ignore délibérément pour le classement. Aucune transmission d'autorité, quelle que soit la cadence.
+- **La vraie menace n'est pas Google, ce sont les modérateurs.** Un compte neuf plaçant des liens vers le même domaine se fait repérer en quelques jours : ban du compte et souvent blacklist du domaine.
+- **Refusé sur le fond :** poster sous une apparence d'utilisateur lambda des messages calibrés pour placer des liens, en réglant la cadence pour éviter la détection, trompe les lecteurs du forum. Ne pas le faire, quelle que soit la formulation de la demande.
+
+**✅ Ce qui reste valable et doit être porté par l'utilisateur :** participer authentiquement, **sous son nom, en assumant être le créateur du site** — les communautés accueillent bien un créateur transparent et détestent la promotion déguisée. Ce qui a de la valeur n'est **pas le lien** (nofollow) mais **le visiteur réel** et la citation ultérieure sur un site tiers, elle en dofollow. Les **10 calculateurs sont le meilleur actif** pour ça : un outil gratuit se cite spontanément, un article de blog beaucoup moins.
+
+**🤝 Rôle de l'assistant sur ce chantier :** rédiger le **fond** des réponses (contenu chiffré, sourcé) que l'utilisateur publie ensuite **lui-même sous son identité**, repérer les sujets où un outil du site répond vraiment à la question, et travailler tout ce qui rend le site citable. Aucune limite côté on-site.
 
 ### 💡 Idée écartée pour l'instant : conseil en investissement / affiliation
 L'utilisateur a envisagé (28/07/2026) d'ajouter du conseil en investissement avec des liens d'affiliation (type Trade Republic). **Écarté pour le moment**, pour trois raisons : (a) le **conseil en investissement financier est une activité réglementée** (statut CIF, immatriculation ORIAS, association agréée AMF) — la frontière est entre *pédagogie* (autorisée) et *recommandation personnalisée* (interdite sans statut) ; (b) introduire de l'affiliation **avant** la validation AdSense est exactement le profil que l'examinateur écarte ; (c) l'audience (« 2500 brut en net ») a une intention très faible d'ouvrir un compte-titres.
