@@ -342,7 +342,22 @@ Contrôle complet des 38 pages + calculateurs :
 
 ## 🚀 12. Feuille de route SEO & revenus — À FAIRE APRÈS L'ENRICHISSEMENT DES 23 ARTICLES
 
-> Établie le 28/07/2026 à la demande de l'utilisateur. **Ne pas démarrer ces chantiers tant que les 4 derniers articles ne sont pas enrichis** (liste en §9), sauf la resoumission AdSense qui est possible dès maintenant.
+> Établie le 28/07/2026. ✅ **L'enrichissement des 23 articles est terminé** — tous les chantiers ci-dessous sont désormais ouverts.
+
+### 📐 État des lieux vérifié le 25/08/2026 (mesuré, pas estimé)
+
+| Indicateur | Valeur |
+|---|---|
+| Pages HTML | **38** (23 articles + 10 outils + accueil + listing + 3 légales) |
+| AdSense · canonical · OG · favicon · manifest · theme-color · meta description · nav · liens légaux | **38/38** sur chaque critère |
+| JSON-LD `Article` / `BreadcrumbList` / `FAQPage` | 23 / 37 / 31 *(l'accueil n'a pas de fil d'Ariane : normal, c'est la racine)* |
+| Infographies SVG inline | **23/23 articles** |
+| Volume éditorial | **44 800 mots**, moyenne **1 947 mots/article** |
+| Articles sous la cible de 1 500 mots | **1 seul** — `ticket-restaurant-2026.html` (~1 400) |
+| Blocs `tool-seo` | 8/10 outils — manquent `/simulateur-salaire/` et `/generateur-lettre/` |
+| Sitemap | 38 URL, `lastmod` réels, **soumis à GSC** le 25/08/2026 |
+
+⚠️ **Piège de mesure rencontré :** un `grep 'class="figure"'` fait croire à tort qu'un article n'a pas d'infographie, car certains utilisent `class="figure figure-narrow"`. **Toujours tester `<figure` ou `<svg`**, jamais la classe exacte.
 
 ### 💶 Attentes de revenus — chiffres à ne pas gonfler
 Revenu AdSense = `(pages vues ÷ 1000) × RPM`. Pour de la finance personnelle en français, trafic majoritairement mobile : **RPM de 4 à 8 €** sur les articles, **2 à 5 €** sur les pages d'outils (l'utilisateur calcule son net et repart en 40 s → peu d'impressions). Le marché français rapporte environ deux fois moins que l'anglophone.
@@ -358,7 +373,7 @@ Revenu AdSense = `(pages vues ÷ 1000) × RPM`. Pour de la finance personnelle e
 
 ### 📋 Chantiers par ordre de rapport effort/impact
 
-1. **🔴 Resoumettre à AdSense.** Tant que ce n'est pas fait, le revenu est nul quoi qu'on écrive. Possible dès maintenant (lot du 30/06 complet).
+1. **🟡 Resoumettre à AdSense — DEMANDE D'EXAMEN LANCÉE PAR L'UTILISATEUR LE 25/08/2026.** Le motif du refus du 27/07 (« contenu à faible valeur informative ») a été traité : 23/23 articles enrichis, ~1 950 mots de moyenne. Conformité revérifiée le 25/08/2026 avant resoumission : `ads.txt` correct, script AdSense sur **38/38** pages, 3 pages légales en ligne, aucune unité `<ins>` vide. **Prochaine étape : attendre le verdict** (quelques jours à quelques semaines). En cas de nouveau refus, exiger le motif exact affiché en console avant de toucher à quoi que ce soit — ne pas re-diagnostiquer à l'aveugle comme cela a été fait avant juillet.
 2. **📊 Google Search Console — 🔴 DIAGNOSTIC DU 25/08/2026 : LE SITEMAP N'A JAMAIS ÉTÉ SOUMIS.** Constat GSC : **8 URL connues de Google sur 38** (7 indexées + 1 en double), 642 impressions et 3 clics sur 3 mois, **position moyenne 29,5**. Cause identifiée : dans *Indexation → Sitemaps*, **aucun sitemap n'était déclaré**. Le fichier existe pourtant, est valide et est référencé dans `robots.txt` — mais un `robots.txt` ne fait que l'*autoriser*, il ne le soumet pas. Sans soumission, Google découvre les pages une par une au fil des liens, d'où les 30 pages jamais détectées.
    - **✅ RÉGLÉ le 25/08/2026 :** sitemap soumis via pilotage du navigateur. Résultat immédiat en console : `/sitemap.xml` · état **« Opération effectuée »** · **38 pages découvertes** (contre 8 URL connues auparavant). Le sitemap est apparu dans la seconde comme source de découverte lors des inspections d'URL suivantes.
    - **✅ Indexations demandées manuellement** (file d'exploration prioritaire) : `articles/calculer-salaire-net-2025.html`, `articles.html` et `articles/indemnite-licenciement-calcul.html`. Déjà indexées et donc laissées de côté : `/simulateur-salaire/`, `guide-frais-reels-deductibles.html`, `decoder-fiche-paie.html`.
