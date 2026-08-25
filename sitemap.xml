@@ -4,7 +4,7 @@
   <!-- ── Accueil ── -->
   <url>
     <loc>https://simulateur-salaire.fr/</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,61 +12,61 @@
   <!-- ── Outils / Simulateurs ── -->
   <url>
     <loc>https://simulateur-salaire.fr/simulateur-salaire/</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/simulateur-salaire/cout-employeur.html</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/simulateur-salaire/comparateur-statuts.html</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/simulateur-salaire/simulateur-prime.html</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/simulateur-salaire/tjm-net.html</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/simulateur-salaire/rupture-conventionnelle.html</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/simulateur-salaire/simulateur-are.html</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/calculateur-frais-kilometriques/</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/calculateur-frais-reels/</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/generateur-lettre/</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -74,145 +74,145 @@
   <!-- ── Blog ── -->
   <url>
     <loc>https://simulateur-salaire.fr/articles.html</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/guide-frais-reels-deductibles.html</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/deductions-impots-enfants.html</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/deductions-impots-maison.html</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/reduction-impot-dons.html</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/changement-situation-impots.html</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/calcul-are-chomage.html</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/statut-freelance-2026.html</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/frais-kilometriques-impots.html</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/calculer-salaire-net-2025.html</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/optimiser-prelevement-source.html</loc>
-    <lastmod>2025-08-08</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/decoder-fiche-paie.html</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/cout-augmentation-employeur.html</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/rupture-conventionnelle-negociation.html</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/prime-interessement-participation.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/ticket-restaurant-2026.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/mutuelle-entreprise-obligatoire.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/conges-payes-calcul.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/heures-supplementaires-majoration.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/arret-maladie-indemnites.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/solde-tout-compte.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/indemnite-licenciement-calcul.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/periode-essai-regles.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/articles/prime-precarite-cdd.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -220,7 +220,7 @@
   <!-- ── Pages légales ── -->
   <url>
     <loc>https://simulateur-salaire.fr/mentions-legales.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -232,7 +232,7 @@
   </url>
   <url>
     <loc>https://simulateur-salaire.fr/contact.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
